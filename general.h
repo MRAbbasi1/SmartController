@@ -1,0 +1,15 @@
+#ifndef GENERAL_H
+#define GENERAL_H
+
+#include <Arduino.h>
+#include <time.h>
+#include <HTTPClient.h>
+#include <ArduinoJson.h>
+
+// Setup and update time
+void setupAndUpdateTime();
+
+// Get the current time
+String getTime();
+
+#endif // GENERAL_H

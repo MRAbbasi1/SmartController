@@ -1,0 +1,27 @@
+#ifndef RELAY_CONTROL_H
+#define RELAY_CONTROL_H
+
+#include <Arduino.h>
+#include "alarm.h"
+#include "setting.h"
+#include "tempSensor.h"
+
+// ================================
+// Pin Definitions
+// ================================
+#define COMPRESSOR_RELAY_PIN 47
+#define EVAPORATOR_RELAY_PIN 48
+#define CONDENSER_RELAY_PIN 35
+#define FAN2_RELAY_PIN 36
+
+// ================================
+// Function Prototypes
+// ================================
+void setupRelays();
+void controlRelays();
+void reloadCachedData();
+void controlEvaporatorRelay();
+void controlCompressorAndCondenserRelays();
+void controlFan2Relay();
+
+#endif // RELAY_CONTROL_H
