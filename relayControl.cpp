@@ -28,8 +28,11 @@ static float fan2SensorTemp = 0.0;
 // Timing Variables
 // ================================
 unsigned long lastCheckTime = 0;
-const unsigned long CHECK_INTERVAL = 10000; // Time for settings refresh
+const unsigned long CHECK_INTERVAL = 30000; // Time for settings refresh
+unsigned long lastRelayUpdateTime = 0;
+unsigned long lastCompressorCheck = 0;
 unsigned long compressorLastOffTime = 0;
+const unsigned long RELAY_UPDATE_INTERVAL = 1000; // 1 second
 
 // ================================
 // Setup Function
@@ -65,10 +68,14 @@ void controlRelays()
         lastCheckTime = currentTime;
     }
 
-    // Relay control functions
-    controlEvaporatorRelay();
-    controlCompressorAndCondenserRelays(); // Unified logic for compressor and condenser
-    controlFan2Relay();
+    // Update relays in RELAY_UPDATE_INTERVAL intervals
+    if (currentTime - lastRelayUpdateTime >= RELAY_UPDATE_INTERVAL)
+    {
+        controlEvaporatorRelay();
+        controlCompressorAndCondenserRelays(); // Unified logic for compressor and condenser
+        controlFan2Relay();
+        lastRelayUpdateTime = currentTime;
+    }
 }
 
 // ================================
@@ -77,10 +84,6 @@ void controlRelays()
 // ================================
 void reloadCachedData()
 {
-    // ================================
-    // Check and reload settings -> Flag -> NVS
-    // ================================
-
     if (getChangedFlagTemp("boolean", DEVICE_ON))
     {
         deviceOn = getBooleanSetting(DEVICE_ON);
@@ -141,8 +144,7 @@ void reloadCachedData()
 }
 
 // ================================
-// Control Evaporator Relay
-// Handles the evaporator relay based on basic conditions
+// Relay Control Functions
 // ================================
 void controlEvaporatorRelay()
 {
@@ -151,101 +153,52 @@ void controlEvaporatorRelay()
     if (newStatus != evaporatorRelayStatus)
     {
         evaporatorRelayStatus = newStatus;
-        if (newStatus)
-        {
-            digitalWrite(EVAPORATOR_RELAY_PIN, LOW); // ON for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("️🔵 [Relay] Evaporator Relay: ON");
-            Serial.println("--------------------------------");
-        }
-        else
-        {
-            digitalWrite(EVAPORATOR_RELAY_PIN, HIGH); // OFF for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🔴 [Relay] Evaporator Relay: OFF");
-            Serial.println("--------------------------------");
-        }
+        digitalWrite(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
+        Serial.println(newStatus ? "🟢 Evaporator: ON" : "🔴 Evaporator: OFF");
     }
 }
 
-// ================================
-// Control Compressor and Condenser Relays
-// Unified logic to ensure proper timing and activation
-// ================================
 void controlCompressorAndCondenserRelays()
 {
     static unsigned long condenserOnTime = 0;
     bool newCondenserStatus = false;
     bool newCompressorStatus = false;
 
-    // Conditions for condenser and compressor
     if (deviceOn && cachedDoorClosed && !cachedFilterWarning &&
         antiFreezeTemp > antiFreezeBase + antiFreezeRange &&
         inletTemp >= compressorTemp + compressorRange)
     {
         newCondenserStatus = true;
 
-        // If condenser is turning on, record the time
         if (newCondenserStatus != condenserRelayStatus)
         {
             condenserOnTime = millis();
         }
 
-        // Compressor turns on 5 seconds after condenser
         newCompressorStatus = (millis() - condenserOnTime >= 5000);
     }
-    else if (antiFreezeTemp <= antiFreezeBase || inletTemp <= compressorTemp)
+    else
     {
         newCondenserStatus = false;
         newCompressorStatus = false;
-        compressorLastOffTime = millis(); // Update last off time for compressor
+        compressorLastOffTime = millis();
     }
 
-    // Update condenser relay
     if (newCondenserStatus != condenserRelayStatus)
     {
         condenserRelayStatus = newCondenserStatus;
-        if (newCondenserStatus)
-        {
-            digitalWrite(CONDENSER_RELAY_PIN, LOW); // ON for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🟡 [Relay] Condenser Relay: ON");
-            Serial.println("--------------------------------");
-        }
-        else
-        {
-            digitalWrite(CONDENSER_RELAY_PIN, HIGH); // OFF for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🔴 [Relay] Condenser Relay: OFF");
-            Serial.println("--------------------------------");
-        }
+        digitalWrite(CONDENSER_RELAY_PIN, newCondenserStatus ? LOW : HIGH);
+        Serial.println(newCondenserStatus ? "🟡 Condenser: ON" : "🔴 Condenser: OFF");
     }
 
-    // Update compressor relay
     if (newCompressorStatus != compressorRelayStatus)
     {
         compressorRelayStatus = newCompressorStatus;
-        if (newCompressorStatus)
-        {
-            digitalWrite(COMPRESSOR_RELAY_PIN, LOW); // ON for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🟠 [Relay] Compressor Relay: ON");
-            Serial.println("--------------------------------");
-        }
-        else
-        {
-            digitalWrite(COMPRESSOR_RELAY_PIN, HIGH); // OFF for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🔴 [Relay] Compressor Relay: OFF");
-            Serial.println("--------------------------------");
-        }
+        digitalWrite(COMPRESSOR_RELAY_PIN, newCompressorStatus ? LOW : HIGH);
+        Serial.println(newCompressorStatus ? "🟠 Compressor: ON" : "🔴 Compressor: OFF");
     }
 }
 
-// ================================
-// Control Fan2 Relay
-// Handles the fan2 relay based on temperature and alarms
-// ================================
 void controlFan2Relay()
 {
     bool newStatus = (deviceOn && cachedDoorClosed && !cachedFilterWarning &&
@@ -254,19 +207,7 @@ void controlFan2Relay()
     if (newStatus != fan2RelayStatus)
     {
         fan2RelayStatus = newStatus;
-        if (newStatus)
-        {
-            digitalWrite(FAN2_RELAY_PIN, LOW); // ON for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🟣 [Relay] Fan2 Relay: ON");
-            Serial.println("--------------------------------");
-        }
-        else
-        {
-            digitalWrite(FAN2_RELAY_PIN, HIGH); // OFF for Active LOW
-            Serial.println("--------------------------------");
-            Serial.println("🔴 [Relay] Fan2 Relay: OFF");
-            Serial.println("--------------------------------");
-        }
+        digitalWrite(FAN2_RELAY_PIN, newStatus ? LOW : HIGH);
+        Serial.println(newStatus ? "🟣 Fan2: ON" : "🔴 Fan2: OFF");
     }
 }

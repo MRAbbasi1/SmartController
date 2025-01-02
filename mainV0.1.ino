@@ -26,13 +26,18 @@ void setup()
 
     Serial.println("________________ Starting Setup ________________");
 
-    // 1- Initialize Sensors (DHT11, DS18B20, DHT22)
-    initializeSensors();
+    // 0- Setup Display
+    displaySetup();
 
     Serial.println("________________________________________________");
 
-    // 2- Initialize Settings (NVS)
+    // 1- Initialize Settings (NVS)
     initializeSettings();
+
+    Serial.println("________________________________________________");
+
+    // 2- Setup Sensors (DHT11, DS18B20, DHT22)
+    initializeSensors();
 
     Serial.println("________________________________________________");
 
@@ -55,9 +60,6 @@ void setup()
     setupAndUpdateTime();
 
     Serial.println("________________________________________________");
-
-    // 7- Setup Display
-    displaySetup();
 
     // Indicate end of setup with RGB Red
     pixels.setBrightness(64);

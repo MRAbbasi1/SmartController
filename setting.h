@@ -10,7 +10,7 @@
 // -----------------------------------
 #define NUMERIC_SETTING_COUNT 13
 #define BOOLEAN_SETTING_COUNT 10
-#define STRING_SETTING_COUNT 6
+#define STRING_SETTING_COUNT 10
 #define STRING_MAX_LENGTH 64
 
 // -----------------------------------
@@ -53,7 +53,11 @@ typedef enum
     AP_NAME,
     AP_PASSWORD,
     SERVER_URL,
-    SERVER_IP
+    SERVER_IP,
+    INLET_SENSOR_ADDRESS,
+    OUTLET_SENSOR_ADDRESS,
+    ANTIFREEZE_SENSOR_ADDRESS,
+    FILTER_SENSOR_ADDRESS
 } StringIndex;
 
 // -----------------------------------

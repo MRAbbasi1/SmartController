@@ -39,12 +39,16 @@ const bool defaultBooleanValues[] = {
 };
 
 const char *defaultStringValues[] = {
-    "Redmi Note 9S",     // WIFI_SSID
-    "80018001",          // WIFI_PASSWORD
-    "0",                 // AP_NAME
-    "0",                 // AP_PASSWORD
-    "http://server.com", // SERVER_URL
-    "192.168.1.1"        // SERVER_IP
+    "Redmi Note 9S",           // WIFI_SSID
+    "80018001",                // WIFI_PASSWORD
+    "0",                       // AP_NAME
+    "0",                       // AP_PASSWORD
+    "http://server.com",       // SERVER_URL
+    "192.168.1.1",             // SERVER_IP
+    "28:2D:11:58:D4:E1:3C:BC", // INLET_SENSOR_ADDRESS
+    "28:BD:AD:43:D4:E1:3C:CF", // OUTLET_SENSOR_ADDRESS
+    "28:AB:CC:43:D4:E1:3C:FA", // ANTIFREEZE_SENSOR_ADDRESS
+    "28:FF:64:1F:70:68:7C:7C"  // FILTER_SENSOR_ADDRESS
 };
 
 // -----------------------------------
@@ -89,7 +93,11 @@ const int stringMaxLengths[] = {
     16, // AP_NAME
     16, // AP_PASSWORD
     64, // SERVER_URL
-    15  // SERVER_IP
+    15, // SERVER_IP
+    32, // INLET_SENSOR_ADDRESS
+    32, // OUTLET_SENSOR_ADDRESS
+    32, // ANTIFREEZE_SENSOR_ADDRESS
+    32  // FILTER_SENSOR_ADDRESS
 };
 
 // Temporary Arrays to track change flags
