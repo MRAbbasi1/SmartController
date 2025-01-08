@@ -1,25 +1,22 @@
 SET(SOURCES ui_mainScreen.c
     ui_controlSettingScreen.c
-    ui_wifiScreen.c
-    ui_statusScreen.c
     ui_processSettingScreen.c
     ui_addvansedSettingScreen.c
+    ui_statusScreen.c
     ui.c
     ui_comp_hook.c
     ui_helpers.c
     ui_events.c
     ui_img_2087107542.c
-    ui_img_832325132.c
+    ui_img_640283455.c
     ui_img_return_png.c
     ui_img_278418788.c
     ui_img_worker_png.c
     ui_img_68039786.c
-    ui_img_1122079624.c
     ui_img_info_png.c
-    ui_img_wifi_4_png.c
-    ui_img_534919753.c
-    ui_img_cloud_png.c
-    ui_img_1740866726.c
+    ui_img_plus_png.c
+    ui_img_1731839073.c
+    ui_img_208276483.c
     ui_img_temperature_png.c
     ui_img_return_66_png.c
     ui_img_sensor_png.c
@@ -29,8 +26,6 @@ SET(SOURCES ui_mainScreen.c
     ui_img_close_png.c
     ui_img_1437619218.c
     ui_img_18821776.c
-    ui_img_plus_png.c
-    ui_img_1731839073.c
-    ui_img_208276483.c)
+    ui_img_wifi_4_png.c)
 
 add_library(ui ${SOURCES})

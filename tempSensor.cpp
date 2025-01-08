@@ -1,158 +1,204 @@
 #include "tempSensor.h"
 #include "setting.h"
 
-// Define the GPIO pin for all DS18B20 sensors
-#define ONE_WIRE_BUS 4 // Change to the GPIO pin you're using
+#define ONE_WIRE_BUS 4
 
-// OneWire instance for communication
 OneWire oneWire(ONE_WIRE_BUS);
-
-// DallasTemperature instance
 DallasTemperature ds18b20(&oneWire);
 
-// Define the sensors array (adjust size as needed)
-const uint8_t sensorCount = 4; // Number of sensors
+const uint8_t sensorCount = 4;
 DS18B20Sensor sensors[sensorCount];
 
-unsigned long lastTemperatureRequestTime = 0; // Timestamp for last request
-const unsigned long requestInterval = 1000;   // Interval between requests in milliseconds
-
-// To keep track of the current sensor being read
-uint8_t currentSensorIndex = 0;
+const unsigned long TEMPERATURE_READ_INTERVAL = 30000;
+unsigned long lastTemperatureRequestTime = 0;
+bool conversionRequested = false;
+const uint16_t CONVERSION_TIME = 750;
 
 bool convertStringToDeviceAddress(const char *addressStr, DeviceAddress &deviceAddress)
 {
+    Serial.print("🔍 [Temperature] Converting address string: ");
+    Serial.println(addressStr);
+
     char *ptr = (char *)addressStr;
     for (uint8_t i = 0; i < 8; i++)
     {
-        // Skip colons
         if (*ptr == ':')
             ptr++;
-
-        // Read two hex digits
         char hex[3] = {ptr[0], ptr[1], '\0'};
-
-        // Convert hex to byte
         char *end;
         long value = strtol(hex, &end, 16);
 
-        // Validate conversion
         if (end == hex || value < 0 || value > 255)
         {
+            Serial.println("❌ [Temperature] Invalid hex value in address");
             return false;
         }
-
         deviceAddress[i] = (uint8_t)value;
         ptr += 2;
     }
+    Serial.println("✅ [Temperature] Address conversion successful");
     return true;
 }
 
-// --------------------------------------
-// Function to initialize all sensors
-// --------------------------------------
 void initializeSensors()
 {
-    Serial.println("🔁 [Temperature] Initializing DS18B20 sensors...");
+    Serial.println("\n🔄 [Temperature] Starting sensor initialization...");
 
-    // Start the DallasTemperature library
+    Serial.println("🔄 [Temperature] Beginning Dallas Temperature library");
     ds18b20.begin();
 
-    // Names of the sensors and their corresponding NVS keys (use enum values)
+    Serial.println("🔄 [Temperature] Setting resolution to 12 bits");
+    ds18b20.setResolution(12);
+
+    Serial.println("🔄 [Temperature] Enabling async mode");
+    ds18b20.setWaitForConversion(false);
+
     const char *sensorNames[] = {"Inlet", "Outlet", "Antifreeze", "Filter"};
     StringIndex sensorIndexes[] = {INLET_SENSOR_ADDRESS, OUTLET_SENSOR_ADDRESS, ANTIFREEZE_SENSOR_ADDRESS, FILTER_SENSOR_ADDRESS};
 
-    // Initialize each sensor
+    uint8_t successCount = 0;
+
     for (uint8_t i = 0; i < sensorCount; i++)
     {
+        Serial.print("\n🔄 [Temperature] Initializing sensor ");
+        Serial.print(i + 1);
+        Serial.print(" of ");
+        Serial.println(sensorCount);
+
         char addressStr[STRING_MAX_LENGTH];
 
-        // Attempt to get the address for the current sensor from NVS
+        Serial.print("🔄 [Temperature] Reading address for: ");
+        Serial.println(sensorNames[i]);
+
         if (!getStringSetting(sensorIndexes[i], addressStr, STRING_MAX_LENGTH))
         {
-            Serial.print("❌ [Temperature] Failed to read sensor address for: ");
+            Serial.print("❌ [Temperature] Failed to read address from settings for: ");
             Serial.println(sensorNames[i]);
-            continue; // Skip this sensor initialization
+            continue;
         }
 
-        // Convert the address string to device address
         if (!convertStringToDeviceAddress(addressStr, sensors[i].address))
         {
             Serial.print("❌ [Temperature] Invalid address format for: ");
             Serial.println(sensorNames[i]);
-            continue; // Skip this sensor if address is invalid
+            continue;
         }
 
-        // Assign the name of the sensor
         sensors[i].name = sensorNames[i];
 
-        // Print sensor information
-        Serial.print("✅ [Temperature] ");
+        Serial.print("🔄 [Temperature] Checking connection for: ");
+        Serial.println(sensorNames[i]);
+
+        if (!ds18b20.isConnected(sensors[i].address))
+        {
+            Serial.print("❌ [Temperature] Sensor not connected: ");
+            Serial.println(sensorNames[i]);
+            continue;
+        }
+
+        Serial.print("🌡️ [Temperature] ");
         Serial.print(sensors[i].name);
-        Serial.print(" sensor initialized | Address: ");
+        Serial.print(" initialized | Address: ");
         for (uint8_t j = 0; j < 8; j++)
         {
             Serial.print(sensors[i].address[j], HEX);
             if (j < 7)
-                Serial.print(":"); // Add colon between bytes
+                Serial.print(":");
         }
         Serial.println();
+
+        successCount++;
     }
 
-    Serial.println("🌡️ [Temperature] Sensors initialization completed ✅");
+    Serial.print("\n🌡️ [Temperature] Initialization complete: ");
+    Serial.print(successCount);
+    Serial.print("/");
+    Serial.print(sensorCount);
+    Serial.println(" sensors initialized");
     Serial.println("________________________________________________");
 }
 
-// --------------------------------------
-// Function to handle reading temperatures in a non-blocking manner
-// --------------------------------------
 void handleTemperatureReadings()
 {
-    // Check if it's time to request temperatures
-    if (millis() - lastTemperatureRequestTime >= requestInterval)
+    unsigned long currentMillis = millis();
+
+    if (!conversionRequested && (currentMillis - lastTemperatureRequestTime >= TEMPERATURE_READ_INTERVAL))
     {
-        // Request temperature for the current sensor
+        Serial.println("\n🌡️ [Temperature] Requesting temperature conversion");
         ds18b20.requestTemperatures();
-        float temperature = ds18b20.getTempC(sensors[currentSensorIndex].address);
+        conversionRequested = true;
+        lastTemperatureRequestTime = currentMillis;
+        return;
+    }
 
-        // Check for valid temperature
-        if (temperature != DEVICE_DISCONNECTED_C)
+    if (conversionRequested && (currentMillis - lastTemperatureRequestTime >= CONVERSION_TIME))
+    {
+        Serial.println("🔄 [Temperature] Reading all sensors:");
+        uint8_t validReadings = 0;
+
+        for (uint8_t i = 0; i < sensorCount; i++)
         {
-            Serial.print("🌡️ [Temperature] ");
-            Serial.print(sensors[currentSensorIndex].name);
-            Serial.print(": ");
-            Serial.print(temperature);
-            Serial.println(" °C");
-        }
-        else
-        {
-            Serial.print("❌ [Temperature] Failed to read temperature for sensor: ");
-            Serial.println(sensors[currentSensorIndex].name);
+            float temperature = ds18b20.getTempC(sensors[i].address);
+
+            if (temperature != DEVICE_DISCONNECTED_C && temperature > -55 && temperature < 125)
+            {
+                Serial.print("🌡️ [Temperature] ");
+                Serial.print(sensors[i].name);
+                Serial.print(": ");
+                Serial.print(temperature);
+                Serial.println(" °C");
+
+                sensors[i].lastValidTemperature = temperature;
+                sensors[i].lastReadTime = currentMillis;
+                validReadings++;
+            }
+            else
+            {
+                Serial.print("❌ [Temperature] Invalid reading for ");
+                Serial.print(sensors[i].name);
+                Serial.print(" (");
+                Serial.print(temperature);
+                Serial.println(" °C)");
+            }
         }
 
-        // Move to the next sensor
-        currentSensorIndex = (currentSensorIndex + 1) % sensorCount;
+        Serial.print("🌡️ [Temperature] Valid readings: ");
+        Serial.print(validReadings);
+        Serial.print("/");
+        Serial.println(sensorCount);
 
-        // Update the timestamp
-        lastTemperatureRequestTime = millis();
+        conversionRequested = false;
     }
 }
 
-// --------------------------------------
-// Function to read temperature from a specific sensor by name
-// --------------------------------------
 float readTemperatureByName(String name)
 {
-    // Loop through the sensors to find the one with the given name
+    Serial.print("\n🌡️ [Temperature] Reading temperature for: ");
+    Serial.println(name);
+
+    unsigned long currentMillis = millis();
+
     for (uint8_t i = 0; i < sensorCount; i++)
     {
-        if (sensors[i].name == name)
+        if (String(sensors[i].name) == name)
         {
-            // Request temperature for the specific sensor
+            if (currentMillis - sensors[i].lastReadTime < TEMPERATURE_READ_INTERVAL * 2)
+            {
+                Serial.print("🌡️ [Temperature] Using cached value for ");
+                Serial.print(name);
+                Serial.print(": ");
+                Serial.print(sensors[i].lastValidTemperature);
+                Serial.println(" °C");
+                return sensors[i].lastValidTemperature;
+            }
+
+            Serial.println("🌡️ [Temperature] Requesting new reading");
+            ds18b20.requestTemperatures();
+            delay(CONVERSION_TIME);
+
             float temperature = ds18b20.getTempC(sensors[i].address);
 
-            // Check for valid temperature
-            if (temperature != DEVICE_DISCONNECTED_C)
+            if (temperature != DEVICE_DISCONNECTED_C && temperature > -55 && temperature < 125)
             {
                 Serial.print("🌡️ [Temperature] ");
                 Serial.print(name);
@@ -160,19 +206,18 @@ float readTemperatureByName(String name)
                 Serial.print(temperature);
                 Serial.println(" °C");
 
+                sensors[i].lastValidTemperature = temperature;
+                sensors[i].lastReadTime = currentMillis;
                 return temperature;
             }
-            else
-            {
-                Serial.print("❌ [Temperature] Failed to read temperature for sensor: ");
-                Serial.println(name);
-                return NAN;
-            }
+
+            Serial.print("❌ [Temperature] Invalid reading for ");
+            Serial.println(name);
+            return NAN;
         }
     }
 
-    // If no sensor with the given name is found
-    Serial.print("❌ [Temperature] Sensor not found with name: ");
+    Serial.print("❌ [Temperature] Sensor not found: ");
     Serial.println(name);
     return NAN;
 }

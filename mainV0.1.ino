@@ -75,5 +75,7 @@ void loop()
 
     wifiLoop(); // Handle Wi-Fi connection checks and reconnection
 
+    handleTemperatureReadings(); // Handle temperature sensor readings
+
     controlRelays(); // Handle Relay Control
 }

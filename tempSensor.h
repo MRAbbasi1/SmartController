@@ -8,8 +8,10 @@
 // Define DS18B20 sensor structure
 struct DS18B20Sensor
 {
-    String name;           // Name of the sensor (e.g., Inlet, Outlet)
-    DeviceAddress address; // Unique address of the sensor
+    const char *name;
+    DeviceAddress address;
+    float lastValidTemperature;
+    unsigned long lastReadTime;
 };
 
 // Declare global variables for sensors
@@ -18,6 +20,7 @@ extern const uint8_t sensorCount; // Number of sensors
 
 // Function prototypes
 void initializeSensors();                 // Function to initialize all sensors
+void handleTemperatureReadings();         // Function to handle continuous temperature readings
 float readTemperatureByName(String name); // Function to read temperature from a sensor by name
 
 #endif

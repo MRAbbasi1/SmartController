@@ -14,20 +14,14 @@ void mainScreen(lv_event_t * e);
 void settingScreen(lv_event_t * e);
 void turnOffCtrl_Checked(lv_event_t * e);
 void turnOffCtrl_Unchecked(lv_event_t * e);
-void wifiScreen(lv_event_t * e);
-void selectedwifissid(lv_event_t * e);
-void disconnectwifinetwork(lv_event_t * e);
-void wifistateReport(lv_event_t * e);
-void server_connection_status(lv_event_t * e);
-void server_handshaking(lv_event_t * e);
-void connectwifibtn(lv_event_t * e);
-void getwifipass(lv_event_t * e);
-void satusScreen(lv_event_t * e);
-void show_QR_code(lv_event_t * e);
 void processSettingScreen(lv_event_t * e);
 void submit_process_setting(lv_event_t * e);
 void addvancedSettingScreen(lv_event_t * e);
 void submit_advance_setting(lv_event_t * e);
+void searchingSensors(lv_event_t * e);
+void goToFactoryReseting(lv_event_t * e);
+void satusScreen(lv_event_t * e);
+void show_QR_code(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

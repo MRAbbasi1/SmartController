@@ -40,17 +40,6 @@ lv_obj_set_style_text_color(ui_statusscreenlabel, lv_color_hex(0x000000), LV_PAR
 lv_obj_set_style_text_opa(ui_statusscreenlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_statusscreenlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Time_Status_screen_2 = lv_label_create(ui_statusScreen);
-lv_obj_set_width( ui_Time_Status_screen_2, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Time_Status_screen_2, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Time_Status_screen_2, 120 );
-lv_obj_set_y( ui_Time_Status_screen_2, -100 );
-lv_obj_set_align( ui_Time_Status_screen_2, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Time_Status_screen_2,"T: ");
-lv_obj_set_style_text_color(ui_Time_Status_screen_2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Time_Status_screen_2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Time_Status_screen_2, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 ui_TEMP_Label = lv_label_create(ui_statusScreen);
 lv_obj_set_width( ui_TEMP_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_TEMP_Label, LV_SIZE_CONTENT);   /// 1
@@ -556,7 +545,7 @@ lv_obj_set_height( ui_guidetext, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_guidetext, -110 );
 lv_obj_set_y( ui_guidetext, 12 );
 lv_obj_set_align( ui_guidetext, LV_ALIGN_CENTER );
-lv_label_set_text(ui_guidetext,"For Locally Connection/Control To Device:\n1) First Download Device Application\n2) Scan QR-Code in Application");
+lv_label_set_text(ui_guidetext,"For Locally Connection & Control Device:\n1) First Download Device Application.\n2) Scan QR-Code in Application.");
 lv_obj_set_style_text_color(ui_guidetext, lv_color_hex(0xCECECE), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_guidetext, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_guidetext, &lv_font_montserrat_12, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -877,7 +866,6 @@ lv_obj_add_event_cb(ui_statusScreen, ui_event_statusScreen, LV_EVENT_ALL, NULL);
 uic_statusScreen = ui_statusScreen;
 uic_returnButton3 = ui_returnButton3;
 uic_statusscreenlabel = ui_statusscreenlabel;
-uic_Time_Status_screen_2 = ui_Time_Status_screen_2;
 uic_TEMP_Label = ui_TEMP_Label;
 uic_ALARM_Label = ui_ALARM_Label;
 uic_Status_Label = ui_Status_Label;

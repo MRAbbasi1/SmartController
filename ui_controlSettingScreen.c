@@ -40,22 +40,11 @@ lv_obj_set_style_text_color(ui_settingscreenlabel, lv_color_hex(0x000000), LV_PA
 lv_obj_set_style_text_opa(ui_settingscreenlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_settingscreenlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Time_Status_screen_3 = lv_label_create(ui_controlSettingScreen);
-lv_obj_set_width( ui_Time_Status_screen_3, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Time_Status_screen_3, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Time_Status_screen_3, 120 );
-lv_obj_set_y( ui_Time_Status_screen_3, -100 );
-lv_obj_set_align( ui_Time_Status_screen_3, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Time_Status_screen_3,"T: ");
-lv_obj_set_style_text_color(ui_Time_Status_screen_3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Time_Status_screen_3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Time_Status_screen_3, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 ui_SettingCTRL = lv_btn_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_SettingCTRL, 70);
 lv_obj_set_height( ui_SettingCTRL, 70);
 lv_obj_set_x( ui_SettingCTRL, -120 );
-lv_obj_set_y( ui_SettingCTRL, -30 );
+lv_obj_set_y( ui_SettingCTRL, 0 );
 lv_obj_set_align( ui_SettingCTRL, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_SettingCTRL, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
 lv_obj_set_style_radius(ui_SettingCTRL, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -73,8 +62,8 @@ lv_obj_set_style_text_align(ui_SettingCTRL, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| 
 ui_Advanced_Setting_Button = lv_btn_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_Advanced_Setting_Button, 70);
 lv_obj_set_height( ui_Advanced_Setting_Button, 70);
-lv_obj_set_x( ui_Advanced_Setting_Button, -40 );
-lv_obj_set_y( ui_Advanced_Setting_Button, -30 );
+lv_obj_set_x( ui_Advanced_Setting_Button, 120 );
+lv_obj_set_y( ui_Advanced_Setting_Button, 0 );
 lv_obj_set_align( ui_Advanced_Setting_Button, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Advanced_Setting_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Advanced_Setting_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
@@ -90,8 +79,8 @@ lv_obj_set_style_shadow_ofs_y(ui_Advanced_Setting_Button, 0, LV_PART_MAIN| LV_ST
 ui_TurnOffCTRL = lv_btn_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_TurnOffCTRL, 70);
 lv_obj_set_height( ui_TurnOffCTRL, 70);
-lv_obj_set_x( ui_TurnOffCTRL, -120 );
-lv_obj_set_y( ui_TurnOffCTRL, 60 );
+lv_obj_set_x( ui_TurnOffCTRL, 40 );
+lv_obj_set_y( ui_TurnOffCTRL, 0 );
 lv_obj_set_align( ui_TurnOffCTRL, LV_ALIGN_CENTER );
 lv_obj_add_state( ui_TurnOffCTRL, LV_STATE_CHECKED );     /// States
 lv_obj_add_flag( ui_TurnOffCTRL, LV_OBJ_FLAG_CHECKABLE );   /// Flags
@@ -110,28 +99,11 @@ lv_obj_set_style_text_align(ui_TurnOffCTRL, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| 
 lv_obj_set_style_bg_color(ui_TurnOffCTRL, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_CHECKED );
 lv_obj_set_style_bg_opa(ui_TurnOffCTRL, 255, LV_PART_MAIN| LV_STATE_CHECKED);
 
-ui_Wifi_Setting_Button = lv_btn_create(ui_controlSettingScreen);
-lv_obj_set_width( ui_Wifi_Setting_Button, 70);
-lv_obj_set_height( ui_Wifi_Setting_Button, 70);
-lv_obj_set_x( ui_Wifi_Setting_Button, 40 );
-lv_obj_set_y( ui_Wifi_Setting_Button, -30 );
-lv_obj_set_align( ui_Wifi_Setting_Button, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Wifi_Setting_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
-lv_obj_clear_flag( ui_Wifi_Setting_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Wifi_Setting_Button, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Wifi_Setting_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Wifi_Setting_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_Wifi_Setting_Button, &ui_img_1122079624, LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_shadow_width(ui_Wifi_Setting_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_spread(ui_Wifi_Setting_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_ofs_x(ui_Wifi_Setting_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_ofs_y(ui_Wifi_Setting_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 ui_Status_info_Button = lv_btn_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_Status_info_Button, 70);
 lv_obj_set_height( ui_Status_info_Button, 70);
-lv_obj_set_x( ui_Status_info_Button, 120 );
-lv_obj_set_y( ui_Status_info_Button, -30 );
+lv_obj_set_x( ui_Status_info_Button, -40 );
+lv_obj_set_y( ui_Status_info_Button, 0 );
 lv_obj_set_align( ui_Status_info_Button, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Status_info_Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_Status_info_Button, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
@@ -148,7 +120,7 @@ ui_COOLER_IS__ON = lv_label_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_COOLER_IS__ON, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_COOLER_IS__ON, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_COOLER_IS__ON, 0 );
-lv_obj_set_y( ui_COOLER_IS__ON, 60 );
+lv_obj_set_y( ui_COOLER_IS__ON, 90 );
 lv_obj_set_align( ui_COOLER_IS__ON, LV_ALIGN_CENTER );
 lv_label_set_text(ui_COOLER_IS__ON,"COOLER IS : ON");
 lv_obj_add_flag( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -160,7 +132,7 @@ ui_COOLER_IS__OFF = lv_label_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_COOLER_IS__OFF, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_COOLER_IS__OFF, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_COOLER_IS__OFF, 0 );
-lv_obj_set_y( ui_COOLER_IS__OFF, 60 );
+lv_obj_set_y( ui_COOLER_IS__OFF, 90 );
 lv_obj_set_align( ui_COOLER_IS__OFF, LV_ALIGN_CENTER );
 lv_label_set_text(ui_COOLER_IS__OFF,"COOLER IS : OFF");
 lv_obj_set_style_text_color(ui_COOLER_IS__OFF, lv_color_hex(0xFF0400), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -171,17 +143,14 @@ lv_obj_add_event_cb(ui_returnButton4, ui_event_returnButton4, LV_EVENT_ALL, NULL
 lv_obj_add_event_cb(ui_SettingCTRL, ui_event_SettingCTRL, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Advanced_Setting_Button, ui_event_Advanced_Setting_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_TurnOffCTRL, ui_event_TurnOffCTRL, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Wifi_Setting_Button, ui_event_Wifi_Setting_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Status_info_Button, ui_event_Status_info_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_controlSettingScreen, ui_event_controlSettingScreen, LV_EVENT_ALL, NULL);
 uic_controlSettingScreen = ui_controlSettingScreen;
 uic_returnButton4 = ui_returnButton4;
 uic_settingscreenlabel = ui_settingscreenlabel;
-uic_Time_Status_screen_3 = ui_Time_Status_screen_3;
 uic_SettingCTRL = ui_SettingCTRL;
 uic_Advanced_Setting_Button = ui_Advanced_Setting_Button;
 uic_TurnOffCTRL = ui_TurnOffCTRL;
-uic_Wifi_Setting_Button = ui_Wifi_Setting_Button;
 uic_Status_info_Button = ui_Status_info_Button;
 uic_COOLER_IS__ON = ui_COOLER_IS__ON;
 uic_COOLER_IS__OFF = ui_COOLER_IS__OFF;

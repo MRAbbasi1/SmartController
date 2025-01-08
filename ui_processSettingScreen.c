@@ -40,6 +40,33 @@ lv_obj_set_style_text_color(ui_ProcessSettingCTRL, lv_color_hex(0x000000), LV_PA
 lv_obj_set_style_text_opa(ui_ProcessSettingCTRL, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_ProcessSettingCTRL, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+ui_Setting_Save_btn = lv_btn_create(ui_processSettingScreen);
+lv_obj_set_width( ui_Setting_Save_btn, 60);
+lv_obj_set_height( ui_Setting_Save_btn, 30);
+lv_obj_set_x( ui_Setting_Save_btn, 125 );
+lv_obj_set_y( ui_Setting_Save_btn, -100 );
+lv_obj_set_align( ui_Setting_Save_btn, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_Setting_Save_btn, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_clear_flag( ui_Setting_Save_btn, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_radius(ui_Setting_Save_btn, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_Setting_Save_btn, lv_color_hex(0x00BE10), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Setting_Save_btn, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_width(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_spread(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_ofs_x(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_shadow_ofs_y(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Setting_Save_btn_label = lv_label_create(ui_processSettingScreen);
+lv_obj_set_width( ui_Setting_Save_btn_label, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Setting_Save_btn_label, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_Setting_Save_btn_label, 124 );
+lv_obj_set_y( ui_Setting_Save_btn_label, -101 );
+lv_obj_set_align( ui_Setting_Save_btn_label, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Setting_Save_btn_label,"Save");
+lv_obj_set_style_text_color(ui_Setting_Save_btn_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_Setting_Save_btn_label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Setting_Save_btn_label, &lv_font_montserrat_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+
 ui_ProcessScreenContainer1 = lv_obj_create(ui_processSettingScreen);
 lv_obj_remove_style_all(ui_ProcessScreenContainer1);
 lv_obj_set_width( ui_ProcessScreenContainer1, 150);
@@ -383,33 +410,6 @@ lv_obj_set_style_text_color(ui_TempAlarmSwitch_OFFlabel, lv_color_hex(0xFF0400),
 lv_obj_set_style_text_opa(ui_TempAlarmSwitch_OFFlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_TempAlarmSwitch_OFFlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Setting_Save_btn = lv_btn_create(ui_processSettingScreen);
-lv_obj_set_width( ui_Setting_Save_btn, 60);
-lv_obj_set_height( ui_Setting_Save_btn, 30);
-lv_obj_set_x( ui_Setting_Save_btn, 125 );
-lv_obj_set_y( ui_Setting_Save_btn, -100 );
-lv_obj_set_align( ui_Setting_Save_btn, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Setting_Save_btn, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
-lv_obj_clear_flag( ui_Setting_Save_btn, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_radius(ui_Setting_Save_btn, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_Setting_Save_btn, lv_color_hex(0x00BE10), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Setting_Save_btn, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_width(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_spread(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_ofs_x(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_shadow_ofs_y(ui_Setting_Save_btn, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Setting_Save_btn_label = lv_label_create(ui_processSettingScreen);
-lv_obj_set_width( ui_Setting_Save_btn_label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Setting_Save_btn_label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Setting_Save_btn_label, 124 );
-lv_obj_set_y( ui_Setting_Save_btn_label, -101 );
-lv_obj_set_align( ui_Setting_Save_btn_label, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Setting_Save_btn_label,"Save");
-lv_obj_set_style_text_color(ui_Setting_Save_btn_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Setting_Save_btn_label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Setting_Save_btn_label, &lv_font_montserrat_12, LV_PART_MAIN| LV_STATE_DEFAULT);
-
 ui_High_Temp_Alarm_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Temp_Alarm_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Temp_Alarm_Label, LV_SIZE_CONTENT);   /// 1
@@ -481,6 +481,7 @@ lv_obj_set_style_bg_color(ui_High_Temp_Alarm_Switch_Label, lv_color_hex(0xFFFFFF
 lv_obj_set_style_bg_opa(ui_High_Temp_Alarm_Switch_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_add_event_cb(ui_returnButton5, ui_event_returnButton5, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Setting_Save_btn, ui_event_Setting_Save_btn, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Compressor_Range_Plus_Button, ui_event_Compressor_Range_Plus_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Compressor_Range_Minus_Button, ui_event_Compressor_Range_Minus_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Compressor_Offset_Plus_Button, ui_event_Compressor_Offset_Plus_Button, LV_EVENT_ALL, NULL);
@@ -489,11 +490,12 @@ lv_obj_add_event_cb(ui_High_Temp_Alarm_Plus_Button, ui_event_High_Temp_Alarm_Plu
 lv_obj_add_event_cb(ui_High_Temp_Alarm_Minus_Button, ui_event_High_Temp_Alarm_Minus_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_PressureAlarmSwitch, ui_event_PressureAlarmSwitch, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_TempAlarmSwitch, ui_event_TempAlarmSwitch, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_Setting_Save_btn, ui_event_Setting_Save_btn, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_processSettingScreen, ui_event_processSettingScreen, LV_EVENT_ALL, NULL);
 uic_processSettingScreen = ui_processSettingScreen;
 uic_returnButton5 = ui_returnButton5;
 uic_ProcessSettingCTRL = ui_ProcessSettingCTRL;
+uic_Setting_Save_btn = ui_Setting_Save_btn;
+uic_Setting_Save_btn_label = ui_Setting_Save_btn_label;
 uic_ProcessScreenContainer1 = ui_ProcessScreenContainer1;
 uic_Compressor_Range_Spinbox = ui_Compressor_Range_Spinbox;
 uic_Compressor_Range_Plus_Button = ui_Compressor_Range_Plus_Button;
@@ -517,8 +519,6 @@ uic_ProcessScreenContainer5 = ui_ProcessScreenContainer5;
 uic_TempAlarmSwitch = ui_TempAlarmSwitch;
 uic_TempAlarmSwitch_ONlabel = ui_TempAlarmSwitch_ONlabel;
 uic_TempAlarmSwitch_OFFlabel = ui_TempAlarmSwitch_OFFlabel;
-uic_Setting_Save_btn = ui_Setting_Save_btn;
-uic_Setting_Save_btn_label = ui_Setting_Save_btn_label;
 uic_High_Temp_Alarm_Label = ui_High_Temp_Alarm_Label;
 uic_High_Pressure_Alarm_Label = ui_High_Pressure_Alarm_Label;
 uic_Compressor_Offset_Label = ui_Compressor_Offset_Label;

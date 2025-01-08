@@ -25,56 +25,6 @@ void turnOffCtrl_Unchecked(lv_event_t * e)
 	// Your code here
 }
 
-void wifiScreen(lv_event_t * e)
-{
-	// Your code here
-}
-
-void selectedwifissid(lv_event_t * e)
-{
-	// Your code here
-}
-
-void disconnectwifinetwork(lv_event_t * e)
-{
-	// Your code here
-}
-
-void wifistateReport(lv_event_t * e)
-{
-	// Your code here
-}
-
-void server_connection_status(lv_event_t * e)
-{
-	// Your code here
-}
-
-void server_handshaking(lv_event_t * e)
-{
-	// Your code here
-}
-
-void connectwifibtn(lv_event_t * e)
-{
-	// Your code here
-}
-
-void getwifipass(lv_event_t * e)
-{
-	// Your code here
-}
-
-void satusScreen(lv_event_t * e)
-{
-	// Your code here
-}
-
-void show_QR_code(lv_event_t * e)
-{
-	// Your code here
-}
-
 void processSettingScreen(lv_event_t * e)
 {
 	// Your code here
@@ -91,6 +41,26 @@ void addvancedSettingScreen(lv_event_t * e)
 }
 
 void submit_advance_setting(lv_event_t * e)
+{
+	// Your code here
+}
+
+void searchingSensors(lv_event_t * e)
+{
+	// Your code here
+}
+
+void goToFactoryReseting(lv_event_t * e)
+{
+	// Your code here
+}
+
+void satusScreen(lv_event_t * e)
+{
+	// Your code here
+}
+
+void show_QR_code(lv_event_t * e)
 {
 	// Your code here
 }
