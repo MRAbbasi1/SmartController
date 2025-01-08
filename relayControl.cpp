@@ -18,7 +18,7 @@ static int antiFreezeBase = 0, antiFreezeRange = 0, fan2Temp = 0;
 
 static bool cachedDoorClosed = true;
 static bool cachedFilterWarning = false;
-static bool cachedHighPressure = false;
+// static bool cachedHighPressure = false;
 
 static float inletTemp = 0.0;
 static float antiFreezeTemp = 0.0;
@@ -84,6 +84,9 @@ void controlRelays()
 // ================================
 void reloadCachedData()
 {
+    Serial.println(" ");
+    Serial.println("---------------Relay Control: Check Flags---------------");
+
     if (getChangedFlagTemp("boolean", DEVICE_ON))
     {
         deviceOn = getBooleanSetting(DEVICE_ON);
@@ -132,15 +135,21 @@ void reloadCachedData()
         resetChangedFlagTemp("numeric", FAN2_TEMP);
     }
 
+    Serial.println(" ");
+    Serial.println("---------------Relay Control: Read Temperature---------------");
+
     // Read sensor temperatures
     inletTemp = readTemperatureByName("Inlet");
     antiFreezeTemp = readTemperatureByName("Antifreeze");
     fan2SensorTemp = readTemperatureByName("Filter");
 
+    Serial.println(" ");
+    Serial.println("---------------Relay Control: Check Alarm Status---------------");
+
     // Update alarm states
     cachedDoorClosed = isDoorClosed();
     cachedFilterWarning = isFilterWarning();
-    cachedHighPressure = isPressureHigh();
+    // cachedHighPressure = isPressureHigh();
 }
 
 // ================================
@@ -154,7 +163,10 @@ void controlEvaporatorRelay()
     {
         evaporatorRelayStatus = newStatus;
         digitalWrite(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
+        Serial.println("");
+        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
         Serial.println(newStatus ? "🟢 Evaporator: ON" : "🔴 Evaporator: OFF");
+        Serial.println("");
     }
 }
 
@@ -188,14 +200,20 @@ void controlCompressorAndCondenserRelays()
     {
         condenserRelayStatus = newCondenserStatus;
         digitalWrite(CONDENSER_RELAY_PIN, newCondenserStatus ? LOW : HIGH);
+        Serial.println("");
+        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
         Serial.println(newCondenserStatus ? "🟡 Condenser: ON" : "🔴 Condenser: OFF");
+        Serial.println("");
     }
 
     if (newCompressorStatus != compressorRelayStatus)
     {
         compressorRelayStatus = newCompressorStatus;
         digitalWrite(COMPRESSOR_RELAY_PIN, newCompressorStatus ? LOW : HIGH);
+        Serial.println("");
+        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
         Serial.println(newCompressorStatus ? "🟠 Compressor: ON" : "🔴 Compressor: OFF");
+        Serial.println("");
     }
 }
 
@@ -208,6 +226,9 @@ void controlFan2Relay()
     {
         fan2RelayStatus = newStatus;
         digitalWrite(FAN2_RELAY_PIN, newStatus ? LOW : HIGH);
+        Serial.println("");
+        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
         Serial.println(newStatus ? "🟣 Fan2: ON" : "🔴 Fan2: OFF");
+        Serial.println("");
     }
 }

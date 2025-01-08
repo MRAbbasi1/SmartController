@@ -124,6 +124,8 @@ void handleTemperatureReadings()
 
     if (!conversionRequested && (currentMillis - lastTemperatureRequestTime >= TEMPERATURE_READ_INTERVAL))
     {
+        Serial.println(" ");
+        Serial.println("---------------Handle Temperature Cache---------------");
         Serial.println("\n🌡️ [Temperature] Requesting temperature conversion");
         ds18b20.requestTemperatures();
         conversionRequested = true;
@@ -133,6 +135,8 @@ void handleTemperatureReadings()
 
     if (conversionRequested && (currentMillis - lastTemperatureRequestTime >= CONVERSION_TIME))
     {
+        Serial.println(" ");
+        Serial.println("---------------Handle Temperature Cache---------------");
         Serial.println("🔄 [Temperature] Reading all sensors:");
         uint8_t validReadings = 0;
 
@@ -154,6 +158,8 @@ void handleTemperatureReadings()
             }
             else
             {
+                Serial.println(" ");
+                Serial.println("---------------Handle Temperature Cache---------------");
                 Serial.print("❌ [Temperature] Invalid reading for ");
                 Serial.print(sensors[i].name);
                 Serial.print(" (");
@@ -161,7 +167,8 @@ void handleTemperatureReadings()
                 Serial.println(" °C)");
             }
         }
-
+        Serial.println(" ");
+        Serial.println("---------------Handle Temperature Cache---------------");
         Serial.print("🌡️ [Temperature] Valid readings: ");
         Serial.print(validReadings);
         Serial.print("/");
