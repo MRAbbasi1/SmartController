@@ -18,7 +18,6 @@ static int antiFreezeBase = 0, antiFreezeRange = 0, fan2Temp = 0;
 
 static bool cachedDoorClosed = true;
 static bool cachedFilterWarning = false;
-// static bool cachedHighPressure = false;
 
 static float inletTemp = 0.0;
 static float antiFreezeTemp = 0.0;
@@ -30,8 +29,6 @@ static float fan2SensorTemp = 0.0;
 unsigned long lastCheckTime = 0;
 const unsigned long CHECK_INTERVAL = 30000; // Time for settings refresh
 unsigned long lastRelayUpdateTime = 0;
-unsigned long lastCompressorCheck = 0;
-unsigned long compressorLastOffTime = 0;
 const unsigned long RELAY_UPDATE_INTERVAL = 1000; // 1 second
 
 // ================================
@@ -72,7 +69,7 @@ void controlRelays()
     if (currentTime - lastRelayUpdateTime >= RELAY_UPDATE_INTERVAL)
     {
         controlEvaporatorRelay();
-        controlCompressorAndCondenserRelays(); // Unified logic for compressor and condenser
+        controlCompressorAndCondenserRelays();
         controlFan2Relay();
         lastRelayUpdateTime = currentTime;
     }
@@ -84,8 +81,8 @@ void controlRelays()
 // ================================
 void reloadCachedData()
 {
-    Serial.println(" ");
-    Serial.println("---------------Relay Control: Check Flags---------------");
+    Serial.println("");
+    Serial.println("---------------Relay Control: Check Settings---------------");
 
     if (getChangedFlagTemp("boolean", DEVICE_ON))
     {
@@ -135,21 +132,19 @@ void reloadCachedData()
         resetChangedFlagTemp("numeric", FAN2_TEMP);
     }
 
-    Serial.println(" ");
-    Serial.println("---------------Relay Control: Read Temperature---------------");
-
+    Serial.println("");
+    Serial.println("---------------Relay Control: Check Temperatures---------------");
     // Read sensor temperatures
     inletTemp = readTemperatureByName("Inlet");
     antiFreezeTemp = readTemperatureByName("Antifreeze");
     fan2SensorTemp = readTemperatureByName("Filter");
 
-    Serial.println(" ");
-    Serial.println("---------------Relay Control: Check Alarm Status---------------");
-
+    Serial.println("");
+    Serial.println("---------------Relay Control: Check Alarms---------------");
     // Update alarm states
     cachedDoorClosed = isDoorClosed();
     cachedFilterWarning = isFilterWarning();
-    // cachedHighPressure = isPressureHigh();
+    Serial.println("");
 }
 
 // ================================
@@ -163,9 +158,19 @@ void controlEvaporatorRelay()
     {
         evaporatorRelayStatus = newStatus;
         digitalWrite(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
+
         Serial.println("");
-        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
-        Serial.println(newStatus ? "🟢 Evaporator: ON" : "🔴 Evaporator: OFF");
+        Serial.print("[RELAY] 🟢 Evaporator: ");
+        Serial.print(newStatus ? "ON" : "OFF");
+        Serial.print(" | Reason: ");
+        if (!deviceOn)
+            Serial.println("🔴 Device is OFF");
+        else if (!cachedDoorClosed)
+            Serial.println("🚨 Door is OPEN");
+        else if (cachedFilterWarning)
+            Serial.println("🚨 Filter warning active");
+        else
+            Serial.println("✅ All conditions met");
         Serial.println("");
     }
 }
@@ -193,16 +198,29 @@ void controlCompressorAndCondenserRelays()
     {
         newCondenserStatus = false;
         newCompressorStatus = false;
-        compressorLastOffTime = millis();
     }
 
     if (newCondenserStatus != condenserRelayStatus)
     {
         condenserRelayStatus = newCondenserStatus;
         digitalWrite(CONDENSER_RELAY_PIN, newCondenserStatus ? LOW : HIGH);
+
         Serial.println("");
-        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
-        Serial.println(newCondenserStatus ? "🟡 Condenser: ON" : "🔴 Condenser: OFF");
+        Serial.print("[RELAY] 🟡 Condenser: ");
+        Serial.print(newCondenserStatus ? "ON" : "OFF");
+        Serial.print(" | Reason: ");
+        if (!deviceOn)
+            Serial.println("🔴 Device is OFF");
+        else if (!cachedDoorClosed)
+            Serial.println("🚨 Door is OPEN");
+        else if (cachedFilterWarning)
+            Serial.println("🚨 Filter warning active");
+        else if (antiFreezeTemp <= antiFreezeBase + antiFreezeRange)
+            Serial.println("🥶 Antifreeze temperature too low");
+        else if (inletTemp < compressorTemp + compressorRange)
+            Serial.println("🆗 Inlet temperature below range");
+        else
+            Serial.println("✅ All conditions met");
         Serial.println("");
     }
 
@@ -210,9 +228,17 @@ void controlCompressorAndCondenserRelays()
     {
         compressorRelayStatus = newCompressorStatus;
         digitalWrite(COMPRESSOR_RELAY_PIN, newCompressorStatus ? LOW : HIGH);
+
         Serial.println("");
-        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
-        Serial.println(newCompressorStatus ? "🟠 Compressor: ON" : "🔴 Compressor: OFF");
+        Serial.print("[RELAY] 🔵 Compressor: ");
+        Serial.print(newCompressorStatus ? "ON" : "OFF");
+        Serial.print(" | Reason: ");
+        if (!newCondenserStatus)
+            Serial.println("🔴 Condenser is OFF");
+        else if ((millis() - condenserOnTime) < 5000)
+            Serial.println("⌛️ Waiting for delay");
+        else
+            Serial.println("✅ All conditions met");
         Serial.println("");
     }
 }
@@ -226,9 +252,21 @@ void controlFan2Relay()
     {
         fan2RelayStatus = newStatus;
         digitalWrite(FAN2_RELAY_PIN, newStatus ? LOW : HIGH);
+
         Serial.println("");
-        Serial.println("- - - - - - - - Relay Control - - - - - - - -");
-        Serial.println(newStatus ? "🟣 Fan2: ON" : "🔴 Fan2: OFF");
+        Serial.print("[RELAY] 🟠 Fan2: ");
+        Serial.print(newStatus ? "ON" : "OFF");
+        Serial.print(" | Reason: ");
+        if (!deviceOn)
+            Serial.println("🔴 Device is OFF");
+        else if (!cachedDoorClosed)
+            Serial.println("🚨 Door is OPEN");
+        else if (cachedFilterWarning)
+            Serial.println("🚨 Filter warning active");
+        else if (fan2SensorTemp <= fan2Temp)
+            Serial.println("🆗 Sensor temperature below threshold");
+        else
+            Serial.println("✅ All conditions met");
         Serial.println("");
     }
 }
