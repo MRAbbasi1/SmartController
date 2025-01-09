@@ -24,49 +24,53 @@ void setup()
     pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // Green
     pixels.show();
 
-    Serial.println("________________ Starting Setup ________________");
+    Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    Serial.println("----------------- Start Setup -----------------");
+    Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     // 0- Setup Display
     displaySetup();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // 1- Initialize Settings (NVS)
     initializeSettings();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // 2- Setup Sensors (DHT11, DS18B20, DHT22)
     initializeSensors();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // 3- Setup Wi-Fi
     wifiSetup();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // 4- Initialize the Alarm system
     alarmSetup();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // 5- Setup Relays
     setupRelays();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // 6- Update the Time
     setupAndUpdateTime();
 
-    Serial.println("________________________________________________");
+    Serial.println("---------------------------------------------------");
 
     // Indicate end of setup with RGB Red
     pixels.setBrightness(64);
     pixels.setPixelColor(0, pixels.Color(64, 0, 0));
     pixels.show();
 
-    Serial.println("_________________ End of setup _________________");
+    Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    Serial.println("----------------- End of Setup -----------------");
+    Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 void loop()
