@@ -41,7 +41,7 @@ bool isDoorClosed()
     if (!doorWarning)
     {
         doorClosed = true;
-        Serial.println("🚨 [Alarm] Door is Closed ✅");
+        Serial.println("🚨 [Alarm] Door is Closed ✅ - Default Disabled in Setting");
     }
     else
     {
@@ -70,7 +70,7 @@ bool isPressureHigh()
     if (!pressureWarning)
     {
         pressureHigh = false;
-        Serial.println("🚨 [Alarm] Pressure is Normal ✅");
+        Serial.println("🚨 [Alarm] Pressure is Normal ✅ - Default Disabled in Setting");
     }
     else
     {
@@ -104,7 +104,7 @@ bool isFilterWarning()
         if (filterAlarm)
         {
             filterAlarm = false;
-            Serial.println("🚨 [Alarm] Filter is Normal ✅");
+            Serial.println("🚨 [Alarm] Filter is Normal ✅ - Default Disabled in Setting");
         }
     }
     else
@@ -140,7 +140,7 @@ bool isHighTempAlarm()
         if (tempAlarm)
         {
             tempAlarm = false;
-            Serial.println("🚨 [Alarm] Temperature is Normal ✅");
+            Serial.println("🚨 [Alarm] Temperature is Normal ✅ - Default Disabled in Setting");
         }
     }
     else
