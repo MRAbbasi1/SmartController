@@ -15,7 +15,6 @@ extern "C" {
 #include "ui_helpers.h"
 #include "ui_events.h"
 
-
 // SCREEN: ui_mainScreen
 void ui_mainScreen_screen_init(void);
 void ui_event_mainScreen( lv_event_t * e);
@@ -339,7 +338,7 @@ extern lv_obj_t *ui_statusscreenlabel;
 extern lv_obj_t *ui_TEMP_Label;
 extern lv_obj_t *ui_ALARM_Label;
 extern lv_obj_t *ui_Status_Label;
-extern lv_obj_t *ui_Connection_Label;
+extern lv_obj_t *ui_App_Connection_Label;
 extern lv_obj_t *ui_info_Label;
 extern lv_obj_t *ui_Maintenance_Label;
 void ui_event_tempStatusButton( lv_event_t * e);
@@ -421,7 +420,7 @@ extern lv_obj_t *uic_statusscreenlabel;
 extern lv_obj_t *uic_TEMP_Label;
 extern lv_obj_t *uic_ALARM_Label;
 extern lv_obj_t *uic_Status_Label;
-extern lv_obj_t *uic_TEMP_Label;
+extern lv_obj_t *uic_App_Connection_Label;
 extern lv_obj_t *uic_info_Label;
 extern lv_obj_t *uic_Maintenance_Label;
 extern lv_obj_t *uic_tempStatusButton;
@@ -480,12 +479,14 @@ extern lv_obj_t *uic_serviceInfoLabel;
 extern lv_obj_t *uic_ContainerA6;
 extern lv_obj_t *uic_servicesintervals;
 
-// EVENTS
+// EVENTS
 extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
+LV_IMG_DECLARE( ui_img_dots_shapes_purple_213704_240x320_png);   // assets/dots_shapes_purple_213704_240x320.png
 LV_IMG_DECLARE( ui_img_2087107542);   // assets/logo-min-800x191 (2).png
 LV_IMG_DECLARE( ui_img_640283455);   // assets/menu-2.png
+LV_IMG_DECLARE( ui_img_blue_color_background_85551_240x320_png);   // assets/blue_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
 LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png
 LV_IMG_DECLARE( ui_img_worker_png);   // assets/worker.png
@@ -494,6 +495,7 @@ LV_IMG_DECLARE( ui_img_info_png);   // assets/info.png
 LV_IMG_DECLARE( ui_img_plus_png);   // assets/plus.png
 LV_IMG_DECLARE( ui_img_1731839073);   // assets/minus (1).png
 LV_IMG_DECLARE( ui_img_208276483);   // assets/celcius (1).png
+LV_IMG_DECLARE( ui_img_1740866726);   // assets/cloud (1).png
 LV_IMG_DECLARE( ui_img_temperature_png);   // assets/temperature.png
 LV_IMG_DECLARE( ui_img_return_66_png);   // assets/return 66.png
 LV_IMG_DECLARE( ui_img_sensor_png);   // assets/sensor.png
@@ -503,6 +505,9 @@ LV_IMG_DECLARE( ui_img_983251955);   // assets/qr-code (4).png
 LV_IMG_DECLARE( ui_img_close_png);   // assets/close.png
 LV_IMG_DECLARE( ui_img_1437619218);   // assets/info (17).png
 LV_IMG_DECLARE( ui_img_18821776);   // assets/technical-support.png
+LV_IMG_DECLARE( ui_img_dots_circles_shapes_213107_240x320_png);   // assets/dots_circles_shapes_213107_240x320.png
+LV_IMG_DECLARE( ui_img_net_color_background_85551_240x320_png);   // assets/net_color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_wifi_4_png);   // assets/wifi 4.png
 
 // UI INIT

@@ -112,7 +112,7 @@ void wifiSetup()
     WiFi.begin(ssid, password);
 
     unsigned long startAttemptTime = millis();
-    while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < 10000)
+    while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < 15000)
     {
         delay(500);
         Serial.print("...");

@@ -11,6 +11,7 @@ ui_statusScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_statusScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_statusScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_statusScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_statusScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 
 ui_returnButton3 = lv_btn_create(ui_statusScreen);
 lv_obj_set_width( ui_returnButton3, 60);
@@ -36,7 +37,7 @@ lv_obj_set_x( ui_statusscreenlabel, 0 );
 lv_obj_set_y( ui_statusscreenlabel, -100 );
 lv_obj_set_align( ui_statusscreenlabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_statusscreenlabel,"STATUS-INFO");
-lv_obj_set_style_text_color(ui_statusscreenlabel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_statusscreenlabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_statusscreenlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_statusscreenlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -47,7 +48,7 @@ lv_obj_set_x( ui_TEMP_Label, -110 );
 lv_obj_set_y( ui_TEMP_Label, 10 );
 lv_obj_set_align( ui_TEMP_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_TEMP_Label,"Temp");
-lv_obj_set_style_text_color(ui_TEMP_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_TEMP_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_TEMP_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_TEMP_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -58,7 +59,7 @@ lv_obj_set_x( ui_ALARM_Label, 0 );
 lv_obj_set_y( ui_ALARM_Label, 10 );
 lv_obj_set_align( ui_ALARM_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_ALARM_Label,"Alarm");
-lv_obj_set_style_text_color(ui_ALARM_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_ALARM_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_ALARM_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_ALARM_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -69,20 +70,20 @@ lv_obj_set_x( ui_Status_Label, 110 );
 lv_obj_set_y( ui_Status_Label, 10 );
 lv_obj_set_align( ui_Status_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Status_Label,"Status");
-lv_obj_set_style_text_color(ui_Status_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_Status_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_Status_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Status_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Connection_Label = lv_label_create(ui_statusScreen);
-lv_obj_set_width( ui_Connection_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Connection_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_Connection_Label, -110 );
-lv_obj_set_y( ui_Connection_Label, 105 );
-lv_obj_set_align( ui_Connection_Label, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Connection_Label,"Connection");
-lv_obj_set_style_text_color(ui_Connection_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_Connection_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Connection_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_App_Connection_Label = lv_label_create(ui_statusScreen);
+lv_obj_set_width( ui_App_Connection_Label, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_App_Connection_Label, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_App_Connection_Label, -110 );
+lv_obj_set_y( ui_App_Connection_Label, 105 );
+lv_obj_set_align( ui_App_Connection_Label, LV_ALIGN_CENTER );
+lv_label_set_text(ui_App_Connection_Label,"APP");
+lv_obj_set_style_text_color(ui_App_Connection_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_App_Connection_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_App_Connection_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_info_Label = lv_label_create(ui_statusScreen);
 lv_obj_set_width( ui_info_Label, LV_SIZE_CONTENT);  /// 1
@@ -91,7 +92,7 @@ lv_obj_set_x( ui_info_Label, 110 );
 lv_obj_set_y( ui_info_Label, 105 );
 lv_obj_set_align( ui_info_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_info_Label,"Info");
-lv_obj_set_style_text_color(ui_info_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_info_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_info_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_info_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -102,7 +103,7 @@ lv_obj_set_x( ui_Maintenance_Label, 0 );
 lv_obj_set_y( ui_Maintenance_Label, 105 );
 lv_obj_set_align( ui_Maintenance_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Maintenance_Label,"Maintenance");
-lv_obj_set_style_text_color(ui_Maintenance_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_Maintenance_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_Maintenance_Label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_Maintenance_Label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -869,7 +870,7 @@ uic_statusscreenlabel = ui_statusscreenlabel;
 uic_TEMP_Label = ui_TEMP_Label;
 uic_ALARM_Label = ui_ALARM_Label;
 uic_Status_Label = ui_Status_Label;
-uic_TEMP_Label = ui_Connection_Label;
+uic_App_Connection_Label = ui_App_Connection_Label;
 uic_info_Label = ui_info_Label;
 uic_Maintenance_Label = ui_Maintenance_Label;
 uic_tempStatusButton = ui_tempStatusButton;

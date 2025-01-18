@@ -13,13 +13,14 @@ lv_obj_clear_flag( ui_mainScreen, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_SCROLLABL
 lv_obj_set_scrollbar_mode(ui_mainScreen, LV_SCROLLBAR_MODE_OFF);
 lv_obj_set_style_bg_color(ui_mainScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_mainScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_mainScreen, &ui_img_dots_shapes_purple_213704_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 
 ui_Logo = lv_img_create(ui_mainScreen);
 lv_img_set_src(ui_Logo, &ui_img_2087107542);
 lv_obj_set_width( ui_Logo, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Logo, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Logo, 0 );
-lv_obj_set_y( ui_Logo, -100 );
+lv_obj_set_y( ui_Logo, -95 );
 lv_obj_set_align( ui_Logo, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_Logo, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
 

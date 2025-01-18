@@ -11,6 +11,7 @@ ui_controlSettingScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_controlSettingScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_controlSettingScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_controlSettingScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_controlSettingScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 
 ui_returnButton4 = lv_btn_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_returnButton4, 60);
@@ -36,7 +37,7 @@ lv_obj_set_x( ui_settingscreenlabel, 0 );
 lv_obj_set_y( ui_settingscreenlabel, -100 );
 lv_obj_set_align( ui_settingscreenlabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_settingscreenlabel,"CONTROL-SETTING");
-lv_obj_set_style_text_color(ui_settingscreenlabel, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_settingscreenlabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_settingscreenlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_settingscreenlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 

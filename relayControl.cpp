@@ -27,7 +27,7 @@ static float fan2SensorTemp = 0.0;
 // Timing Variables
 // ================================
 unsigned long lastCheckTime = 0;
-const unsigned long CHECK_INTERVAL = 30000; // Time for settings refresh
+const unsigned long CHECK_INTERVAL = 15000; // Time for settings refresh
 unsigned long lastRelayUpdateTime = 0;
 const unsigned long RELAY_UPDATE_INTERVAL = 1000; // 1 second
 

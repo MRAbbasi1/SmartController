@@ -9,8 +9,9 @@ void ui_processSettingScreen_screen_init(void)
 {
 ui_processSettingScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_processSettingScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_processSettingScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_processSettingScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_processSettingScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_processSettingScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 
 ui_returnButton5 = lv_btn_create(ui_processSettingScreen);
 lv_obj_set_width( ui_returnButton5, 60);
@@ -36,7 +37,7 @@ lv_obj_set_x( ui_ProcessSettingCTRL, 0 );
 lv_obj_set_y( ui_ProcessSettingCTRL, -100 );
 lv_obj_set_align( ui_ProcessSettingCTRL, LV_ALIGN_CENTER );
 lv_label_set_text(ui_ProcessSettingCTRL,"PROCESS-SETTING");
-lv_obj_set_style_text_color(ui_ProcessSettingCTRL, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_ProcessSettingCTRL, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_ProcessSettingCTRL, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_ProcessSettingCTRL, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -78,7 +79,8 @@ lv_obj_clear_flag( ui_ProcessScreenContainer1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FL
 lv_obj_set_style_radius(ui_ProcessScreenContainer1, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_ProcessScreenContainer1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_ProcessScreenContainer1, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer1, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_ProcessScreenContainer1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer1, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_side(ui_ProcessScreenContainer1, LV_BORDER_SIDE_FULL, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -114,6 +116,9 @@ lv_obj_clear_flag( ui_Compressor_Range_Plus_Button, LV_OBJ_FLAG_SCROLLABLE );   
 lv_obj_set_style_bg_color(ui_Compressor_Range_Plus_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Compressor_Range_Plus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_Compressor_Range_Plus_Button, &ui_img_plus_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_Compressor_Range_Plus_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Compressor_Range_Plus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Compressor_Range_Plus_Button, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_Compressor_Range_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Compressor_Range_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_Compressor_Range_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -130,6 +135,9 @@ lv_obj_clear_flag( ui_Compressor_Range_Minus_Button, LV_OBJ_FLAG_SCROLLABLE );  
 lv_obj_set_style_bg_color(ui_Compressor_Range_Minus_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Compressor_Range_Minus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_Compressor_Range_Minus_Button, &ui_img_1731839073, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_Compressor_Range_Minus_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Compressor_Range_Minus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Compressor_Range_Minus_Button, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_Compressor_Range_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Compressor_Range_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_Compressor_Range_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -159,7 +167,8 @@ lv_obj_clear_flag( ui_ProcessScreenContainer2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FL
 lv_obj_set_style_radius(ui_ProcessScreenContainer2, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_ProcessScreenContainer2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_ProcessScreenContainer2, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer2, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_ProcessScreenContainer2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer2, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_side(ui_ProcessScreenContainer2, LV_BORDER_SIDE_FULL, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -195,6 +204,9 @@ lv_obj_clear_flag( ui_Compressor_Offset_Plus_Button, LV_OBJ_FLAG_SCROLLABLE );  
 lv_obj_set_style_bg_color(ui_Compressor_Offset_Plus_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Compressor_Offset_Plus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_Compressor_Offset_Plus_Button, &ui_img_plus_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_Compressor_Offset_Plus_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Compressor_Offset_Plus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Compressor_Offset_Plus_Button, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_Compressor_Offset_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Compressor_Offset_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_Compressor_Offset_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -211,6 +223,9 @@ lv_obj_clear_flag( ui_Compressor_Offset_Minus_Button, LV_OBJ_FLAG_SCROLLABLE ); 
 lv_obj_set_style_bg_color(ui_Compressor_Offset_Minus_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Compressor_Offset_Minus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_Compressor_Offset_Minus_Button, &ui_img_1731839073, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_Compressor_Offset_Minus_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_Compressor_Offset_Minus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_Compressor_Offset_Minus_Button, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_Compressor_Offset_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_Compressor_Offset_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_Compressor_Offset_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -240,7 +255,8 @@ lv_obj_clear_flag( ui_ProcessScreenContainer3, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FL
 lv_obj_set_style_radius(ui_ProcessScreenContainer3, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_ProcessScreenContainer3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_ProcessScreenContainer3, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer3, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_ProcessScreenContainer3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer3, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_side(ui_ProcessScreenContainer3, LV_BORDER_SIDE_FULL, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -276,6 +292,9 @@ lv_obj_clear_flag( ui_High_Temp_Alarm_Plus_Button, LV_OBJ_FLAG_SCROLLABLE );    
 lv_obj_set_style_bg_color(ui_High_Temp_Alarm_Plus_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_High_Temp_Alarm_Plus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_High_Temp_Alarm_Plus_Button, &ui_img_plus_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_High_Temp_Alarm_Plus_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_High_Temp_Alarm_Plus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_High_Temp_Alarm_Plus_Button, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_High_Temp_Alarm_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_High_Temp_Alarm_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_High_Temp_Alarm_Plus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -292,6 +311,9 @@ lv_obj_clear_flag( ui_High_Temp_Alarm_Minus_Button, LV_OBJ_FLAG_SCROLLABLE );   
 lv_obj_set_style_bg_color(ui_High_Temp_Alarm_Minus_Button, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_High_Temp_Alarm_Minus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_High_Temp_Alarm_Minus_Button, &ui_img_1731839073, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_High_Temp_Alarm_Minus_Button, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_High_Temp_Alarm_Minus_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_High_Temp_Alarm_Minus_Button, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_High_Temp_Alarm_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_High_Temp_Alarm_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_High_Temp_Alarm_Minus_Button, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -321,7 +343,8 @@ lv_obj_clear_flag( ui_ProcessScreenContainer4, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FL
 lv_obj_set_style_radius(ui_ProcessScreenContainer4, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_ProcessScreenContainer4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_ProcessScreenContainer4, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer4, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_ProcessScreenContainer4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer4, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_side(ui_ProcessScreenContainer4, LV_BORDER_SIDE_FULL, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -333,9 +356,13 @@ lv_obj_set_x( ui_PressureAlarmSwitch, 45 );
 lv_obj_set_y( ui_PressureAlarmSwitch, 5 );
 lv_obj_set_align( ui_PressureAlarmSwitch, LV_ALIGN_CENTER );
 lv_obj_add_state( ui_PressureAlarmSwitch, LV_STATE_CHECKED );     /// States
-lv_obj_set_style_bg_color(ui_PressureAlarmSwitch, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_PressureAlarmSwitch, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_PressureAlarmSwitch, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_PressureAlarmSwitch, lv_color_hex(0x00B639), LV_PART_MAIN | LV_STATE_CHECKED );
+lv_obj_set_style_bg_opa(ui_PressureAlarmSwitch, 255, LV_PART_MAIN| LV_STATE_CHECKED);
 
+lv_obj_set_style_bg_color(ui_PressureAlarmSwitch, lv_color_hex(0x00B639), LV_PART_INDICATOR | LV_STATE_CHECKED );
+lv_obj_set_style_bg_opa(ui_PressureAlarmSwitch, 255, LV_PART_INDICATOR| LV_STATE_CHECKED);
 
 ui_PressureAlarmSwitch_ONlabel = lv_label_create(ui_ProcessScreenContainer4);
 lv_obj_set_width( ui_PressureAlarmSwitch_ONlabel, LV_SIZE_CONTENT);  /// 1
@@ -371,7 +398,8 @@ lv_obj_clear_flag( ui_ProcessScreenContainer5, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FL
 lv_obj_set_style_radius(ui_ProcessScreenContainer5, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer5, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_ProcessScreenContainer5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_border_color(ui_ProcessScreenContainer5, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer5, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_border_color(ui_ProcessScreenContainer5, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer5, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_side(ui_ProcessScreenContainer5, LV_BORDER_SIDE_FULL, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -383,9 +411,13 @@ lv_obj_set_x( ui_TempAlarmSwitch, 45 );
 lv_obj_set_y( ui_TempAlarmSwitch, 5 );
 lv_obj_set_align( ui_TempAlarmSwitch, LV_ALIGN_CENTER );
 lv_obj_add_state( ui_TempAlarmSwitch, LV_STATE_CHECKED );     /// States
-lv_obj_set_style_bg_color(ui_TempAlarmSwitch, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_TempAlarmSwitch, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_TempAlarmSwitch, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_TempAlarmSwitch, lv_color_hex(0x00B639), LV_PART_MAIN | LV_STATE_CHECKED );
+lv_obj_set_style_bg_opa(ui_TempAlarmSwitch, 255, LV_PART_MAIN| LV_STATE_CHECKED);
 
+lv_obj_set_style_bg_color(ui_TempAlarmSwitch, lv_color_hex(0x00B639), LV_PART_INDICATOR | LV_STATE_CHECKED );
+lv_obj_set_style_bg_opa(ui_TempAlarmSwitch, 255, LV_PART_INDICATOR| LV_STATE_CHECKED);
 
 ui_TempAlarmSwitch_ONlabel = lv_label_create(ui_ProcessScreenContainer5);
 lv_obj_set_width( ui_TempAlarmSwitch_ONlabel, LV_SIZE_CONTENT);  /// 1
@@ -414,7 +446,7 @@ ui_High_Temp_Alarm_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Temp_Alarm_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Temp_Alarm_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_High_Temp_Alarm_Label, 80 );
-lv_obj_set_y( ui_High_Temp_Alarm_Label, 17 );
+lv_obj_set_y( ui_High_Temp_Alarm_Label, 18 );
 lv_obj_set_align( ui_High_Temp_Alarm_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_High_Temp_Alarm_Label," Temp Alarm ");
 lv_obj_set_style_text_color(ui_High_Temp_Alarm_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -428,7 +460,7 @@ ui_High_Pressure_Alarm_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Pressure_Alarm_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Pressure_Alarm_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_High_Pressure_Alarm_Label, -80 );
-lv_obj_set_y( ui_High_Pressure_Alarm_Label, 16 );
+lv_obj_set_y( ui_High_Pressure_Alarm_Label, 18 );
 lv_obj_set_align( ui_High_Pressure_Alarm_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_High_Pressure_Alarm_Label," Pressure Alarm ");
 lv_obj_set_style_text_color(ui_High_Pressure_Alarm_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -442,7 +474,7 @@ ui_Compressor_Offset_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_Compressor_Offset_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Compressor_Offset_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Compressor_Offset_Label, 80 );
-lv_obj_set_y( ui_Compressor_Offset_Label, -70 );
+lv_obj_set_y( ui_Compressor_Offset_Label, -72 );
 lv_obj_set_align( ui_Compressor_Offset_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Compressor_Offset_Label," Comp Range ");
 lv_obj_set_style_text_color(ui_Compressor_Offset_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -456,7 +488,7 @@ ui_Compressor_Range_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_Compressor_Range_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Compressor_Range_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Compressor_Range_Label, -80 );
-lv_obj_set_y( ui_Compressor_Range_Label, -70 );
+lv_obj_set_y( ui_Compressor_Range_Label, -72 );
 lv_obj_set_align( ui_Compressor_Range_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Compressor_Range_Label," Compressor ");
 lv_obj_set_style_text_color(ui_Compressor_Range_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -470,7 +502,7 @@ ui_High_Temp_Alarm_Switch_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Temp_Alarm_Switch_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Temp_Alarm_Switch_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_High_Temp_Alarm_Switch_Label, -80 );
-lv_obj_set_y( ui_High_Temp_Alarm_Switch_Label, 70 );
+lv_obj_set_y( ui_High_Temp_Alarm_Switch_Label, 72 );
 lv_obj_set_align( ui_High_Temp_Alarm_Switch_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_High_Temp_Alarm_Switch_Label," Temp Alarm ");
 lv_obj_set_style_text_color(ui_High_Temp_Alarm_Switch_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );

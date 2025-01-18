@@ -336,7 +336,7 @@ lv_obj_t *ui_statusscreenlabel;
 lv_obj_t *ui_TEMP_Label;
 lv_obj_t *ui_ALARM_Label;
 lv_obj_t *ui_Status_Label;
-lv_obj_t *ui_Connection_Label;
+lv_obj_t *ui_App_Connection_Label;
 lv_obj_t *ui_info_Label;
 lv_obj_t *ui_Maintenance_Label;
 void ui_event_tempStatusButton( lv_event_t * e);
@@ -418,7 +418,7 @@ lv_obj_t *uic_statusscreenlabel;
 lv_obj_t *uic_TEMP_Label;
 lv_obj_t *uic_ALARM_Label;
 lv_obj_t *uic_Status_Label;
-lv_obj_t *uic_TEMP_Label;
+lv_obj_t *uic_App_Connection_Label;
 lv_obj_t *uic_info_Label;
 lv_obj_t *uic_Maintenance_Label;
 lv_obj_t *uic_tempStatusButton;
@@ -481,7 +481,12 @@ lv_obj_t *uic_servicesintervals;
 lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
+const lv_img_dsc_t *ui_imgset_blue_color_background_85551_240x[1] = {&ui_img_blue_color_background_85551_240x320_png};
+const lv_img_dsc_t *ui_imgset_dots_circles_shapes_213107_240x[1] = {&ui_img_dots_circles_shapes_213107_240x320_png};
+const lv_img_dsc_t *ui_imgset_dots_shapes_purple_213704_240x[1] = {&ui_img_dots_shapes_purple_213704_240x320_png};
 const lv_img_dsc_t *ui_imgset_882430644[1] = {&ui_img_640283455};
+const lv_img_dsc_t *ui_imgset_net_color_background_85551_240x[1] = {&ui_img_net_color_background_85551_240x320_png};
+const lv_img_dsc_t *ui_imgset_netlkjhg_color_background_85551_240x[1] = {&ui_img_netlkjhg_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_return_[1] = {&ui_img_return_66_png};
 const lv_img_dsc_t *ui_imgset_wifi_[1] = {&ui_img_wifi_4_png};
 
