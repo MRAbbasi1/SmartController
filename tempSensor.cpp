@@ -115,6 +115,35 @@ void initializeSensors()
     Serial.print("/");
     Serial.print(sensorCount);
     Serial.println(" sensors initialized");
+
+    Serial.println("________________________________________________");
+
+    // خواندن اولیه دما برای کش کردن مقادیر
+    Serial.println("\n🔄 [Temperature] Reading initial values for all sensors...");
+    ds18b20.requestTemperatures(); // درخواست تبدیل دما از همه حسگرها
+    delay(CONVERSION_TIME);        // منتظر ماندن برای تکمیل تبدیل
+
+    for (uint8_t i = 0; i < sensorCount; i++)
+    {
+        float temperature = ds18b20.getTempC(sensors[i].address);
+
+        if (temperature != DEVICE_DISCONNECTED_C && temperature > -55 && temperature < 125)
+        {
+            sensors[i].lastValidTemperature = temperature;
+            sensors[i].lastReadTime = millis();
+
+            Serial.print("🌡️ [Temperature] ");
+            Serial.print(sensors[i].name);
+            Serial.print(": ");
+            Serial.print(temperature);
+            Serial.println(" °C");
+        }
+        else
+        {
+            Serial.print("❌ [Temperature] Failed to read initial value for ");
+            Serial.println(sensors[i].name);
+        }
+    }
     Serial.println("________________________________________________");
 }
 

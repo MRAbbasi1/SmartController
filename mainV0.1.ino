@@ -14,13 +14,14 @@
 
 Adafruit_NeoPixel pixels(NUM_PIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
 
   // Initialize RGB LED
   pixels.begin();
   pixels.clear();
-  pixels.setPixelColor(0, pixels.Color(0, 255, 0));  // Green
+  pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // Green
   pixels.show();
 
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -72,12 +73,13 @@ void setup() {
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
-void loop() {
-  displayLoop();  // Continuously update display (if applicable)
+void loop()
+{
+  displayLoop(); // Continuously update display (if applicable)
 
-  wifiLoop();  // Handle Wi-Fi connection checks and reconnection
+  wifiLoop(); // Handle Wi-Fi connection checks and reconnection
 
-  handleTemperatureReadings();  // Handle temperature sensor readings
+  handleTemperatureReadings(); // Handle temperature sensor readings
 
-  controlRelays();  // Handle Relay Control
+  controlRelays(); // Handle Relay Control
 }

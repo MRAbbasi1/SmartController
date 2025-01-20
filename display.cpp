@@ -13,7 +13,57 @@ static lv_color_t buf[SIZE_SCREEN_BUFFER]; // Buffer for screen content
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display with width and height
 
-// ============================ Touch Timeout Management =========================
+// ============================ Variables for Periodic Updates =====================
+
+// Time interval for updating the arc value
+const uint32_t updateArcMainScreenInterval = 15000; // in milliseconds
+uint32_t lastUpdateTime = 0;                        // Stores the last update time
+
+// ============================ Update Function for MainScreen ============================
+
+void updateArcMainScreen()
+{
+    // Check if the user is on the main screen
+    if (lv_scr_act() == ui_mainScreen)
+    {
+        // Get the current time
+        uint32_t currentTime = millis();
+
+        // Check if the update interval has passed
+        if (currentTime - lastUpdateTime >= updateArcMainScreenInterval)
+        {
+            // Update the last update time
+            lastUpdateTime = currentTime;
+
+            // Read the temperature from the sensor (float values)
+            float inletTempMainScreen = readTemperatureByName("Inlet");
+            float outletTempMainScreen = readTemperatureByName("Outlet");
+
+            // Update the arc value
+            lv_arc_set_value(ui_inlet_Arc, static_cast<int>(inletTempMainScreen));
+            lv_arc_set_value(ui_outlet_Arc, static_cast<int>(outletTempMainScreen));
+
+            // Send the arc value
+            lv_event_send(ui_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+            lv_event_send(ui_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+
+            // Update the labels with float values
+            char inletLabelText[32];
+            char outletLabelText[32];
+            snprintf(inletLabelText, sizeof(inletLabelText), "INLET: %.1f C°", inletTempMainScreen);
+            snprintf(outletLabelText, sizeof(outletLabelText), "OUTLET: %.1f C°", outletTempMainScreen);
+
+            lv_label_set_text(ui_inletMainsScreen, inletLabelText);
+            lv_label_set_text(ui_outletMainsScreen, outletLabelText);
+
+            // Print the updated values for debugging
+            Serial.printf("🌡️ [UpdateScreen] Inlet Temp: %.1f°C\n", inletTempMainScreen);
+            Serial.printf("🌡️ [UpdateScreen] Outlet Temp: %.1f°C\n", outletTempMainScreen);
+        }
+    }
+}
+
+// ============================ Screen Switching =========================
 
 // Variables for touch timeout management
 uint32_t lastTouchTime = 0;              // Last time the screen was touched
@@ -138,6 +188,10 @@ void displaySetup()
     // Initialize user interface screens
     ui_init();
 
+    // Attach event handlers for value updates
+    lv_obj_add_event_cb(ui_inlet_Arc, ui_event_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+    lv_obj_add_event_cb(ui_outlet_Arc, ui_event_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+
     Serial.println("📺 [Display] Display, Touch and UI Setup completed ✅");
 }
 
@@ -157,6 +211,9 @@ void displayLoop()
             switchToMainScreen();
         }
     }
+
+    // Update the inlet, outlet arc value periodically
+    updateArcMainScreen();
 
     // Small delay to allow LVGL to process tasks and avoid blocking
     delay(5);

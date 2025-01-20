@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <lvgl.h>
 #include <TFT_eSPI.h>
+#include "tempSensor.h"
+#include "setting.h"
 
 // Define screen rotation
 #define SCREEN_ROTATION 1
