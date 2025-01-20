@@ -6,6 +6,7 @@
 #include <TFT_eSPI.h>
 #include "tempSensor.h"
 #include "setting.h"
+#include "alarm.h"
 
 // Define screen rotation
 #define SCREEN_ROTATION 1

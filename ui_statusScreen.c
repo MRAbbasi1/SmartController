@@ -11,8 +11,8 @@ ui_statusScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_statusScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_statusScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_statusScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_statusScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_img_opa(ui_statusScreen, 150, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_statusScreen, &ui_img_netlkjhg_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_opa(ui_statusScreen, 127, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton3 = lv_btn_create(ui_statusScreen);
 lv_obj_set_width( ui_returnButton3, 60);

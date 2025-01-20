@@ -505,20 +505,20 @@ extern lv_obj_t *uic_servicesintervals;
 extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-LV_IMG_DECLARE( ui_img_dots_shapes_purple_213704_240x320_png);   // assets/dots_shapes_purple_213704_240x320.png
+LV_IMG_DECLARE( ui_img_1341850634);   // assets/gradient-blue-abstract-blur-ev-320x24076543.png
 LV_IMG_DECLARE( ui_img_2087107542);   // assets/logo-min-800x191 (2).png
 LV_IMG_DECLARE( ui_img_640283455);   // assets/menu-2.png
 LV_IMG_DECLARE( ui_img_165651551);   // assets/power (4).png
 LV_IMG_DECLARE( ui_img_165652574);   // assets/power (5).png
-LV_IMG_DECLARE( ui_img_300503194);   // assets/cooling-fan (7).png
-LV_IMG_DECLARE( ui_img_300506143);   // assets/cooling-fan (8).png
+LV_IMG_DECLARE( ui_img_300499993);   // assets/cooling-fan (6).png
+LV_IMG_DECLARE( ui_img_300505244);   // assets/cooling-fan (5).png
 LV_IMG_DECLARE( ui_img_835894428);   // assets/high-temprature (4).png
-LV_IMG_DECLARE( ui_img_539814101);   // assets/low-temprature (3).png
-LV_IMG_DECLARE( ui_img_31617782);   // assets/dashboard (4).png
+LV_IMG_DECLARE( ui_img_1488402037);   // assets/low-temprature.png
+LV_IMG_DECLARE( ui_img_pressure_png);   // assets/pressure.png
 LV_IMG_DECLARE( ui_img_31615732);   // assets/dashboard (6).png
 LV_IMG_DECLARE( ui_img_2101917800);   // assets/door (6).png
 LV_IMG_DECLARE( ui_img_778269571);   // assets/door (5).png
-LV_IMG_DECLARE( ui_img_blue_color_background_85551_240x320_png);   // assets/blue_color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
 LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png
 LV_IMG_DECLARE( ui_img_worker_png);   // assets/worker.png
@@ -537,10 +537,19 @@ LV_IMG_DECLARE( ui_img_983251955);   // assets/qr-code (4).png
 LV_IMG_DECLARE( ui_img_close_png);   // assets/close.png
 LV_IMG_DECLARE( ui_img_1437619218);   // assets/info (17).png
 LV_IMG_DECLARE( ui_img_18821776);   // assets/technical-support.png
+LV_IMG_DECLARE( ui_img_blue_color_background_85551_240x320_png);   // assets/blue_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_dots_circles_shapes_213107_240x320_png);   // assets/dots_circles_shapes_213107_240x320.png
+LV_IMG_DECLARE( ui_img_dots_shapes_purple_213704_240x320_png);   // assets/dots_shapes_purple_213704_240x320.png
 LV_IMG_DECLARE( ui_img_net_color_background_85551_240x320_png);   // assets/net_color_background_85551_240x320.png
-LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_wifi_4_png);   // assets/wifi 4.png
+LV_IMG_DECLARE( ui_img_421771461);   // assets/dark-abstract-shapes-5k-tx-320x240.png
+LV_IMG_DECLARE( ui_img_1117942354);   // assets/soft-fusion-blur-abstract-5k-36-320x240.png
+LV_IMG_DECLARE( ui_img_1716101175);   // assets/gradient-blue-abstract-blur-ev-320x240.png
+LV_IMG_DECLARE( ui_img_1104223176);   // assets/3d-colorful-render-de-240x320.png
+LV_IMG_DECLARE( ui_img_1025573664);   // assets/gradient-blue-abstract-blur-ev-320x240-2.png
+LV_IMG_DECLARE( ui_img_1025572639);   // assets/gradient-blue-abstract-blur-ev-320x240-1.png
+LV_IMG_DECLARE( ui_img_1025574689);   // assets/gradient-blue-abstract-blur-ev-320x240-3.png
+LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
 
 // UI INIT
 void ui_init(void);

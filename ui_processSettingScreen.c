@@ -11,8 +11,8 @@ ui_processSettingScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_processSettingScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_processSettingScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_processSettingScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_processSettingScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_img_opa(ui_processSettingScreen, 150, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_processSettingScreen, &ui_img_netlkjhg_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_opa(ui_processSettingScreen, 127, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton5 = lv_btn_create(ui_processSettingScreen);
 lv_obj_set_width( ui_returnButton5, 60);

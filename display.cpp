@@ -13,14 +13,13 @@ static lv_color_t buf[SIZE_SCREEN_BUFFER]; // Buffer for screen content
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display with width and height
 
-// ============================ Variables for Periodic Updates =====================
+// ============================ Update Functions for MainScreen ============================
 
 // Time interval for updating the arc value
 const uint32_t updateArcMainScreenInterval = 15000; // in milliseconds
 uint32_t lastUpdateTime = 0;                        // Stores the last update time
 
-// ============================ Update Function for MainScreen ============================
-
+// main screen Arc graph
 void updateArcMainScreen()
 {
     // Check if the user is on the main screen
@@ -50,8 +49,8 @@ void updateArcMainScreen()
             // Update the labels with float values
             char inletLabelText[32];
             char outletLabelText[32];
-            snprintf(inletLabelText, sizeof(inletLabelText), "INLET: %.1f C°", inletTempMainScreen);
-            snprintf(outletLabelText, sizeof(outletLabelText), "OUTLET: %.1f C°", outletTempMainScreen);
+            snprintf(inletLabelText, sizeof(inletLabelText), "%.1f C°\n\nINLET", inletTempMainScreen);
+            snprintf(outletLabelText, sizeof(outletLabelText), "%.1f C°\n\nOUTLET", outletTempMainScreen);
 
             lv_label_set_text(ui_inletMainsScreen, inletLabelText);
             lv_label_set_text(ui_outletMainsScreen, outletLabelText);
@@ -63,6 +62,222 @@ void updateArcMainScreen()
     }
 }
 
+// Device status (true = ON, false = OFF)
+bool isDeviceOn = false;                // Device working status (true = ON, false = OFF)
+bool isHighTempAlarmActive = false;     // High temperature alarm status (true = active, false = inactive)
+bool isHighPressureAlarmActive = false; // High pressure alarm status (true = active, false = inactive)
+bool isDoorClosedStatus = false;        // Door status (true = closed, false = open)
+
+// Timing variables for checking door status
+unsigned long lastDoorCheckTime = 0;            // Last time door status was checked
+const unsigned long DOOR_CHECK_INTERVAL = 5000; // Interval for checking door status (15 seconds)
+
+// Timing variables for periodic checks in the main screen
+unsigned long lastDeviceCheckTime = 0;            // Last check time for device working status
+const unsigned long DEVICE_CHECK_INTERVAL = 5000; // Interval for checking device status (3 seconds)
+
+unsigned long lastHighTempCheckTime = 0;             // Last check time for high temperature alarm status
+const unsigned long HIGH_TEMP_CHECK_INTERVAL = 5000; // Interval for checking high temperature alarm status (15 seconds)
+
+unsigned long lastPressureCheckTime = 0;            // Last check time for high pressure alarm status
+const unsigned long PRESSURE_CHECK_INTERVAL = 5000; // Interval for checking high pressure alarm status (15 seconds)
+
+// Function to update the device icons based on the device status
+void updateDeviceIcons()
+{
+    if (isDeviceOn)
+    {
+        // If the device is ON
+        lv_obj_clear_flag(ui_Cooler_ON_Icon, LV_OBJ_FLAG_HIDDEN); // Show the "ON" icon
+        lv_obj_add_flag(ui_Cooler_OFF_Icon, LV_OBJ_FLAG_HIDDEN);  // Hide the "OFF" icon
+    }
+    else
+    {
+        // If the device is OFF
+        lv_obj_clear_flag(ui_Cooler_OFF_Icon, LV_OBJ_FLAG_HIDDEN); // Show the "OFF" icon
+        lv_obj_add_flag(ui_Cooler_ON_Icon, LV_OBJ_FLAG_HIDDEN);    // Hide the "ON" icon
+    }
+}
+
+// Function to update the temperature alarm icons based on the high temperature alarm status
+void updateTempAlarmIcons()
+{
+    if (isHighTempAlarmActive)
+    {
+        // If the high temperature alarm is active
+        lv_obj_clear_flag(ui_High_Temp_Icon, LV_OBJ_FLAG_HIDDEN); // Show the high temperature icon
+        lv_obj_add_flag(ui_Low_Temp_Icon, LV_OBJ_FLAG_HIDDEN);    // Hide the low temperature icon
+    }
+    else
+    {
+        // If the high temperature alarm is not active
+        lv_obj_clear_flag(ui_Low_Temp_Icon, LV_OBJ_FLAG_HIDDEN); // Show the low temperature icon
+        lv_obj_add_flag(ui_High_Temp_Icon, LV_OBJ_FLAG_HIDDEN);  // Hide the high temperature icon
+    }
+}
+
+// Function to update the pressure alarm icons based on the high pressure alarm status
+void updatePressureAlarmIcons()
+{
+    if (isHighPressureAlarmActive)
+    {
+        // If the high pressure alarm is active
+        lv_obj_clear_flag(ui_High_Pressure_Icon, LV_OBJ_FLAG_HIDDEN); // Show the high pressure icon
+        lv_obj_add_flag(ui_Low_Pressure_Icon, LV_OBJ_FLAG_HIDDEN);    // Hide the low pressure icon
+    }
+    else
+    {
+        // If the high pressure alarm is not active
+        lv_obj_clear_flag(ui_Low_Pressure_Icon, LV_OBJ_FLAG_HIDDEN); // Show the low pressure icon
+        lv_obj_add_flag(ui_High_Pressure_Icon, LV_OBJ_FLAG_HIDDEN);  // Hide the high pressure icon
+    }
+}
+
+// Function to update door status icons
+void updateDoorIcons()
+{
+    if (isDoorClosedStatus)
+    {
+        // If the door is closed
+        lv_obj_clear_flag(ui_Door_Close_Icon, LV_OBJ_FLAG_HIDDEN); // Show the "Closed" icon
+        lv_obj_add_flag(ui_Door_Open_Icon, LV_OBJ_FLAG_HIDDEN);    // Hide the "Open" icon
+    }
+    else
+    {
+        // If the door is open
+        lv_obj_clear_flag(ui_Door_Open_Icon, LV_OBJ_FLAG_HIDDEN); // Show the "Open" icon
+        lv_obj_add_flag(ui_Door_Close_Icon, LV_OBJ_FLAG_HIDDEN);  // Hide the "Closed" icon
+    }
+}
+
+// Function to periodically check the device status
+void checkDeviceStatus()
+{
+    unsigned long currentMillis = millis(); // Get the current system time
+
+    // Check if the interval for the device power status has passed
+    if (currentMillis - lastDeviceCheckTime >= DEVICE_CHECK_INTERVAL)
+    {
+        lastDeviceCheckTime = currentMillis; // Update the last check time
+
+        Serial.println("________________________________________________");
+
+        // Check if the device power status has changed
+        if (getChangedFlagTemp("boolean", DEVICE_ON))
+        {
+            // Update the device status
+            isDeviceOn = getBooleanSetting(DEVICE_ON);
+            resetChangedFlagTemp("boolean", DEVICE_ON);
+
+            // Update the icons based on the new device status
+            updateDeviceIcons();
+        }
+
+        Serial.println("________________________________________________");
+    }
+}
+
+// Function to periodically check the high temperature alarm status
+void checkHighTempAlarmStatus()
+{
+    unsigned long currentMillis = millis(); // Get the current system time
+
+    // Check if the interval for the high temperature alarm status has passed
+    if (currentMillis - lastHighTempCheckTime >= HIGH_TEMP_CHECK_INTERVAL)
+    {
+        lastHighTempCheckTime = currentMillis; // Update the last check time
+
+        Serial.println("________________________________________________");
+
+        // Check if the high temperature alarm status has changed
+        if (isHighTempAlarm()) // This function needs to be defined to check the high temperature condition
+        {
+            // If the high temperature alarm is active
+            isHighTempAlarmActive = true;
+        }
+        else
+        {
+            // If the high temperature alarm is not active
+            isHighTempAlarmActive = false;
+        }
+
+        // Update the alarm icons based on the current status
+        updateTempAlarmIcons();
+
+        Serial.println("________________________________________________");
+    }
+}
+
+// Function to periodically check the high pressure alarm status
+void checkPressureAlarmStatus()
+{
+    unsigned long currentMillis = millis(); // Get the current system time
+
+    // Check if the interval for the high pressure alarm status has passed
+    if (currentMillis - lastPressureCheckTime >= PRESSURE_CHECK_INTERVAL)
+    {
+        lastPressureCheckTime = currentMillis; // Update the last check time
+
+        Serial.println("________________________________________________");
+
+        // Check if the high pressure alarm status has changed
+        if (isPressureHigh()) // This function needs to be defined to check the high pressure condition
+        {
+            // If the high pressure alarm is active
+            isHighPressureAlarmActive = true;
+        }
+        else
+        {
+            // If the high pressure alarm is not active
+            isHighPressureAlarmActive = false;
+        }
+
+        // Update the pressure icons based on the current status
+        updatePressureAlarmIcons();
+
+        Serial.println("________________________________________________");
+    }
+}
+
+// Function to check door status periodically
+void checkDoorStatus()
+{
+    unsigned long currentMillis = millis(); // Get the current time
+
+    // Check if the interval for checking door status has passed
+    if (currentMillis - lastDoorCheckTime >= DOOR_CHECK_INTERVAL)
+    {
+        lastDoorCheckTime = currentMillis; // Update the last check time
+
+        Serial.println("________________________________________________");
+
+        // Check the door status
+        if (isDoorClosed()) // This function should return true if the door is closed
+        {
+            // If the door is closed
+            isDoorClosedStatus = true;
+        }
+        else
+        {
+            // If the door is open
+            isDoorClosedStatus = false;
+        }
+
+        // Update the door icons based on the current status
+        updateDoorIcons();
+
+        Serial.println("________________________________________________");
+    }
+}
+
+// Function to check both device and temperature status periodically
+void checkStatusIcon()
+{
+    checkDeviceStatus();        // Check device working status every 3 seconds
+    checkHighTempAlarmStatus(); // Check high temperature alarm status every 15 seconds
+    checkPressureAlarmStatus(); // Check high pressure alarm status every 15 seconds
+    checkDoorStatus();          // Check door status
+}
 // ============================ Screen Switching =========================
 
 // Variables for touch timeout management
@@ -214,6 +429,9 @@ void displayLoop()
 
     // Update the inlet, outlet arc value periodically
     updateArcMainScreen();
+
+    // Cooler status icons check function
+    checkStatusIcon();
 
     // Small delay to allow LVGL to process tasks and avoid blocking
     delay(5);

@@ -511,6 +511,14 @@ const lv_img_dsc_t *ui_imgset_net_color_background_85551_240x[1] = {&ui_img_net_
 const lv_img_dsc_t *ui_imgset_netlkjhg_color_background_85551_240x[1] = {&ui_img_netlkjhg_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_return_[1] = {&ui_img_return_66_png};
 const lv_img_dsc_t *ui_imgset_wifi_[1] = {&ui_img_wifi_4_png};
+const lv_img_dsc_t *ui_imgset_940004748[1] = {&ui_img_421771461};
+const lv_img_dsc_t *ui_imgset_1492707047[1] = {&ui_img_1117942354};
+const lv_img_dsc_t *ui_imgset_805123926[2] = {&ui_img_1716101175, &ui_img_1341850634};
+const lv_img_dsc_t *ui_imgset_1916505924[1] = {&ui_img_1104223176};
+const lv_img_dsc_t *ui_imgset_771659885[1] = {&ui_img_1025573664};
+const lv_img_dsc_t *ui_imgset_434955943[1] = {&ui_img_1025572639};
+const lv_img_dsc_t *ui_imgset_1394360258[1] = {&ui_img_1025574689};
+const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -544,7 +552,7 @@ void ui_event_inlet_Arc( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
-      _ui_arc_set_text_value( ui_inletMainsScreen, target, "INLET: ", " C°");
+      _ui_arc_set_text_value( ui_inletMainsScreen, target, "", " C°\n\nINTLET");
 }
 }
 
@@ -552,7 +560,7 @@ void ui_event_outlet_Arc( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
-      _ui_arc_set_text_value( ui_outletMainsScreen, target, "OUTLET: ", " C°");
+      _ui_arc_set_text_value( ui_outletMainsScreen, target, "OUTLET\n", " C°\n\nOUTLET");
 }
 }
 

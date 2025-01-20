@@ -118,10 +118,10 @@ void initializeSensors()
 
     Serial.println("________________________________________________");
 
-    // خواندن اولیه دما برای کش کردن مقادیر
+    // get first temp
     Serial.println("\n🔄 [Temperature] Reading initial values for all sensors...");
-    ds18b20.requestTemperatures(); // درخواست تبدیل دما از همه حسگرها
-    delay(CONVERSION_TIME);        // منتظر ماندن برای تکمیل تبدیل
+    ds18b20.requestTemperatures();
+    delay(CONVERSION_TIME);
 
     for (uint8_t i = 0; i < sensorCount; i++)
     {
@@ -202,6 +202,7 @@ void handleTemperatureReadings()
         Serial.print(validReadings);
         Serial.print("/");
         Serial.println(sensorCount);
+        Serial.println("________________________________________________");
 
         conversionRequested = false;
     }
