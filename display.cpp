@@ -19,7 +19,7 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display wi
 uint32_t lastTouchTime = 0;              // Last time the screen was touched
 const uint32_t timeoutDuration = 120000; // Timeout duration in milliseconds
 
-// ============================ Screen Switching Section ==========================
+// ============================ Screen Switching ==========================
 
 // Function to switch to the main screen and delete the previous screen
 void switchToMainScreen()
@@ -38,7 +38,7 @@ void switchToMainScreen()
     _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, NULL);
 }
 
-// ============================ Display Flushing Section ==========================
+// ============================ Display Flushing ==========================
 
 // Display flushing function (to send data to the display)
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
@@ -56,7 +56,7 @@ void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color
     lv_disp_flush_ready(disp);
 }
 
-// ============================ Touch Input Management Section =====================
+// ============================ Touch Input Management =====================
 
 // Read the touchpad input and update the touch data
 void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
@@ -88,7 +88,7 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
     }
 }
 
-// ============================ Display Setup Section ============================
+// ============================ Display Setup ============================
 
 // Setup function to initialize the display and touch
 void displaySetup()
@@ -141,7 +141,7 @@ void displaySetup()
     Serial.println("📺 [Display] Display, Touch and UI Setup completed ✅");
 }
 
-// ============================ Main Loop Section ==============================
+// ============================ Main Loop ==============================
 
 // Main loop function for updating the display and checking touch timeout
 void displayLoop()

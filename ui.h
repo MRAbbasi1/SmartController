@@ -20,20 +20,42 @@ void ui_mainScreen_screen_init(void);
 void ui_event_mainScreen( lv_event_t * e);
 extern lv_obj_t *ui_mainScreen;
 extern lv_obj_t *ui_Logo;
-void ui_event_returnButton13( lv_event_t * e);
-extern lv_obj_t *ui_returnButton13;
+void ui_event_MenuButton( lv_event_t * e);
+extern lv_obj_t *ui_MenuButton;
+void ui_event_inlet_Arc( lv_event_t * e);
+extern lv_obj_t *ui_inlet_Arc;
 extern lv_obj_t *ui_inletMainsScreen;
-extern lv_obj_t *ui_outletMainScreen;
-extern lv_obj_t *ui_highTempAlarmMainScreen;
-extern lv_obj_t *ui_highPressureAlarmMainScreen;
+void ui_event_outlet_Arc( lv_event_t * e);
+extern lv_obj_t *ui_outlet_Arc;
+extern lv_obj_t *ui_outletMainsScreen;
+extern lv_obj_t *ui_Cooler_OFF_Icon;
+extern lv_obj_t *ui_Cooler_ON_Icon;
+extern lv_obj_t *ui_Compressor_ON_Icon;
+extern lv_obj_t *ui_Compressor_OFF_Icon;
+extern lv_obj_t *ui_High_Temp_Icon;
+extern lv_obj_t *ui_Low_Temp_Icon;
+extern lv_obj_t *ui_Low_Pressure_Icon;
+extern lv_obj_t *ui_High_Pressure_Icon;
+extern lv_obj_t *ui_Door_Open_Icon;
+extern lv_obj_t *ui_Door_Close_Icon;
 // CUSTOM VARIABLES
 extern lv_obj_t *uic_mainScreen;
 extern lv_obj_t *uic_Logo;
-extern lv_obj_t *uic_returnButton1;
+extern lv_obj_t *uic_MenuButton;
+extern lv_obj_t *uic_inlet_Arc;
 extern lv_obj_t *uic_inletMainsScreen;
-extern lv_obj_t *uic_outletMainScreen;
-extern lv_obj_t *uic_highTempAlarmMainScreen;
-extern lv_obj_t *uic_highPressureAlarmMainScreen;
+extern lv_obj_t *uic_outlet_Arc;
+extern lv_obj_t *uic_outletMainsScreen;
+extern lv_obj_t *uic_Cooler_OFF_Icon;
+extern lv_obj_t *uic_Cooler_ON_Icon;
+extern lv_obj_t *uic_Compressor_ON_Icon;
+extern lv_obj_t *uic_Compressor_OFF_Icon;
+extern lv_obj_t *uic_High_Temp_Icon;
+extern lv_obj_t *uic_Low_Temp_Icon;
+extern lv_obj_t *uic_Low_Pressure_Icon;
+extern lv_obj_t *uic_High_Pressure_Icon;
+extern lv_obj_t *uic_Door_Open_Icon;
+extern lv_obj_t *uic_Door_Close_Icon;
 
 // SCREEN: ui_controlSettingScreen
 void ui_controlSettingScreen_screen_init(void);
@@ -486,6 +508,16 @@ extern lv_obj_t *ui____initial_actions0;
 LV_IMG_DECLARE( ui_img_dots_shapes_purple_213704_240x320_png);   // assets/dots_shapes_purple_213704_240x320.png
 LV_IMG_DECLARE( ui_img_2087107542);   // assets/logo-min-800x191 (2).png
 LV_IMG_DECLARE( ui_img_640283455);   // assets/menu-2.png
+LV_IMG_DECLARE( ui_img_165651551);   // assets/power (4).png
+LV_IMG_DECLARE( ui_img_165652574);   // assets/power (5).png
+LV_IMG_DECLARE( ui_img_300503194);   // assets/cooling-fan (7).png
+LV_IMG_DECLARE( ui_img_300506143);   // assets/cooling-fan (8).png
+LV_IMG_DECLARE( ui_img_835894428);   // assets/high-temprature (4).png
+LV_IMG_DECLARE( ui_img_539814101);   // assets/low-temprature (3).png
+LV_IMG_DECLARE( ui_img_31617782);   // assets/dashboard (4).png
+LV_IMG_DECLARE( ui_img_31615732);   // assets/dashboard (6).png
+LV_IMG_DECLARE( ui_img_2101917800);   // assets/door (6).png
+LV_IMG_DECLARE( ui_img_778269571);   // assets/door (5).png
 LV_IMG_DECLARE( ui_img_blue_color_background_85551_240x320_png);   // assets/blue_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
 LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png

@@ -12,6 +12,7 @@ lv_obj_clear_flag( ui_processSettingScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Fla
 lv_obj_set_style_bg_color(ui_processSettingScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_processSettingScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_processSettingScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_opa(ui_processSettingScreen, 150, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton5 = lv_btn_create(ui_processSettingScreen);
 lv_obj_set_width( ui_returnButton5, 60);
@@ -78,8 +79,7 @@ lv_obj_set_align( ui_ProcessScreenContainer1, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer1, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_ProcessScreenContainer1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer1, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_ProcessScreenContainer1, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_ProcessScreenContainer1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer1, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -94,7 +94,7 @@ lv_obj_set_align( ui_Compressor_Range_Spinbox, LV_ALIGN_CENTER );
 lv_spinbox_set_digit_format( ui_Compressor_Range_Spinbox, 2, 0);
 lv_spinbox_set_range( ui_Compressor_Range_Spinbox, 20,50 );
 lv_spinbox_set_cursor_pos(ui_Compressor_Range_Spinbox, 1 - 1);
-lv_spinbox_set_value( ui_Compressor_Range_Spinbox, 33 );
+lv_spinbox_set_value( ui_Compressor_Range_Spinbox, 21 );
 lv_obj_set_style_border_color(ui_Compressor_Range_Spinbox, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_Compressor_Range_Spinbox, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_Compressor_Range_Spinbox, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -166,8 +166,7 @@ lv_obj_set_align( ui_ProcessScreenContainer2, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer2, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_ProcessScreenContainer2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer2, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_ProcessScreenContainer2, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_ProcessScreenContainer2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer2, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -182,7 +181,6 @@ lv_obj_set_align( ui_Compressor_Offste_Spinbox, LV_ALIGN_CENTER );
 lv_spinbox_set_digit_format( ui_Compressor_Offste_Spinbox, 2, 0);
 lv_spinbox_set_range( ui_Compressor_Offste_Spinbox, 0,15 );
 lv_spinbox_set_cursor_pos(ui_Compressor_Offste_Spinbox, 1 - 1);
-lv_spinbox_set_value( ui_Compressor_Offste_Spinbox, 1 );
 lv_obj_set_style_border_color(ui_Compressor_Offste_Spinbox, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_Compressor_Offste_Spinbox, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_Compressor_Offste_Spinbox, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -254,8 +252,7 @@ lv_obj_set_align( ui_ProcessScreenContainer3, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer3, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer3, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_ProcessScreenContainer3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer3, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_ProcessScreenContainer3, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_ProcessScreenContainer3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer3, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -342,8 +339,7 @@ lv_obj_set_align( ui_ProcessScreenContainer4, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer4, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer4, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_ProcessScreenContainer4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer4, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_ProcessScreenContainer4, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_ProcessScreenContainer4, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer4, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -397,8 +393,7 @@ lv_obj_set_align( ui_ProcessScreenContainer5, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer5, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer5, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_ProcessScreenContainer5, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_ProcessScreenContainer5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_ProcessScreenContainer5, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_ProcessScreenContainer5, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_color(ui_ProcessScreenContainer5, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_ProcessScreenContainer5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_ProcessScreenContainer5, 1, LV_PART_MAIN| LV_STATE_DEFAULT);

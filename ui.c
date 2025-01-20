@@ -14,20 +14,42 @@ void ui_mainScreen_screen_init(void);
 void ui_event_mainScreen( lv_event_t * e);
 lv_obj_t *ui_mainScreen;
 lv_obj_t *ui_Logo;
-void ui_event_returnButton13( lv_event_t * e);
-lv_obj_t *ui_returnButton13;
+void ui_event_MenuButton( lv_event_t * e);
+lv_obj_t *ui_MenuButton;
+void ui_event_inlet_Arc( lv_event_t * e);
+lv_obj_t *ui_inlet_Arc;
 lv_obj_t *ui_inletMainsScreen;
-lv_obj_t *ui_outletMainScreen;
-lv_obj_t *ui_highTempAlarmMainScreen;
-lv_obj_t *ui_highPressureAlarmMainScreen;
+void ui_event_outlet_Arc( lv_event_t * e);
+lv_obj_t *ui_outlet_Arc;
+lv_obj_t *ui_outletMainsScreen;
+lv_obj_t *ui_Cooler_OFF_Icon;
+lv_obj_t *ui_Cooler_ON_Icon;
+lv_obj_t *ui_Compressor_ON_Icon;
+lv_obj_t *ui_Compressor_OFF_Icon;
+lv_obj_t *ui_High_Temp_Icon;
+lv_obj_t *ui_Low_Temp_Icon;
+lv_obj_t *ui_Low_Pressure_Icon;
+lv_obj_t *ui_High_Pressure_Icon;
+lv_obj_t *ui_Door_Open_Icon;
+lv_obj_t *ui_Door_Close_Icon;
 // CUSTOM VARIABLES
 lv_obj_t *uic_mainScreen;
 lv_obj_t *uic_Logo;
-lv_obj_t *uic_returnButton1;
+lv_obj_t *uic_MenuButton;
+lv_obj_t *uic_inlet_Arc;
 lv_obj_t *uic_inletMainsScreen;
-lv_obj_t *uic_outletMainScreen;
-lv_obj_t *uic_highTempAlarmMainScreen;
-lv_obj_t *uic_highPressureAlarmMainScreen;
+lv_obj_t *uic_outlet_Arc;
+lv_obj_t *uic_outletMainsScreen;
+lv_obj_t *uic_Cooler_OFF_Icon;
+lv_obj_t *uic_Cooler_ON_Icon;
+lv_obj_t *uic_Compressor_ON_Icon;
+lv_obj_t *uic_Compressor_OFF_Icon;
+lv_obj_t *uic_High_Temp_Icon;
+lv_obj_t *uic_Low_Temp_Icon;
+lv_obj_t *uic_Low_Pressure_Icon;
+lv_obj_t *uic_High_Pressure_Icon;
+lv_obj_t *uic_Door_Open_Icon;
+lv_obj_t *uic_Door_Close_Icon;
 
 
 // SCREEN: ui_controlSettingScreen
@@ -509,12 +531,28 @@ if ( event_code == LV_EVENT_SCREEN_LOADED) {
 }
 }
 
-void ui_event_returnButton13( lv_event_t * e) {
+void ui_event_MenuButton( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
       _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_mainScreen);
+}
+}
+
+void ui_event_inlet_Arc( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      _ui_arc_set_text_value( ui_inletMainsScreen, target, "INLET: ", " C°");
+}
+}
+
+void ui_event_outlet_Arc( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      _ui_arc_set_text_value( ui_outletMainsScreen, target, "OUTLET: ", " C°");
 }
 }
 

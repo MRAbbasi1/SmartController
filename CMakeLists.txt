@@ -10,6 +10,16 @@ SET(SOURCES ui_mainScreen.c
     ui_img_dots_shapes_purple_213704_240x320_png.c
     ui_img_2087107542.c
     ui_img_640283455.c
+    ui_img_165651551.c
+    ui_img_165652574.c
+    ui_img_300503194.c
+    ui_img_300506143.c
+    ui_img_835894428.c
+    ui_img_539814101.c
+    ui_img_31617782.c
+    ui_img_31615732.c
+    ui_img_2101917800.c
+    ui_img_778269571.c
     ui_img_blue_color_background_85551_240x320_png.c
     ui_img_return_png.c
     ui_img_278418788.c

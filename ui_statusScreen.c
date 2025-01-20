@@ -9,9 +9,10 @@ void ui_statusScreen_screen_init(void)
 {
 ui_statusScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_statusScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_statusScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_statusScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_statusScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_statusScreen, &ui_img_blue_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_opa(ui_statusScreen, 150, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton3 = lv_btn_create(ui_statusScreen);
 lv_obj_set_width( ui_returnButton3, 60);
@@ -342,7 +343,7 @@ lv_obj_set_align( ui_relayStatusButton, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_relayStatusButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_relayStatusButton, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_relayStatusButton, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_relayStatusButton, lv_color_hex(0x34A5FF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_relayStatusButton, lv_color_hex(0x0071FF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_relayStatusButton, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_relayStatusButton, &ui_img_120570296, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_color(ui_relayStatusButton, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -561,16 +562,40 @@ lv_obj_add_flag( ui_QRcode_Tab, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_clear_flag( ui_QRcode_Tab, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_QRcode_Tab, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_QRcode_Tab, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_QRcode_Tab, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(ui_QRcode_Tab, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(ui_QRcode_Tab, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_color(ui_QRcode_Tab, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_CHECKED );
+lv_obj_set_style_bg_opa(ui_QRcode_Tab, 255, LV_PART_MAIN| LV_STATE_CHECKED);
+lv_obj_set_style_border_width(ui_QRcode_Tab, 0, LV_PART_MAIN| LV_STATE_CHECKED);
+lv_obj_set_style_outline_width(ui_QRcode_Tab, 0, LV_PART_MAIN| LV_STATE_CHECKED);
+lv_obj_set_style_outline_pad(ui_QRcode_Tab, 0, LV_PART_MAIN| LV_STATE_CHECKED);
 
 lv_obj_set_style_text_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0xFFFFFF),  LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(lv_tabview_get_tab_btns(ui_QRcode_Tab), 255,  LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0x060030),  LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0x00B639),  LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(lv_tabview_get_tab_btns(ui_QRcode_Tab), 255,  LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0xFFFFFF),  LV_PART_MAIN | LV_STATE_CHECKED );
+lv_obj_set_style_text_opa(lv_tabview_get_tab_btns(ui_QRcode_Tab), 255,  LV_PART_MAIN| LV_STATE_CHECKED);
+lv_obj_set_style_border_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_MAIN| LV_STATE_CHECKED);
+lv_obj_set_style_outline_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_MAIN| LV_STATE_CHECKED);
+lv_obj_set_style_outline_pad(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_MAIN| LV_STATE_CHECKED);
 
 lv_obj_set_style_text_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0xFFFFFF),  LV_PART_ITEMS | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(lv_tabview_get_tab_btns(ui_QRcode_Tab), 255,  LV_PART_ITEMS| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0x0077D4),  LV_PART_ITEMS | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0x0071FF),  LV_PART_ITEMS | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(lv_tabview_get_tab_btns(ui_QRcode_Tab), 255,  LV_PART_ITEMS| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_ITEMS| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_ITEMS| LV_STATE_DEFAULT);
+lv_obj_set_style_outline_pad(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_ITEMS| LV_STATE_DEFAULT);
+lv_obj_set_style_text_color(lv_tabview_get_tab_btns(ui_QRcode_Tab), lv_color_hex(0xFFFFFF),  LV_PART_ITEMS | LV_STATE_CHECKED );
+lv_obj_set_style_text_opa(lv_tabview_get_tab_btns(ui_QRcode_Tab), 255,  LV_PART_ITEMS| LV_STATE_CHECKED);
+lv_obj_set_style_border_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_ITEMS| LV_STATE_CHECKED);
+lv_obj_set_style_outline_width(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_ITEMS| LV_STATE_CHECKED);
+lv_obj_set_style_outline_pad(lv_tabview_get_tab_btns(ui_QRcode_Tab), 0,  LV_PART_ITEMS| LV_STATE_CHECKED);
 
 ui_appldownload = lv_tabview_add_tab(ui_QRcode_Tab, "Download App");
 lv_obj_set_flex_flow(ui_appldownload,LV_FLEX_FLOW_ROW);
@@ -675,7 +700,7 @@ lv_obj_set_align( ui_deviceInfoButton, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_deviceInfoButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_deviceInfoButton, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_deviceInfoButton, 10, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_color(ui_deviceInfoButton, lv_color_hex(0xC1C1C1), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_deviceInfoButton, lv_color_hex(0xB0B0B0), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_deviceInfoButton, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_deviceInfoButton, &ui_img_1437619218, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_color(ui_deviceInfoButton, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
