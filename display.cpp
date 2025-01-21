@@ -1,5 +1,5 @@
 // -----------------------------------
-// Display and Touch Management Module
+// Display, Touch and UI Module
 // -----------------------------------
 
 #include "display.h"
@@ -16,8 +16,8 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display wi
 // ============================ Update Functions for MainScreen ============================
 
 // Time interval for updating the arc value
-const uint32_t updateArcMainScreenInterval = 15000; // in milliseconds
-uint32_t lastUpdateTime = 0;                        // Stores the last update time
+const uint32_t updateArcMainScreenInterval = 5000; // in milliseconds
+uint32_t lastUpdateTime = 0;                       // Stores the last update time
 
 // main screen Arc graph
 void updateArcMainScreen()
@@ -34,30 +34,66 @@ void updateArcMainScreen()
             // Update the last update time
             lastUpdateTime = currentTime;
 
+            Serial.println("----------------UI-MainScreen----------------");
+
             // Read the temperature from the sensor (float values)
             float inletTempMainScreen = readTemperatureByName("Inlet");
             float outletTempMainScreen = readTemperatureByName("Outlet");
 
-            // Update the arc value
-            lv_arc_set_value(ui_inlet_Arc, static_cast<int>(inletTempMainScreen));
-            lv_arc_set_value(ui_outlet_Arc, static_cast<int>(outletTempMainScreen));
-
-            // Send the arc value
-            lv_event_send(ui_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
-            lv_event_send(ui_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
-
-            // Update the labels with float values
+            // Variables to hold label text
             char inletLabelText[32];
             char outletLabelText[32];
-            snprintf(inletLabelText, sizeof(inletLabelText), "%.1f C°\n\nINLET", inletTempMainScreen);
-            snprintf(outletLabelText, sizeof(outletLabelText), "%.1f C°\n\nOUTLET", outletTempMainScreen);
 
+            // Check if the inlet temperature is valid
+            if (!isnan(inletTempMainScreen) &&
+                inletTempMainScreen != DEVICE_DISCONNECTED_C &&
+                inletTempMainScreen > -55 && inletTempMainScreen < 125)
+            {
+                // Update the arc value and label with valid temperature
+                lv_arc_set_value(ui_inlet_Arc, static_cast<int>(inletTempMainScreen));
+                snprintf(inletLabelText, sizeof(inletLabelText), "%.1f C°\n\nINLET", inletTempMainScreen);
+            }
+            else
+            {
+                // Set error value for invalid temperature
+                lv_arc_set_value(ui_inlet_Arc, 0); // Default value for invalid data
+                snprintf(inletLabelText, sizeof(inletLabelText), "Error\n\nINLET");
+            }
+
+            // Check if the outlet temperature is valid
+            if (!isnan(outletTempMainScreen) &&
+                outletTempMainScreen != DEVICE_DISCONNECTED_C &&
+                outletTempMainScreen > -55 && outletTempMainScreen < 125)
+            {
+                // Update the arc value and label with valid temperature
+                lv_arc_set_value(ui_outlet_Arc, static_cast<int>(outletTempMainScreen));
+                snprintf(outletLabelText, sizeof(outletLabelText), "%.1f C°\n\nOUTLET", outletTempMainScreen);
+            }
+            else
+            {
+                // Set error value for invalid temperature
+                lv_arc_set_value(ui_outlet_Arc, 0); // Default value for invalid data
+                snprintf(outletLabelText, sizeof(outletLabelText), "Error\n\nOUTLET");
+            }
+
+            // Update the labels
             lv_label_set_text(ui_inletMainsScreen, inletLabelText);
             lv_label_set_text(ui_outletMainsScreen, outletLabelText);
 
-            // Print the updated values for debugging
-            Serial.printf("🌡️ [UpdateScreen] Inlet Temp: %.1f°C\n", inletTempMainScreen);
-            Serial.printf("🌡️ [UpdateScreen] Outlet Temp: %.1f°C\n", outletTempMainScreen);
+            Serial.println("");
+
+            // Print the updated values or error for debugging
+            if (!isnan(inletTempMainScreen))
+                Serial.printf("📺 [UI-MainScreen] Inlet Temp: %.1f°C\n", inletTempMainScreen);
+            else
+                Serial.println("📺 [UI-MainScreen] Inlet Temp: ❌ Error (Invalid data)");
+
+            if (!isnan(outletTempMainScreen))
+                Serial.printf("📺 [UI-MainScreen] Outlet Temp: %.1f°C\n", outletTempMainScreen);
+            else
+                Serial.println("📺 [UI-MainScreen] Outlet Temp: ❌ Error (Invalid data)");
+
+            Serial.println("________________________________________________");
         }
     }
 }
@@ -67,20 +103,41 @@ bool isDeviceOn = false;                // Device working status (true = ON, fal
 bool isHighTempAlarmActive = false;     // High temperature alarm status (true = active, false = inactive)
 bool isHighPressureAlarmActive = false; // High pressure alarm status (true = active, false = inactive)
 bool isDoorClosedStatus = false;        // Door status (true = closed, false = open)
+bool isCompressorRelayActive = false;   // Door status (true = closed, false = open)
 
 // Timing variables for checking door status
 unsigned long lastDoorCheckTime = 0;            // Last time door status was checked
-const unsigned long DOOR_CHECK_INTERVAL = 5000; // Interval for checking door status (15 seconds)
+const unsigned long DOOR_CHECK_INTERVAL = 5000; // Interval for checking door status
 
 // Timing variables for periodic checks in the main screen
 unsigned long lastDeviceCheckTime = 0;            // Last check time for device working status
-const unsigned long DEVICE_CHECK_INTERVAL = 5000; // Interval for checking device status (3 seconds)
+const unsigned long DEVICE_CHECK_INTERVAL = 5000; // Interval for checking device status
 
 unsigned long lastHighTempCheckTime = 0;             // Last check time for high temperature alarm status
-const unsigned long HIGH_TEMP_CHECK_INTERVAL = 5000; // Interval for checking high temperature alarm status (15 seconds)
+const unsigned long HIGH_TEMP_CHECK_INTERVAL = 5000; // Interval for checking high temperature alarm status
 
 unsigned long lastPressureCheckTime = 0;            // Last check time for high pressure alarm status
-const unsigned long PRESSURE_CHECK_INTERVAL = 5000; // Interval for checking high pressure alarm status (15 seconds)
+const unsigned long PRESSURE_CHECK_INTERVAL = 5000; // Interval for checking high pressure alarm status
+
+unsigned long lastRelayCheckTime = 0;            // Last time the relay status was checked
+const unsigned long RELAY_CHECK_INTERVAL = 5000; // Interval to check relay status
+
+// Function to update compressor relay icons
+void updateCompressorIcons()
+{
+    if (isCompressorRelayActive)
+    {
+        // If the compressor relay is ON
+        lv_obj_clear_flag(ui_Compressor_ON_Icon, LV_OBJ_FLAG_HIDDEN); // Show the "ON" icon
+        lv_obj_add_flag(ui_Compressor_OFF_Icon, LV_OBJ_FLAG_HIDDEN);  // Hide the "OFF" icon
+    }
+    else
+    {
+        // If the compressor relay is OFF
+        lv_obj_clear_flag(ui_Compressor_OFF_Icon, LV_OBJ_FLAG_HIDDEN); // Show the "OFF" icon
+        lv_obj_add_flag(ui_Compressor_ON_Icon, LV_OBJ_FLAG_HIDDEN);    // Hide the "ON" icon
+    }
+}
 
 // Function to update the device icons based on the device status
 void updateDeviceIcons()
@@ -160,7 +217,7 @@ void checkDeviceStatus()
     {
         lastDeviceCheckTime = currentMillis; // Update the last check time
 
-        Serial.println("________________________________________________");
+        Serial.println("----------------UI-MainScreen----------------");
 
         // Check if the device power status has changed
         if (getChangedFlagTemp("boolean", DEVICE_ON))
@@ -187,7 +244,7 @@ void checkHighTempAlarmStatus()
     {
         lastHighTempCheckTime = currentMillis; // Update the last check time
 
-        Serial.println("________________________________________________");
+        Serial.println("----------------UI-MainScreen----------------");
 
         // Check if the high temperature alarm status has changed
         if (isHighTempAlarm()) // This function needs to be defined to check the high temperature condition
@@ -218,7 +275,7 @@ void checkPressureAlarmStatus()
     {
         lastPressureCheckTime = currentMillis; // Update the last check time
 
-        Serial.println("________________________________________________");
+        Serial.println("----------------UI-MainScreen----------------");
 
         // Check if the high pressure alarm status has changed
         if (isPressureHigh()) // This function needs to be defined to check the high pressure condition
@@ -249,7 +306,7 @@ void checkDoorStatus()
     {
         lastDoorCheckTime = currentMillis; // Update the last check time
 
-        Serial.println("________________________________________________");
+        Serial.println("----------------UI-MainScreen----------------");
 
         // Check the door status
         if (isDoorClosed()) // This function should return true if the door is closed
@@ -270,14 +327,48 @@ void checkDoorStatus()
     }
 }
 
+// Function to check Relay status periodically
+void checkRelayStatus()
+{
+    unsigned long currentMillis = millis(); // Get the current system time
+
+    // Check if the interval for relay status update has passed
+    if (currentMillis - lastRelayCheckTime >= RELAY_CHECK_INTERVAL)
+    {
+        lastRelayCheckTime = currentMillis; // Update the last check time
+
+        Serial.println("----------------UI-MainScreen----------------");
+
+        if (getCompressorRelayStatus())
+        {
+            isCompressorRelayActive = true;
+        }
+        else
+        {
+            //
+            isCompressorRelayActive = false;
+        }
+
+        // Update the compressor icons based on relay status
+        updateCompressorIcons();
+
+        Serial.println("________________________________________________");
+    }
+}
+
 // Function to check both device and temperature status periodically
 void checkStatusIcon()
 {
-    checkDeviceStatus();        // Check device working status every 3 seconds
-    checkHighTempAlarmStatus(); // Check high temperature alarm status every 15 seconds
-    checkPressureAlarmStatus(); // Check high pressure alarm status every 15 seconds
-    checkDoorStatus();          // Check door status
+    if (lv_scr_act() == ui_mainScreen) //// Check if the active screen is ui_mainScreen
+    {
+        checkDeviceStatus();        // Check device working status
+        checkHighTempAlarmStatus(); // Check high temperature alarm status
+        checkPressureAlarmStatus(); // Check high pressure alarm status
+        checkDoorStatus();          // Check door status
+        checkRelayStatus();         // Check Relay status
+    }
 }
+
 // ============================ Screen Switching =========================
 
 // Variables for touch timeout management

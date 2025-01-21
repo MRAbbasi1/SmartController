@@ -9,7 +9,7 @@ DallasTemperature ds18b20(&oneWire);
 const uint8_t sensorCount = 4;
 DS18B20Sensor sensors[sensorCount];
 
-const unsigned long TEMPERATURE_READ_INTERVAL = 30000;
+const unsigned long TEMPERATURE_READ_INTERVAL = 15000;
 unsigned long lastTemperatureRequestTime = 0;
 bool conversionRequested = false;
 const uint16_t CONVERSION_TIME = 750;
@@ -151,6 +151,7 @@ void handleTemperatureReadings()
 {
     unsigned long currentMillis = millis();
 
+    // Request temperature conversion if it's time to do so
     if (!conversionRequested && (currentMillis - lastTemperatureRequestTime >= TEMPERATURE_READ_INTERVAL))
     {
         Serial.println(" ");
@@ -162,6 +163,7 @@ void handleTemperatureReadings()
         return;
     }
 
+    // Read the temperature values after conversion is complete
     if (conversionRequested && (currentMillis - lastTemperatureRequestTime >= CONVERSION_TIME))
     {
         Serial.println(" ");
@@ -169,12 +171,16 @@ void handleTemperatureReadings()
         Serial.println("🔄 [Temperature] Reading all sensors:");
         uint8_t validReadings = 0;
 
+        // Loop through all sensors
         for (uint8_t i = 0; i < sensorCount; i++)
         {
+            // Get the temperature reading from the sensor
             float temperature = ds18b20.getTempC(sensors[i].address);
 
-            if (temperature != DEVICE_DISCONNECTED_C && temperature > -55 && temperature < 125)
+            // Check if the reading is valid
+            if (temperature != DEVICE_DISCONNECTED_C && temperature > -55 && temperature < 125 && !isnan(temperature))
             {
+                // Valid reading, print and save the temperature
                 Serial.print("🌡️ [Temperature] ");
                 Serial.print(sensors[i].name);
                 Serial.print(": ");
@@ -187,6 +193,7 @@ void handleTemperatureReadings()
             }
             else
             {
+                // Invalid reading, set to NaN
                 Serial.println(" ");
                 Serial.println("---------------Handle Temperature Cache---------------");
                 Serial.print("❌ [Temperature] Invalid reading for ");
@@ -194,8 +201,15 @@ void handleTemperatureReadings()
                 Serial.print(" (");
                 Serial.print(temperature);
                 Serial.println(" °C)");
+
+                // Set temperature to NaN if invalid
+                temperature = NAN;
+                sensors[i].lastValidTemperature = temperature;
+                sensors[i].lastReadTime = currentMillis;
             }
         }
+
+        // Log the number of valid readings
         Serial.println(" ");
         Serial.println("---------------Handle Temperature Cache---------------");
         Serial.print("🌡️ [Temperature] Valid readings: ");
@@ -204,6 +218,7 @@ void handleTemperatureReadings()
         Serial.println(sensorCount);
         Serial.println("________________________________________________");
 
+        // Reset the flag to allow the next temperature request
         conversionRequested = false;
     }
 }

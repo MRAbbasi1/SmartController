@@ -7,6 +7,7 @@
 #include "tempSensor.h"
 #include "setting.h"
 #include "alarm.h"
+#include "relayControl.h"
 
 // Define screen rotation
 #define SCREEN_ROTATION 1

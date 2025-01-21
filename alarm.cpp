@@ -110,8 +110,20 @@ bool isFilterWarning()
     else
     {
         float temperature = readTemperatureByName("Filter");
-        filterAlarm = (temperature > filterWarningThreshold);
-        Serial.printf("🚨 [Alarm] Filter temperature: %0.2f %s threshold of %d\n", temperature, filterAlarm ? "exceeds" : "is below", filterWarningThreshold);
+
+        // Trigger an alert if the temperature value is NaN or above the threshold.
+        filterAlarm = (isnan(temperature) || temperature > filterWarningThreshold);
+
+        // Warning messages for invalid values ​​and comparison with thresholds
+        if (isnan(temperature))
+        {
+            Serial.println("🚨 [Alarm] Invalid Filter Temperature Reading (NAN) detected!");
+        }
+        else
+        {
+            Serial.printf("🚨 [Alarm] Filter temperature: %0.2f %s threshold of %d\n",
+                          temperature, filterAlarm ? "exceeds" : "is below", filterWarningThreshold);
+        }
     }
 
     return filterAlarm;
@@ -146,8 +158,20 @@ bool isHighTempAlarm()
     else
     {
         float temperature = readTemperatureByName("Inlet");
-        tempAlarm = (temperature > highTempWarningThreshold);
-        Serial.printf("🚨 [Alarm] Temperature: %0.2f %s high threshold of %d\n", temperature, tempAlarm ? "exceeds" : "is below", highTempWarningThreshold);
+
+        // Trigger an alert if the temperature value is NaN or above the threshold.
+        tempAlarm = (isnan(temperature) || temperature > highTempWarningThreshold);
+
+        // Warning messages for invalid values ​​and comparison with thresholds
+        if (isnan(temperature))
+        {
+            Serial.println("🚨 [Alarm] Invalid Temperature Reading (NAN) detected!");
+        }
+        else
+        {
+            Serial.printf("🚨 [Alarm] Temperature: %0.2f %s high threshold of %d\n",
+                          temperature, tempAlarm ? "exceeds" : "is below", highTempWarningThreshold);
+        }
     }
 
     return tempAlarm;

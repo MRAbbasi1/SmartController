@@ -270,3 +270,30 @@ void controlFan2Relay()
         Serial.println("");
     }
 }
+
+// ================================
+// Get status functions
+// ================================
+bool getCompressorRelayStatus()
+{
+    Serial.printf("🔵 Compressor Relay Working: %s\n", compressorRelayStatus ? "True" : "False");
+    return compressorRelayStatus;
+}
+
+bool getEvaporatorRelayStatus()
+{
+    Serial.printf("🟢 Evaporator Relay Working:  %s\n", evaporatorRelayStatus ? "True" : "False");
+    return evaporatorRelayStatus;
+}
+
+bool getCondenserRelayStatus()
+{
+    Serial.printf("🟡 Condensor Relay Working:  %s\n", condenserRelayStatus ? "True" : "False");
+    return condenserRelayStatus;
+}
+
+bool getFan2RelayStatus()
+{
+    Serial.printf("🟠 Fan-2 Relay Working:  %s\n", fan2RelayStatus ? "True" : "False");
+    return fan2RelayStatus;
+}

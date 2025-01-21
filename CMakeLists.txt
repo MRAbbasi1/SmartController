@@ -7,7 +7,7 @@ SET(SOURCES ui_mainScreen.c
     ui_comp_hook.c
     ui_helpers.c
     ui_events.c
-    ui_img_1341850634.c
+    ui_img_netff_color_background_85551_240x320_png.c
     ui_img_2087107542.c
     ui_img_640283455.c
     ui_img_165651551.c
@@ -51,6 +51,7 @@ SET(SOURCES ui_mainScreen.c
     ui_img_1025573664.c
     ui_img_1025572639.c
     ui_img_1025574689.c
-    ui_img_menu43_png.c)
+    ui_img_menu43_png.c
+    ui_img_1341850634.c)
 
 add_library(ui ${SOURCES})

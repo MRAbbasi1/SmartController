@@ -505,7 +505,7 @@ extern lv_obj_t *uic_servicesintervals;
 extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-LV_IMG_DECLARE( ui_img_1341850634);   // assets/gradient-blue-abstract-blur-ev-320x24076543.png
+LV_IMG_DECLARE( ui_img_netff_color_background_85551_240x320_png);   // assets/netff_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_2087107542);   // assets/logo-min-800x191 (2).png
 LV_IMG_DECLARE( ui_img_640283455);   // assets/menu-2.png
 LV_IMG_DECLARE( ui_img_165651551);   // assets/power (4).png
@@ -550,6 +550,7 @@ LV_IMG_DECLARE( ui_img_1025573664);   // assets/gradient-blue-abstract-blur-ev-3
 LV_IMG_DECLARE( ui_img_1025572639);   // assets/gradient-blue-abstract-blur-ev-320x240-1.png
 LV_IMG_DECLARE( ui_img_1025574689);   // assets/gradient-blue-abstract-blur-ev-320x240-3.png
 LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
+LV_IMG_DECLARE( ui_img_1341850634);   // assets/gradient-blue-abstract-blur-ev-320x24076543.png
 
 // UI INIT
 void ui_init(void);

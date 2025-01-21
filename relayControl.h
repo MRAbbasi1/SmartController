@@ -24,4 +24,9 @@ void controlEvaporatorRelay();
 void controlCompressorAndCondenserRelays();
 void controlFan2Relay();
 
+bool getCompressorRelayStatus();
+bool getEvaporatorRelayStatus();
+bool getCondenserRelayStatus();
+bool getFan2RelayStatus();
+
 #endif // RELAY_CONTROL_H

@@ -519,6 +519,7 @@ const lv_img_dsc_t *ui_imgset_771659885[1] = {&ui_img_1025573664};
 const lv_img_dsc_t *ui_imgset_434955943[1] = {&ui_img_1025572639};
 const lv_img_dsc_t *ui_imgset_1394360258[1] = {&ui_img_1025574689};
 const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
+const lv_img_dsc_t *ui_imgset_netff_color_background_85551_240x[1] = {&ui_img_netff_color_background_85551_240x320_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
