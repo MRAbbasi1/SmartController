@@ -219,16 +219,17 @@ void checkDeviceStatus()
 
         Serial.println("----------------UI-MainScreen----------------");
 
-        // Check if the device power status has changed
-        if (getChangedFlagTemp("boolean", DEVICE_ON))
+        if (getEvaporatorRelayStatus())
         {
-            // Update the device status
-            isDeviceOn = getBooleanSetting(DEVICE_ON);
-            resetChangedFlagTemp("boolean", DEVICE_ON);
-
-            // Update the icons based on the new device status
-            updateDeviceIcons();
+            isDeviceOn = true;
         }
+        else
+        {
+            isDeviceOn = false;
+        }
+
+        // Update the icons based on the new device status
+        updateDeviceIcons();
 
         Serial.println("________________________________________________");
     }
@@ -345,7 +346,6 @@ void checkRelayStatus()
         }
         else
         {
-            //
             isCompressorRelayActive = false;
         }
 

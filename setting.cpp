@@ -235,7 +235,7 @@ void initializeSettings()
 }
 
 // -----------------------------------
-// Section: Reset | Erase all NVS and Flaf data and reinitialize with default values
+// Section: Reset | Erase all NVS and Flag data and reinitialize with default values
 // -----------------------------------
 void resetSettings()
 {
@@ -328,7 +328,6 @@ bool setBooleanSetting(BooleanIndex index, bool value)
     return true;
 }
 
-// Function to set string settings
 bool setStringSetting(StringIndex index, const char *value)
 {
     // Check if the index is valid

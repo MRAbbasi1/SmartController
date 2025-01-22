@@ -4,63 +4,84 @@
 // Project name: SquareLine_Project
 
 #include "ui.h"
+#include "setting.h"
+#include <Arduino.h>
 
-void mainScreen(lv_event_t * e)
+void mainScreen(lv_event_t *e)
 {
 	// Your code here
 }
 
-void settingScreen(lv_event_t * e)
+void settingScreen(lv_event_t *e)
 {
-	
+	// turnOffCtrl btn
+	bool deviceOnStateForBtn;
+	deviceOnStateForBtn = getBooleanSetting(DEVICE_ON);
+
+	if (deviceOnStateForBtn)
+	{
+		lv_obj_add_state(ui_TurnOffCTRL, LV_STATE_CHECKED); // btn checked
+
+		lv_obj_clear_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN); // hide COOLER_IS__OFF
+		lv_obj_add_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);	 // unhide COOLER_IS__ON
+	}
+	else
+	{
+		lv_obj_clear_state(ui_TurnOffCTRL, LV_STATE_CHECKED); // btn unchecked
+
+		lv_obj_add_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN);	  // unhide COOLER_IS__OFF
+		lv_obj_clear_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN); // hide COOLER_IS__ON
+	}
 }
 
-void turnOffCtrl_Checked(lv_event_t * e)
+void turnOffCtrl_Checked(lv_event_t *e)
 {
-	// Your code here
+	// set true in nvs
+	setBooleanSetting(DEVICE_ON, true); // Set DEVICE_ON true
 }
 
-void turnOffCtrl_Unchecked(lv_event_t * e)
+void turnOffCtrl_Unchecked(lv_event_t *e)
 {
-	// Your code here
+	// set false in nvs
+	setBooleanSetting(DEVICE_ON, false); // Set DEVICE_ON false
 }
 
-void processSettingScreen(lv_event_t * e)
-{
-	// Your code here
-}
-
-void submit_process_setting(lv_event_t * e)
-{
-	// Your code here
-}
-
-void addvancedSettingScreen(lv_event_t * e)
-{
-	// Your code here
-}
-
-void submit_advance_setting(lv_event_t * e)
-{
-	// Your code here
-}
-
-void searchingSensors(lv_event_t * e)
-{
-	// Your code here
-}
-
-void goToFactoryReseting(lv_event_t * e)
+void processSettingScreen(lv_event_t *e)
 {
 	// Your code here
 }
 
-void satusScreen(lv_event_t * e)
+void submit_process_setting(lv_event_t *e)
 {
 	// Your code here
 }
 
-void show_QR_code(lv_event_t * e)
+void addvancedSettingScreen(lv_event_t *e)
+{
+	// Your code here
+}
+
+void submit_advance_setting(lv_event_t *e)
+{
+	// Your code here
+}
+
+void searchingSensors(lv_event_t *e)
+{
+	// Your code here
+}
+
+void goToFactoryReseting(lv_event_t *e)
+{
+	// Your code here
+}
+
+void satusScreen(lv_event_t *e)
+{
+	// Your code here
+}
+
+void show_QR_code(lv_event_t *e)
 {
 	// Your code here
 }

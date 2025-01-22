@@ -39,19 +39,7 @@ SET(SOURCES ui_mainScreen.c
     ui_img_close_png.c
     ui_img_1437619218.c
     ui_img_18821776.c
-    ui_img_blue_color_background_85551_240x320_png.c
-    ui_img_dots_circles_shapes_213107_240x320_png.c
-    ui_img_dots_shapes_purple_213704_240x320_png.c
-    ui_img_net_color_background_85551_240x320_png.c
-    ui_img_wifi_4_png.c
-    ui_img_421771461.c
-    ui_img_1117942354.c
-    ui_img_1716101175.c
-    ui_img_1104223176.c
-    ui_img_1025573664.c
-    ui_img_1025572639.c
-    ui_img_1025574689.c
     ui_img_menu43_png.c
-    ui_img_1341850634.c)
+    ui_img_wifi_4_png.c)
 
 add_library(ui ${SOURCES})

@@ -503,23 +503,12 @@ lv_obj_t *uic_servicesintervals;
 lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-const lv_img_dsc_t *ui_imgset_blue_color_background_85551_240x[1] = {&ui_img_blue_color_background_85551_240x320_png};
-const lv_img_dsc_t *ui_imgset_dots_circles_shapes_213107_240x[1] = {&ui_img_dots_circles_shapes_213107_240x320_png};
-const lv_img_dsc_t *ui_imgset_dots_shapes_purple_213704_240x[1] = {&ui_img_dots_shapes_purple_213704_240x320_png};
 const lv_img_dsc_t *ui_imgset_882430644[1] = {&ui_img_640283455};
-const lv_img_dsc_t *ui_imgset_net_color_background_85551_240x[1] = {&ui_img_net_color_background_85551_240x320_png};
+const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
+const lv_img_dsc_t *ui_imgset_netff_color_background_85551_240x[1] = {&ui_img_netff_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_netlkjhg_color_background_85551_240x[1] = {&ui_img_netlkjhg_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_return_[1] = {&ui_img_return_66_png};
 const lv_img_dsc_t *ui_imgset_wifi_[1] = {&ui_img_wifi_4_png};
-const lv_img_dsc_t *ui_imgset_940004748[1] = {&ui_img_421771461};
-const lv_img_dsc_t *ui_imgset_1492707047[1] = {&ui_img_1117942354};
-const lv_img_dsc_t *ui_imgset_805123926[2] = {&ui_img_1716101175, &ui_img_1341850634};
-const lv_img_dsc_t *ui_imgset_1916505924[1] = {&ui_img_1104223176};
-const lv_img_dsc_t *ui_imgset_771659885[1] = {&ui_img_1025573664};
-const lv_img_dsc_t *ui_imgset_434955943[1] = {&ui_img_1025572639};
-const lv_img_dsc_t *ui_imgset_1394360258[1] = {&ui_img_1025574689};
-const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
-const lv_img_dsc_t *ui_imgset_netff_color_background_85551_240x[1] = {&ui_img_netff_color_background_85551_240x320_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -568,7 +557,7 @@ if ( event_code == LV_EVENT_VALUE_CHANGED) {
 void ui_event_controlSettingScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       settingScreen( e );
 }
 }
@@ -605,13 +594,13 @@ void ui_event_TurnOffCTRL( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
       turnOffCtrl_Checked( e );
-      _ui_flag_modify( ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_flag_modify( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
       turnOffCtrl_Unchecked( e );
-      _ui_flag_modify( ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 

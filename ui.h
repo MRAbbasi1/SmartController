@@ -537,20 +537,8 @@ LV_IMG_DECLARE( ui_img_983251955);   // assets/qr-code (4).png
 LV_IMG_DECLARE( ui_img_close_png);   // assets/close.png
 LV_IMG_DECLARE( ui_img_1437619218);   // assets/info (17).png
 LV_IMG_DECLARE( ui_img_18821776);   // assets/technical-support.png
-LV_IMG_DECLARE( ui_img_blue_color_background_85551_240x320_png);   // assets/blue_color_background_85551_240x320.png
-LV_IMG_DECLARE( ui_img_dots_circles_shapes_213107_240x320_png);   // assets/dots_circles_shapes_213107_240x320.png
-LV_IMG_DECLARE( ui_img_dots_shapes_purple_213704_240x320_png);   // assets/dots_shapes_purple_213704_240x320.png
-LV_IMG_DECLARE( ui_img_net_color_background_85551_240x320_png);   // assets/net_color_background_85551_240x320.png
-LV_IMG_DECLARE( ui_img_wifi_4_png);   // assets/wifi 4.png
-LV_IMG_DECLARE( ui_img_421771461);   // assets/dark-abstract-shapes-5k-tx-320x240.png
-LV_IMG_DECLARE( ui_img_1117942354);   // assets/soft-fusion-blur-abstract-5k-36-320x240.png
-LV_IMG_DECLARE( ui_img_1716101175);   // assets/gradient-blue-abstract-blur-ev-320x240.png
-LV_IMG_DECLARE( ui_img_1104223176);   // assets/3d-colorful-render-de-240x320.png
-LV_IMG_DECLARE( ui_img_1025573664);   // assets/gradient-blue-abstract-blur-ev-320x240-2.png
-LV_IMG_DECLARE( ui_img_1025572639);   // assets/gradient-blue-abstract-blur-ev-320x240-1.png
-LV_IMG_DECLARE( ui_img_1025574689);   // assets/gradient-blue-abstract-blur-ev-320x240-3.png
 LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
-LV_IMG_DECLARE( ui_img_1341850634);   // assets/gradient-blue-abstract-blur-ev-320x24076543.png
+LV_IMG_DECLARE( ui_img_wifi_4_png);   // assets/wifi 4.png
 
 // UI INIT
 void ui_init(void);
