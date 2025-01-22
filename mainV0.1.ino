@@ -21,7 +21,7 @@ void setup()
   // Initialize RGB LED
   pixels.begin();
   pixels.clear();
-  pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // Green
+  pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // RGB Green
   pixels.show();
 
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

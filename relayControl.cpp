@@ -27,7 +27,7 @@ static float fan2SensorTemp = 0.0;
 // Timing Variables
 // ================================
 unsigned long lastCheckTime = 0;
-const unsigned long CHECK_INTERVAL = 15000; // Time for settings refresh
+const unsigned long CHECK_INTERVAL = 5000; // Time for settings refresh
 unsigned long lastRelayUpdateTime = 0;
 const unsigned long RELAY_UPDATE_INTERVAL = 1000; // 1 second
 
@@ -42,7 +42,7 @@ void setupRelays()
     pinMode(CONDENSER_RELAY_PIN, OUTPUT);
     pinMode(FAN2_RELAY_PIN, OUTPUT);
 
-    digitalWrite(COMPRESSOR_RELAY_PIN, HIGH); // OFF lOW
+    digitalWrite(COMPRESSOR_RELAY_PIN, HIGH); // OFF With HIGH | ON with LOW
     digitalWrite(EVAPORATOR_RELAY_PIN, HIGH);
     digitalWrite(CONDENSER_RELAY_PIN, HIGH);
     digitalWrite(FAN2_RELAY_PIN, HIGH);

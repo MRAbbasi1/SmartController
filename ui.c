@@ -594,13 +594,9 @@ void ui_event_TurnOffCTRL( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
       turnOffCtrl_Checked( e );
-      _ui_flag_modify( ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
       turnOffCtrl_Unchecked( e );
-      _ui_flag_modify( ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_flag_modify( ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 

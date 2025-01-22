@@ -22,28 +22,91 @@ void settingScreen(lv_event_t *e)
 	{
 		lv_obj_add_state(ui_TurnOffCTRL, LV_STATE_CHECKED); // btn checked
 
-		lv_obj_clear_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN); // hide COOLER_IS__OFF
-		lv_obj_add_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);	 // unhide COOLER_IS__ON
+		lv_obj_clear_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN); // unhide COOLER_IS__ON
+		lv_obj_add_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);	 // hide COOLER_IS__OFF
 	}
 	else
 	{
 		lv_obj_clear_state(ui_TurnOffCTRL, LV_STATE_CHECKED); // btn unchecked
 
-		lv_obj_add_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN);	  // unhide COOLER_IS__OFF
-		lv_obj_clear_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN); // hide COOLER_IS__ON
+		lv_obj_clear_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN); // unhide COOLER_IS__OFF
 	}
+}
+
+lv_timer_t *coolerStatusTimer = NULL; // store the timer
+
+void showCoolerStatusOn(lv_timer_t *timer)
+{
+	// Hide the "COOLER IS : OFF" label
+	lv_obj_add_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);
+
+	// Update text and show the "COOLER IS : ON" label
+	lv_label_set_text(ui_COOLER_IS__ON, "COOLER IS : ON");
+	lv_obj_clear_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN);
+
+	// Delete the timer
+	lv_timer_del(timer);
+	coolerStatusTimer = NULL;
+}
+
+void showCoolerStatusOff(lv_timer_t *timer)
+{
+	// Hide the "COOLER IS : ON" label
+	lv_obj_add_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN);
+
+	// Update text and show the "COOLER IS : OFF" label
+	lv_label_set_text(ui_COOLER_IS__OFF, "COOLER IS : OFF");
+	lv_obj_clear_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);
+
+	// Delete the timer
+	lv_timer_del(timer);
+	coolerStatusTimer = NULL;
 }
 
 void turnOffCtrl_Checked(lv_event_t *e)
 {
-	// set true in nvs
-	setBooleanSetting(DEVICE_ON, true); // Set DEVICE_ON true
+	// Store device state as ON
+	setBooleanSetting(DEVICE_ON, true);
+
+	// Hide the "COOLER IS : OFF" label
+	lv_obj_add_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);
+
+	// Set New label: "TURNING ON..."
+	lv_label_set_text(ui_COOLER_IS__ON, "TURNING ON...");
+	lv_obj_clear_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN);
+
+	// If a previous timer exists, delete it before creating a new one
+	if (coolerStatusTimer != NULL)
+	{
+		lv_timer_del(coolerStatusTimer);
+		coolerStatusTimer = NULL;
+	}
+
+	// Create a new timer to update the final status after 7 seconds
+	coolerStatusTimer = lv_timer_create(showCoolerStatusOn, 7000, NULL);
 }
 
 void turnOffCtrl_Unchecked(lv_event_t *e)
 {
-	// set false in nvs
-	setBooleanSetting(DEVICE_ON, false); // Set DEVICE_ON false
+	// Store device state as OFF
+	setBooleanSetting(DEVICE_ON, false);
+
+	// Hide the "COOLER IS : ON" label
+	lv_obj_add_flag(ui_COOLER_IS__ON, LV_OBJ_FLAG_HIDDEN);
+
+	// Set new label: "TURNING OFF..." label
+	lv_label_set_text(ui_COOLER_IS__OFF, "TURNING OFF...");
+	lv_obj_clear_flag(ui_COOLER_IS__OFF, LV_OBJ_FLAG_HIDDEN);
+
+	// If a previous timer exists, delete it before creating a new one
+	if (coolerStatusTimer != NULL)
+	{
+		lv_timer_del(coolerStatusTimer);
+		coolerStatusTimer = NULL;
+	}
+
+	// Create a new timer to update the final status after 7 seconds
+	coolerStatusTimer = lv_timer_create(showCoolerStatusOff, 7000, NULL);
 }
 
 void processSettingScreen(lv_event_t *e)
