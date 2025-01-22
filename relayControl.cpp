@@ -42,7 +42,7 @@ void setupRelays()
     pinMode(CONDENSER_RELAY_PIN, OUTPUT);
     pinMode(FAN2_RELAY_PIN, OUTPUT);
 
-    digitalWrite(COMPRESSOR_RELAY_PIN, HIGH); // OFF for Active LOW
+    digitalWrite(COMPRESSOR_RELAY_PIN, HIGH); // OFF lOW
     digitalWrite(EVAPORATOR_RELAY_PIN, HIGH);
     digitalWrite(CONDENSER_RELAY_PIN, HIGH);
     digitalWrite(FAN2_RELAY_PIN, HIGH);
@@ -152,25 +152,38 @@ void reloadCachedData()
 // ================================
 void controlEvaporatorRelay()
 {
-    bool newStatus = (deviceOn && cachedDoorClosed && !cachedFilterWarning);
+    bool newStatus = (deviceOn && cachedDoorClosed && !cachedFilterWarning && !isnan(inletTemp));
 
     if (newStatus != evaporatorRelayStatus)
     {
         evaporatorRelayStatus = newStatus;
         digitalWrite(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
 
+        // if (newStatus)
+        // {
+        //     digitalWrite(EVAPORATOR_RELAY_PIN, LOW);
+        // }
+        // if (!newStatus)
+        // {
+        //     digitalWrite(EVAPORATOR_RELAY_PIN, HIGH);
+        // }
+
         Serial.println("");
         Serial.print("[RELAY] 🟢 Evaporator: ");
         Serial.print(newStatus ? "ON" : "OFF");
         Serial.print(" | Reason: ");
+
         if (!deviceOn)
             Serial.println("🔴 Device is OFF");
         else if (!cachedDoorClosed)
             Serial.println("🚨 Door is OPEN");
         else if (cachedFilterWarning)
             Serial.println("🚨 Filter warning active");
+        else if (isnan(inletTemp))
+            Serial.println("⛔️ Invalid inlet temperature (NAN)");
         else
             Serial.println("✅ All conditions met");
+
         Serial.println("");
     }
 }
@@ -182,6 +195,7 @@ void controlCompressorAndCondenserRelays()
     bool newCompressorStatus = false;
 
     if (deviceOn && cachedDoorClosed && !cachedFilterWarning &&
+        !isnan(antiFreezeTemp) && !isnan(inletTemp) &&
         antiFreezeTemp > antiFreezeBase + antiFreezeRange &&
         inletTemp >= compressorTemp + compressorRange)
     {
@@ -209,12 +223,17 @@ void controlCompressorAndCondenserRelays()
         Serial.print("[RELAY] 🟡 Condenser: ");
         Serial.print(newCondenserStatus ? "ON" : "OFF");
         Serial.print(" | Reason: ");
+
         if (!deviceOn)
             Serial.println("🔴 Device is OFF");
         else if (!cachedDoorClosed)
             Serial.println("🚨 Door is OPEN");
         else if (cachedFilterWarning)
             Serial.println("🚨 Filter warning active");
+        else if (isnan(antiFreezeTemp))
+            Serial.println("⛔️ Invalid antifreeze temperature (NAN)");
+        else if (isnan(inletTemp))
+            Serial.println("⛔️ Invalid inlet temperature (NAN)");
         else if (antiFreezeTemp <= antiFreezeBase + antiFreezeRange)
             Serial.println("🥶 Antifreeze temperature too low");
         else if (inletTemp < compressorTemp + compressorRange)
@@ -233,6 +252,7 @@ void controlCompressorAndCondenserRelays()
         Serial.print("[RELAY] 🔵 Compressor: ");
         Serial.print(newCompressorStatus ? "ON" : "OFF");
         Serial.print(" | Reason: ");
+
         if (!newCondenserStatus)
             Serial.println("🔴 Condenser is OFF");
         else if ((millis() - condenserOnTime) < 5000)
@@ -246,7 +266,7 @@ void controlCompressorAndCondenserRelays()
 void controlFan2Relay()
 {
     bool newStatus = (deviceOn && cachedDoorClosed && !cachedFilterWarning &&
-                      fan2SensorTemp > fan2Temp);
+                      !isnan(fan2SensorTemp) && fan2SensorTemp > fan2Temp);
 
     if (newStatus != fan2RelayStatus)
     {
@@ -257,12 +277,15 @@ void controlFan2Relay()
         Serial.print("[RELAY] 🟠 Fan2: ");
         Serial.print(newStatus ? "ON" : "OFF");
         Serial.print(" | Reason: ");
+
         if (!deviceOn)
             Serial.println("🔴 Device is OFF");
         else if (!cachedDoorClosed)
             Serial.println("🚨 Door is OPEN");
         else if (cachedFilterWarning)
             Serial.println("🚨 Filter warning active");
+        else if (isnan(fan2SensorTemp))
+            Serial.println("⛔️ Invalid sensor temperature (NAN)");
         else if (fan2SensorTemp <= fan2Temp)
             Serial.println("🆗 Sensor temperature below threshold");
         else

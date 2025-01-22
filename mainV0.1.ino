@@ -1,4 +1,4 @@
-#include <Arduino.h> 
+#include <Arduino.h>
 #include "setting.h"
 #include "display.h"
 #include "wifi.h"
@@ -28,6 +28,11 @@ void setup()
   Serial.println("----------------- Start Setup -----------------");
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
+  // 5- Setup Relays
+  setupRelays();
+
+  Serial.println("---------------------------------------------------");
+
   // 0- Setup Display
   displaySetup();
 
@@ -50,11 +55,6 @@ void setup()
 
   // 4- Initialize the Alarm system
   alarmSetup();
-
-  Serial.println("---------------------------------------------------");
-
-  // 5- Setup Relays
-  setupRelays();
 
   Serial.println("---------------------------------------------------");
 

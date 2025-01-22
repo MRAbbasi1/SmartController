@@ -9,8 +9,8 @@
 // ================================
 // Pin Definitions
 // ================================
-#define COMPRESSOR_RELAY_PIN 47
-#define EVAPORATOR_RELAY_PIN 48
+#define COMPRESSOR_RELAY_PIN 38
+#define EVAPORATOR_RELAY_PIN 37
 #define CONDENSER_RELAY_PIN 35
 #define FAN2_RELAY_PIN 36
 

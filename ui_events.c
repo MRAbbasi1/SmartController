@@ -12,7 +12,7 @@ void mainScreen(lv_event_t * e)
 
 void settingScreen(lv_event_t * e)
 {
-	// Your code here
+	
 }
 
 void turnOffCtrl_Checked(lv_event_t * e)
