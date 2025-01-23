@@ -83,7 +83,7 @@ void turnOffCtrl_Checked(lv_event_t *e)
 	}
 
 	// Create a new timer to update the final status after 7 seconds
-	coolerStatusTimer = lv_timer_create(showCoolerStatusOn, 7000, NULL);
+	coolerStatusTimer = lv_timer_create(showCoolerStatusOn, 5000, NULL);
 }
 
 void turnOffCtrl_Unchecked(lv_event_t *e)
@@ -106,7 +106,7 @@ void turnOffCtrl_Unchecked(lv_event_t *e)
 	}
 
 	// Create a new timer to update the final status after 7 seconds
-	coolerStatusTimer = lv_timer_create(showCoolerStatusOff, 7000, NULL);
+	coolerStatusTimer = lv_timer_create(showCoolerStatusOff, 5000, NULL);
 }
 
 void processSettingScreen(lv_event_t *e)

@@ -17,7 +17,7 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display wi
 
 // Time interval for updating the arc value
 const uint32_t updateArcMainScreenInterval = 5000; // in milliseconds
-uint32_t lastUpdateTime = 0;                       // Stores the last update time
+uint32_t lastUpdateMainScreenArc = 0;              // Stores the last update time
 
 // main screen Arc graph
 void updateArcMainScreen()
@@ -29,10 +29,10 @@ void updateArcMainScreen()
         uint32_t currentTime = millis();
 
         // Check if the update interval has passed
-        if (currentTime - lastUpdateTime >= updateArcMainScreenInterval)
+        if (currentTime - lastUpdateMainScreenArc >= updateArcMainScreenInterval)
         {
             // Update the last update time
-            lastUpdateTime = currentTime;
+            lastUpdateMainScreenArc = currentTime;
 
             Serial.println("----------------UI-MainScreen----------------");
 
@@ -369,6 +369,93 @@ void checkStatusIcon()
     }
 }
 
+// ============================ Update Functions for StatusScreen =========================
+
+static uint32_t lastUpdateTemperatureLabels = 0;
+const uint32_t updateInterval = 10000; // Update every 10 seconds
+
+void updateTemperatureLabels()
+{
+    if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_tempStatusPanel, LV_OBJ_FLAG_HIDDEN))
+    {
+        uint32_t currentTime = millis();
+
+        if (currentTime - lastUpdateTemperatureLabels >= updateInterval)
+        {
+            // Non-blocking timing
+            lastUpdateTemperatureLabels = currentTime;
+
+            float inletTempstatusScreen = readTemperatureByName("Inlet");
+            float outletTempstatusScreen = readTemperatureByName("Outlet");
+            float antifreezeTempstatusScreen = readTemperatureByName("Antifreeze");
+            float filterTempstatusScreen = readTemperatureByName("Filter");
+
+            char buffer[32];
+
+            // Inlet Temperature
+            if (!isnan(inletTempstatusScreen) && inletTempstatusScreen != DEVICE_DISCONNECTED_C &&
+                inletTempstatusScreen > -55 && inletTempstatusScreen < 125)
+            {
+                snprintf(buffer, sizeof(buffer), "INLET: %.1f °C", inletTempstatusScreen);
+            }
+            else
+            {
+                snprintf(buffer, sizeof(buffer), "INLET: Sensor Error Detected1");
+            }
+            lv_label_set_text(ui_Inlet_Temp_status, buffer);
+
+            // Outlet Temperature
+            if (!isnan(outletTempstatusScreen) && outletTempstatusScreen != DEVICE_DISCONNECTED_C &&
+                outletTempstatusScreen > -55 && outletTempstatusScreen < 125)
+            {
+                snprintf(buffer, sizeof(buffer), "OUTLET: %.1f °C", outletTempstatusScreen);
+            }
+            else
+            {
+                snprintf(buffer, sizeof(buffer), "OUTLET: Sensor Error Detected!");
+            }
+            lv_label_set_text(ui_Outlet_Temp_status, buffer);
+
+            // Antifreeze Temperature
+            if (!isnan(antifreezeTempstatusScreen) && antifreezeTempstatusScreen != DEVICE_DISCONNECTED_C &&
+                antifreezeTempstatusScreen > -55 && antifreezeTempstatusScreen < 125)
+            {
+                snprintf(buffer, sizeof(buffer), "ANTIFREEZE: %.1f °C", antifreezeTempstatusScreen);
+            }
+            else
+            {
+                snprintf(buffer, sizeof(buffer), "ANTIFREEZE: Sensor Error Detected!");
+            }
+            lv_label_set_text(ui_antifreeze_temp_status, buffer);
+
+            // Filter Temperature
+            if (!isnan(filterTempstatusScreen) && filterTempstatusScreen != DEVICE_DISCONNECTED_C &&
+                filterTempstatusScreen > -55 && filterTempstatusScreen < 125)
+            {
+                snprintf(buffer, sizeof(buffer), "FILTER: %.1f °C", filterTempstatusScreen);
+            }
+            else
+            {
+                snprintf(buffer, sizeof(buffer), "FILTER: Sensor Error Detected!");
+            }
+            lv_label_set_text(ui_fan_2_filter_alarm_status, buffer);
+
+            // Debug Logs
+            Serial.println("📺 [UI-StatusScreen] Temperature Updates:");
+            Serial.printf(" - Inlet Temp: %s\n", (!isnan(inletTempstatusScreen)) ? String(inletTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
+            Serial.printf(" - Outlet Temp: %s\n", (!isnan(outletTempstatusScreen)) ? String(outletTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
+            Serial.printf(" - Antifreeze Temp: %s\n", (!isnan(antifreezeTempstatusScreen)) ? String(antifreezeTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
+            Serial.printf(" - Filter Temp: %s\n", (!isnan(filterTempstatusScreen)) ? String(filterTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
+            Serial.println("________________________UI-StatusScreen________________________");
+        }
+    }
+}
+
+void checkTemperatureUpdate()
+{
+    updateTemperatureLabels(); // Call in displayLoop()
+}
+
 // ============================ Screen Switching =========================
 
 // Variables for touch timeout management
@@ -523,6 +610,9 @@ void displayLoop()
 
     // Cooler status icons check function
     checkStatusIcon();
+
+    // Temperature Labels in Status Screen
+    checkTemperatureUpdate();
 
     // Small delay to allow LVGL to process tasks and avoid blocking
     delay(5);
