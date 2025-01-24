@@ -372,15 +372,22 @@ void checkStatusIcon()
 // ============================ Update Functions for StatusScreen =========================
 
 static uint32_t lastUpdateTemperatureLabels = 0;
-const uint32_t updateInterval = 10000; // Update every 10 seconds
+const uint32_t temperatureLabelsUpdateInterval = 10000; // Update every 10 seconds
 
+static uint32_t lastUpdateAlarmLabels = 0;
+const uint32_t alarmLabelsUpdateInterval = 10000; // Update every 10 seconds
+
+static uint32_t lastUpdateRelayLabels = 0;
+const uint32_t relayLabelsUpdateInterval = 10000; // Update every 10 seconds
+
+// update temp panel labels
 void updateTemperatureLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_tempStatusPanel, LV_OBJ_FLAG_HIDDEN))
     {
         uint32_t currentTime = millis();
 
-        if (currentTime - lastUpdateTemperatureLabels >= updateInterval)
+        if (currentTime - lastUpdateTemperatureLabels >= temperatureLabelsUpdateInterval)
         {
             // Non-blocking timing
             lastUpdateTemperatureLabels = currentTime;
@@ -400,7 +407,7 @@ void updateTemperatureLabels()
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "INLET: Sensor Error Detected1");
+                snprintf(buffer, sizeof(buffer), "INLET: Sensor Error!");
             }
             lv_label_set_text(ui_Inlet_Temp_status, buffer);
 
@@ -412,7 +419,7 @@ void updateTemperatureLabels()
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "OUTLET: Sensor Error Detected!");
+                snprintf(buffer, sizeof(buffer), "OUTLET: Sensor Error!");
             }
             lv_label_set_text(ui_Outlet_Temp_status, buffer);
 
@@ -424,7 +431,7 @@ void updateTemperatureLabels()
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "ANTIFREEZE: Sensor Error Detected!");
+                snprintf(buffer, sizeof(buffer), "ANTIFREEZE: Sensor Error!");
             }
             lv_label_set_text(ui_antifreeze_temp_status, buffer);
 
@@ -436,7 +443,7 @@ void updateTemperatureLabels()
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "FILTER: Sensor Error Detected!");
+                snprintf(buffer, sizeof(buffer), "FILTER: Sensor Error!");
             }
             lv_label_set_text(ui_fan_2_filter_alarm_status, buffer);
 
@@ -451,9 +458,199 @@ void updateTemperatureLabels()
     }
 }
 
-void checkTemperatureUpdate()
+// update alarm panel labels
+void updateAlarmLabels()
 {
-    updateTemperatureLabels(); // Call in displayLoop()
+    if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_alarmStatusPanel, LV_OBJ_FLAG_HIDDEN))
+    {
+        uint32_t currentTime = millis();
+
+        if (currentTime - lastUpdateAlarmLabels >= alarmLabelsUpdateInterval)
+        {
+            lastUpdateAlarmLabels = currentTime;
+
+            char buffer_temp[64];
+            char buffer_filter[64];
+            char buffer_door[64];
+            char buffer_pressure[64];
+
+            // high temp alarm label status
+            if (isHighTempAlarm())
+            {
+                float highTempAlarmInlet = readTemperatureByName("Inlet");
+
+                if (!isnan(highTempAlarmInlet) && highTempAlarmInlet != DEVICE_DISCONNECTED_C &&
+                    highTempAlarmInlet > -55 && highTempAlarmInlet < 125)
+                {
+                    snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: %.1f °C - High Temp Warning !", highTempAlarmInlet);
+                }
+                else
+                {
+                    snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: NaN - Sensor Error !");
+                }
+
+                lv_obj_set_style_text_color(ui_high_Temp_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red color for warning/error
+            }
+            else
+            {
+                snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: Within Safe Limits - OK !");
+                lv_obj_set_style_text_color(ui_high_Temp_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green color for OK
+            }
+            lv_label_set_text(ui_high_Temp_Alarm, buffer_temp);
+
+            // filter alarm label status
+            if (isFilterWarning())
+            {
+                float highTempAlarmFilter = readTemperatureByName("Filter");
+
+                if (!isnan(highTempAlarmFilter) && highTempAlarmFilter != DEVICE_DISCONNECTED_C &&
+                    highTempAlarmFilter > -55 && highTempAlarmFilter < 125)
+                {
+                    snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: %.1f °C - Filter Temp Warning !", highTempAlarmFilter);
+                }
+                else
+                {
+                    snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: NaN - Sensor Error !");
+                }
+
+                lv_obj_set_style_text_color(ui_Filter_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red color for warning/error
+            }
+            else
+            {
+                snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: Operating Normally - Stable !");
+                lv_obj_set_style_text_color(ui_Filter_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green color for OK
+            }
+            lv_label_set_text(ui_Filter_Alarm, buffer_filter);
+
+            // door alarm label status
+            if (!isDoorClosed())
+            {
+                snprintf(buffer_door, sizeof(buffer_door), "DOOR: Open - Critical Warning !");
+                lv_obj_set_style_text_color(ui_Door_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+            }
+            else
+            {
+                snprintf(buffer_door, sizeof(buffer_door), "DOOR: Closed - OK !");
+                lv_obj_set_style_text_color(ui_Door_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+            }
+            lv_label_set_text(ui_Door_Alarm, buffer_door);
+
+            // pressure alarm label status
+            if (isPressureHigh())
+            {
+                snprintf(buffer_pressure, sizeof(buffer_pressure), "PRESSURE: High - System Warning !");
+                lv_obj_set_style_text_color(ui_high_Pressure_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+            }
+            else
+            {
+                snprintf(buffer_pressure, sizeof(buffer_pressure), "PRESSURE: Normal - Stable !");
+                lv_obj_set_style_text_color(ui_high_Pressure_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+            }
+            lv_label_set_text(ui_high_Pressure_Alarm, buffer_pressure);
+
+            // Debug Logs
+            Serial.println("📺 [UI-StatusScreen] Alarm Status Updates:");
+
+            Serial.printf(" - Inlet Temp Alarm: %s\n", isHighTempAlarm() ? (!isnan(readTemperatureByName("Inlet")) ? String(readTemperatureByName("Inlet"), 1).c_str() : "❌ Error") : "✅ Within Safe Limits");
+
+            Serial.printf(" - Filter Temp Alarm: %s\n", isFilterWarning() ? (!isnan(readTemperatureByName("Filter")) ? String(readTemperatureByName("Filter"), 1).c_str() : "❌ Error") : "✅ Operating Normally");
+
+            Serial.println(!isDoorClosed() ? " - Door Alarm: 🚪 Open - Critical Warning !" : " - Door Alarm: ✅ Closed - good");
+
+            Serial.println(isPressureHigh() ? " - Pressure Alarm: 🚨 High Pressure - System Alert !" : " - Pressure Alarm: ✅ Normal - Stable");
+
+            Serial.println("________________________UI-StatusScreen________________________");
+        }
+    }
+}
+
+// update relay status panel labels
+void updateRelayLabels()
+{
+    if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_relayStatusPanel, LV_OBJ_FLAG_HIDDEN))
+    {
+        uint32_t currentTime = millis();
+
+        if (currentTime - lastUpdateRelayLabels >= relayLabelsUpdateInterval)
+        {
+            lastUpdateRelayLabels = currentTime;
+
+            char buffer_evaprator[32];
+            char buffer_compressor[32];
+            char buffer_condensor[32];
+            char buffer_fan2[32];
+
+            // Evaporator status
+            if (getEvaporatorRelayStatus())
+            {
+                snprintf(buffer_evaprator, sizeof(buffer_evaprator), "EVAPRATOR: ON - Working !");
+                lv_obj_set_style_text_color(ui_evaprartor_Fan_Status, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+            }
+            else
+            {
+                snprintf(buffer_evaprator, sizeof(buffer_evaprator), "EVAPRATOR: OFF - Not Working !");
+                lv_obj_set_style_text_color(ui_evaprartor_Fan_Status, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+            }
+            lv_label_set_text(ui_evaprartor_Fan_Status, buffer_evaprator);
+
+            // Compressor status
+            if (getCompressorRelayStatus())
+            {
+                snprintf(buffer_compressor, sizeof(buffer_compressor), "COMPRESSOR: ON - Working !");
+                lv_obj_set_style_text_color(ui_Compressor_Status, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+            }
+            else
+            {
+                snprintf(buffer_compressor, sizeof(buffer_compressor), "COMPRESSOR: OFF - Not Working !");
+                lv_obj_set_style_text_color(ui_Compressor_Status, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+            }
+            lv_label_set_text(ui_Compressor_Status, buffer_compressor);
+
+            // Condenser status
+            if (getCondenserRelayStatus())
+            {
+                snprintf(buffer_condensor, sizeof(buffer_condensor), "CONDENSER: ON - Working !");
+                lv_obj_set_style_text_color(ui_condensor_Fan_1_Status, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+            }
+            else
+            {
+                snprintf(buffer_condensor, sizeof(buffer_condensor), "CONDENSER: OFF - Not Working !");
+                lv_obj_set_style_text_color(ui_condensor_Fan_1_Status, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+            }
+            lv_label_set_text(ui_condensor_Fan_1_Status, buffer_condensor);
+
+            // Fan-2 status
+            if (getFan2RelayStatus())
+            {
+                snprintf(buffer_fan2, sizeof(buffer_fan2), "FAN-2: ON - Working !");
+                lv_obj_set_style_text_color(ui_condensor_Fan_2_Status, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+            }
+            else
+            {
+                snprintf(buffer_fan2, sizeof(buffer_fan2), "FAN-2: OFF - Not Working !");
+                lv_obj_set_style_text_color(ui_condensor_Fan_2_Status, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+            }
+            lv_label_set_text(ui_condensor_Fan_2_Status, buffer_fan2);
+
+            // Debug Logs
+            Serial.println("📺 [UI-StatusScreen] Relay Status Updates:");
+
+            Serial.printf(" - Evaporator: %s\n", getEvaporatorRelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
+            Serial.printf(" - Compressor: %s\n", getCompressorRelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
+            Serial.printf(" - Condenser: %s\n", getCondenserRelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
+            Serial.printf(" - Fan-2: %s\n", getFan2RelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
+
+            Serial.println("________________________UI-StatusScreen________________________");
+        }
+    }
+}
+
+// Call in displayLoop()
+void checkStatusUpdate()
+{
+    updateRelayLabels();
+    updateTemperatureLabels();
+    updateAlarmLabels();
 }
 
 // ============================ Screen Switching =========================
@@ -461,8 +658,6 @@ void checkTemperatureUpdate()
 // Variables for touch timeout management
 uint32_t lastTouchTime = 0;              // Last time the screen was touched
 const uint32_t timeoutDuration = 120000; // Timeout duration in milliseconds
-
-// ============================ Screen Switching ==========================
 
 // Function to switch to the main screen and delete the previous screen
 void switchToMainScreen()
@@ -612,7 +807,7 @@ void displayLoop()
     checkStatusIcon();
 
     // Temperature Labels in Status Screen
-    checkTemperatureUpdate();
+    checkStatusUpdate();
 
     // Small delay to allow LVGL to process tasks and avoid blocking
     delay(5);
