@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <lvgl.h>
 #include <TFT_eSPI.h>
-// #include "ui.h"
 #include "tempSensor.h"
 #include "setting.h"
 #include "alarm.h"

@@ -28,32 +28,32 @@ void setup()
   Serial.println("----------------- Start Setup -----------------");
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-  // 5- Setup Relays
+  // 0- Setup Relays
   setupRelays();
 
   Serial.println("---------------------------------------------------");
 
-  // 0- Setup Display
+  // 1- Setup Display
   displaySetup();
 
   Serial.println("---------------------------------------------------");
 
-  // 1- Initialize Settings (NVS)
+  // 2- Initialize Settings (NVS)
   initializeSettings();
 
   Serial.println("---------------------------------------------------");
 
-  // 2- Setup Sensors (DHT11, DS18B20, DHT22)
+  // 3- Setup Sensors (DHT11, DS18B20, DHT22)
   initializeSensors();
 
   Serial.println("---------------------------------------------------");
 
-  // 3- Setup Wi-Fi
+  // 4- Setup Wi-Fi
   wifiSetup();
 
   Serial.println("---------------------------------------------------");
 
-  // 4- Initialize the Alarm system
+  // 5- Initialize the Alarm system
   alarmSetup();
 
   Serial.println("---------------------------------------------------");
@@ -63,14 +63,17 @@ void setup()
 
   Serial.println("---------------------------------------------------");
 
-  // Indicate end of setup with RGB Red
-  pixels.setBrightness(64);
-  pixels.setPixelColor(0, pixels.Color(64, 0, 0));
-  pixels.show();
+  // 7- Initialize the maintenance counter
+  initializeHoursElapsedTracking();
 
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   Serial.println("----------------- End of Setup -----------------");
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+  // Indicate end of setup with RGB Red
+  pixels.setBrightness(64);
+  pixels.setPixelColor(0, pixels.Color(64, 0, 0));
+  pixels.show();
 }
 
 void loop()
@@ -82,4 +85,6 @@ void loop()
   handleTemperatureReadings(); // Handle temperature sensor readings
 
   controlRelays(); // Handle Relay Control
+
+  updateHoursElapsedCounter(); // Update the maintenance counter periodically
 }

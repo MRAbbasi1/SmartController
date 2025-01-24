@@ -12,4 +12,7 @@ void setupAndUpdateTime();
 // Get the current time
 String getTime();
 
-#endif // GENERAL_H
+void initializeHoursElapsedTracking();
+void updateHoursElapsedCounter();
+
+#endif                               // GENERAL_H

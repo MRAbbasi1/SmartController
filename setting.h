@@ -34,7 +34,8 @@ extern "C"
         DEVICE_SERIAL_ID,
         CUSTOMER_ID,
         ACTIVATION_DATE,
-        SERVICE_INTERVAL
+        SERVICE_INTERVAL,
+        HOURS_ELAPSED
     } NumericIndex;
 
     typedef enum

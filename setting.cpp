@@ -11,18 +11,19 @@
 // Section: Default Values
 // -----------------------------------
 const int defaultNumericValues[] = {
-    20, // COMPRESSOR_TEMP
-    1,  // COMPRESSOR_RANGE
-    50, // HIGH_TEMP_WARNING
-    -5, // ANTI_FREEZE_TEMP
-    2,  // ANTI_FREEZE_RANGE
-    3,  // COMPRESSOR_REST_TIME
-    80, // FILTER_WARNING
-    44, // FAN2_TEMP
-    0,  // DEVICE_SERIAL_ID
-    0,  // CUSTOMER_ID
-    0,  // ACTIVATION_DATE
-    365 // SERVICE_INTERVAL
+    20,        // COMPRESSOR_TEMP
+    1,         // COMPRESSOR_RANGE
+    50,        // HIGH_TEMP_WARNING
+    -5,        // ANTI_FREEZE_TEMP
+    2,         // ANTI_FREEZE_RANGE
+    3,         // COMPRESSOR_REST_TIME
+    80,        // FILTER_WARNING
+    44,        // FAN2_TEMP
+    100001,    // DEVICE_SERIAL_ID
+    123456789, // CUSTOMER_ID
+    20241104,  // ACTIVATION_DATE
+    365,       // SERVICE_INTERVAL
+    0          // HOURS_ELAPSED
 };
 
 const bool defaultBooleanValues[] = {
@@ -57,18 +58,19 @@ const char *defaultStringValues[] = {
 
 // Limits for numbers
 const int numericMinValues[] = {
-    20,      // COMPRESSOR_TEMP_MIN
-    0,       // COMPRESSOR_RANGE
-    20,      // HIGH_TEMP_WARNING
-    0,       // ANTI_FREEZE_TEMP
-    0,       // ANTI_FREEZE_RANGE
-    0,       // COMPRESSOR_REST_TIME
-    60,      // FILTER_WARNING
-    30,      // FAN2_TEMP
-    1000000, // DEVICE_SERIAL_ID
-    1000000, // CUSTOMER_ID
-    0,       // ACTIVATION_DATE
-    12       // SERVICE_INTERVAL
+    20,       // COMPRESSOR_TEMP_MIN
+    0,        // COMPRESSOR_RANGE
+    20,       // HIGH_TEMP_WARNING
+    0,        // ANTI_FREEZE_TEMP
+    0,        // ANTI_FREEZE_RANGE
+    0,        // COMPRESSOR_REST_TIME
+    60,       // FILTER_WARNING
+    30,       // FAN2_TEMP
+    0,        // DEVICE_SERIAL_ID
+    0,        // CUSTOMER_ID
+    20010903, // ACTIVATION_DATE
+    0,        // SERVICE_INTERVAL
+    0         // HOURS_ELAPSED
 };
 
 const int numericMaxValues[] = {
@@ -80,10 +82,11 @@ const int numericMaxValues[] = {
     5,         // COMPRESSOR_REST_TIME
     100,       // FILTER_WARNING
     80,        // FAN2_TEMP
-    100000000, // DEVICE_SERIAL_ID
-    100000000, // CUSTOMER_ID
-    100000000, // ACTIVATION_DATE
-    120        // SERVICE_INTERVAL
+    999999999, // DEVICE_SERIAL_ID
+    999999999, // CUSTOMER_ID
+    999999999, // ACTIVATION_DATE
+    3650,      // SERVICE_INTERVAL
+    87600      // HOURS_ELAPSED
 };
 
 // Length limit for strings

@@ -374,13 +374,7 @@ void checkStatusIcon()
 static uint32_t lastUpdateTemperatureLabels = 0;
 const uint32_t temperatureLabelsUpdateInterval = 10000; // Update every 10 seconds
 
-static uint32_t lastUpdateAlarmLabels = 0;
-const uint32_t alarmLabelsUpdateInterval = 10000; // Update every 10 seconds
-
-static uint32_t lastUpdateRelayLabels = 0;
-const uint32_t relayLabelsUpdateInterval = 10000; // Update every 10 seconds
-
-// update temp panel labels
+// update Temp panel labels
 void updateTemperatureLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_tempStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -458,7 +452,10 @@ void updateTemperatureLabels()
     }
 }
 
-// update alarm panel labels
+static uint32_t lastUpdateAlarmLabels = 0;
+const uint32_t alarmLabelsUpdateInterval = 10000; // Update every 10 seconds
+
+// update Alarm panel labels
 void updateAlarmLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_alarmStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -564,7 +561,10 @@ void updateAlarmLabels()
     }
 }
 
-// update relay status panel labels
+static uint32_t lastUpdateRelayLabels = 0;
+const uint32_t relayLabelsUpdateInterval = 10000; // Update every 10 seconds
+
+// update Relay status panel labels
 void updateRelayLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_relayStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -645,12 +645,126 @@ void updateRelayLabels()
     }
 }
 
+// static uint32_t lastUpdateAppLabels = 0;
+// const uint32_t appLabelsUpdateInterval = 10000; // Update every 10 seconds
+
+// update App status panel labels and Info
+// void updateAppLabels()
+// {
+//     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_networkStatusPanel, LV_OBJ_FLAG_HIDDEN))
+//     {
+//         uint32_t currentTime = millis();
+
+//         if (currentTime - lastUpdateAppLabels >= appLabelsUpdateInterval)
+//         {
+//             lastUpdateAppLabels = currentTime;
+
+//             char buffer_access_Point_wifi[32];
+//             char buffer_access_Point_Password[32];
+//         }
+//     }
+// }
+
+// update Maintenance status panel labels
+void updateMaintenanceLabels()
+{
+    uint32_t currentTime = millis();
+    static uint32_t lastUpdateTime = 0;
+
+    if (currentTime - lastUpdateTime >= 3600000)
+    { // 1-hour interval
+        int serviceInterval = getNumericSetting(SERVICE_INTERVAL);
+        int hoursElapsed = getNumericSetting(HOURS_ELAPSED);
+
+        // Default and sanity checks
+        serviceInterval = (serviceInterval <= 0) ? 365 : serviceInterval;
+        hoursElapsed = (hoursElapsed < 0 || hoursElapsed > 87600) ? 0 : hoursElapsed;
+
+        int daysElapsed = hoursElapsed / 24;
+        int remainingHours = hoursElapsed % 24;
+        int daysRemaining = max(0, serviceInterval - daysElapsed);
+
+        char buffer[128];
+        bool isServiceOverdue = daysRemaining <= 0;
+
+        if (!isServiceOverdue)
+        {
+            snprintf(buffer, sizeof(buffer),
+                     "SERVICES INTERVALS:\n %d Days %d Hours Elapsed - OK!",
+                     daysElapsed, remainingHours);
+        }
+        else
+        {
+            snprintf(buffer, sizeof(buffer),
+                     "MAINTENANCE ALERT: %d Hours Overdue!\n                 Service Required!",
+                     hoursElapsed - (serviceInterval * 24));
+        }
+
+        if (ui_servicesintervals != NULL)
+        {
+            lv_label_set_text(ui_servicesintervals, buffer);
+            lv_obj_set_style_text_color(ui_servicesintervals,
+                                        isServiceOverdue ? lv_color_hex(0xFF0000) : lv_color_hex(0xFFFFFF),
+                                        LV_PART_MAIN);
+        }
+
+        lastUpdateTime = currentTime;
+    }
+}
+
+static uint32_t lastUpdateTime = 0;
+const uint32_t UPDATE_INTERVAL = 3600000; // 1 hour in milliseconds
+static bool firstRun = true;
+
+void updateInfoLabels()
+{
+    uint32_t currentTime = millis();
+
+    // First run or interval check
+    if (firstRun || (currentTime - lastUpdateTime >= UPDATE_INTERVAL))
+    {
+        firstRun = false;
+        lastUpdateTime = currentTime;
+
+        Serial.println("📺 [UI-StatusScreen] Info Labels Updating");
+
+        // Update labels
+        int serialNumber = getNumericSetting(DEVICE_SERIAL_ID);
+        int customerId = getNumericSetting(CUSTOMER_ID);
+        int activationDate = getNumericSetting(ACTIVATION_DATE);
+
+        char buffer[32];
+
+        // Serial Number
+        snprintf(buffer, sizeof(buffer), "Serial Number: %d", serialNumber);
+        lv_label_set_text(ui_serial_number, buffer);
+
+        // Customer ID
+        snprintf(buffer, sizeof(buffer), "Customer ID: %d", customerId);
+        lv_label_set_text(ui_customerID, buffer);
+
+        // Activation Date
+        snprintf(buffer, sizeof(buffer), "Activation Date: %04d-%02d-%02d",
+                 activationDate / 10000,         // Year
+                 (activationDate % 10000) / 100, // Month
+                 activationDate % 100            // Day
+        );
+        lv_label_set_text(ui_activationDate, buffer);
+
+        // Debug Log Footer
+        Serial.println("________________________ UI-StatusScreen ________________________");
+    }
+}
+
 // Call in displayLoop()
 void checkStatusUpdate()
 {
     updateRelayLabels();
     updateTemperatureLabels();
     updateAlarmLabels();
+    // updateAppLabels();
+    updateMaintenanceLabels();
+    updateInfoLabels();
 }
 
 // ============================ Screen Switching =========================
@@ -806,7 +920,7 @@ void displayLoop()
     // Cooler status icons check function
     checkStatusIcon();
 
-    // Temperature Labels in Status Screen
+    // Status Labels in Status Screen
     checkStatusUpdate();
 
     // Small delay to allow LVGL to process tasks and avoid blocking

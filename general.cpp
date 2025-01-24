@@ -1,6 +1,8 @@
 #include "general.h"
 #include "wifi.h"
 #include <ArduinoJson.h> // Include the ArduinoJson library for JSON parsing
+#include "setting.h"
+#include "relayControl.h"
 
 // ======== Cache Variables ==========
 static time_t cachedEpoch = 0;             // Cached epoch time from last update
@@ -135,4 +137,49 @@ String getTime()
     time_t currentEpoch = cachedEpoch + (elapsedMillis / 1000);
 
     return formatTime(currentEpoch); // Format and return the current time as a string
+}
+
+// ======== System Active Time Counter ========
+
+// Constants
+const uint32_t HOUR_INTERVAL = 60 * 60 * 1000; // 1 hour in milliseconds
+const uint8_t SAVE_INTERVAL = 1;               // Save every 5 hours
+const uint32_t MAX_HOURS = 87600;              // Maximum trackable hours
+
+// Global Variables
+static uint32_t hoursElapsedCounter = 0;
+static uint32_t lastHourUpdateTime = 0;
+
+void initializeHoursElapsedTracking()
+{
+    Serial.println("------------Setup Hours Elapsed Counter------------");
+    hoursElapsedCounter = getNumericSetting(HOURS_ELAPSED);
+    lastHourUpdateTime = millis();
+    Serial.println("🔧 Hours Elapsed Counter Initialized");
+}
+
+void updateHoursElapsedCounter()
+{
+    uint32_t currentTime = millis();
+
+    // Check if 1 hour has passed and Evaporator Fan is running
+    if ((currentTime - lastHourUpdateTime >= HOUR_INTERVAL) && getEvaporatorRelayStatus())
+    {
+        // Increment the counter
+        hoursElapsedCounter++;
+
+        // Ensure we don't exceed max limit
+        hoursElapsedCounter = min(hoursElapsedCounter, MAX_HOURS);
+
+        // Save only every 1 hours
+        if (hoursElapsedCounter % SAVE_INTERVAL == 0)
+        {
+            setNumericSetting(HOURS_ELAPSED, hoursElapsedCounter);
+        }
+
+        // Reset the hour timer
+        lastHourUpdateTime = currentTime;
+
+        Serial.printf("🔧 Hours Elapsed Updated: %d\n", hoursElapsedCounter);
+    }
 }
