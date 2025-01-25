@@ -13,7 +13,7 @@ static lv_color_t buf[SIZE_SCREEN_BUFFER]; // Buffer for screen content
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display with width and height
 
-// ============================ Update Functions for MainScreen ============================
+// ============================ Update Functions for Main Screen ============================
 
 // Time interval for updating the arc value
 const uint32_t updateArcMainScreenInterval = 5000; // in milliseconds
@@ -369,7 +369,11 @@ void checkStatusIcon()
     }
 }
 
-// ============================ Update Functions for StatusScreen =========================
+// ============================ Update Functions for Control-Setting Screen =========================
+
+//...
+
+// ============================ Update Functions for Status-Info Screen =========================
 
 // update Temp panel labels
 static uint32_t lastUpdateTemperatureLabels = 0;
@@ -787,6 +791,10 @@ void checkStatusUpdate()
     updateMaintenanceLabels();
     updateInfoLabels();
 }
+
+// ============================ Update Functions for Process-Setting Screen =========================
+
+//...
 
 // ============================ Screen Switching =========================
 

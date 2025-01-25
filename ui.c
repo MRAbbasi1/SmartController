@@ -612,7 +612,7 @@ if ( event_code == LV_EVENT_RELEASED) {
 void ui_event_processSettingScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       processSettingScreen( e );
 }
 }
@@ -686,8 +686,8 @@ void ui_event_PressureAlarmSwitch( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
-      _ui_flag_modify( ui_PressureAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
       _ui_flag_modify( ui_PressureAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_PressureAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
       _ui_flag_modify( ui_PressureAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
@@ -699,18 +699,18 @@ void ui_event_TempAlarmSwitch( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
-      _ui_flag_modify( ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_flag_modify( ui_TempAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_state_modify( ui_High_Temp_Alarm_Plus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
       _ui_state_modify( ui_High_Temp_Alarm_Minus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
       _ui_state_modify( ui_High_Temp_Alarm_Spinbox, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+      _ui_flag_modify( ui_TempAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 if ( event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
-      _ui_flag_modify( ui_TempAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_flag_modify( ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_state_modify( ui_High_Temp_Alarm_Spinbox, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
       _ui_state_modify( ui_High_Temp_Alarm_Plus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
       _ui_state_modify( ui_High_Temp_Alarm_Minus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+      _ui_flag_modify( ui_TempAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 

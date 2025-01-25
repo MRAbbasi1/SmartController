@@ -181,6 +181,7 @@ lv_obj_set_align( ui_Compressor_Offste_Spinbox, LV_ALIGN_CENTER );
 lv_spinbox_set_digit_format( ui_Compressor_Offste_Spinbox, 2, 0);
 lv_spinbox_set_range( ui_Compressor_Offste_Spinbox, 0,15 );
 lv_spinbox_set_cursor_pos(ui_Compressor_Offste_Spinbox, 1 - 1);
+lv_spinbox_set_value( ui_Compressor_Offste_Spinbox, 1 );
 lv_obj_set_style_border_color(ui_Compressor_Offste_Spinbox, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_Compressor_Offste_Spinbox, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_Compressor_Offste_Spinbox, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -367,6 +368,7 @@ lv_obj_set_x( ui_PressureAlarmSwitch_ONlabel, -50 );
 lv_obj_set_y( ui_PressureAlarmSwitch_ONlabel, 5 );
 lv_obj_set_align( ui_PressureAlarmSwitch_ONlabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_PressureAlarmSwitch_ONlabel,"ON");
+lv_obj_add_flag( ui_PressureAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_set_style_text_color(ui_PressureAlarmSwitch_ONlabel, lv_color_hex(0x00BE10), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_PressureAlarmSwitch_ONlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_PressureAlarmSwitch_ONlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -421,6 +423,7 @@ lv_obj_set_x( ui_TempAlarmSwitch_ONlabel, -50 );
 lv_obj_set_y( ui_TempAlarmSwitch_ONlabel, 5 );
 lv_obj_set_align( ui_TempAlarmSwitch_ONlabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_TempAlarmSwitch_ONlabel,"ON");
+lv_obj_add_flag( ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN );   /// Flags
 lv_obj_set_style_text_color(ui_TempAlarmSwitch_ONlabel, lv_color_hex(0x00BE10), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_TempAlarmSwitch_ONlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_TempAlarmSwitch_ONlabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);

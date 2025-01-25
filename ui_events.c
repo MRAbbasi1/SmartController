@@ -111,12 +111,99 @@ void turnOffCtrl_Unchecked(lv_event_t *e)
 
 void processSettingScreen(lv_event_t *e)
 {
-	// Your code here
+	int compressorTempSpinbox;
+	compressorTempSpinbox = getNumericSetting(COMPRESSOR_TEMP);
+	lv_spinbox_set_value(ui_Compressor_Range_Spinbox, compressorTempSpinbox);
+
+	int compressorOffsetSpinbox;
+	compressorOffsetSpinbox = getNumericSetting(COMPRESSOR_RANGE);
+	lv_spinbox_set_value(ui_Compressor_Offste_Spinbox, compressorOffsetSpinbox);
+
+	int highTempAlarmSpinbox;
+	highTempAlarmSpinbox = getNumericSetting(HIGH_TEMP_WARNING);
+	lv_spinbox_set_value(ui_High_Temp_Alarm_Spinbox, highTempAlarmSpinbox);
+
+	bool pressureAlarmSwitch;
+	pressureAlarmSwitch = getBooleanSetting(PRESSURE_WARNING_ON);
+	if (pressureAlarmSwitch)
+	{
+		// true - checked
+		lv_obj_add_state(ui_PressureAlarmSwitch, LV_STATE_CHECKED);
+		lv_obj_clear_flag(ui_PressureAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN); // "ON" Flag
+		lv_obj_add_flag(ui_PressureAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN);  // "OFF" Flag
+	}
+	else
+	{
+		// false - unchecked
+		lv_obj_clear_state(ui_PressureAlarmSwitch, LV_STATE_CHECKED);
+		lv_obj_add_flag(ui_PressureAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN);	// "ON" Flag
+		lv_obj_clear_flag(ui_PressureAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN); // "OFF" Flag
+	}
+
+	bool tempAlarmSwitch;
+	tempAlarmSwitch = getBooleanSetting(TEMP_WARNING_ON);
+	if (tempAlarmSwitch)
+	{
+		// true - checked
+		lv_obj_add_state(ui_TempAlarmSwitch, LV_STATE_CHECKED);
+		lv_obj_clear_flag(ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN); // "ON" Flag
+		lv_obj_add_flag(ui_TempAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN);  // "OFF" Flag
+
+		_ui_state_modify(ui_High_Temp_Alarm_Plus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+		_ui_state_modify(ui_High_Temp_Alarm_Minus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+		_ui_state_modify(ui_High_Temp_Alarm_Spinbox, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+	}
+	else
+	{
+		// false - unchecked
+		lv_obj_clear_state(ui_TempAlarmSwitch, LV_STATE_CHECKED);
+		lv_obj_add_flag(ui_TempAlarmSwitch_ONlabel, LV_OBJ_FLAG_HIDDEN);	// "ON" Flag
+		lv_obj_clear_flag(ui_TempAlarmSwitch_OFFlabel, LV_OBJ_FLAG_HIDDEN); // "OFF" Flag
+
+		_ui_state_modify(ui_High_Temp_Alarm_Spinbox, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+		_ui_state_modify(ui_High_Temp_Alarm_Plus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+		_ui_state_modify(ui_High_Temp_Alarm_Minus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+	}
+}
+
+static void update_save_label(lv_timer_t *timer)
+{
+	static int step = 0;
+	const char *texts[] = {"Saving", "Saved", "Save"};
+
+	lv_label_set_text(ui_Setting_Save_btn_label, texts[step]);
+
+	step++;
+	if (step >= 3)
+	{
+		step = 0;
+		lv_timer_del(timer); // delete timer
+	}
+}
+
+void animate_save_label()
+{
+	lv_label_set_text(ui_Setting_Save_btn_label, "Save");
+	lv_timer_create(update_save_label, 1000, NULL); // 1000ms
 }
 
 void submit_process_setting(lv_event_t *e)
 {
-	// Your code here
+	animate_save_label();
+
+	int compressorTempValue = lv_spinbox_get_value(ui_Compressor_Range_Spinbox);
+	int compressorOffsetValue = lv_spinbox_get_value(ui_Compressor_Offste_Spinbox);
+	int highTempAlarmValue = lv_spinbox_get_value(ui_High_Temp_Alarm_Spinbox);
+
+	bool pressureAlarmState = lv_obj_has_state(ui_PressureAlarmSwitch, LV_STATE_CHECKED);
+	bool tempAlarmState = lv_obj_has_state(ui_TempAlarmSwitch, LV_STATE_CHECKED);
+
+	setNumericSetting(COMPRESSOR_TEMP, compressorTempValue);
+	setNumericSetting(COMPRESSOR_RANGE, compressorOffsetValue);
+	setNumericSetting(HIGH_TEMP_WARNING, highTempAlarmValue);
+
+	setBooleanSetting(PRESSURE_WARNING_ON, pressureAlarmState);
+	setBooleanSetting(TEMP_WARNING_ON, tempAlarmState);
 }
 
 void addvancedSettingScreen(lv_event_t *e)
