@@ -371,10 +371,10 @@ void checkStatusIcon()
 
 // ============================ Update Functions for StatusScreen =========================
 
+// update Temp panel labels
 static uint32_t lastUpdateTemperatureLabels = 0;
 const uint32_t temperatureLabelsUpdateInterval = 10000; // Update every 10 seconds
 
-// update Temp panel labels
 void updateTemperatureLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_tempStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -452,10 +452,10 @@ void updateTemperatureLabels()
     }
 }
 
+// update Alarm panel labels
 static uint32_t lastUpdateAlarmLabels = 0;
 const uint32_t alarmLabelsUpdateInterval = 10000; // Update every 10 seconds
 
-// update Alarm panel labels
 void updateAlarmLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_alarmStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -561,10 +561,10 @@ void updateAlarmLabels()
     }
 }
 
+// update Relay status panel labels
 static uint32_t lastUpdateRelayLabels = 0;
 const uint32_t relayLabelsUpdateInterval = 10000; // Update every 10 seconds
 
-// update Relay status panel labels
 void updateRelayLabels()
 {
     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_relayStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -645,10 +645,10 @@ void updateRelayLabels()
     }
 }
 
+// update App status panel labels and Info
 // static uint32_t lastUpdateAppLabels = 0;
 // const uint32_t appLabelsUpdateInterval = 10000; // Update every 10 seconds
 
-// update App status panel labels and Info
 // void updateAppLabels()
 // {
 //     if (lv_scr_act() == ui_statusScreen && !lv_obj_has_flag(ui_networkStatusPanel, LV_OBJ_FLAG_HIDDEN))
@@ -666,17 +666,22 @@ void updateRelayLabels()
 // }
 
 // update Maintenance status panel labels
+static uint32_t lastMaintenanceUpdateTime = 0;
+const uint32_t UPDATE_INTERVAL_Maintenance = 3600000;
+static bool firstMaintenanceRun = true;
+
 void updateMaintenanceLabels()
 {
     uint32_t currentTime = millis();
-    static uint32_t lastUpdateTime = 0;
 
-    if (currentTime - lastUpdateTime >= 3600000)
-    { // 1-hour interval
+    if (firstMaintenanceRun || (currentTime - lastMaintenanceUpdateTime >= UPDATE_INTERVAL_Maintenance))
+    {
+        firstMaintenanceRun = false;
+        lastMaintenanceUpdateTime = currentTime;
+
         int serviceInterval = getNumericSetting(SERVICE_INTERVAL);
         int hoursElapsed = getNumericSetting(HOURS_ELAPSED);
 
-        // Default and sanity checks
         serviceInterval = (serviceInterval <= 0) ? 365 : serviceInterval;
         hoursElapsed = (hoursElapsed < 0 || hoursElapsed > 87600) ? 0 : hoursElapsed;
 
@@ -708,23 +713,39 @@ void updateMaintenanceLabels()
                                         LV_PART_MAIN);
         }
 
-        lastUpdateTime = currentTime;
+        Serial.println("📺 [UI-StatusScreen] Maintenance Status Updated");
+        Serial.printf(" - Service Interval: %d Days\n", serviceInterval);
+        Serial.printf(" - Hours Elapsed: %d Hours\n", hoursElapsed);
+        Serial.printf(" - Days Elapsed: %d Days\n", daysElapsed);
+        Serial.printf(" - Remaining Time: %d Days %d Hours\n", daysRemaining, remainingHours);
+
+        if (isServiceOverdue)
+        {
+            Serial.println(" - Status: 🔴 ALERT - Maintenance Overdue! Immediate Service Required!");
+        }
+        else
+        {
+            Serial.printf(" - Status: 🟢 OK - %d Days Left Until Service.\n", daysRemaining);
+        }
+
+        Serial.println("________________________ UI-StatusScreen ________________________");
     }
 }
 
-static uint32_t lastUpdateTime = 0;
-const uint32_t UPDATE_INTERVAL = 3600000; // 1 hour in milliseconds
-static bool firstRun = true;
+// update Info status panel labels
+static uint32_t lastInfoUpdateTime = 0;
+const uint32_t UPDATE_INTERVAL_Info = 12 * 60 * 60 * 1000; // 24 hours in milliseconds
+static bool firstInfoRun = true;
 
 void updateInfoLabels()
 {
     uint32_t currentTime = millis();
 
     // First run or interval check
-    if (firstRun || (currentTime - lastUpdateTime >= UPDATE_INTERVAL))
+    if (firstInfoRun || (currentTime - lastInfoUpdateTime >= UPDATE_INTERVAL_Info))
     {
-        firstRun = false;
-        lastUpdateTime = currentTime;
+        firstInfoRun = false;
+        lastInfoUpdateTime = currentTime;
 
         Serial.println("📺 [UI-StatusScreen] Info Labels Updating");
 
