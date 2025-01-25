@@ -12,13 +12,13 @@
 // -----------------------------------
 const int defaultNumericValues[] = {
     20,        // COMPRESSOR_TEMP
-    2,         // COMPRESSOR_RANGE
-    50,        // HIGH_TEMP_WARNING
+    5,         // COMPRESSOR_RANGE
+    40,        // HIGH_TEMP_WARNING
     -5,        // ANTI_FREEZE_TEMP
-    2,         // ANTI_FREEZE_RANGE
+    10,        // ANTI_FREEZE_RANGE
     3,         // COMPRESSOR_REST_TIME
     80,        // FILTER_WARNING
-    44,        // FAN2_TEMP
+    55,        // FAN2_TEMP
     100001,    // DEVICE_SERIAL_ID
     123456789, // CUSTOMER_ID
     20241104,  // ACTIVATION_DATE
@@ -27,12 +27,12 @@ const int defaultNumericValues[] = {
 };
 
 const bool defaultBooleanValues[] = {
-    true,  // DEVICE_ON
+    false, // DEVICE_ON
     false, // PRESSURE_WARNING_ON
     false, // TEMP_WARNING_ON
-    true,  // FILTER_WARNING_ON
-    true,  // DOOR_WARNING_ON
-    true,  // FAN2_ON
+    false, // FILTER_WARNING_ON
+    false, // DOOR_WARNING_ON
+    false, // FAN2_ON
     false, // ADVANCED_SETTINGS_ON
     false, // CLOUD_ON
     false, // SERIAL_LOG_ON

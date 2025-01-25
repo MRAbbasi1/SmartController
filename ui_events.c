@@ -171,20 +171,35 @@ static void update_save_label(lv_timer_t *timer)
 	static int step = 0;
 	const char *texts[] = {"Saving", "Saved", "Save"};
 
-	lv_label_set_text(ui_Setting_Save_btn_label, texts[step]);
+	if (lv_scr_act() == ui_processSettingScreen)
+	{
+		lv_label_set_text(ui_Setting_Save_btn_label, texts[step]);
+	}
+	else if (lv_scr_act() == ui_addvansedSettingScreen)
+	{
+		lv_label_set_text(ui_Setting_Save_btn_label_advanced_Screen, texts[step]);
+	}
 
 	step++;
 	if (step >= 3)
 	{
 		step = 0;
-		lv_timer_del(timer); // delete timer
+		lv_timer_del(timer);
 	}
 }
 
 void animate_save_label()
 {
-	lv_label_set_text(ui_Setting_Save_btn_label, "Save");
-	lv_timer_create(update_save_label, 1000, NULL); // 1000ms
+	if (lv_scr_act() == ui_processSettingScreen)
+	{
+		lv_label_set_text(ui_Setting_Save_btn_label, "Save");
+	}
+	else if (lv_scr_act() == ui_addvansedSettingScreen)
+	{
+		lv_label_set_text(ui_Setting_Save_btn_label_advanced_Screen, "Save");
+	}
+
+	lv_timer_create(update_save_label, 1000, NULL);
 }
 
 void submit_process_setting(lv_event_t *e)
@@ -208,12 +223,109 @@ void submit_process_setting(lv_event_t *e)
 
 void addvancedSettingScreen(lv_event_t *e)
 {
-	// Your code here
+	int antiFreezeTempSpinbox;
+	antiFreezeTempSpinbox = getNumericSetting(ANTI_FREEZE_TEMP);
+	lv_spinbox_set_value(ui_AntiFreeze_Temp_Range_Spinbox, antiFreezeTempSpinbox);
+
+	int antiFreezeOffsetTempSpinbox;
+	antiFreezeOffsetTempSpinbox = getNumericSetting(ANTI_FREEZE_RANGE);
+	lv_spinbox_set_value(ui_AntiFreeze_Temp_Offset_Spinbox, antiFreezeOffsetTempSpinbox);
+
+	int compressorRestTimeSpinbox;
+	compressorRestTimeSpinbox = getNumericSetting(COMPRESSOR_REST_TIME);
+	lv_spinbox_set_value(ui_Compressor_Rest_Time_Spinbox, compressorRestTimeSpinbox);
+
+	int filterAlarmSpinbox;
+	filterAlarmSpinbox = getNumericSetting(FILTER_WARNING);
+	lv_spinbox_set_value(ui_Filter_Alarm_Spinbox, filterAlarmSpinbox);
+
+	int fan2RangeSpinbox;
+	fan2RangeSpinbox = getNumericSetting(FAN2_TEMP);
+	lv_spinbox_set_value(ui_fan_2_range_Spinbox, fan2RangeSpinbox);
+
+	bool fan2Switch;
+	fan2Switch = getBooleanSetting(FAN2_ON);
+	if (fan2Switch)
+	{
+		// true - checked
+		lv_obj_add_state(ui_fan_2_Switch, LV_STATE_CHECKED);
+		lv_obj_clear_flag(ui_enable_fan_2_Label, LV_OBJ_FLAG_HIDDEN); // "ON" Flag
+		lv_obj_add_flag(ui_disable_fan_2_Label, LV_OBJ_FLAG_HIDDEN);  // "OFF" Flag
+
+		_ui_state_modify(ui_fan_2_range_Minus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+		_ui_state_modify(ui_fan_2_range_Plus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+		_ui_state_modify(ui_fan_2_range_Spinbox, LV_STATE_DISABLED, _UI_MODIFY_STATE_REMOVE);
+	}
+	else
+	{
+		// false - unchecked
+		lv_obj_clear_state(ui_fan_2_Switch, LV_STATE_CHECKED);
+		lv_obj_add_flag(ui_enable_fan_2_Label, LV_OBJ_FLAG_HIDDEN);	   // "ON" Flag
+		lv_obj_clear_flag(ui_disable_fan_2_Label, LV_OBJ_FLAG_HIDDEN); // "OFF" Flag
+
+		_ui_state_modify(ui_fan_2_range_Plus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+		_ui_state_modify(ui_fan_2_range_Spinbox, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+		_ui_state_modify(ui_fan_2_range_Minus_Button, LV_STATE_DISABLED, _UI_MODIFY_STATE_ADD);
+	}
+
+	bool doorAlarmStatusSwitch;
+	doorAlarmStatusSwitch = getBooleanSetting(DOOR_WARNING_ON);
+	if (doorAlarmStatusSwitch)
+	{
+		// true - checked
+		lv_obj_add_state(ui_door_alarm_status_Switch, LV_STATE_CHECKED);
+		lv_obj_clear_flag(ui_enable_door_alarm_status_Label, LV_OBJ_FLAG_HIDDEN); // "ON" Flag
+		lv_obj_add_flag(ui_disable_door_alarm_status_Label, LV_OBJ_FLAG_HIDDEN);  // "OFF" Flag
+	}
+	else
+	{
+		// false - unchecked
+		lv_obj_clear_state(ui_door_alarm_status_Switch, LV_STATE_CHECKED);
+		lv_obj_add_flag(ui_enable_door_alarm_status_Label, LV_OBJ_FLAG_HIDDEN);	   // "ON" Flag
+		lv_obj_clear_flag(ui_disable_door_alarm_status_Label, LV_OBJ_FLAG_HIDDEN); // "OFF" Flag
+	}
+
+	bool filterAlarmStatusSwitch;
+	filterAlarmStatusSwitch = getBooleanSetting(FILTER_WARNING_ON);
+	if (filterAlarmStatusSwitch)
+	{
+		// true - checked
+		lv_obj_add_state(ui_filter_alarm_status_Switch, LV_STATE_CHECKED);
+		lv_obj_clear_flag(ui_enable_filter_alarm_status_Label, LV_OBJ_FLAG_HIDDEN); // "ON" Flag
+		lv_obj_add_flag(ui_disable_filter_alarm_status_Label, LV_OBJ_FLAG_HIDDEN);	// "OFF" Flag
+	}
+	else
+	{
+		// false - unchecked
+		lv_obj_clear_state(ui_filter_alarm_status_Switch, LV_STATE_CHECKED);
+		lv_obj_add_flag(ui_enable_filter_alarm_status_Label, LV_OBJ_FLAG_HIDDEN);	 // "ON" Flag
+		lv_obj_clear_flag(ui_disable_filter_alarm_status_Label, LV_OBJ_FLAG_HIDDEN); // "OFF" Flag
+	}
 }
 
 void submit_advance_setting(lv_event_t *e)
 {
-	// Your code here
+	animate_save_label();
+
+	int antiFreeze_Temp_Range_SpinboxValue = lv_spinbox_get_value(ui_AntiFreeze_Temp_Range_Spinbox);
+	int antiFreeze_Temp_Offset_SpinboxValue = lv_spinbox_get_value(ui_AntiFreeze_Temp_Offset_Spinbox);
+	int compressor_Rest_Time_SpinboxValue = lv_spinbox_get_value(ui_Compressor_Rest_Time_Spinbox);
+	int filter_Alarm_SpinboxValue = lv_spinbox_get_value(ui_Filter_Alarm_Spinbox);
+	int fan_2_range_SpinboxValue = lv_spinbox_get_value(ui_fan_2_range_Spinbox);
+
+	bool fan_2_SwitchState = lv_obj_has_state(ui_fan_2_Switch, LV_STATE_CHECKED);
+	bool door_alarm_status_SwitchState = lv_obj_has_state(ui_door_alarm_status_Switch, LV_STATE_CHECKED);
+	bool filter_alarm_status_SwitchState = lv_obj_has_state(ui_filter_alarm_status_Switch, LV_STATE_CHECKED);
+
+	setNumericSetting(ANTI_FREEZE_TEMP, antiFreeze_Temp_Range_SpinboxValue);
+	setNumericSetting(ANTI_FREEZE_RANGE, antiFreeze_Temp_Offset_SpinboxValue);
+	setNumericSetting(COMPRESSOR_REST_TIME, compressor_Rest_Time_SpinboxValue);
+	setNumericSetting(FILTER_WARNING, filter_Alarm_SpinboxValue);
+	setNumericSetting(FAN2_TEMP, fan_2_range_SpinboxValue);
+
+	setBooleanSetting(FAN2_ON, fan_2_SwitchState);
+	setBooleanSetting(DOOR_WARNING_ON, door_alarm_status_SwitchState);
+	setBooleanSetting(FILTER_WARNING_ON, filter_alarm_status_SwitchState);
 }
 
 void searchingSensors(lv_event_t *e)

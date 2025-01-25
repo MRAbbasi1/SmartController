@@ -717,7 +717,7 @@ if ( event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target,LV_STATE_
 void ui_event_addvansedSettingScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
-if ( event_code == LV_EVENT_SCREEN_LOADED) {
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
       addvancedSettingScreen( e );
 }
 }
