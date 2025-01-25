@@ -194,19 +194,22 @@ void controlCompressorAndCondenserRelays()
     bool newCondenserStatus = false;
     bool newCompressorStatus = false;
 
-    if (deviceOn && cachedDoorClosed && !cachedFilterWarning &&
-        !isnan(antiFreezeTemp) && !isnan(inletTemp) &&
-        antiFreezeTemp > antiFreezeBase + antiFreezeRange &&
-        inletTemp >= compressorTemp + compressorRange)
+    if (deviceOn && cachedDoorClosed && !cachedFilterWarning && !isnan(antiFreezeTemp) && !isnan(inletTemp))
     {
-        newCondenserStatus = true;
-
-        if (newCondenserStatus != condenserRelayStatus)
+        if (antiFreezeTemp > antiFreezeBase + antiFreezeRange)
         {
-            condenserOnTime = millis();
-        }
+            if (inletTemp >= compressorTemp + compressorRange || inletTemp >= compressorTemp)
+            {
+                newCondenserStatus = true;
 
-        newCompressorStatus = (millis() - condenserOnTime >= 5000);
+                if (newCondenserStatus != condenserRelayStatus)
+                {
+                    condenserOnTime = millis();
+                }
+
+                newCompressorStatus = (millis() - condenserOnTime >= 5000);
+            }
+        }
     }
     else
     {
