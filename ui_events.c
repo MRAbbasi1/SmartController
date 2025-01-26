@@ -2,9 +2,11 @@
 // SquareLine Studio version: SquareLine Studio 1.5.0
 // LVGL version: 8.3.11
 // Project name: SquareLine_Project
+// ui_events.c
 
 #include "ui.h"
 #include "setting.h"
+// #include "wifi.h"
 #include <Arduino.h>
 
 void mainScreen(lv_event_t *e)
@@ -333,9 +335,118 @@ void searchingSensors(lv_event_t *e)
 	// Your code here
 }
 
+void resetDeviceSettings()
+{
+	// Reset Numeric Settings to Default
+	setNumericSetting(COMPRESSOR_TEMP, 20);
+	setNumericSetting(COMPRESSOR_RANGE, 5);
+	setNumericSetting(HIGH_TEMP_WARNING, 40);
+	setNumericSetting(ANTI_FREEZE_TEMP, 0);
+	setNumericSetting(ANTI_FREEZE_RANGE, 5);
+	setNumericSetting(COMPRESSOR_REST_TIME, 3);
+	setNumericSetting(FILTER_WARNING, 80);
+	setNumericSetting(FAN2_TEMP, 55);
+	setNumericSetting(DEVICE_SERIAL_ID, 100001);
+	setNumericSetting(CUSTOMER_ID, 123456789);
+	setNumericSetting(ACTIVATION_DATE, 20241104);
+	setNumericSetting(SERVICE_INTERVAL, 365);
+	setNumericSetting(HOURS_ELAPSED, 0);
+
+	// Reset Boolean Settings to Default
+	setBooleanSetting(DEVICE_ON, false);
+	setBooleanSetting(PRESSURE_WARNING_ON, false);
+	setBooleanSetting(TEMP_WARNING_ON, false);
+	setBooleanSetting(FILTER_WARNING_ON, false);
+	setBooleanSetting(DOOR_WARNING_ON, false);
+	setBooleanSetting(FAN2_ON, false);
+	setBooleanSetting(ADVANCED_SETTINGS_ON, false);
+	setBooleanSetting(CLOUD_ON, false);
+	setBooleanSetting(SERIAL_LOG_ON, false);
+	setBooleanSetting(CLOUD_LOG_ON, false);
+
+	// Reset String Settings to Default
+	setStringSetting(WIFI_SSID, "0");
+	setStringSetting(WIFI_PASSWORD, "0");
+	setStringSetting(AP_NAME, "0");
+	setStringSetting(AP_PASSWORD, "0");
+	setStringSetting(SERVER_URL, "https://bently.cool/");
+	setStringSetting(SERVER_IP, "192.168.1.1");
+	setStringSetting(INLET_SENSOR_ADDRESS, "28:2D:11:58:D4:E1:3C:BC");
+	setStringSetting(OUTLET_SENSOR_ADDRESS, "28:BD:AD:43:D4:E1:3C:CF");
+	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "28:AB:CC:43:D4:E1:3C:FA");
+	setStringSetting(FILTER_SENSOR_ADDRESS, "28:FF:64:1F:70:68:7C:7C");
+
+	resetAllChangedFlagsToFalse(); // Reset all flags to false
+
+	delay(60000);
+
+	esp_restart(); // Reboot after the reset
+}
+
+// Callback function for the reset timer
+void resetDeviceCallback(lv_timer_t *t)
+{
+	resetDeviceSettings();
+}
+
+// Function to display UI and then reset
+void displayAndResetTask(lv_event_t *e)
+{
+	// Clear screen
+	lv_obj_clean(lv_scr_act());
+
+	// Set black background
+	lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+
+	// Create styles
+	static lv_style_t style_title, style_warning, style_symbol;
+
+	lv_style_init(&style_title);
+	lv_style_set_text_font(&style_title, &lv_font_montserrat_18);
+	lv_style_set_text_color(&style_title, lv_color_white());
+
+	lv_style_init(&style_warning);
+	lv_style_set_text_font(&style_warning, &lv_font_montserrat_14);
+	lv_style_set_text_color(&style_warning, lv_color_white());
+
+	lv_style_init(&style_symbol);
+	lv_style_set_text_font(&style_symbol, &lv_font_montserrat_20);
+	lv_style_set_text_color(&style_symbol, lv_color_hex(0xFFFF00));
+
+	// Title Label
+	lv_obj_t *titleLabel = lv_label_create(lv_scr_act());
+	lv_label_set_text(titleLabel, "Factory Reset In Progress...");
+	lv_obj_align(titleLabel, LV_ALIGN_CENTER, 0, -30);
+	lv_obj_set_width(titleLabel, LV_HOR_RES);
+	lv_obj_set_style_text_align(titleLabel, LV_TEXT_ALIGN_CENTER, 0);
+	lv_obj_add_style(titleLabel, &style_title, LV_PART_MAIN);
+
+	// Symbol Label (Warning)
+	lv_obj_t *symbolLabel = lv_label_create(lv_scr_act());
+	lv_label_set_text(symbolLabel, LV_SYMBOL_WARNING);
+	lv_obj_align(symbolLabel, LV_ALIGN_CENTER, 0, 10);
+	lv_obj_add_style(symbolLabel, &style_symbol, LV_PART_MAIN);
+
+	// Warning Label
+	lv_obj_t *warningLabel = lv_label_create(lv_scr_act());
+	lv_label_set_text(warningLabel, "Do not turn off or unplug the device!");
+	lv_obj_align(warningLabel, LV_ALIGN_CENTER, 0, 50);
+	lv_obj_set_width(warningLabel, LV_HOR_RES);
+	lv_obj_set_style_text_align(warningLabel, LV_TEXT_ALIGN_CENTER, 0);
+	lv_obj_add_style(warningLabel, &style_warning, LV_PART_MAIN);
+
+	// Update display to ensure UI is rendered immediately
+	lv_timer_handler();
+
+	// Schedule reset after a small delay to allow UI rendering to complete
+	lv_timer_create(resetDeviceCallback, 500, NULL); // Set delay to 500 ms
+}
+
+// Function to trigger display and reset
 void goToFactoryReseting(lv_event_t *e)
 {
-	// Your code here
+	// Start display and reset task
+	displayAndResetTask(e);
 }
 
 void satusScreen(lv_event_t *e)

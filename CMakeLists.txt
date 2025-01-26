@@ -29,7 +29,6 @@ SET(SOURCES ui_mainScreen.c
     ui_img_plus_png.c
     ui_img_1731839073.c
     ui_img_208276483.c
-    ui_img_1740866726.c
     ui_img_temperature_png.c
     ui_img_return_66_png.c
     ui_img_sensor_png.c
@@ -39,7 +38,6 @@ SET(SOURCES ui_mainScreen.c
     ui_img_close_png.c
     ui_img_1437619218.c
     ui_img_18821776.c
-    ui_img_menu43_png.c
-    ui_img_wifi_4_png.c)
+    ui_img_menu43_png.c)
 
 add_library(ui ${SOURCES})

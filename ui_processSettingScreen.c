@@ -26,6 +26,8 @@ lv_obj_set_style_radius(ui_returnButton5, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_returnButton5, lv_color_hex(0x0D0246), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_returnButton5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_img_src( ui_returnButton5, &ui_img_return_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_shadow_color(ui_returnButton5, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_shadow_opa(ui_returnButton5, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_width(ui_returnButton5, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_spread(ui_returnButton5, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_shadow_ofs_x(ui_returnButton5, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -37,7 +39,7 @@ lv_obj_set_height( ui_ProcessSettingCTRL, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_ProcessSettingCTRL, 0 );
 lv_obj_set_y( ui_ProcessSettingCTRL, -100 );
 lv_obj_set_align( ui_ProcessSettingCTRL, LV_ALIGN_CENTER );
-lv_label_set_text(ui_ProcessSettingCTRL,"PROCESS-SETTING");
+lv_label_set_text(ui_ProcessSettingCTRL,"CUSTOMER SETTING");
 lv_obj_set_style_text_color(ui_ProcessSettingCTRL, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_ProcessSettingCTRL, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_ProcessSettingCTRL, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -67,7 +69,7 @@ lv_obj_set_align( ui_Setting_Save_btn_label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Setting_Save_btn_label,"Save");
 lv_obj_set_style_text_color(ui_Setting_Save_btn_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_Setting_Save_btn_label, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_Setting_Save_btn_label, &lv_font_montserrat_12, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_Setting_Save_btn_label, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_ProcessScreenContainer1 = lv_obj_create(ui_processSettingScreen);
 lv_obj_remove_style_all(ui_ProcessScreenContainer1);

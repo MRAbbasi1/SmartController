@@ -15,6 +15,11 @@ extern "C" {
 #include "ui_helpers.h"
 #include "ui_events.h"
 
+void effect_Animation( lv_obj_t *TargetObject, int delay);
+void logo_Animation( lv_obj_t *TargetObject, int delay);
+void icon_Animation( lv_obj_t *TargetObject, int delay);
+void arc_Animation( lv_obj_t *TargetObject, int delay);
+
 // SCREEN: ui_mainScreen
 void ui_mainScreen_screen_init(void);
 void ui_event_mainScreen( lv_event_t * e);
@@ -271,8 +276,8 @@ extern lv_obj_t *ui_reset_factory_notice_text;
 void ui_event_close_factory_container( lv_event_t * e);
 extern lv_obj_t *ui_close_factory_container;
 extern lv_obj_t *ui_Label275;
-void ui_event_submit_factory_( lv_event_t * e);
-extern lv_obj_t *ui_submit_factory_;
+void ui_event_submit_factory( lv_event_t * e);
+extern lv_obj_t *ui_submit_factory;
 extern lv_obj_t *ui_Label1863;
 // CUSTOM VARIABLES
 extern lv_obj_t *uic_addvansedSettingScreen;
@@ -346,8 +351,9 @@ extern lv_obj_t *uic_antifreeze_Checkbox;
 extern lv_obj_t *uic_antifreeze_address;
 extern lv_obj_t *uic_factory_reset_container;
 extern lv_obj_t *uic_reset_factory_notice_text;
+extern lv_obj_t *uic_close_factory_container;
 extern lv_obj_t *uic_Label275;
-extern lv_obj_t *uic_submit_factory_;
+extern lv_obj_t *uic_submit_factory;
 extern lv_obj_t *uic_Label1863;
 
 // SCREEN: ui_statusScreen
@@ -527,7 +533,6 @@ LV_IMG_DECLARE( ui_img_info_png);   // assets/info.png
 LV_IMG_DECLARE( ui_img_plus_png);   // assets/plus.png
 LV_IMG_DECLARE( ui_img_1731839073);   // assets/minus (1).png
 LV_IMG_DECLARE( ui_img_208276483);   // assets/celcius (1).png
-LV_IMG_DECLARE( ui_img_1740866726);   // assets/cloud (1).png
 LV_IMG_DECLARE( ui_img_temperature_png);   // assets/temperature.png
 LV_IMG_DECLARE( ui_img_return_66_png);   // assets/return 66.png
 LV_IMG_DECLARE( ui_img_sensor_png);   // assets/sensor.png
@@ -538,7 +543,6 @@ LV_IMG_DECLARE( ui_img_close_png);   // assets/close.png
 LV_IMG_DECLARE( ui_img_1437619218);   // assets/info (17).png
 LV_IMG_DECLARE( ui_img_18821776);   // assets/technical-support.png
 LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
-LV_IMG_DECLARE( ui_img_wifi_4_png);   // assets/wifi 4.png
 
 // UI INIT
 void ui_init(void);
