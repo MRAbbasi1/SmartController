@@ -36,6 +36,8 @@ lv_obj_t *ui_Low_Pressure_Icon;
 lv_obj_t *ui_High_Pressure_Icon;
 lv_obj_t *ui_Door_Open_Icon;
 lv_obj_t *ui_Door_Close_Icon;
+lv_obj_t *ui_arc_danger_outlet_;
+lv_obj_t *ui_arc_danger_inlet;
 // CUSTOM VARIABLES
 lv_obj_t *uic_mainScreen;
 lv_obj_t *uic_Logo;
@@ -54,6 +56,8 @@ lv_obj_t *uic_Low_Pressure_Icon;
 lv_obj_t *uic_High_Pressure_Icon;
 lv_obj_t *uic_Door_Open_Icon;
 lv_obj_t *uic_Door_Close_Icon;
+lv_obj_t *uic_arc_danger_outlet_;
+lv_obj_t *uic_arc_danger_inlet;
 
 
 // SCREEN: ui_controlSettingScreen
@@ -372,6 +376,10 @@ lv_obj_t *ui_tempStatusPanel;
 void ui_event_returnButton11( lv_event_t * e);
 lv_obj_t *ui_returnButton11;
 lv_obj_t *ui_tempStatusLabel;
+lv_obj_t *ui_inlet_temp_danger;
+lv_obj_t *ui_outlet_temp_danger;
+lv_obj_t *ui_antifreeze_temp_danger;
+lv_obj_t *ui_filter_temp_danger;
 lv_obj_t *ui_ContainerA1;
 lv_obj_t *ui_Inlet_Temp_status;
 lv_obj_t *ui_Outlet_Temp_status;
@@ -383,6 +391,10 @@ lv_obj_t *ui_alarmStatusPanel;
 void ui_event_returnButton2( lv_event_t * e);
 lv_obj_t *ui_returnButton2;
 lv_obj_t *ui_alarmStatusLabel;
+lv_obj_t *ui_high_temp_danger;
+lv_obj_t *ui_door_danger;
+lv_obj_t *ui_filter_danger;
+lv_obj_t *ui_high_pressure_danger;
 lv_obj_t *ui_ContainerA2;
 lv_obj_t *ui_high_Temp_Alarm;
 lv_obj_t *ui_Door_Alarm;
@@ -452,6 +464,10 @@ lv_obj_t *uic_tempStatusButton;
 lv_obj_t *uic_tempStatusPanel;
 lv_obj_t *uic_returnButton11;
 lv_obj_t *uic_tempStatusLabel;
+lv_obj_t *uic_inlet_temp_danger;
+lv_obj_t *uic_outlet_temp_danger;
+lv_obj_t *uic_antifreeze_temp_danger;
+lv_obj_t *uic_filter_temp_danger;
 lv_obj_t *uic_ContainerA1;
 lv_obj_t *uic_Inlet_Temp_status;
 lv_obj_t *uic_Outlet_Temp_status;
@@ -461,6 +477,10 @@ lv_obj_t *uic_alarmStatusButton;
 lv_obj_t *uic_alarmStatusPanel;
 lv_obj_t *uic_returnButton2;
 lv_obj_t *uic_alarmStatusLabel;
+lv_obj_t *uic_high_temp_danger;
+lv_obj_t *uic_door_danger;
+lv_obj_t *uic_filter_danger;
+lv_obj_t *uic_high_pressure_danger;
 lv_obj_t *uic_ContainerA2;
 lv_obj_t *uic_high_Temp_Alarm;
 lv_obj_t *uic_Door_Alarm;
@@ -645,7 +665,7 @@ void ui_event_MenuButton( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 200, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_mainScreen);
 }
 }
@@ -680,7 +700,7 @@ void ui_event_returnButton4( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_mainScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 200, 0, &ui_mainScreen_screen_init);
+      _ui_screen_change( &ui_mainScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_mainScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -689,7 +709,7 @@ void ui_event_SettingCTRL( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_processSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 200, 0, &ui_processSettingScreen_screen_init);
+      _ui_screen_change( &ui_processSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_processSettingScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -698,7 +718,7 @@ void ui_event_Advanced_Setting_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_addvansedSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 200, 0, &ui_addvansedSettingScreen_screen_init);
+      _ui_screen_change( &ui_addvansedSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_addvansedSettingScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -718,7 +738,7 @@ void ui_event_Status_info_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_statusScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 200, 0, &ui_statusScreen_screen_init);
+      _ui_screen_change( &ui_statusScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_statusScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -739,7 +759,7 @@ void ui_event_returnButton5( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 200, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_processSettingScreen);
 }
 }
@@ -848,7 +868,7 @@ void ui_event_returnButton14( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 200, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_addvansedSettingScreen);
 }
 }
@@ -1092,7 +1112,7 @@ void ui_event_returnButton3( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 200, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_statusScreen);
 }
 }

@@ -20,6 +20,7 @@ SET(SOURCES ui_mainScreen.c
     ui_img_31615732.c
     ui_img_2101917800.c
     ui_img_778269571.c
+    ui_img_1019942150.c
     ui_img_netlkjhg_color_background_85551_240x320_png.c
     ui_img_return_png.c
     ui_img_278418788.c
@@ -31,6 +32,7 @@ SET(SOURCES ui_mainScreen.c
     ui_img_208276483.c
     ui_img_temperature_png.c
     ui_img_return_66_png.c
+    ui_img_1101012385.c
     ui_img_sensor_png.c
     ui_img_120570296.c
     ui_img_wifi_png.c

@@ -52,12 +52,14 @@ void updateArcMainScreen()
                 // Update the arc value and label with valid temperature
                 lv_arc_set_value(ui_inlet_Arc, static_cast<int>(inletTempMainScreen));
                 snprintf(inletLabelText, sizeof(inletLabelText), "%.1f C°\n\nINLET", inletTempMainScreen);
+                lv_obj_add_flag(ui_arc_danger_inlet, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
                 // Set error value for invalid temperature
                 lv_arc_set_value(ui_inlet_Arc, 0); // Default value for invalid data
                 snprintf(inletLabelText, sizeof(inletLabelText), "Error\n\nINLET");
+                lv_obj_clear_flag(ui_arc_danger_inlet, LV_OBJ_FLAG_HIDDEN);
             }
 
             // Check if the outlet temperature is valid
@@ -68,12 +70,14 @@ void updateArcMainScreen()
                 // Update the arc value and label with valid temperature
                 lv_arc_set_value(ui_outlet_Arc, static_cast<int>(outletTempMainScreen));
                 snprintf(outletLabelText, sizeof(outletLabelText), "%.1f C°\n\nOUTLET", outletTempMainScreen);
+                lv_obj_add_flag(ui_arc_danger_outlet_, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
                 // Set error value for invalid temperature
                 lv_arc_set_value(ui_outlet_Arc, 0); // Default value for invalid data
                 snprintf(outletLabelText, sizeof(outletLabelText), "Error\n\nOUTLET");
+                lv_obj_clear_flag(ui_arc_danger_outlet_, LV_OBJ_FLAG_HIDDEN);
             }
 
             // Update the labels
@@ -402,10 +406,12 @@ void updateTemperatureLabels()
                 inletTempstatusScreen > -55 && inletTempstatusScreen < 125)
             {
                 snprintf(buffer, sizeof(buffer), "INLET: %.1f °C", inletTempstatusScreen);
+                lv_obj_add_flag(ui_inlet_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "INLET: Sensor Error!");
+                snprintf(buffer, sizeof(buffer), "INLET: NaN - Sensor Error!");
+                lv_obj_clear_flag(ui_inlet_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_Inlet_Temp_status, buffer);
 
@@ -414,10 +420,12 @@ void updateTemperatureLabels()
                 outletTempstatusScreen > -55 && outletTempstatusScreen < 125)
             {
                 snprintf(buffer, sizeof(buffer), "OUTLET: %.1f °C", outletTempstatusScreen);
+                lv_obj_add_flag(ui_outlet_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "OUTLET: Sensor Error!");
+                snprintf(buffer, sizeof(buffer), "OUTLET: NaN - Sensor Error!");
+                lv_obj_clear_flag(ui_outlet_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_Outlet_Temp_status, buffer);
 
@@ -426,10 +434,12 @@ void updateTemperatureLabels()
                 antifreezeTempstatusScreen > -55 && antifreezeTempstatusScreen < 125)
             {
                 snprintf(buffer, sizeof(buffer), "ANTIFREEZE: %.1f °C", antifreezeTempstatusScreen);
+                lv_obj_add_flag(ui_antifreeze_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "ANTIFREEZE: Sensor Error!");
+                snprintf(buffer, sizeof(buffer), "ANTIFREEZE: NaN - Sensor Error!");
+                lv_obj_clear_flag(ui_antifreeze_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_antifreeze_temp_status, buffer);
 
@@ -438,10 +448,12 @@ void updateTemperatureLabels()
                 filterTempstatusScreen > -55 && filterTempstatusScreen < 125)
             {
                 snprintf(buffer, sizeof(buffer), "FILTER: %.1f °C", filterTempstatusScreen);
+                lv_obj_add_flag(ui_filter_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
-                snprintf(buffer, sizeof(buffer), "FILTER: Sensor Error!");
+                snprintf(buffer, sizeof(buffer), "FILTER: NaN - Sensor Error!");
+                lv_obj_clear_flag(ui_filter_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_fan_2_filter_alarm_status, buffer);
 
@@ -483,19 +495,22 @@ void updateAlarmLabels()
                 if (!isnan(highTempAlarmInlet) && highTempAlarmInlet != DEVICE_DISCONNECTED_C &&
                     highTempAlarmInlet > -55 && highTempAlarmInlet < 125)
                 {
-                    snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: %.1f °C - High Temp Warning !", highTempAlarmInlet);
+                    snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: %.1f °C - High Temp!", highTempAlarmInlet);
+                    lv_obj_clear_flag(ui_high_temp_danger, LV_OBJ_FLAG_HIDDEN);
                 }
                 else
                 {
-                    snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: NaN - Sensor Error !");
+                    snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: NaN - Sensor Error!");
+                    lv_obj_clear_flag(ui_high_temp_danger, LV_OBJ_FLAG_HIDDEN);
                 }
 
                 lv_obj_set_style_text_color(ui_high_Temp_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red color for warning/error
             }
             else
             {
-                snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: Within Safe Limits - OK !");
+                snprintf(buffer_temp, sizeof(buffer_temp), "TEMP: Within Safe Limits - OK!");
                 lv_obj_set_style_text_color(ui_high_Temp_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green color for OK
+                lv_obj_add_flag(ui_high_temp_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_high_Temp_Alarm, buffer_temp);
 
@@ -507,45 +522,52 @@ void updateAlarmLabels()
                 if (!isnan(highTempAlarmFilter) && highTempAlarmFilter != DEVICE_DISCONNECTED_C &&
                     highTempAlarmFilter > -55 && highTempAlarmFilter < 125)
                 {
-                    snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: %.1f °C - Filter Temp Warning !", highTempAlarmFilter);
+                    snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: %.1f °C - Filter Warning!", highTempAlarmFilter);
+                    lv_obj_clear_flag(ui_filter_danger, LV_OBJ_FLAG_HIDDEN);
                 }
                 else
                 {
-                    snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: NaN - Sensor Error !");
+                    snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: NaN - Sensor Error!");
+                    lv_obj_clear_flag(ui_filter_danger, LV_OBJ_FLAG_HIDDEN);
                 }
 
                 lv_obj_set_style_text_color(ui_Filter_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red color for warning/error
             }
             else
             {
-                snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: Operating Normally - Stable !");
+                snprintf(buffer_filter, sizeof(buffer_filter), "FILTER: Operating Normally - Stable!");
                 lv_obj_set_style_text_color(ui_Filter_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green color for OK
+                lv_obj_add_flag(ui_filter_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_Filter_Alarm, buffer_filter);
 
             // door alarm label status
             if (!isDoorClosed())
             {
-                snprintf(buffer_door, sizeof(buffer_door), "DOOR: Open - Critical Warning !");
+                snprintf(buffer_door, sizeof(buffer_door), "DOOR: Critical Warning - Open!");
                 lv_obj_set_style_text_color(ui_Door_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+                lv_obj_clear_flag(ui_door_danger, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
-                snprintf(buffer_door, sizeof(buffer_door), "DOOR: Closed - OK !");
+                snprintf(buffer_door, sizeof(buffer_door), "DOOR: Closed - OK!");
                 lv_obj_set_style_text_color(ui_Door_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+                lv_obj_add_flag(ui_door_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_Door_Alarm, buffer_door);
 
             // pressure alarm label status
             if (isPressureHigh())
             {
-                snprintf(buffer_pressure, sizeof(buffer_pressure), "PRESSURE: High - System Warning !");
+                snprintf(buffer_pressure, sizeof(buffer_pressure), "PRESSURE: High - Warning!");
                 lv_obj_set_style_text_color(ui_high_Pressure_Alarm, lv_color_hex(0xFF0000), LV_PART_MAIN); // 🔴 Red for warning
+                lv_obj_clear_flag(ui_high_pressure_danger, LV_OBJ_FLAG_HIDDEN);
             }
             else
             {
-                snprintf(buffer_pressure, sizeof(buffer_pressure), "PRESSURE: Normal - Stable !");
+                snprintf(buffer_pressure, sizeof(buffer_pressure), "PRESSURE: Normal - Stable!");
                 lv_obj_set_style_text_color(ui_high_Pressure_Alarm, lv_color_hex(0x00BE10), LV_PART_MAIN); // 🟢 Green for normal state
+                lv_obj_add_flag(ui_high_pressure_danger, LV_OBJ_FLAG_HIDDEN);
             }
             lv_label_set_text(ui_high_Pressure_Alarm, buffer_pressure);
 

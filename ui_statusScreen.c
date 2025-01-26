@@ -168,6 +168,46 @@ lv_obj_set_style_text_color(ui_tempStatusLabel, lv_color_hex(0xFFFFFF), LV_PART_
 lv_obj_set_style_text_opa(ui_tempStatusLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_tempStatusLabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+ui_inlet_temp_danger = lv_img_create(ui_tempStatusPanel);
+lv_img_set_src(ui_inlet_temp_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_inlet_temp_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_inlet_temp_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_inlet_temp_danger, 140 );
+lv_obj_set_y( ui_inlet_temp_danger, -55 );
+lv_obj_set_align( ui_inlet_temp_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_inlet_temp_danger, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_inlet_temp_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_outlet_temp_danger = lv_img_create(ui_tempStatusPanel);
+lv_img_set_src(ui_outlet_temp_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_outlet_temp_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_outlet_temp_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_outlet_temp_danger, 140 );
+lv_obj_set_y( ui_outlet_temp_danger, -10 );
+lv_obj_set_align( ui_outlet_temp_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_outlet_temp_danger, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_outlet_temp_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_antifreeze_temp_danger = lv_img_create(ui_tempStatusPanel);
+lv_img_set_src(ui_antifreeze_temp_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_antifreeze_temp_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_antifreeze_temp_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_antifreeze_temp_danger, 140 );
+lv_obj_set_y( ui_antifreeze_temp_danger, 35 );
+lv_obj_set_align( ui_antifreeze_temp_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_antifreeze_temp_danger, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_antifreeze_temp_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_filter_temp_danger = lv_img_create(ui_tempStatusPanel);
+lv_img_set_src(ui_filter_temp_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_filter_temp_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_filter_temp_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_filter_temp_danger, 140 );
+lv_obj_set_y( ui_filter_temp_danger, 80 );
+lv_obj_set_align( ui_filter_temp_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_filter_temp_danger, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_filter_temp_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
 ui_ContainerA1 = lv_obj_create(ui_tempStatusPanel);
 lv_obj_remove_style_all(ui_ContainerA1);
 lv_obj_set_width( ui_ContainerA1, 300);
@@ -282,6 +322,46 @@ lv_label_set_text(ui_alarmStatusLabel,"ALARM-REPORT");
 lv_obj_set_style_text_color(ui_alarmStatusLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_alarmStatusLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_alarmStatusLabel, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_high_temp_danger = lv_img_create(ui_alarmStatusPanel);
+lv_img_set_src(ui_high_temp_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_high_temp_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_high_temp_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_high_temp_danger, 140 );
+lv_obj_set_y( ui_high_temp_danger, -57 );
+lv_obj_set_align( ui_high_temp_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_high_temp_danger, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_high_temp_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_door_danger = lv_img_create(ui_alarmStatusPanel);
+lv_img_set_src(ui_door_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_door_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_door_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_door_danger, 140 );
+lv_obj_set_y( ui_door_danger, -12 );
+lv_obj_set_align( ui_door_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_door_danger, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_door_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_filter_danger = lv_img_create(ui_alarmStatusPanel);
+lv_img_set_src(ui_filter_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_filter_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_filter_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_filter_danger, 140 );
+lv_obj_set_y( ui_filter_danger, 33 );
+lv_obj_set_align( ui_filter_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_filter_danger, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_filter_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_high_pressure_danger = lv_img_create(ui_alarmStatusPanel);
+lv_img_set_src(ui_high_pressure_danger, &ui_img_1101012385);
+lv_obj_set_width( ui_high_pressure_danger, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_high_pressure_danger, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_high_pressure_danger, 140 );
+lv_obj_set_y( ui_high_pressure_danger, 78 );
+lv_obj_set_align( ui_high_pressure_danger, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_high_pressure_danger, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_high_pressure_danger, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
 ui_ContainerA2 = lv_obj_create(ui_alarmStatusPanel);
 lv_obj_remove_style_all(ui_ContainerA2);
@@ -938,6 +1018,10 @@ uic_tempStatusButton = ui_tempStatusButton;
 uic_tempStatusPanel = ui_tempStatusPanel;
 uic_returnButton11 = ui_returnButton11;
 uic_tempStatusLabel = ui_tempStatusLabel;
+uic_inlet_temp_danger = ui_inlet_temp_danger;
+uic_outlet_temp_danger = ui_outlet_temp_danger;
+uic_antifreeze_temp_danger = ui_antifreeze_temp_danger;
+uic_filter_temp_danger = ui_filter_temp_danger;
 uic_ContainerA1 = ui_ContainerA1;
 uic_Inlet_Temp_status = ui_Inlet_Temp_status;
 uic_Outlet_Temp_status = ui_Outlet_Temp_status;
@@ -947,6 +1031,10 @@ uic_alarmStatusButton = ui_alarmStatusButton;
 uic_alarmStatusPanel = ui_alarmStatusPanel;
 uic_returnButton2 = ui_returnButton2;
 uic_alarmStatusLabel = ui_alarmStatusLabel;
+uic_high_temp_danger = ui_high_temp_danger;
+uic_door_danger = ui_door_danger;
+uic_filter_danger = ui_filter_danger;
+uic_high_pressure_danger = ui_high_pressure_danger;
 uic_ContainerA2 = ui_ContainerA2;
 uic_high_Temp_Alarm = ui_high_Temp_Alarm;
 uic_Door_Alarm = ui_Door_Alarm;

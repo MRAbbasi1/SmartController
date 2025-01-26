@@ -214,6 +214,26 @@ lv_obj_set_align( ui_Door_Close_Icon, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_Door_Close_Icon, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_Door_Close_Icon, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
+ui_arc_danger_outlet_ = lv_img_create(ui_mainScreen);
+lv_img_set_src(ui_arc_danger_outlet_, &ui_img_1019942150);
+lv_obj_set_width( ui_arc_danger_outlet_, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_arc_danger_outlet_, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_arc_danger_outlet_, -80 );
+lv_obj_set_y( ui_arc_danger_outlet_, -30 );
+lv_obj_set_align( ui_arc_danger_outlet_, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_arc_danger_outlet_, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_arc_danger_outlet_, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_arc_danger_inlet = lv_img_create(ui_mainScreen);
+lv_img_set_src(ui_arc_danger_inlet, &ui_img_1019942150);
+lv_obj_set_width( ui_arc_danger_inlet, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_arc_danger_inlet, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_arc_danger_inlet, 80 );
+lv_obj_set_y( ui_arc_danger_inlet, -30 );
+lv_obj_set_align( ui_arc_danger_inlet, LV_ALIGN_CENTER );
+lv_obj_add_flag( ui_arc_danger_inlet, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+lv_obj_clear_flag( ui_arc_danger_inlet, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
 lv_obj_add_event_cb(ui_MenuButton, ui_event_MenuButton, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_inlet_Arc, ui_event_inlet_Arc, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_outlet_Arc, ui_event_outlet_Arc, LV_EVENT_ALL, NULL);
@@ -235,5 +255,7 @@ uic_Low_Pressure_Icon = ui_Low_Pressure_Icon;
 uic_High_Pressure_Icon = ui_High_Pressure_Icon;
 uic_Door_Open_Icon = ui_Door_Open_Icon;
 uic_Door_Close_Icon = ui_Door_Close_Icon;
+uic_arc_danger_outlet_ = ui_arc_danger_outlet_;
+uic_arc_danger_inlet = ui_arc_danger_inlet;
 
 }

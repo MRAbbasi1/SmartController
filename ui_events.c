@@ -6,7 +6,6 @@
 
 #include "ui.h"
 #include "setting.h"
-// #include "wifi.h"
 #include <Arduino.h>
 
 void mainScreen(lv_event_t *e)

@@ -43,6 +43,8 @@ extern lv_obj_t *ui_Low_Pressure_Icon;
 extern lv_obj_t *ui_High_Pressure_Icon;
 extern lv_obj_t *ui_Door_Open_Icon;
 extern lv_obj_t *ui_Door_Close_Icon;
+extern lv_obj_t *ui_arc_danger_outlet_;
+extern lv_obj_t *ui_arc_danger_inlet;
 // CUSTOM VARIABLES
 extern lv_obj_t *uic_mainScreen;
 extern lv_obj_t *uic_Logo;
@@ -61,6 +63,8 @@ extern lv_obj_t *uic_Low_Pressure_Icon;
 extern lv_obj_t *uic_High_Pressure_Icon;
 extern lv_obj_t *uic_Door_Open_Icon;
 extern lv_obj_t *uic_Door_Close_Icon;
+extern lv_obj_t *uic_arc_danger_outlet_;
+extern lv_obj_t *uic_arc_danger_inlet;
 
 // SCREEN: ui_controlSettingScreen
 void ui_controlSettingScreen_screen_init(void);
@@ -375,6 +379,10 @@ extern lv_obj_t *ui_tempStatusPanel;
 void ui_event_returnButton11( lv_event_t * e);
 extern lv_obj_t *ui_returnButton11;
 extern lv_obj_t *ui_tempStatusLabel;
+extern lv_obj_t *ui_inlet_temp_danger;
+extern lv_obj_t *ui_outlet_temp_danger;
+extern lv_obj_t *ui_antifreeze_temp_danger;
+extern lv_obj_t *ui_filter_temp_danger;
 extern lv_obj_t *ui_ContainerA1;
 extern lv_obj_t *ui_Inlet_Temp_status;
 extern lv_obj_t *ui_Outlet_Temp_status;
@@ -386,6 +394,10 @@ extern lv_obj_t *ui_alarmStatusPanel;
 void ui_event_returnButton2( lv_event_t * e);
 extern lv_obj_t *ui_returnButton2;
 extern lv_obj_t *ui_alarmStatusLabel;
+extern lv_obj_t *ui_high_temp_danger;
+extern lv_obj_t *ui_door_danger;
+extern lv_obj_t *ui_filter_danger;
+extern lv_obj_t *ui_high_pressure_danger;
 extern lv_obj_t *ui_ContainerA2;
 extern lv_obj_t *ui_high_Temp_Alarm;
 extern lv_obj_t *ui_Door_Alarm;
@@ -455,6 +467,10 @@ extern lv_obj_t *uic_tempStatusButton;
 extern lv_obj_t *uic_tempStatusPanel;
 extern lv_obj_t *uic_returnButton11;
 extern lv_obj_t *uic_tempStatusLabel;
+extern lv_obj_t *uic_inlet_temp_danger;
+extern lv_obj_t *uic_outlet_temp_danger;
+extern lv_obj_t *uic_antifreeze_temp_danger;
+extern lv_obj_t *uic_filter_temp_danger;
 extern lv_obj_t *uic_ContainerA1;
 extern lv_obj_t *uic_Inlet_Temp_status;
 extern lv_obj_t *uic_Outlet_Temp_status;
@@ -464,6 +480,10 @@ extern lv_obj_t *uic_alarmStatusButton;
 extern lv_obj_t *uic_alarmStatusPanel;
 extern lv_obj_t *uic_returnButton2;
 extern lv_obj_t *uic_alarmStatusLabel;
+extern lv_obj_t *uic_high_temp_danger;
+extern lv_obj_t *uic_door_danger;
+extern lv_obj_t *uic_filter_danger;
+extern lv_obj_t *uic_high_pressure_danger;
 extern lv_obj_t *uic_ContainerA2;
 extern lv_obj_t *uic_high_Temp_Alarm;
 extern lv_obj_t *uic_Door_Alarm;
@@ -524,6 +544,7 @@ LV_IMG_DECLARE( ui_img_pressure_png);   // assets/pressure.png
 LV_IMG_DECLARE( ui_img_31615732);   // assets/dashboard (6).png
 LV_IMG_DECLARE( ui_img_2101917800);   // assets/door (6).png
 LV_IMG_DECLARE( ui_img_778269571);   // assets/door (5).png
+LV_IMG_DECLARE( ui_img_1019942150);   // assets/danger (3).png
 LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
 LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png
@@ -535,6 +556,7 @@ LV_IMG_DECLARE( ui_img_1731839073);   // assets/minus (1).png
 LV_IMG_DECLARE( ui_img_208276483);   // assets/celcius (1).png
 LV_IMG_DECLARE( ui_img_temperature_png);   // assets/temperature.png
 LV_IMG_DECLARE( ui_img_return_66_png);   // assets/return 66.png
+LV_IMG_DECLARE( ui_img_1101012385);   // assets/danger (2).png
 LV_IMG_DECLARE( ui_img_sensor_png);   // assets/sensor.png
 LV_IMG_DECLARE( ui_img_120570296);   // assets/sync-problem.png
 LV_IMG_DECLARE( ui_img_wifi_png);   // assets/wifi.png
