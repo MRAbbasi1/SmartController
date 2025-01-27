@@ -10,7 +10,9 @@
 
 void mainScreen(lv_event_t *e)
 {
-	// Your code here
+	// Attach event handlers for value updates
+	lv_obj_add_event_cb(ui_inlet_Arc, ui_event_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+	lv_obj_add_event_cb(ui_outlet_Arc, ui_event_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
 void settingScreen(lv_event_t *e)
@@ -456,4 +458,34 @@ void satusScreen(lv_event_t *e)
 void show_QR_code(lv_event_t *e)
 {
 	// Your code here
+}
+
+void switchToMainScreen(lv_timer_t *timer)
+{
+	// Get the currently active screen
+	lv_obj_t *currentScreen = lv_scr_act();
+
+	// Change to the main screen with a fade-in animation
+	_ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_IN, 100, 0, NULL);
+
+	// Delete the boot screen if it is still active
+	if (currentScreen == ui_Boot_Screen)
+	{
+		lv_obj_t *screenToDelete = currentScreen; // Create a temporary pointer
+		_ui_screen_delete(&screenToDelete);		  // Delete the boot screen
+	}
+
+	// Delete the timer to prevent further execution
+	lv_timer_del(timer);
+}
+
+void bootScreen(lv_event_t *e)
+{
+	printf("📺 [Display] Boot Screen Started...\n");
+
+	// Create a timer to switch to the main screen after 30,000ms (30 seconds)
+	lv_timer_create(switchToMainScreen, 30000, NULL);
+
+	// Handle LVGL tasks
+	lv_timer_handler();
 }

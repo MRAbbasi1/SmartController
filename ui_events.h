@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-void mainScreen(lv_event_t * e);
+void bootScreen(lv_event_t * e);
 void settingScreen(lv_event_t * e);
 void turnOffCtrl_Checked(lv_event_t * e);
 void turnOffCtrl_Unchecked(lv_event_t * e);
@@ -22,6 +22,7 @@ void searchingSensors(lv_event_t * e);
 void goToFactoryReseting(lv_event_t * e);
 void satusScreen(lv_event_t * e);
 void show_QR_code(lv_event_t * e);
+void mainScreen(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

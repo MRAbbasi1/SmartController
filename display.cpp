@@ -373,10 +373,6 @@ void checkStatusIcon()
     }
 }
 
-// ============================ Update Functions for Control-Setting Screen =========================
-
-//...
-
 // ============================ Update Functions for Status-Info Screen =========================
 
 // update Temp panel labels
@@ -814,10 +810,6 @@ void checkStatusUpdate()
     updateInfoLabels();
 }
 
-// ============================ Update Functions for Process-Setting Screen =========================
-
-//...
-
 // ============================ Screen Switching =========================
 
 // Variables for touch timeout management
@@ -896,7 +888,7 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 // Setup function to initialize the display and touch
 void displaySetup()
 {
-    Serial.println("🔁 Initializing Display...");
+    Serial.println("📺 [Display] Initializing Screen...");
 
     // Initialize LVGL library
     lv_init();
@@ -942,10 +934,15 @@ void displaySetup()
     ui_init();
 
     // Attach event handlers for value updates
-    lv_obj_add_event_cb(ui_inlet_Arc, ui_event_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_add_event_cb(ui_outlet_Arc, ui_event_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+    // lv_obj_add_event_cb(ui_inlet_Arc, ui_event_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+    // lv_obj_add_event_cb(ui_outlet_Arc, ui_event_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
 
-    Serial.println("📺 [Display] Display, Touch and UI Setup completed ✅");
+    lv_scr_load(ui_Boot_Screen);
+
+    // Handle LVGL tasks
+    // lv_timer_handler();
+
+    Serial.println("📺 [Display] Screen, Touch and UI Setup completed ✅");
 }
 
 // ============================ Main Loop ==============================
@@ -953,10 +950,10 @@ void displaySetup()
 // Main loop function for updating the display and checking touch timeout
 void displayLoop()
 {
-    // Handle LVGL tasks such as redrawing and handling animations
+    // Handle LVGL tasks
     lv_timer_handler();
 
-    // Check for touch timeout and switch screens if necessary
+    // Check for touch timeout and switch screens
     if (millis() - lastTouchTime > timeoutDuration)
     {
         if (lv_scr_act() != ui_mainScreen) // Only if not already on the main screen

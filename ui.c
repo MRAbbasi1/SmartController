@@ -11,53 +11,20 @@ void effect_Animation( lv_obj_t *TargetObject, int delay);
 void logo_Animation( lv_obj_t *TargetObject, int delay);
 void icon_Animation( lv_obj_t *TargetObject, int delay);
 void arc_Animation( lv_obj_t *TargetObject, int delay);
+void boot_Animation( lv_obj_t *TargetObject, int delay);
+void loading_Animation( lv_obj_t *TargetObject, int delay);
 
 
-// SCREEN: ui_mainScreen
-void ui_mainScreen_screen_init(void);
-void ui_event_mainScreen( lv_event_t * e);
-lv_obj_t *ui_mainScreen;
-lv_obj_t *ui_Logo;
-void ui_event_MenuButton( lv_event_t * e);
-lv_obj_t *ui_MenuButton;
-void ui_event_inlet_Arc( lv_event_t * e);
-lv_obj_t *ui_inlet_Arc;
-lv_obj_t *ui_inletMainsScreen;
-void ui_event_outlet_Arc( lv_event_t * e);
-lv_obj_t *ui_outlet_Arc;
-lv_obj_t *ui_outletMainsScreen;
-lv_obj_t *ui_Cooler_OFF_Icon;
-lv_obj_t *ui_Cooler_ON_Icon;
-lv_obj_t *ui_Compressor_ON_Icon;
-lv_obj_t *ui_Compressor_OFF_Icon;
-lv_obj_t *ui_High_Temp_Icon;
-lv_obj_t *ui_Low_Temp_Icon;
-lv_obj_t *ui_Low_Pressure_Icon;
-lv_obj_t *ui_High_Pressure_Icon;
-lv_obj_t *ui_Door_Open_Icon;
-lv_obj_t *ui_Door_Close_Icon;
-lv_obj_t *ui_arc_danger_outlet_;
-lv_obj_t *ui_arc_danger_inlet;
+// SCREEN: ui_Boot_Screen
+void ui_Boot_Screen_screen_init(void);
+void ui_event_Boot_Screen( lv_event_t * e);
+lv_obj_t *ui_Boot_Screen;
+lv_obj_t *ui_boot_Image;
+lv_obj_t *ui_loading_img;
 // CUSTOM VARIABLES
-lv_obj_t *uic_mainScreen;
-lv_obj_t *uic_Logo;
-lv_obj_t *uic_MenuButton;
-lv_obj_t *uic_inlet_Arc;
-lv_obj_t *uic_inletMainsScreen;
-lv_obj_t *uic_outlet_Arc;
-lv_obj_t *uic_outletMainsScreen;
-lv_obj_t *uic_Cooler_OFF_Icon;
-lv_obj_t *uic_Cooler_ON_Icon;
-lv_obj_t *uic_Compressor_ON_Icon;
-lv_obj_t *uic_Compressor_OFF_Icon;
-lv_obj_t *uic_High_Temp_Icon;
-lv_obj_t *uic_Low_Temp_Icon;
-lv_obj_t *uic_Low_Pressure_Icon;
-lv_obj_t *uic_High_Pressure_Icon;
-lv_obj_t *uic_Door_Open_Icon;
-lv_obj_t *uic_Door_Close_Icon;
-lv_obj_t *uic_arc_danger_outlet_;
-lv_obj_t *uic_arc_danger_inlet;
+lv_obj_t *uic_Boot_Screen;
+lv_obj_t *uic_boot_Image;
+lv_obj_t *uic_loading_img;
 
 
 // SCREEN: ui_controlSettingScreen
@@ -524,6 +491,53 @@ lv_obj_t *uic_serviceInfoLabel;
 lv_obj_t *uic_ContainerA6;
 lv_obj_t *uic_servicesintervals;
 
+
+// SCREEN: ui_mainScreen
+void ui_mainScreen_screen_init(void);
+void ui_event_mainScreen( lv_event_t * e);
+lv_obj_t *ui_mainScreen;
+lv_obj_t *ui_Logo;
+void ui_event_MenuButton( lv_event_t * e);
+lv_obj_t *ui_MenuButton;
+void ui_event_inlet_Arc( lv_event_t * e);
+lv_obj_t *ui_inlet_Arc;
+lv_obj_t *ui_inletMainsScreen;
+void ui_event_outlet_Arc( lv_event_t * e);
+lv_obj_t *ui_outlet_Arc;
+lv_obj_t *ui_outletMainsScreen;
+lv_obj_t *ui_Cooler_OFF_Icon;
+lv_obj_t *ui_Cooler_ON_Icon;
+lv_obj_t *ui_Compressor_ON_Icon;
+lv_obj_t *ui_Compressor_OFF_Icon;
+lv_obj_t *ui_High_Temp_Icon;
+lv_obj_t *ui_Low_Temp_Icon;
+lv_obj_t *ui_Low_Pressure_Icon;
+lv_obj_t *ui_High_Pressure_Icon;
+lv_obj_t *ui_Door_Open_Icon;
+lv_obj_t *ui_Door_Close_Icon;
+lv_obj_t *ui_arc_danger_outlet_;
+lv_obj_t *ui_arc_danger_inlet;
+// CUSTOM VARIABLES
+lv_obj_t *uic_mainScreen;
+lv_obj_t *uic_Logo;
+lv_obj_t *uic_MenuButton;
+lv_obj_t *uic_inlet_Arc;
+lv_obj_t *uic_inletMainsScreen;
+lv_obj_t *uic_outlet_Arc;
+lv_obj_t *uic_outletMainsScreen;
+lv_obj_t *uic_Cooler_OFF_Icon;
+lv_obj_t *uic_Cooler_ON_Icon;
+lv_obj_t *uic_Compressor_ON_Icon;
+lv_obj_t *uic_Compressor_OFF_Icon;
+lv_obj_t *uic_High_Temp_Icon;
+lv_obj_t *uic_Low_Temp_Icon;
+lv_obj_t *uic_Low_Pressure_Icon;
+lv_obj_t *uic_High_Pressure_Icon;
+lv_obj_t *uic_Door_Open_Icon;
+lv_obj_t *uic_Door_Close_Icon;
+lv_obj_t *uic_arc_danger_outlet_;
+lv_obj_t *uic_arc_danger_inlet;
+
 // EVENTS
 lv_obj_t *ui____initial_actions0;
 
@@ -635,54 +649,62 @@ lv_anim_set_early_apply( &PropertyAnimation_0, false );
 lv_anim_start(&PropertyAnimation_0);
 
 }
+void boot_Animation( lv_obj_t *TargetObject, int delay)
+{
+ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
+PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->val = -1;
+lv_anim_t PropertyAnimation_0;
+lv_anim_init(&PropertyAnimation_0);
+lv_anim_set_time(&PropertyAnimation_0, 1500);
+lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
+lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_opacity );
+lv_anim_set_values(&PropertyAnimation_0, 0, 255 );
+lv_anim_set_path_cb( &PropertyAnimation_0, lv_anim_path_ease_in);
+lv_anim_set_delay( &PropertyAnimation_0, delay + 0 );
+lv_anim_set_deleted_cb( &PropertyAnimation_0, _ui_anim_callback_free_user_data );
+lv_anim_set_playback_time(&PropertyAnimation_0, 0);
+lv_anim_set_playback_delay(&PropertyAnimation_0, 0);
+ lv_anim_set_repeat_count(&PropertyAnimation_0, LV_ANIM_REPEAT_INFINITE );
+lv_anim_set_repeat_delay(&PropertyAnimation_0, 0);
+lv_anim_set_early_apply( &PropertyAnimation_0, false );
+ lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_opacity );
+lv_anim_start(&PropertyAnimation_0);
+
+}
+void loading_Animation( lv_obj_t *TargetObject, int delay)
+{
+ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
+PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->val = -1;
+lv_anim_t PropertyAnimation_0;
+lv_anim_init(&PropertyAnimation_0);
+lv_anim_set_time(&PropertyAnimation_0, 1000);
+lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
+lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_image_angle );
+lv_anim_set_values(&PropertyAnimation_0, 0, 3600 );
+lv_anim_set_path_cb( &PropertyAnimation_0, lv_anim_path_linear);
+lv_anim_set_delay( &PropertyAnimation_0, delay + 0 );
+lv_anim_set_deleted_cb( &PropertyAnimation_0, _ui_anim_callback_free_user_data );
+lv_anim_set_playback_time(&PropertyAnimation_0, 0);
+lv_anim_set_playback_delay(&PropertyAnimation_0, 0);
+ lv_anim_set_repeat_count(&PropertyAnimation_0, LV_ANIM_REPEAT_INFINITE );
+lv_anim_set_repeat_delay(&PropertyAnimation_0, 0);
+lv_anim_set_early_apply( &PropertyAnimation_0, true );
+ lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_image_angle );
+lv_anim_start(&PropertyAnimation_0);
+
+}
 
 ///////////////////// FUNCTIONS ////////////////////
-void ui_event_mainScreen( lv_event_t * e) {
+void ui_event_Boot_Screen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
-if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
-      mainScreen( e );
-      arc_Animation(ui_inlet_Arc, 0);
-      arc_Animation(ui_outlet_Arc, 0);
-      logo_Animation(ui_Logo, 0);
-      icon_Animation(ui_Door_Close_Icon, 0);
-      icon_Animation(ui_Door_Open_Icon, 0);
-      icon_Animation(ui_High_Pressure_Icon, 0);
-      icon_Animation(ui_Low_Pressure_Icon, 0);
-      icon_Animation(ui_Low_Temp_Icon, 0);
-      icon_Animation(ui_High_Temp_Icon, 0);
-      icon_Animation(ui_Compressor_OFF_Icon, 0);
-      icon_Animation(ui_Compressor_ON_Icon, 0);
-      icon_Animation(ui_Cooler_ON_Icon, 0);
-      icon_Animation(ui_Cooler_OFF_Icon, 0);
-      arc_Animation(ui_outletMainsScreen, 0);
-      arc_Animation(ui_inletMainsScreen, 0);
-      icon_Animation(ui_MenuButton, 0);
-}
-}
-
-void ui_event_MenuButton( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_controlSettingScreen_screen_init);
-      _ui_screen_delete( &ui_mainScreen);
-}
-}
-
-void ui_event_inlet_Arc( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-
-if ( event_code == LV_EVENT_VALUE_CHANGED) {
-      _ui_arc_set_text_value( ui_inletMainsScreen, target, "", " C°\n\nINTLET");
-}
-}
-
-void ui_event_outlet_Arc( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-
-if ( event_code == LV_EVENT_VALUE_CHANGED) {
-      _ui_arc_set_text_value( ui_outletMainsScreen, target, "OUTLET\n", " C°\n\nOUTLET");
+if ( event_code == LV_EVENT_SCREEN_LOADED) {
+      loading_Animation(ui_loading_img, 0);
+      boot_Animation(ui_boot_Image, 0);
+      bootScreen( e );
+      _ui_flag_modify( ui_loading_img, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 }
 
@@ -1309,6 +1331,55 @@ if ( event_code == LV_EVENT_RELEASED) {
 }
 }
 
+void ui_event_mainScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+if ( event_code == LV_EVENT_SCREEN_LOAD_START) {
+      mainScreen( e );
+      arc_Animation(ui_inlet_Arc, 0);
+      arc_Animation(ui_outlet_Arc, 0);
+      logo_Animation(ui_Logo, 0);
+      icon_Animation(ui_Door_Close_Icon, 0);
+      icon_Animation(ui_Door_Open_Icon, 0);
+      icon_Animation(ui_High_Pressure_Icon, 0);
+      icon_Animation(ui_Low_Pressure_Icon, 0);
+      icon_Animation(ui_Low_Temp_Icon, 0);
+      icon_Animation(ui_High_Temp_Icon, 0);
+      icon_Animation(ui_Compressor_OFF_Icon, 0);
+      icon_Animation(ui_Compressor_ON_Icon, 0);
+      icon_Animation(ui_Cooler_ON_Icon, 0);
+      icon_Animation(ui_Cooler_OFF_Icon, 0);
+      arc_Animation(ui_outletMainsScreen, 0);
+      arc_Animation(ui_inletMainsScreen, 0);
+      icon_Animation(ui_MenuButton, 0);
+}
+}
+
+void ui_event_MenuButton( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+if ( event_code == LV_EVENT_RELEASED) {
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_delete( &ui_mainScreen);
+}
+}
+
+void ui_event_inlet_Arc( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      _ui_arc_set_text_value( ui_inletMainsScreen, target, "", " C°\n\nINTLET");
+}
+}
+
+void ui_event_outlet_Arc( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      _ui_arc_set_text_value( ui_outletMainsScreen, target, "OUTLET\n", " C°\n\nOUTLET");
+}
+}
+
 ///////////////////// SCREENS ////////////////////
 
 void ui_init( void )
@@ -1316,11 +1387,12 @@ void ui_init( void )
 lv_disp_t *dispp = lv_disp_get_default();
 lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
 lv_disp_set_theme(dispp, theme);
-ui_mainScreen_screen_init();
+ui_Boot_Screen_screen_init();
 ui_controlSettingScreen_screen_init();
 ui_processSettingScreen_screen_init();
 ui_addvansedSettingScreen_screen_init();
 ui_statusScreen_screen_init();
+ui_mainScreen_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
-lv_disp_load_scr( ui_mainScreen);
+lv_disp_load_scr( ui_Boot_Screen);
 }

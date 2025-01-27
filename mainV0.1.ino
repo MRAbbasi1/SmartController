@@ -28,43 +28,45 @@ void setup()
   Serial.println("----------------- Start Setup -----------------");
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-  // 0- Setup Relays
+  // Setup Relays
   setupRelays();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("-------------------------Setup Relays--------------------------");
 
-  // 1- Setup Display
+  // Setup Display
   displaySetup();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("-------------------------Setup Display--------------------------");
 
-  // 2- Initialize Settings (NVS)
+  // Initialize Settings (NVS)
   initializeSettings();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("--------------------------Initialize Settings-------------------------");
 
-  // 3- Setup Sensors (DHT11, DS18B20, DHT22)
+  // Setup Sensors
   initializeSensors();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("-------------------------Setup Sensors--------------------------");
 
-  // 4- Setup Wi-Fi
+  // Setup Wi-Fi
   wifiSetup();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("-------------------------Setup Wi-Fi--------------------------");
 
-  // 5- Initialize the Alarm system
+  // Initialize the Alarm system
   alarmSetup();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("--------------------------Alarm System-------------------------");
 
-  // 6- Update the Time
+  // Update the Time
   setupAndUpdateTime();
 
-  Serial.println("---------------------------------------------------");
+  Serial.println("------------------------Updating Time---------------------------");
 
-  // 7- Initialize the maintenance counter
+  // Initialize the maintenance counter
   initializeHoursElapsedTracking();
+
+  Serial.println("------------------------Maintenance Counter---------------------------");
 
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   Serial.println("----------------- End of Setup -----------------");

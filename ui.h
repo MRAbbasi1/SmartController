@@ -19,52 +19,19 @@ void effect_Animation( lv_obj_t *TargetObject, int delay);
 void logo_Animation( lv_obj_t *TargetObject, int delay);
 void icon_Animation( lv_obj_t *TargetObject, int delay);
 void arc_Animation( lv_obj_t *TargetObject, int delay);
+void boot_Animation( lv_obj_t *TargetObject, int delay);
+void loading_Animation( lv_obj_t *TargetObject, int delay);
 
-// SCREEN: ui_mainScreen
-void ui_mainScreen_screen_init(void);
-void ui_event_mainScreen( lv_event_t * e);
-extern lv_obj_t *ui_mainScreen;
-extern lv_obj_t *ui_Logo;
-void ui_event_MenuButton( lv_event_t * e);
-extern lv_obj_t *ui_MenuButton;
-void ui_event_inlet_Arc( lv_event_t * e);
-extern lv_obj_t *ui_inlet_Arc;
-extern lv_obj_t *ui_inletMainsScreen;
-void ui_event_outlet_Arc( lv_event_t * e);
-extern lv_obj_t *ui_outlet_Arc;
-extern lv_obj_t *ui_outletMainsScreen;
-extern lv_obj_t *ui_Cooler_OFF_Icon;
-extern lv_obj_t *ui_Cooler_ON_Icon;
-extern lv_obj_t *ui_Compressor_ON_Icon;
-extern lv_obj_t *ui_Compressor_OFF_Icon;
-extern lv_obj_t *ui_High_Temp_Icon;
-extern lv_obj_t *ui_Low_Temp_Icon;
-extern lv_obj_t *ui_Low_Pressure_Icon;
-extern lv_obj_t *ui_High_Pressure_Icon;
-extern lv_obj_t *ui_Door_Open_Icon;
-extern lv_obj_t *ui_Door_Close_Icon;
-extern lv_obj_t *ui_arc_danger_outlet_;
-extern lv_obj_t *ui_arc_danger_inlet;
+// SCREEN: ui_Boot_Screen
+void ui_Boot_Screen_screen_init(void);
+void ui_event_Boot_Screen( lv_event_t * e);
+extern lv_obj_t *ui_Boot_Screen;
+extern lv_obj_t *ui_boot_Image;
+extern lv_obj_t *ui_loading_img;
 // CUSTOM VARIABLES
-extern lv_obj_t *uic_mainScreen;
-extern lv_obj_t *uic_Logo;
-extern lv_obj_t *uic_MenuButton;
-extern lv_obj_t *uic_inlet_Arc;
-extern lv_obj_t *uic_inletMainsScreen;
-extern lv_obj_t *uic_outlet_Arc;
-extern lv_obj_t *uic_outletMainsScreen;
-extern lv_obj_t *uic_Cooler_OFF_Icon;
-extern lv_obj_t *uic_Cooler_ON_Icon;
-extern lv_obj_t *uic_Compressor_ON_Icon;
-extern lv_obj_t *uic_Compressor_OFF_Icon;
-extern lv_obj_t *uic_High_Temp_Icon;
-extern lv_obj_t *uic_Low_Temp_Icon;
-extern lv_obj_t *uic_Low_Pressure_Icon;
-extern lv_obj_t *uic_High_Pressure_Icon;
-extern lv_obj_t *uic_Door_Open_Icon;
-extern lv_obj_t *uic_Door_Close_Icon;
-extern lv_obj_t *uic_arc_danger_outlet_;
-extern lv_obj_t *uic_arc_danger_inlet;
+extern lv_obj_t *uic_Boot_Screen;
+extern lv_obj_t *uic_boot_Image;
+extern lv_obj_t *uic_loading_img;
 
 // SCREEN: ui_controlSettingScreen
 void ui_controlSettingScreen_screen_init(void);
@@ -527,12 +494,79 @@ extern lv_obj_t *uic_serviceInfoLabel;
 extern lv_obj_t *uic_ContainerA6;
 extern lv_obj_t *uic_servicesintervals;
 
+// SCREEN: ui_mainScreen
+void ui_mainScreen_screen_init(void);
+void ui_event_mainScreen( lv_event_t * e);
+extern lv_obj_t *ui_mainScreen;
+extern lv_obj_t *ui_Logo;
+void ui_event_MenuButton( lv_event_t * e);
+extern lv_obj_t *ui_MenuButton;
+void ui_event_inlet_Arc( lv_event_t * e);
+extern lv_obj_t *ui_inlet_Arc;
+extern lv_obj_t *ui_inletMainsScreen;
+void ui_event_outlet_Arc( lv_event_t * e);
+extern lv_obj_t *ui_outlet_Arc;
+extern lv_obj_t *ui_outletMainsScreen;
+extern lv_obj_t *ui_Cooler_OFF_Icon;
+extern lv_obj_t *ui_Cooler_ON_Icon;
+extern lv_obj_t *ui_Compressor_ON_Icon;
+extern lv_obj_t *ui_Compressor_OFF_Icon;
+extern lv_obj_t *ui_High_Temp_Icon;
+extern lv_obj_t *ui_Low_Temp_Icon;
+extern lv_obj_t *ui_Low_Pressure_Icon;
+extern lv_obj_t *ui_High_Pressure_Icon;
+extern lv_obj_t *ui_Door_Open_Icon;
+extern lv_obj_t *ui_Door_Close_Icon;
+extern lv_obj_t *ui_arc_danger_outlet_;
+extern lv_obj_t *ui_arc_danger_inlet;
+// CUSTOM VARIABLES
+extern lv_obj_t *uic_mainScreen;
+extern lv_obj_t *uic_Logo;
+extern lv_obj_t *uic_MenuButton;
+extern lv_obj_t *uic_inlet_Arc;
+extern lv_obj_t *uic_inletMainsScreen;
+extern lv_obj_t *uic_outlet_Arc;
+extern lv_obj_t *uic_outletMainsScreen;
+extern lv_obj_t *uic_Cooler_OFF_Icon;
+extern lv_obj_t *uic_Cooler_ON_Icon;
+extern lv_obj_t *uic_Compressor_ON_Icon;
+extern lv_obj_t *uic_Compressor_OFF_Icon;
+extern lv_obj_t *uic_High_Temp_Icon;
+extern lv_obj_t *uic_Low_Temp_Icon;
+extern lv_obj_t *uic_Low_Pressure_Icon;
+extern lv_obj_t *uic_High_Pressure_Icon;
+extern lv_obj_t *uic_Door_Open_Icon;
+extern lv_obj_t *uic_Door_Close_Icon;
+extern lv_obj_t *uic_arc_danger_outlet_;
+extern lv_obj_t *uic_arc_danger_inlet;
+
 // EVENTS
 extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
+LV_IMG_DECLARE( ui_img_884211525);   // assets/logo-min-800x191 (1).png
+LV_IMG_DECLARE( ui_img_loading_png);   // assets/loading.png
+LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
+LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png
+LV_IMG_DECLARE( ui_img_worker_png);   // assets/worker.png
+LV_IMG_DECLARE( ui_img_68039786);   // assets/off (1).png
+LV_IMG_DECLARE( ui_img_info_png);   // assets/info.png
+LV_IMG_DECLARE( ui_img_plus_png);   // assets/plus.png
+LV_IMG_DECLARE( ui_img_1731839073);   // assets/minus (1).png
+LV_IMG_DECLARE( ui_img_208276483);   // assets/celcius (1).png
+LV_IMG_DECLARE( ui_img_temperature_png);   // assets/temperature.png
 LV_IMG_DECLARE( ui_img_netff_color_background_85551_240x320_png);   // assets/netff_color_background_85551_240x320.png
-LV_IMG_DECLARE( ui_img_2087107542);   // assets/logo-min-800x191 (2).png
+LV_IMG_DECLARE( ui_img_return_66_png);   // assets/return 66.png
+LV_IMG_DECLARE( ui_img_1101012385);   // assets/danger (2).png
+LV_IMG_DECLARE( ui_img_sensor_png);   // assets/sensor.png
+LV_IMG_DECLARE( ui_img_120570296);   // assets/sync-problem.png
+LV_IMG_DECLARE( ui_img_wifi_png);   // assets/wifi.png
+LV_IMG_DECLARE( ui_img_983251955);   // assets/qr-code (4).png
+LV_IMG_DECLARE( ui_img_close_png);   // assets/close.png
+LV_IMG_DECLARE( ui_img_1437619218);   // assets/info (17).png
+LV_IMG_DECLARE( ui_img_18821776);   // assets/technical-support.png
+LV_IMG_DECLARE( ui_img_1279246833);   // assets/logo-min-800x191 (3).png
 LV_IMG_DECLARE( ui_img_640283455);   // assets/menu-2.png
 LV_IMG_DECLARE( ui_img_165651551);   // assets/power (4).png
 LV_IMG_DECLARE( ui_img_165652574);   // assets/power (5).png
@@ -545,25 +579,6 @@ LV_IMG_DECLARE( ui_img_31615732);   // assets/dashboard (6).png
 LV_IMG_DECLARE( ui_img_2101917800);   // assets/door (6).png
 LV_IMG_DECLARE( ui_img_778269571);   // assets/door (5).png
 LV_IMG_DECLARE( ui_img_1019942150);   // assets/danger (3).png
-LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
-LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
-LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png
-LV_IMG_DECLARE( ui_img_worker_png);   // assets/worker.png
-LV_IMG_DECLARE( ui_img_68039786);   // assets/off (1).png
-LV_IMG_DECLARE( ui_img_info_png);   // assets/info.png
-LV_IMG_DECLARE( ui_img_plus_png);   // assets/plus.png
-LV_IMG_DECLARE( ui_img_1731839073);   // assets/minus (1).png
-LV_IMG_DECLARE( ui_img_208276483);   // assets/celcius (1).png
-LV_IMG_DECLARE( ui_img_temperature_png);   // assets/temperature.png
-LV_IMG_DECLARE( ui_img_return_66_png);   // assets/return 66.png
-LV_IMG_DECLARE( ui_img_1101012385);   // assets/danger (2).png
-LV_IMG_DECLARE( ui_img_sensor_png);   // assets/sensor.png
-LV_IMG_DECLARE( ui_img_120570296);   // assets/sync-problem.png
-LV_IMG_DECLARE( ui_img_wifi_png);   // assets/wifi.png
-LV_IMG_DECLARE( ui_img_983251955);   // assets/qr-code (4).png
-LV_IMG_DECLARE( ui_img_close_png);   // assets/close.png
-LV_IMG_DECLARE( ui_img_1437619218);   // assets/info (17).png
-LV_IMG_DECLARE( ui_img_18821776);   // assets/technical-support.png
 LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
 
 // UI INIT

@@ -17,7 +17,7 @@ lv_obj_set_style_bg_img_src( ui_mainScreen, &ui_img_netff_color_background_85551
 lv_obj_set_style_bg_img_opa(ui_mainScreen, 127, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Logo = lv_img_create(ui_mainScreen);
-lv_img_set_src(ui_Logo, &ui_img_2087107542);
+lv_img_set_src(ui_Logo, &ui_img_1279246833);
 lv_obj_set_width( ui_Logo, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Logo, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Logo, 0 );
