@@ -831,6 +831,31 @@ void switchToMainScreen()
 
     // Change to the main screen (no animation)
     _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, NULL);
+
+    lv_obj_add_flag(ui_tempStatusPanel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_tempStatusButton, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_alarmStatusPanel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_alarmStatusButton, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_relayStatusPanel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_relayStatusButton, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_networkStatusPanel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_networkStatusButton, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_deviceInfoPanel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_serviceInfoButton, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_serviceInfoPanel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_deviceInfoButton, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_sensors_setup_container, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_factory_reset_container, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_QRcode_Tab, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Hide_QR_Code_Button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_show_QR_Code_Button, LV_OBJ_FLAG_HIDDEN);
 }
 
 // ============================ Display Flushing ==========================

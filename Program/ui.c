@@ -148,6 +148,7 @@ lv_obj_t *ui_Advanced_Setting_Label;
 void ui_event_Setting_Save_btn_in_advanced_Screen( lv_event_t * e);
 lv_obj_t *ui_Setting_Save_btn_in_advanced_Screen;
 lv_obj_t *ui_Setting_Save_btn_label_advanced_Screen;
+void ui_event_TabView1( lv_event_t * e);
 lv_obj_t *ui_TabView1;
 lv_obj_t *ui_tab1;
 lv_obj_t *ui_AdvancedScreenContainer1;
@@ -462,6 +463,7 @@ lv_obj_t *uic_evaprartor_Fan_Status;
 lv_obj_t *uic_Compressor_Status;
 lv_obj_t *uic_condensor_Fan_1_Status;
 lv_obj_t *uic_condensor_Fan_2_Status;
+lv_obj_t *uic_networkStatusButton;
 lv_obj_t *uic_networkStatusPanel;
 lv_obj_t *uic_returnButton8;
 lv_obj_t *uic_Connect_to_Device_Label;
@@ -477,6 +479,7 @@ lv_obj_t *uic_Connection_QR_Code;
 lv_obj_t *uic_Connect_App_Label;
 lv_obj_t *uic_show_QR_Code_Button;
 lv_obj_t *uic_Hide_QR_Code_Button;
+lv_obj_t *uic_deviceInfoButton;
 lv_obj_t *uic_deviceInfoPanel;
 lv_obj_t *uic_returnButton9;
 lv_obj_t *uic_deviceInfoLabel;
@@ -900,6 +903,14 @@ void ui_event_Setting_Save_btn_in_advanced_Screen( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_RELEASED) {
       submit_advance_setting( e );
+}
+}
+
+void ui_event_TabView1( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
+      TabView1AddvancedSetting( e );
 }
 }
 

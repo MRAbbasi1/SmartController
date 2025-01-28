@@ -18,6 +18,7 @@ void processSettingScreen(lv_event_t * e);
 void submit_process_setting(lv_event_t * e);
 void addvancedSettingScreen(lv_event_t * e);
 void submit_advance_setting(lv_event_t * e);
+void TabView1AddvancedSetting(lv_event_t * e);
 void searchingSensors(lv_event_t * e);
 void goToFactoryReseting(lv_event_t * e);
 void satusScreen(lv_event_t * e);

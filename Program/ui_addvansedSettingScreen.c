@@ -1116,6 +1116,7 @@ lv_obj_add_event_cb(ui_door_alarm_status_Switch, ui_event_door_alarm_status_Swit
 lv_obj_add_event_cb(ui_filter_alarm_status_Switch, ui_event_filter_alarm_status_Switch, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Sensor_Setup_Button, ui_event_Sensor_Setup_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_open_factory_reset_panel, ui_event_open_factory_reset_panel, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_TabView1, ui_event_TabView1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_close_sensor_setup_container_Button, ui_event_close_sensor_setup_container_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_search_sensor_setup_Button, ui_event_search_sensor_setup_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_inlet_Checkbox, ui_event_inlet_Checkbox, LV_EVENT_ALL, NULL);

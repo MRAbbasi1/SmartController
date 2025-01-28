@@ -489,3 +489,20 @@ void bootScreen(lv_event_t *e)
 	// Handle LVGL tasks
 	lv_timer_handler();
 }
+
+void TabView1AddvancedSetting(lv_event_t *e)
+{
+	lv_obj_t *tabview = lv_event_get_target(e);
+	uint16_t active_tab = lv_tabview_get_tab_act(tabview);
+
+	if (active_tab == 0 || active_tab == 1)
+	{
+		lv_obj_clear_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+	}
+	else if (active_tab == 2)
+	{
+		lv_obj_add_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+	}
+}
