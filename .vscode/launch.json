@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/mra1380mohammadrezagmail.com/Documents/Arduino/nvsManager",
+      "program": "/Users/mra1380mohammadrezagmail.com/Documents/Arduino/nvsManager/build/Debug/outDebug"
+    }
+  ]
+}
