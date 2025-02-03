@@ -5,7 +5,7 @@
 
 #include "ui.h"
 
-void mainScreen(lv_event_t * e)
+void bootScreen(lv_event_t * e)
 {
 	// Your code here
 }
@@ -100,7 +100,7 @@ void show_QR_code(lv_event_t * e)
 	// Your code here
 }
 
-void bootScreen(lv_event_t * e)
+void mainScreen(lv_event_t * e)
 {
 	// Your code here
 }

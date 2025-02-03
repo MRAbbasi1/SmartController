@@ -1141,7 +1141,6 @@ if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
       _ui_flag_modify( ui_returnButton14, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_flag_modify( ui_open_factory_reset_panel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_flag_modify( ui_TabView1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
@@ -1153,7 +1152,6 @@ if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_factory_reset_container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
       _ui_flag_modify( ui_TabView1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_flag_modify( ui_returnButton14, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 
@@ -1183,7 +1181,6 @@ if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_open_factory_reset_panel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
       _ui_flag_modify( ui_returnButton14, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
       _ui_flag_modify( ui_TabView1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_flag_modify( ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 }
 
@@ -1279,7 +1276,6 @@ if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_factory_reset_container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_flag_modify( ui_returnButton14, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
       _ui_flag_modify( ui_TabView1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-      _ui_flag_modify( ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
 }
 }
 
