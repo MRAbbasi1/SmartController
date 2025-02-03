@@ -5,6 +5,11 @@
 
 #include "ui.h"
 
+void mainScreen(lv_event_t * e)
+{
+	// Your code here
+}
+
 void settingScreen(lv_event_t * e)
 {
 	// Your code here
@@ -40,7 +45,42 @@ void submit_advance_setting(lv_event_t * e)
 	// Your code here
 }
 
-void searchingSensors(lv_event_t * e)
+void TabView1AddvancedSetting(lv_event_t * e)
+{
+	// Your code here
+}
+
+void restart_device(lv_event_t * e)
+{
+	// Your code here
+}
+
+void reseting_sensors_address(lv_event_t * e)
+{
+	// Your code here
+}
+
+void sensors_disconnect_check(lv_event_t * e)
+{
+	// Your code here
+}
+
+void check_set_Inlet(lv_event_t * e)
+{
+	// Your code here
+}
+
+void check_set_Outlet(lv_event_t * e)
+{
+	// Your code here
+}
+
+void check_set_Antifreeze(lv_event_t * e)
+{
+	// Your code here
+}
+
+void check_set_Filter(lv_event_t * e)
 {
 	// Your code here
 }
@@ -56,11 +96,6 @@ void satusScreen(lv_event_t * e)
 }
 
 void show_QR_code(lv_event_t * e)
-{
-	// Your code here
-}
-
-void mainScreen(lv_event_t * e)
 {
 	// Your code here
 }
