@@ -7,12 +7,56 @@
 #include "alarm.h"
 #include "general.h"
 #include <Adafruit_NeoPixel.h>
+#include <esp_heap_caps.h>
 
 // Built in RGB
 #define PIN_NEOPIXEL 48
 #define NUM_PIXELS 1
 
 Adafruit_NeoPixel pixels(NUM_PIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
+
+// ============================ System Info =====================
+
+unsigned long lastshowMemoryUsageUpdateTime = 0;
+const long showMemoryUsageupdateInterval = 5000;
+
+void showMemoryUsage()
+{
+  Serial.println("...........................");
+  size_t freeHeap = ESP.getFreeHeap();
+  size_t totalHeap = ESP.getHeapSize();
+
+  Serial.println("🟥 [System] Memory Usage 🟥");
+  Serial.print("Free Heap: ");
+  Serial.print(freeHeap / 1024.0, 2);
+  Serial.println(" KB");
+
+  Serial.print("Total Heap: ");
+  Serial.print(totalHeap / 1024.0, 2);
+  Serial.println(" KB");
+
+  Serial.print("Used Heap: ");
+  Serial.print((totalHeap - freeHeap) / 1024.0, 2);
+  Serial.println(" KB");
+
+  Serial.println("");
+
+  size_t freePSRAM = heap_caps_get_free_size(MALLOC_CAP_SPIRAM);
+  size_t totalPSRAM = heap_caps_get_total_size(MALLOC_CAP_SPIRAM);
+
+  Serial.print("Free PSRAM: ");
+  Serial.print(freePSRAM / 1024.0, 2);
+  Serial.println(" KB");
+
+  Serial.print("Total PSRAM: ");
+  Serial.print(totalPSRAM / 1024.0, 2);
+  Serial.println(" KB");
+
+  Serial.print("Used PSRAM: ");
+  Serial.print((totalPSRAM - freePSRAM) / 1024.0, 2);
+  Serial.println(" KB");
+  Serial.println("...........................");
+}
 
 void setup()
 {
@@ -27,6 +71,8 @@ void setup()
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   Serial.println("----------------- Start Setup -----------------");
   Serial.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+  showMemoryUsage();
 
   // Setup Relays
   setupRelays();
@@ -89,4 +135,12 @@ void loop()
   controlRelays(); // Handle Relay Control
 
   updateHoursElapsedCounter(); // Update the maintenance counter periodically
+
+  unsigned long currentMillis = millis(); // Resource usage Monitor
+
+  if (currentMillis - lastshowMemoryUsageUpdateTime >= showMemoryUsageupdateInterval)
+  {
+    lastshowMemoryUsageUpdateTime = currentMillis;
+    showMemoryUsage();
+  }
 }

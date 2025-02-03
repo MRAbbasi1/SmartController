@@ -64,7 +64,7 @@
  *=========================*/
 
 /*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/
-#define LV_MEM_CUSTOM 0
+#define LV_MEM_CUSTOM 1
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
     #define LV_MEM_SIZE (64U * 1024U)          /*[bytes]*/
@@ -78,10 +78,12 @@
     #endif
 
 #else       /*LV_MEM_CUSTOM*/
-    #define LV_MEM_CUSTOM_INCLUDE <stdlib.h>   /*Header for the dynamic memory function*/
-    #define LV_MEM_CUSTOM_ALLOC   malloc
-    #define LV_MEM_CUSTOM_FREE    free
-    #define LV_MEM_CUSTOM_REALLOC realloc
+    #define LV_MEM_CUSTOM_INCLUDE "esp_heap_caps.h" // psram
+    #define LV_MEM_CUSTOM_ALLOC(size) heap_caps_malloc(size, MALLOC_CAP_SPIRAM) // psram
+    #define LV_MEM_CUSTOM_FREE heap_caps_free // psram
+    #define LV_MEM_CUSTOM_REALLOC(ptr, size) heap_caps_realloc(ptr, size, MALLOC_CAP_SPIRAM) // psram
+
+
 #endif     /*LV_MEM_CUSTOM*/
 
 /*Number of the intermediate memory buffer used during rendering and other internal processing mechanisms.
@@ -90,18 +92,6 @@
 
 /*Use the standard `memcpy` and `memset` instead of LVGL's own functions. (Might or might not be faster).*/
 #define LV_MEMCPY_MEMSET_STD 0
-
-// -----------------Custom---------------------
-// // تنظیم تخصیص حافظه از PSRAM
-// #define LV_MEM_CUSTOM      1      // استفاده از تخصیص حافظه سفارشی
-// #define LV_MEM_CUSTOM_ALLOC   ps_malloc  // استفاده از ps_malloc برای تخصیص حافظه از PSRAM
-// #define LV_MEM_CUSTOM_FREE    ps_free    // استفاده از ps_free برای آزادسازی حافظه از PSRAM
-
-
-// #define LV_MEM_SIZE (64U * 1024U) // Only for LV_MEM_CUSTOM == 0
-// #define LV_MEMCPY_MEMSET_STD 0
-
-// #define LV_MEM_BUF_MAX_NUM 16
 
 /*====================
    HAL SETTINGS
@@ -372,7 +362,7 @@
 #define LV_EXPORT_CONST_INT(int_value) struct _silence_gcc_warning /*The default value just prevents GCC warning*/
 
 /*Extend the default -32k..32k coordinate range to -4M..4M by using int32_t for coordinates instead of int16_t*/
-#define LV_USE_LARGE_COORD 0
+#define LV_USE_LARGE_COORD 1
 
 /*==================
  *   FONT USAGE

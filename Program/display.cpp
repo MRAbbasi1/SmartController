@@ -9,7 +9,8 @@
 
 // Declare a buffer for drawing
 static lv_disp_draw_buf_t draw_buf;
-static lv_color_t buf[SIZE_SCREEN_BUFFER]; // Buffer for screen content
+static lv_color_t *buf1 = NULL;
+static lv_color_t *buf2 = NULL;
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); // Initialize TFT display with width and height
 
@@ -915,6 +916,24 @@ void displaySetup()
 {
     Serial.println("📺 [Display] Initializing Screen...");
 
+    buf1 = (lv_color_t *)heap_caps_malloc(SIZE_SCREEN_BUFFER * sizeof(lv_color_t), MALLOC_CAP_SPIRAM);
+    if (!buf1)
+    {
+        Serial.println("❌ [Error] Failed to allocate buffer1 in PSRAM!");
+        return;
+    }
+
+    buf2 = (lv_color_t *)heap_caps_malloc(SIZE_SCREEN_BUFFER * sizeof(lv_color_t), MALLOC_CAP_SPIRAM);
+    if (!buf2)
+    {
+        Serial.println("❌ [Error] Failed to allocate buffer2 in PSRAM!");
+        heap_caps_free(buf1); // Free previously allocated memory
+        return;
+    }
+
+    // Initialize display buffer for LVGL (drawing buffer)
+    lv_disp_draw_buf_init(&draw_buf, buf1, buf2, SIZE_SCREEN_BUFFER);
+
     // Initialize LVGL library
     lv_init();
 
@@ -935,9 +954,6 @@ void displaySetup()
 
     // Set the touch screen calibration data
     tft.setTouch(calData);
-
-    // Initialize display buffer for LVGL (drawing buffer)
-    lv_disp_draw_buf_init(&draw_buf, buf, NULL, SIZE_SCREEN_BUFFER);
 
     // Set up display driver for LVGL
     static lv_disp_drv_t disp_drv;

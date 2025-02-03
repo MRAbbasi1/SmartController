@@ -5,6 +5,7 @@
 #include <Arduino.h>
 #include <lvgl.h>
 #include <TFT_eSPI.h>
+#include <esp_heap_caps.h>
 #include "tempSensor.h"
 #include "setting.h"
 #include "alarm.h"
@@ -25,7 +26,7 @@ constexpr uint16_t screenHeight = 320;
 #endif
 
 // Define display buffer size (optimized for performance)
-#define SIZE_SCREEN_BUFFER (screenWidth * screenHeight / 8)
+#define SIZE_SCREEN_BUFFER (screenWidth * screenHeight / 2)
 
 // ======================= Display Initialization =======================
 

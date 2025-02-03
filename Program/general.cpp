@@ -62,8 +62,8 @@ time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asi
     String payload = http.getString(); // Read the response as a string
     http.end();                        // Close the HTTP connection
 
-    // Create a dynamic JSON document for parsing
-    DynamicJsonDocument doc(1024);
+    // Create a JSON document for parsing
+    JsonDocument doc;
 
     // Deserialize the JSON response
     DeserializationError error = deserializeJson(doc, payload);
@@ -73,8 +73,8 @@ time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asi
         return 0; // Return 0 if JSON parsing fails
     }
 
-    String datetime = doc["datetime"]; // Extract the datetime string from the response
-    if (datetime.isEmpty())            // Check if the datetime is empty
+    const char *datetime = doc["datetime"].as<const char *>(); // Extract the datetime string from the response
+    if (datetime == nullptr)                                   // Check if the datetime is empty
     {
         Serial.println("❌ [Time] Failed to parse API time.");
         return 0; // Return 0 if the datetime is invalid
@@ -82,7 +82,7 @@ time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asi
 
     // Extract epoch time from the datetime string
     struct tm timeinfo = {0};
-    sscanf(datetime.c_str(), "%4d-%2d-%2dT%2d:%2d:%2d",
+    sscanf(datetime, "%4d-%2d-%2dT%2d:%2d:%2d",
            &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday,
            &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
     timeinfo.tm_year -= 1900; // Adjust year to tm_year format
