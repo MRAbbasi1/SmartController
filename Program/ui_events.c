@@ -36,7 +36,7 @@ void settingScreen(lv_event_t *e)
 	}
 }
 
-lv_timer_t *coolerStatusTimer = NULL; // store the timer
+lv_timer_t *coolerStatusTimer = NULL;
 
 void showCoolerStatusOn(lv_timer_t *timer)
 {
@@ -331,7 +331,54 @@ void submit_advance_setting(lv_event_t *e)
 	setBooleanSetting(FILTER_WARNING_ON, filter_alarm_status_SwitchState);
 }
 
-void searchingSensors(lv_event_t *e)
+void TabView1AddvancedSetting(lv_event_t *e)
+{
+	lv_obj_t *tabview = lv_event_get_target(e);
+	uint16_t active_tab = lv_tabview_get_tab_act(tabview);
+
+	if (active_tab == 0 || active_tab == 1)
+	{
+		lv_obj_clear_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+	}
+	else if (active_tab == 2)
+	{
+		lv_obj_add_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+	}
+}
+
+void restart_device(lv_event_t *e)
+{
+	// Your code here
+}
+
+void reseting_sensors_address(lv_event_t *e)
+{
+	// Your code here
+}
+
+void sensors_disconnect_check(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Inlet(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Outlet(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Antifreeze(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Filter(lv_event_t *e)
 {
 	// Your code here
 }
@@ -372,10 +419,10 @@ void resetDeviceSettings()
 	setStringSetting(AP_PASSWORD, "0");
 	setStringSetting(SERVER_URL, "https://bently.cool/");
 	setStringSetting(SERVER_IP, "192.168.1.1");
-	setStringSetting(INLET_SENSOR_ADDRESS, "28:2D:11:58:D4:E1:3C:BC");
-	setStringSetting(OUTLET_SENSOR_ADDRESS, "28:BD:AD:43:D4:E1:3C:CF");
-	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "28:AB:CC:43:D4:E1:3C:FA");
-	setStringSetting(FILTER_SENSOR_ADDRESS, "28:FF:64:1F:70:68:7C:7C");
+	// setStringSetting(INLET_SENSOR_ADDRESS, "28:2D:11:58:D4:E1:3C:BC");
+	// setStringSetting(OUTLET_SENSOR_ADDRESS, "28:BD:AD:43:D4:E1:3C:CF");
+	// setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "28:AB:CC:43:D4:E1:3C:FA");
+	// setStringSetting(FILTER_SENSOR_ADDRESS, "28:FF:64:1F:70:68:7C:7C");
 
 	resetAllChangedFlagsToFalse(); // Reset all flags to false
 
@@ -384,13 +431,11 @@ void resetDeviceSettings()
 	esp_restart(); // Reboot after the reset
 }
 
-// Callback function for the reset timer
 void resetDeviceCallback(lv_timer_t *t)
 {
 	resetDeviceSettings();
 }
 
-// Function to display UI and then reset
 void displayAndResetTask(lv_event_t *e)
 {
 	// Clear screen
@@ -443,7 +488,6 @@ void displayAndResetTask(lv_event_t *e)
 	lv_timer_create(resetDeviceCallback, 500, NULL); // Set delay to 500 ms
 }
 
-// Function to trigger display and reset
 void goToFactoryReseting(lv_event_t *e)
 {
 	// Start display and reset task
@@ -484,25 +528,8 @@ void bootScreen(lv_event_t *e)
 	printf("📺 [Display] Boot Screen Started...\n");
 
 	// Create a timer to switch to the main screen after 30,000ms (30 seconds)
-	lv_timer_create(switchToMainScreen, 30000, NULL);
+	lv_timer_create(switchToMainScreen, 15000, NULL);
 
 	// Handle LVGL tasks
 	lv_timer_handler();
-}
-
-void TabView1AddvancedSetting(lv_event_t *e)
-{
-	lv_obj_t *tabview = lv_event_get_target(e);
-	uint16_t active_tab = lv_tabview_get_tab_act(tabview);
-
-	if (active_tab == 0 || active_tab == 1)
-	{
-		lv_obj_clear_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-		lv_obj_clear_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-	}
-	else if (active_tab == 2)
-	{
-		lv_obj_add_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-		lv_obj_add_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-	}
 }
