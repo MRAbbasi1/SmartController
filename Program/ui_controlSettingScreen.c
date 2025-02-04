@@ -9,10 +9,10 @@ void ui_controlSettingScreen_screen_init(void)
 {
 ui_controlSettingScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_controlSettingScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_controlSettingScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_color(ui_controlSettingScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_controlSettingScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_controlSettingScreen, &ui_img_netlkjhg_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_img_opa(ui_controlSettingScreen, 127, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_controlSettingScreen, &ui_img_1234_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_opa(ui_controlSettingScreen, 128, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton4 = lv_btn_create(ui_controlSettingScreen);
 lv_obj_set_width( ui_returnButton4, 60);
@@ -38,7 +38,7 @@ lv_obj_set_x( ui_settingscreenlabel, 0 );
 lv_obj_set_y( ui_settingscreenlabel, -100 );
 lv_obj_set_align( ui_settingscreenlabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_settingscreenlabel,"SETTING");
-lv_obj_set_style_text_color(ui_settingscreenlabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_color(ui_settingscreenlabel, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_settingscreenlabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_settingscreenlabel, &lv_font_montserrat_18, LV_PART_MAIN| LV_STATE_DEFAULT);
 

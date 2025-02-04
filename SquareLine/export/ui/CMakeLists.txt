@@ -8,9 +8,9 @@ SET(SOURCES ui_Boot_Screen.c
     ui_comp_hook.c
     ui_helpers.c
     ui_events.c
+    ui_img_1234_png.c
     ui_img_884211525.c
     ui_img_loading_png.c
-    ui_img_netlkjhg_color_background_85551_240x320_png.c
     ui_img_return_png.c
     ui_img_278418788.c
     ui_img_worker_png.c
@@ -22,7 +22,7 @@ SET(SOURCES ui_Boot_Screen.c
     ui_img_return_66_png.c
     ui_img_unread_png.c
     ui_img_temperature_png.c
-    ui_img_netff_color_background_85551_240x320_png.c
+    ui_img_blur_color_background_85551_240x320_png.c
     ui_img_1101012385.c
     ui_img_sensor_png.c
     ui_img_120570296.c
@@ -43,6 +43,12 @@ SET(SOURCES ui_Boot_Screen.c
     ui_img_31615732.c
     ui_img_2101917800.c
     ui_img_778269571.c
-    ui_img_menu43_png.c)
+    ui_img_menu43_png.c
+    ui_img_netff_color_background_85551_240x320_png.c
+    ui_img_netlkjhg_color_background_85551_240x320_png.c
+    ui_img_blur_240x320_png.c
+    ui_img_575393433.c
+    ui_img_1397087731.c
+    ui_img_1417296881.c)
 
 add_library(ui ${SOURCES})

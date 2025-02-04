@@ -644,6 +644,12 @@ const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
 const lv_img_dsc_t *ui_imgset_netff_color_background_85551_240x[1] = {&ui_img_netff_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_netlkjhg_color_background_85551_240x[1] = {&ui_img_netlkjhg_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_return_[1] = {&ui_img_return_66_png};
+const lv_img_dsc_t *ui_imgset_blur_240x[1] = {&ui_img_blur_240x320_png};
+const lv_img_dsc_t *ui_imgset_blur_color_background_85551_240x[1] = {&ui_img_blur_color_background_85551_240x320_png};
+const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_1234_png};
+const lv_img_dsc_t *ui_imgset_1002920590[1] = {&ui_img_575393433};
+const lv_img_dsc_t *ui_imgset_1298101175[1] = {&ui_img_1397087731};
+const lv_img_dsc_t *ui_imgset_1084269119[1] = {&ui_img_1417296881};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -658,6 +664,8 @@ void effect_Animation( lv_obj_t *TargetObject, int delay)
 {
 ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
 PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->imgset = (lv_img_dsc_t **)ui_imgset_;
+PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_)/(sizeof(lv_img_dsc_t*));
 PropertyAnimation_0_user_data->val = -1;
 lv_anim_t PropertyAnimation_0;
 lv_anim_init(&PropertyAnimation_0);
@@ -681,6 +689,8 @@ void logo_Animation( lv_obj_t *TargetObject, int delay)
 {
 ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
 PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->imgset = (lv_img_dsc_t **)ui_imgset_;
+PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_)/(sizeof(lv_img_dsc_t*));
 PropertyAnimation_0_user_data->val = -1;
 lv_anim_t PropertyAnimation_0;
 lv_anim_init(&PropertyAnimation_0);
@@ -704,6 +714,8 @@ void icon_Animation( lv_obj_t *TargetObject, int delay)
 {
 ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
 PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->imgset = (lv_img_dsc_t **)ui_imgset_;
+PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_)/(sizeof(lv_img_dsc_t*));
 PropertyAnimation_0_user_data->val = -1;
 lv_anim_t PropertyAnimation_0;
 lv_anim_init(&PropertyAnimation_0);
@@ -727,6 +739,8 @@ void arc_Animation( lv_obj_t *TargetObject, int delay)
 {
 ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
 PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->imgset = (lv_img_dsc_t **)ui_imgset_;
+PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_)/(sizeof(lv_img_dsc_t*));
 PropertyAnimation_0_user_data->val = -1;
 lv_anim_t PropertyAnimation_0;
 lv_anim_init(&PropertyAnimation_0);
@@ -750,6 +764,8 @@ void boot_Animation( lv_obj_t *TargetObject, int delay)
 {
 ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
 PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->imgset = (lv_img_dsc_t **)ui_imgset_;
+PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_)/(sizeof(lv_img_dsc_t*));
 PropertyAnimation_0_user_data->val = -1;
 lv_anim_t PropertyAnimation_0;
 lv_anim_init(&PropertyAnimation_0);
@@ -773,6 +789,8 @@ void loading_Animation( lv_obj_t *TargetObject, int delay)
 {
 ui_anim_user_data_t *PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
 PropertyAnimation_0_user_data->target = TargetObject;
+PropertyAnimation_0_user_data->imgset = (lv_img_dsc_t **)ui_imgset_;
+PropertyAnimation_0_user_data->imgset_size = sizeof(ui_imgset_)/(sizeof(lv_img_dsc_t*));
 PropertyAnimation_0_user_data->val = -1;
 lv_anim_t PropertyAnimation_0;
 lv_anim_init(&PropertyAnimation_0);
@@ -787,7 +805,7 @@ lv_anim_set_playback_time(&PropertyAnimation_0, 0);
 lv_anim_set_playback_delay(&PropertyAnimation_0, 0);
  lv_anim_set_repeat_count(&PropertyAnimation_0, LV_ANIM_REPEAT_INFINITE );
 lv_anim_set_repeat_delay(&PropertyAnimation_0, 0);
-lv_anim_set_early_apply( &PropertyAnimation_0, true );
+lv_anim_set_early_apply( &PropertyAnimation_0, false );
  lv_anim_set_get_value_cb(&PropertyAnimation_0, &_ui_anim_callback_get_image_angle );
 lv_anim_start(&PropertyAnimation_0);
 
@@ -819,7 +837,7 @@ void ui_event_returnButton4( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_mainScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_mainScreen_screen_init);
+      _ui_screen_change( &ui_mainScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_mainScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -828,7 +846,7 @@ void ui_event_SettingCTRL( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_processSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_processSettingScreen_screen_init);
+      _ui_screen_change( &ui_processSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_processSettingScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -837,7 +855,7 @@ void ui_event_Advanced_Setting_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_addvansedSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_addvansedSettingScreen_screen_init);
+      _ui_screen_change( &ui_addvansedSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_addvansedSettingScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -857,7 +875,7 @@ void ui_event_Status_info_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_statusScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_statusScreen_screen_init);
+      _ui_screen_change( &ui_statusScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_statusScreen_screen_init);
       _ui_screen_delete( &ui_controlSettingScreen);
 }
 }
@@ -878,7 +896,7 @@ void ui_event_returnButton5( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_processSettingScreen);
 }
 }
@@ -987,7 +1005,7 @@ void ui_event_returnButton14( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_addvansedSettingScreen);
 }
 }
@@ -1301,7 +1319,7 @@ void ui_event_returnButton3( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_RIGHT, 100, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_statusScreen);
 }
 }
@@ -1526,7 +1544,7 @@ void ui_event_MenuButton( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_RELEASED) {
-      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_OVER_LEFT, 100, 0, &ui_controlSettingScreen_screen_init);
+      _ui_screen_change( &ui_controlSettingScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_controlSettingScreen_screen_init);
       _ui_screen_delete( &ui_mainScreen);
 }
 }

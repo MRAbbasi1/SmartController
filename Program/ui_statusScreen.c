@@ -11,8 +11,8 @@ ui_statusScreen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_statusScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_statusScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_statusScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_statusScreen, &ui_img_netlkjhg_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_img_opa(ui_statusScreen, 127, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_statusScreen, &ui_img_1234_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_opa(ui_statusScreen, 200, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton3 = lv_btn_create(ui_statusScreen);
 lv_obj_set_width( ui_returnButton3, 60);
@@ -137,7 +137,7 @@ lv_obj_clear_flag( ui_tempStatusPanel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_tempStatusPanel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_tempStatusPanel, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_tempStatusPanel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_tempStatusPanel, &ui_img_netff_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_tempStatusPanel, &ui_img_blur_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_img_opa(ui_tempStatusPanel, 64, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton11 = lv_btn_create(ui_tempStatusPanel);
@@ -292,7 +292,7 @@ lv_obj_clear_flag( ui_alarmStatusPanel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_alarmStatusPanel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_alarmStatusPanel, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_alarmStatusPanel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_alarmStatusPanel, &ui_img_netff_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_alarmStatusPanel, &ui_img_blur_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_img_opa(ui_alarmStatusPanel, 64, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton2 = lv_btn_create(ui_alarmStatusPanel);
@@ -447,7 +447,7 @@ lv_obj_clear_flag( ui_relayStatusPanel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_relayStatusPanel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_relayStatusPanel, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_relayStatusPanel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_relayStatusPanel, &ui_img_netff_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_relayStatusPanel, &ui_img_blur_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_img_opa(ui_relayStatusPanel, 64, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton7 = lv_btn_create(ui_relayStatusPanel);
@@ -562,7 +562,7 @@ lv_obj_clear_flag( ui_networkStatusPanel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_networkStatusPanel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_networkStatusPanel, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_networkStatusPanel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_networkStatusPanel, &ui_img_netff_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_networkStatusPanel, &ui_img_blur_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_img_opa(ui_networkStatusPanel, 64, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton8 = lv_btn_create(ui_networkStatusPanel);
@@ -850,7 +850,7 @@ lv_obj_clear_flag( ui_deviceInfoPanel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_deviceInfoPanel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_deviceInfoPanel, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_deviceInfoPanel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_deviceInfoPanel, &ui_img_netff_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_deviceInfoPanel, &ui_img_blur_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_img_opa(ui_deviceInfoPanel, 64, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton9 = lv_btn_create(ui_deviceInfoPanel);
@@ -954,7 +954,7 @@ lv_obj_clear_flag( ui_serviceInfoPanel, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_serviceInfoPanel, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_serviceInfoPanel, lv_color_hex(0x080052), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_serviceInfoPanel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_bg_img_src( ui_serviceInfoPanel, &ui_img_netff_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_src( ui_serviceInfoPanel, &ui_img_blur_color_background_85551_240x320_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_img_opa(ui_serviceInfoPanel, 64, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_returnButton10 = lv_btn_create(ui_serviceInfoPanel);

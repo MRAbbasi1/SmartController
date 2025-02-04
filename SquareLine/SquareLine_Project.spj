@@ -120,6 +120,7 @@
               },
               {
                 "nid": 1010,
+                "flags": 1048576,
                 "strtype": "IMAGE/Image",
                 "InheritedType": 1
               },
@@ -364,7 +365,6 @@
           },
           {
             "nid": 90,
-            "flags": 1048576,
             "strtype": "OBJECT/Flags",
             "InheritedType": 1
           },
@@ -388,7 +388,6 @@
           },
           {
             "nid": 320,
-            "flags": 1048576,
             "strtype": "OBJECT/States",
             "InheritedType": 1
           },
@@ -421,6 +420,12 @@
                       255
                     ],
                     "InheritedType": 7
+                  },
+                  {
+                    "nid": 10610,
+                    "strtype": "_style/Bg_Image",
+                    "strval": "assets/1234.png",
+                    "InheritedType": 5
                   }
                 ],
                 "InheritedType": 1
@@ -465,7 +470,6 @@
               },
               {
                 "nid": 1004351,
-                "flags": 1048576,
                 "strtype": "_event/action",
                 "strval": "PLAY ANIMATION",
                 "childs": [
@@ -515,7 +519,6 @@
               },
               {
                 "nid": 1004359,
-                "flags": 1048576,
                 "strtype": "_event/action",
                 "strval": "PLAY ANIMATION",
                 "childs": [
@@ -565,7 +568,6 @@
               },
               {
                 "nid": 1004367,
-                "flags": 1048576,
                 "strtype": "_event/action",
                 "strval": "CALL FUNCTION",
                 "childs": [
@@ -604,7 +606,6 @@
               },
               {
                 "nid": 1004393,
-                "flags": 1048576,
                 "strtype": "_event/action",
                 "strval": "MODIFY FLAG",
                 "childs": [
@@ -876,13 +877,12 @@
                       {
                         "nid": 1000729,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_RIGHT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000730,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -1066,9 +1066,9 @@
                         "nid": 10410,
                         "strtype": "_style/Text_Color",
                         "intarray": [
-                          255,
-                          255,
-                          255,
+                          8,
+                          0,
+                          65,
                           255
                         ],
                         "InheritedType": 7
@@ -1346,13 +1346,12 @@
                       {
                         "nid": 1000529,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_LEFT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000530,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -1621,13 +1620,12 @@
                       {
                         "nid": 1000695,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_LEFT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000696,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -2257,13 +2255,12 @@
                       {
                         "nid": 1000695,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_LEFT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000696,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -2738,9 +2735,9 @@
                     "nid": 10520,
                     "strtype": "_style/Bg_Color",
                     "intarray": [
-                      0,
-                      0,
-                      0,
+                      255,
+                      255,
+                      255,
                       255
                     ],
                     "InheritedType": 7
@@ -2748,13 +2745,13 @@
                   {
                     "nid": 10610,
                     "strtype": "_style/Bg_Image",
-                    "strval": "assets/netlkjhg_color_background_85551_240x320.png",
+                    "strval": "assets/1234.png",
                     "InheritedType": 5
                   },
                   {
                     "nid": 10620,
                     "strtype": "_style/Bg_Image_opa",
-                    "integer": 127,
+                    "integer": 128,
                     "InheritedType": 6
                   }
                 ],
@@ -3174,13 +3171,12 @@
                       {
                         "nid": 1000729,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_RIGHT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000730,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -3364,9 +3360,9 @@
                         "nid": 10410,
                         "strtype": "_style/Text_Color",
                         "intarray": [
-                          255,
-                          255,
-                          255,
+                          8,
+                          0,
+                          65,
                           255
                         ],
                         "InheritedType": 7
@@ -4596,7 +4592,7 @@
                           {
                             "nid": 10510,
                             "strtype": "_style/Bg_Radius",
-                            "integer": 2,
+                            "integer": 5,
                             "InheritedType": 6
                           },
                           {
@@ -4747,7 +4743,7 @@
                           255,
                           255,
                           255,
-                          0
+                          64
                         ],
                         "InheritedType": 7
                       },
@@ -5615,7 +5611,7 @@
                           {
                             "nid": 10510,
                             "strtype": "_style/Bg_Radius",
-                            "integer": 2,
+                            "integer": 5,
                             "InheritedType": 6
                           },
                           {
@@ -5767,7 +5763,7 @@
                           255,
                           255,
                           255,
-                          0
+                          64
                         ],
                         "InheritedType": 7
                       },
@@ -6637,7 +6633,7 @@
                           {
                             "nid": 10510,
                             "strtype": "_style/Bg_Radius",
-                            "integer": 2,
+                            "integer": 5,
                             "InheritedType": 6
                           },
                           {
@@ -6789,7 +6785,7 @@
                           255,
                           255,
                           255,
-                          0
+                          64
                         ],
                         "InheritedType": 7
                       },
@@ -7701,7 +7697,7 @@
                           255,
                           255,
                           255,
-                          0
+                          64
                         ],
                         "InheritedType": 7
                       },
@@ -7746,8 +7742,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "CONTAINER",
-            "tree_closed": true
+            "saved_objtypeKey": "CONTAINER"
           },
           {
             "guid": "GUID16675363-808476S5153329",
@@ -8879,7 +8874,7 @@
                           255,
                           255,
                           255,
-                          0
+                          64
                         ],
                         "InheritedType": 7
                       },
@@ -8924,8 +8919,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "CONTAINER",
-            "tree_closed": true
+            "saved_objtypeKey": "CONTAINER"
           },
           {
             "guid": "GUID72798074-472985S1383326",
@@ -9907,9 +9901,9 @@
                     "nid": 10520,
                     "strtype": "_style/Bg_Color",
                     "intarray": [
-                      0,
-                      0,
-                      0,
+                      255,
+                      255,
+                      255,
                       255
                     ],
                     "InheritedType": 7
@@ -9917,14 +9911,8 @@
                   {
                     "nid": 10610,
                     "strtype": "_style/Bg_Image",
-                    "strval": "assets/netlkjhg_color_background_85551_240x320.png",
+                    "strval": "assets/1234.png",
                     "InheritedType": 5
-                  },
-                  {
-                    "nid": 10620,
-                    "strtype": "_style/Bg_Image_opa",
-                    "integer": 127,
-                    "InheritedType": 6
                   }
                 ],
                 "InheritedType": 1
@@ -10441,13 +10429,12 @@
                       {
                         "nid": 1000729,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_RIGHT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000730,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -10631,9 +10618,9 @@
                         "nid": 10410,
                         "strtype": "_style/Text_Color",
                         "intarray": [
+                          8,
                           0,
-                          0,
-                          0,
+                          65,
                           255
                         ],
                         "InheritedType": 7
@@ -11379,6 +11366,23 @@
                                     "InheritedType": 5
                                   },
                                   {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
+                                  },
+                                  {
                                     "nid": 10920,
                                     "strtype": "_style/Shadow_params",
                                     "intarray": [
@@ -11603,6 +11607,23 @@
                                     "strtype": "_style/Bg_Image",
                                     "strval": "assets/minus (1).png",
                                     "InheritedType": 5
+                                  },
+                                  {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
                                   },
                                   {
                                     "nid": 10920,
@@ -11830,6 +11851,17 @@
                                 "strval": "DEFAULT",
                                 "childs": [
                                   {
+                                    "nid": 10410,
+                                    "strtype": "_style/Text_Color",
+                                    "intarray": [
+                                      0,
+                                      0,
+                                      0,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
                                     "nid": 10450,
                                     "strtype": "_style/Text_Font",
                                     "strval": "montserrat_12",
@@ -11838,7 +11870,7 @@
                                   {
                                     "nid": 10510,
                                     "strtype": "_style/Bg_Radius",
-                                    "integer": 2,
+                                    "integer": 5,
                                     "InheritedType": 6
                                   },
                                   {
@@ -11988,7 +12020,7 @@
                                   255,
                                   255,
                                   255,
-                                  0
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -11996,9 +12028,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -12364,6 +12396,23 @@
                                     "InheritedType": 5
                                   },
                                   {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
+                                  },
+                                  {
                                     "nid": 10920,
                                     "strtype": "_style/Shadow_params",
                                     "intarray": [
@@ -12588,6 +12637,23 @@
                                     "strtype": "_style/Bg_Image",
                                     "strval": "assets/minus (1).png",
                                     "InheritedType": 5
+                                  },
+                                  {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
                                   },
                                   {
                                     "nid": 10920,
@@ -12815,6 +12881,17 @@
                                 "strval": "DEFAULT",
                                 "childs": [
                                   {
+                                    "nid": 10410,
+                                    "strtype": "_style/Text_Color",
+                                    "intarray": [
+                                      0,
+                                      0,
+                                      0,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
                                     "nid": 10450,
                                     "strtype": "_style/Text_Font",
                                     "strval": "montserrat_12",
@@ -12823,7 +12900,7 @@
                                   {
                                     "nid": 10510,
                                     "strtype": "_style/Bg_Radius",
-                                    "integer": 2,
+                                    "integer": 5,
                                     "InheritedType": 6
                                   },
                                   {
@@ -12974,7 +13051,7 @@
                                   255,
                                   255,
                                   255,
-                                  0
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -12982,9 +13059,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -13349,6 +13426,23 @@
                                     "InheritedType": 5
                                   },
                                   {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
+                                  },
+                                  {
                                     "nid": 10920,
                                     "strtype": "_style/Shadow_params",
                                     "intarray": [
@@ -13573,6 +13667,23 @@
                                     "strtype": "_style/Bg_Image",
                                     "strval": "assets/minus (1).png",
                                     "InheritedType": 5
+                                  },
+                                  {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
                                   },
                                   {
                                     "nid": 10920,
@@ -13800,6 +13911,17 @@
                                 "strval": "DEFAULT",
                                 "childs": [
                                   {
+                                    "nid": 10410,
+                                    "strtype": "_style/Text_Color",
+                                    "intarray": [
+                                      0,
+                                      0,
+                                      0,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
                                     "nid": 10450,
                                     "strtype": "_style/Text_Font",
                                     "strval": "montserrat_12",
@@ -13808,7 +13930,7 @@
                                   {
                                     "nid": 10510,
                                     "strtype": "_style/Bg_Radius",
-                                    "integer": 2,
+                                    "integer": 5,
                                     "InheritedType": 6
                                   },
                                   {
@@ -13958,7 +14080,7 @@
                                   255,
                                   255,
                                   255,
-                                  0
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -13966,9 +14088,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -14003,8 +14125,7 @@
                         "InheritedType": 11
                       }
                     ],
-                    "saved_objtypeKey": "CONTAINER",
-                    "tree_closed": true
+                    "saved_objtypeKey": "CONTAINER"
                   },
                   {
                     "guid": "GUID12459167-808439S196763327",
@@ -14334,6 +14455,23 @@
                                     "InheritedType": 5
                                   },
                                   {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
+                                  },
+                                  {
                                     "nid": 10920,
                                     "strtype": "_style/Shadow_params",
                                     "intarray": [
@@ -14558,6 +14696,23 @@
                                     "strtype": "_style/Bg_Image",
                                     "strval": "assets/minus (1).png",
                                     "InheritedType": 5
+                                  },
+                                  {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
                                   },
                                   {
                                     "nid": 10920,
@@ -14785,6 +14940,17 @@
                                 "strval": "DEFAULT",
                                 "childs": [
                                   {
+                                    "nid": 10410,
+                                    "strtype": "_style/Text_Color",
+                                    "intarray": [
+                                      0,
+                                      0,
+                                      0,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
                                     "nid": 10450,
                                     "strtype": "_style/Text_Font",
                                     "strval": "montserrat_12",
@@ -14793,7 +14959,7 @@
                                   {
                                     "nid": 10510,
                                     "strtype": "_style/Bg_Radius",
-                                    "integer": 2,
+                                    "integer": 5,
                                     "InheritedType": 6
                                   },
                                   {
@@ -14943,7 +15109,7 @@
                                   255,
                                   255,
                                   255,
-                                  0
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -14951,9 +15117,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -16311,6 +16477,23 @@
                                     "InheritedType": 5
                                   },
                                   {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
+                                  },
+                                  {
                                     "nid": 10920,
                                     "strtype": "_style/Shadow_params",
                                     "intarray": [
@@ -16539,6 +16722,23 @@
                                     "strtype": "_style/Bg_Image",
                                     "strval": "assets/minus (1).png",
                                     "InheritedType": 5
+                                  },
+                                  {
+                                    "nid": 10710,
+                                    "strtype": "_style/Border_Color",
+                                    "intarray": [
+                                      255,
+                                      255,
+                                      255,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
+                                    "nid": 10720,
+                                    "strtype": "_style/Border width",
+                                    "integer": 1,
+                                    "InheritedType": 6
                                   },
                                   {
                                     "nid": 10920,
@@ -17757,6 +17957,17 @@
                                 "strval": "DEFAULT",
                                 "childs": [
                                   {
+                                    "nid": 10410,
+                                    "strtype": "_style/Text_Color",
+                                    "intarray": [
+                                      0,
+                                      0,
+                                      0,
+                                      255
+                                    ],
+                                    "InheritedType": 7
+                                  },
+                                  {
                                     "nid": 10450,
                                     "strtype": "_style/Text_Font",
                                     "strval": "montserrat_12",
@@ -17765,7 +17976,7 @@
                                   {
                                     "nid": 10510,
                                     "strtype": "_style/Bg_Radius",
-                                    "integer": 2,
+                                    "integer": 5,
                                     "InheritedType": 6
                                   },
                                   {
@@ -17916,7 +18127,7 @@
                                   255,
                                   255,
                                   255,
-                                  255
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -17924,9 +18135,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -19000,7 +19211,7 @@
                                   255,
                                   255,
                                   255,
-                                  0
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -19008,9 +19219,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -20084,7 +20295,7 @@
                                   255,
                                   255,
                                   255,
-                                  0
+                                  64
                                 ],
                                 "InheritedType": 7
                               },
@@ -20092,9 +20303,9 @@
                                 "nid": 10710,
                                 "strtype": "_style/Border_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  82,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -20716,9 +20927,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  65,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -21443,9 +21654,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  8,
-                                  0,
-                                  65,
+                                  255,
+                                  255,
+                                  255,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -22600,7 +22811,8 @@
                     "InheritedType": 11
                   }
                 ],
-                "saved_objtypeKey": "TABPAGE"
+                "saved_objtypeKey": "TABPAGE",
+                "tree_closed": true
               }
             ],
             "dont_export": false,
@@ -22781,6 +22993,17 @@
                           255,
                           255,
                           255,
+                          0
+                        ],
+                        "InheritedType": 7
+                      },
+                      {
+                        "nid": 10710,
+                        "strtype": "_style/Border_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
                           255
                         ],
                         "InheritedType": 7
@@ -22797,11 +23020,33 @@
                         "InheritedType": 3
                       },
                       {
+                        "nid": 10810,
+                        "strtype": "_style/Outline_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
+                        ],
+                        "InheritedType": 7
+                      },
+                      {
                         "nid": 10820,
                         "strtype": "_style/Outline_params",
                         "intarray": [
                           0,
                           0
+                        ],
+                        "InheritedType": 7
+                      },
+                      {
+                        "nid": 10410,
+                        "strtype": "_style/Text_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
                         ],
                         "InheritedType": 7
                       }
@@ -22814,6 +23059,17 @@
                     "strval": "CHECKED",
                     "childs": [
                       {
+                        "nid": 20710,
+                        "strtype": "_style/Border_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
+                        ],
+                        "InheritedType": 7
+                      },
+                      {
                         "nid": 20720,
                         "strtype": "_style/Border width",
                         "InheritedType": 6
@@ -22822,9 +23078,9 @@
                         "nid": 20410,
                         "strtype": "_style/Text_Color",
                         "intarray": [
-                          0,
-                          0,
-                          0,
+                          255,
+                          255,
+                          255,
                           255
                         ],
                         "InheritedType": 7
@@ -22846,6 +23102,17 @@
                     "strtype": "_style/StyleState",
                     "strval": "DEFAULT",
                     "childs": [
+                      {
+                        "nid": 10410,
+                        "strtype": "_style/Text_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
+                        ],
+                        "InheritedType": 7
+                      },
                       {
                         "nid": 10450,
                         "strtype": "_style/Text_Font",
@@ -22902,9 +23169,9 @@
                         "nid": 20410,
                         "strtype": "_style/Text_Color",
                         "intarray": [
-                          0,
-                          0,
-                          0,
+                          255,
+                          255,
+                          255,
                           255
                         ],
                         "InheritedType": 7
@@ -23014,7 +23281,6 @@
                       {
                         "nid": 10510,
                         "strtype": "_style/Bg_Radius",
-                        "integer": 5,
                         "InheritedType": 6
                       },
                       {
@@ -23042,7 +23308,7 @@
                       {
                         "nid": 10720,
                         "strtype": "_style/Border width",
-                        "integer": 2,
+                        "integer": 1,
                         "InheritedType": 6
                       },
                       {
@@ -23101,9 +23367,9 @@
                         "nid": 20410,
                         "strtype": "_style/Text_Color",
                         "intarray": [
-                          0,
-                          0,
-                          0,
+                          255,
+                          255,
+                          255,
                           255
                         ],
                         "InheritedType": 7
@@ -23111,7 +23377,6 @@
                       {
                         "nid": 20510,
                         "strtype": "_style/Bg_Radius",
-                        "integer": 5,
                         "InheritedType": 6
                       },
                       {
@@ -23119,8 +23384,8 @@
                         "strtype": "_style/Bg_Color",
                         "intarray": [
                           0,
-                          182,
-                          57,
+                          190,
+                          16,
                           255
                         ],
                         "InheritedType": 7
@@ -23139,7 +23404,7 @@
                       {
                         "nid": 20720,
                         "strtype": "_style/Border width",
-                        "integer": 2,
+                        "integer": 1,
                         "InheritedType": 6
                       },
                       {
@@ -23435,9 +23700,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  8,
+                                  0,
+                                  82,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -24937,6 +25202,12 @@
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
                           }
                         ],
                         "InheritedType": 1
@@ -25378,9 +25649,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  0,
+                                  0,
+                                  0,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -26586,12 +26857,24 @@
                             "nid": 10520,
                             "strtype": "_style/Bg_Color",
                             "intarray": [
-                              0,
-                              0,
-                              0,
+                              255,
+                              255,
+                              255,
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
+                          },
+                          {
+                            "nid": 10620,
+                            "strtype": "_style/Bg_Image_opa",
+                            "integer": 128,
+                            "InheritedType": 6
                           }
                         ],
                         "InheritedType": 1
@@ -27034,9 +27317,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  0,
+                                  0,
+                                  0,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -28243,12 +28526,24 @@
                             "nid": 10520,
                             "strtype": "_style/Bg_Color",
                             "intarray": [
-                              0,
-                              0,
-                              0,
+                              255,
+                              255,
+                              255,
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
+                          },
+                          {
+                            "nid": 10620,
+                            "strtype": "_style/Bg_Image_opa",
+                            "integer": 128,
+                            "InheritedType": 6
                           }
                         ],
                         "InheritedType": 1
@@ -28691,9 +28986,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  0,
+                                  0,
+                                  0,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -29900,12 +30195,24 @@
                             "nid": 10520,
                             "strtype": "_style/Bg_Color",
                             "intarray": [
-                              0,
-                              0,
-                              0,
+                              255,
+                              255,
+                              255,
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
+                          },
+                          {
+                            "nid": 10620,
+                            "strtype": "_style/Bg_Image_opa",
+                            "integer": 128,
+                            "InheritedType": 6
                           }
                         ],
                         "InheritedType": 1
@@ -30347,9 +30654,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  0,
+                                  0,
+                                  0,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -31556,12 +31863,24 @@
                             "nid": 10520,
                             "strtype": "_style/Bg_Color",
                             "intarray": [
-                              0,
-                              0,
-                              0,
+                              255,
+                              255,
+                              255,
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
+                          },
+                          {
+                            "nid": 10620,
+                            "strtype": "_style/Bg_Image_opa",
+                            "integer": 128,
+                            "InheritedType": 6
                           }
                         ],
                         "InheritedType": 1
@@ -32003,9 +32322,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  0,
+                                  0,
+                                  0,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -33213,12 +33532,24 @@
                             "nid": 10520,
                             "strtype": "_style/Bg_Color",
                             "intarray": [
-                              0,
-                              0,
-                              0,
+                              255,
+                              255,
+                              255,
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
+                          },
+                          {
+                            "nid": 10620,
+                            "strtype": "_style/Bg_Image_opa",
+                            "integer": 128,
+                            "InheritedType": 6
                           }
                         ],
                         "InheritedType": 1
@@ -33380,9 +33711,9 @@
                                 "nid": 10410,
                                 "strtype": "_style/Text_Color",
                                 "intarray": [
-                                  255,
-                                  255,
-                                  255,
+                                  0,
+                                  0,
+                                  0,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -33701,6 +34032,12 @@
                               255
                             ],
                             "InheritedType": 7
+                          },
+                          {
+                            "nid": 10610,
+                            "strtype": "_style/Bg_Image",
+                            "strval": "assets/1234.png",
+                            "InheritedType": 5
                           }
                         ],
                         "InheritedType": 1
@@ -33927,8 +34264,8 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      5,
-                      -50
+                      0,
+                      -20
                     ],
                     "InheritedType": 7
                   },
@@ -33937,7 +34274,7 @@
                     "flags": 49,
                     "strtype": "OBJECT/Size",
                     "intarray": [
-                      210,
+                      232,
                       1
                     ],
                     "InheritedType": 7
@@ -34013,7 +34350,7 @@
                             "nid": 10410,
                             "strtype": "_style/Text_Color",
                             "intarray": [
-                              0,
+                              255,
                               0,
                               0,
                               255
@@ -34021,9 +34358,24 @@
                             "InheritedType": 7
                           },
                           {
+                            "nid": 10420,
+                            "strtype": "_style/Text_Spacing",
+                            "intarray": [
+                              0,
+                              7
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
+                            "nid": 10430,
+                            "strtype": "_style/Text_Align",
+                            "strval": "CENTER",
+                            "InheritedType": 3
+                          },
+                          {
                             "nid": 10450,
                             "strtype": "_style/Text_Font",
-                            "strval": "montserrat_16",
+                            "strval": "montserrat_18",
                             "InheritedType": 3
                           }
                         ],
@@ -34087,7 +34439,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       -55,
-                      25
+                      50
                     ],
                     "InheritedType": 7
                   },
@@ -34159,6 +34511,24 @@
                               0,
                               82,
                               255
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
+                            "nid": 10920,
+                            "strtype": "_style/Shadow_params",
+                            "intarray": [
+                              0,
+                              0
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
+                            "nid": 10930,
+                            "strtype": "_style/Shadow_offset",
+                            "intarray": [
+                              0,
+                              0
                             ],
                             "InheritedType": 7
                           }
@@ -34382,7 +34752,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       -55,
-                      25
+                      50
                     ],
                     "InheritedType": 7
                   },
@@ -34542,7 +34912,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       55,
-                      25
+                      50
                     ],
                     "InheritedType": 7
                   },
@@ -34614,6 +34984,24 @@
                               0,
                               0,
                               255
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
+                            "nid": 10920,
+                            "strtype": "_style/Shadow_params",
+                            "intarray": [
+                              0,
+                              0
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
+                            "nid": 10930,
+                            "strtype": "_style/Shadow_offset",
+                            "intarray": [
+                              0,
+                              0
                             ],
                             "InheritedType": 7
                           }
@@ -34744,7 +35132,7 @@
                     "strtype": "OBJECT/Position",
                     "intarray": [
                       55,
-                      25
+                      50
                     ],
                     "InheritedType": 7
                   },
@@ -34979,12 +35367,18 @@
                         "nid": 10520,
                         "strtype": "_style/Bg_Color",
                         "intarray": [
-                          255,
-                          255,
-                          255,
+                          0,
+                          0,
+                          0,
                           255
                         ],
                         "InheritedType": 7
+                      },
+                      {
+                        "nid": 10610,
+                        "strtype": "_style/Bg_Image",
+                        "strval": "assets/1234.png",
+                        "InheritedType": 5
                       }
                     ],
                     "InheritedType": 1
@@ -35004,7 +35398,8 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "CONTAINER"
+            "saved_objtypeKey": "CONTAINER",
+            "tree_closed": true
           }
         ],
         "isPage": true,
@@ -35120,6 +35515,12 @@
                       255
                     ],
                     "InheritedType": 7
+                  },
+                  {
+                    "nid": 10610,
+                    "strtype": "_style/Bg_Image",
+                    "strval": "assets/1234.png",
+                    "InheritedType": 5
                   }
                 ],
                 "InheritedType": 1
@@ -35625,13 +36026,12 @@
                       {
                         "nid": 1000729,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_RIGHT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000730,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -39510,7 +39910,7 @@
                       {
                         "nid": 10610,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/netff_color_background_85551_240x320.png",
+                        "strval": "assets/blur_color_background_85551_240x320.png",
                         "InheritedType": 5
                       },
                       {
@@ -42231,7 +42631,7 @@
                       {
                         "nid": 10610,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/netff_color_background_85551_240x320.png",
+                        "strval": "assets/blur_color_background_85551_240x320.png",
                         "InheritedType": 5
                       },
                       {
@@ -44340,7 +44740,7 @@
                       {
                         "nid": 10610,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/netff_color_background_85551_240x320.png",
+                        "strval": "assets/blur_color_background_85551_240x320.png",
                         "InheritedType": 5
                       },
                       {
@@ -48944,7 +49344,7 @@
                       {
                         "nid": 10610,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/netff_color_background_85551_240x320.png",
+                        "strval": "assets/blur_color_background_85551_240x320.png",
                         "InheritedType": 5
                       },
                       {
@@ -50895,7 +51295,7 @@
                       {
                         "nid": 10610,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/netff_color_background_85551_240x320.png",
+                        "strval": "assets/blur_color_background_85551_240x320.png",
                         "InheritedType": 5
                       },
                       {
@@ -52526,7 +52926,7 @@
                       {
                         "nid": 10610,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/netff_color_background_85551_240x320.png",
+                        "strval": "assets/blur_color_background_85551_240x320.png",
                         "InheritedType": 5
                       },
                       {
@@ -52665,13 +53065,13 @@
                   {
                     "nid": 10610,
                     "strtype": "_style/Bg_Image",
-                    "strval": "assets/netlkjhg_color_background_85551_240x320.png",
+                    "strval": "assets/1234.png",
                     "InheritedType": 5
                   },
                   {
                     "nid": 10620,
                     "strtype": "_style/Bg_Image_opa",
-                    "integer": 127,
+                    "integer": 200,
                     "InheritedType": 6
                   }
                 ],
@@ -53257,13 +53657,12 @@
                       {
                         "nid": 1000729,
                         "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "OVER_LEFT",
+                        "strval": "NONE",
                         "InheritedType": 3
                       },
                       {
                         "nid": 1000730,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 100,
                         "InheritedType": 6
                       },
                       {
@@ -54086,8 +54485,8 @@
                         "strtype": "_style/Arc_Color",
                         "intarray": [
                           0,
-                          53,
-                          140,
+                          54,
+                          144,
                           255
                         ],
                         "InheritedType": 7
@@ -56439,14 +56838,8 @@
                   {
                     "nid": 10610,
                     "strtype": "_style/Bg_Image",
-                    "strval": "assets/netff_color_background_85551_240x320.png",
+                    "strval": "assets/1234.png",
                     "InheritedType": 5
-                  },
-                  {
-                    "nid": 10620,
-                    "strtype": "_style/Bg_Image_opa",
-                    "integer": 127,
-                    "InheritedType": 6
                   }
                 ],
                 "InheritedType": 1
@@ -58314,7 +58707,7 @@
         {
           "nid": 1004218,
           "strtype": "ELOANIMATION/TestTarget",
-          "strval": "GUID1841713-793393S57688427",
+          "strval": "GUID88455583-793415S969427",
           "InheritedType": 10
         },
         {
@@ -58344,129 +58737,128 @@
           ],
           "TimeReference": 0,
           "ValueReference": 1,
-          "EarlyApply": true,
+          "EarlyApply": false,
           "ImageSet": "",
           "PlaybackTime": 0,
           "PlaybackDelay": 0,
-          "LoopCount": 15,
+          "LoopCount": 0,
           "LoopDelay": 0,
           "LoopInfinite": true,
-          "guid": "GUID54795997-793417S591427",
-          "deepid": -1697126346,
+          "guid": "GUID37529770-524673S45435",
+          "deepid": 922518555,
           "dont_export": false,
           "locked": false,
           "properties": [
             {
-              "nid": 1004327,
+              "nid": 1004649,
               "strtype": "PROPERTYANIMATION/Name",
               "strval": "Image angle",
               "InheritedType": 10
             },
             {
-              "nid": 1004328,
+              "nid": 1004650,
               "strtype": "PROPERTYANIMATION/VariableName",
               "strval": "PropertyAnimation_0",
               "InheritedType": 10
             },
             {
-              "nid": 1004329,
+              "nid": 1004651,
               "strtype": "PROPERTYANIMATION/PropertyFunction",
               "strval": "anim_callback_set_image_angle",
               "InheritedType": 10
             },
             {
-              "nid": 1004330,
+              "nid": 1004652,
               "strtype": "PROPERTYANIMATION/StartValue",
               "InheritedType": 6
             },
             {
-              "nid": 1004331,
+              "nid": 1004653,
               "strtype": "PROPERTYANIMATION/EndValue",
               "integer": 3600,
               "InheritedType": 6
             },
             {
-              "nid": 1004332,
+              "nid": 1004654,
               "strtype": "PROPERTYANIMATION/AbsoluteReference",
               "strval": "False",
               "InheritedType": 2
             },
             {
-              "nid": 1004333,
+              "nid": 1004655,
               "strtype": "PROPERTYANIMATION/Delay",
               "InheritedType": 6
             },
             {
-              "nid": 1004334,
+              "nid": 1004656,
               "strtype": "PROPERTYANIMATION/Duration",
               "integer": 1000,
               "InheritedType": 6
             },
             {
-              "nid": 1004335,
+              "nid": 1004657,
               "strtype": "PROPERTYANIMATION/Path",
               "strval": "linear",
               "InheritedType": 3
             },
             {
-              "nid": 1004336,
+              "nid": 1004658,
               "strtype": "PROPERTYANIMATION/FullAnimationDuration",
               "integer": 1000,
               "InheritedType": 6
             },
             {
-              "nid": 1004337,
+              "nid": 1004659,
               "strtype": "PROPERTYANIMATION/LoopCount",
-              "integer": 15,
               "InheritedType": 6
             },
             {
-              "nid": 1004338,
+              "nid": 1004660,
               "strtype": "PROPERTYANIMATION/Forward",
               "strval": "True",
               "InheritedType": 2
             },
             {
-              "nid": 1004339,
+              "nid": 1004661,
               "strtype": "PROPERTYANIMATION/Backward",
               "strval": "False",
               "InheritedType": 2
             },
             {
-              "nid": 1004340,
+              "nid": 1004662,
               "strtype": "PROPERTYANIMATION/EarlyApply",
-              "strval": "True",
+              "strval": "False",
               "InheritedType": 2
             },
             {
-              "nid": 1004341,
+              "nid": 1004663,
               "strtype": "PROPERTYANIMATION/PropertyGetter",
               "strval": "anim_callback_get_image_angle",
               "InheritedType": 10
             },
             {
-              "nid": 1004342,
+              "nid": 1004664,
               "strtype": "PROPERTYANIMATION/LoopDelay",
               "InheritedType": 6
             },
             {
-              "nid": 1004343,
+              "nid": 1004665,
               "strtype": "PROPERTYANIMATION/PlaybackDelay",
               "InheritedType": 6
             },
             {
-              "nid": 1004344,
+              "nid": 1004666,
               "strtype": "PROPERTYANIMATION/PlaybackTime",
               "InheritedType": 6
             },
             {
-              "nid": 1004345,
+              "nid": 1004667,
               "strtype": "PROPERTYANIMATION/LoopInfinite",
               "strval": "True",
               "InheritedType": 2
             },
             {
-              "nid": 1004346,
+              "nid": 1004668,
               "strtype": "PROPERTYANIMATION/ImageSet",
               "strval": "",
               "InheritedType": 14
@@ -58555,7 +58947,7 @@
     "uiExportFolderPath": "/Users/mra1380mohammadrezagmail.com/Downloads/SquareLine/export/ui",
     "projectExportFolderPath": "/Users/mra1380mohammadrezagmail.com/Downloads/SquareLine/export",
     "custom_variable_prefix": "uic",
-    "backup_cnt": 780,
+    "backup_cnt": 849,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.11",
     "callfuncsexport": "C_FILE",
@@ -58571,7 +58963,7 @@
     "drive_fatfs_path": "",
     "naming": "Name",
     "naming_force_lowercase": false,
-    "nidcnt": 1004649,
+    "nidcnt": 1004673,
     "BitDepth": 16,
     "Name": "SquareLine_Project"
   }

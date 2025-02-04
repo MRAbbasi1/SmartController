@@ -641,9 +641,9 @@ extern lv_obj_t *uic_arc_danger_inlet;
 extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
+LV_IMG_DECLARE( ui_img_1234_png);   // assets/1234.png
 LV_IMG_DECLARE( ui_img_884211525);   // assets/logo-min-800x191 (1).png
 LV_IMG_DECLARE( ui_img_loading_png);   // assets/loading.png
-LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_return_png);   // assets/return.png
 LV_IMG_DECLARE( ui_img_278418788);   // assets/setting (2).png
 LV_IMG_DECLARE( ui_img_worker_png);   // assets/worker.png
@@ -655,7 +655,7 @@ LV_IMG_DECLARE( ui_img_1019942150);   // assets/danger (3).png
 LV_IMG_DECLARE( ui_img_return_66_png);   // assets/return 66.png
 LV_IMG_DECLARE( ui_img_unread_png);   // assets/unread.png
 LV_IMG_DECLARE( ui_img_temperature_png);   // assets/temperature.png
-LV_IMG_DECLARE( ui_img_netff_color_background_85551_240x320_png);   // assets/netff_color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_blur_color_background_85551_240x320_png);   // assets/blur_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_1101012385);   // assets/danger (2).png
 LV_IMG_DECLARE( ui_img_sensor_png);   // assets/sensor.png
 LV_IMG_DECLARE( ui_img_120570296);   // assets/sync-problem.png
@@ -677,6 +677,12 @@ LV_IMG_DECLARE( ui_img_31615732);   // assets/dashboard (6).png
 LV_IMG_DECLARE( ui_img_2101917800);   // assets/door (6).png
 LV_IMG_DECLARE( ui_img_778269571);   // assets/door (5).png
 LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
+LV_IMG_DECLARE( ui_img_netff_color_background_85551_240x320_png);   // assets/netff_color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_blur_240x320_png);   // assets/blur_240x320.png
+LV_IMG_DECLARE( ui_img_575393433);   // assets/compaq-abstract-zf-320x240-2.png
+LV_IMG_DECLARE( ui_img_1397087731);   // assets/netff_2-color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_1417296881);   // assets/netlkjhg_2-color_background_85551_240x320.png
 
 // UI INIT
 void ui_init(void);

@@ -6,37 +6,8 @@
 
 #include "ui.h"
 #include "setting.h"
+#include "esp_system.h"
 #include <Arduino.h>
-
-void switchToMainScreen(lv_timer_t *timer)
-{
-	// Get the currently active screen
-	lv_obj_t *currentScreen = lv_scr_act();
-
-	// Change to the main screen with a fade-in animation
-	_ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_IN, 100, 0, NULL);
-
-	// Delete the boot screen if it is still active
-	if (currentScreen == ui_Boot_Screen)
-	{
-		lv_obj_t *screenToDelete = currentScreen; // Create a temporary pointer
-		_ui_screen_delete(&screenToDelete);		  // Delete the boot screen
-	}
-
-	// Delete the timer to prevent further execution
-	lv_timer_del(timer);
-}
-
-void bootScreen(lv_event_t *e)
-{
-	printf("📺 [Display] Boot Screen Started...\n");
-
-	// Create a timer to switch to the main screen after 30,000ms (30 seconds)
-	lv_timer_create(switchToMainScreen, 15000, NULL);
-
-	// Handle LVGL tasks
-	lv_timer_handler();
-}
 
 void mainScreen(lv_event_t *e)
 {
@@ -66,7 +37,7 @@ void settingScreen(lv_event_t *e)
 	}
 }
 
-lv_timer_t *coolerStatusTimer = NULL; // store the timer
+lv_timer_t *coolerStatusTimer = NULL;
 
 void showCoolerStatusOn(lv_timer_t *timer)
 {
@@ -361,6 +332,102 @@ void submit_advance_setting(lv_event_t *e)
 	setBooleanSetting(FILTER_WARNING_ON, filter_alarm_status_SwitchState);
 }
 
+void TabView1AddvancedSetting(lv_event_t *e)
+{
+	lv_obj_t *tabview = lv_event_get_target(e);
+	uint16_t active_tab = lv_tabview_get_tab_act(tabview);
+
+	if (active_tab == 0 || active_tab == 1)
+	{
+		lv_obj_clear_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+	}
+	else if (active_tab == 2)
+	{
+		lv_obj_add_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+	}
+}
+
+static lv_obj_t *label_countdown;
+static int countdown_value = 5;
+
+void update_countdown(lv_timer_t *timer)
+{
+	// Update countdown value
+	countdown_value--;
+	lv_label_set_text_fmt(label_countdown, "%d", countdown_value);
+
+	// Check if countdown reached zero
+	if (countdown_value <= 0)
+	{
+		// Stop the timer
+		lv_timer_del(timer);
+
+		// Restart device
+		esp_restart();
+	}
+}
+
+void restart_device(lv_event_t *e)
+{
+	// Clear screen
+	lv_obj_clean(lv_scr_act());
+
+	// Set black background
+	lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+
+	// Display restarting message
+	lv_obj_t *label_message = lv_label_create(lv_scr_act());
+	lv_label_set_text(label_message, "Restarting Device...");
+	lv_obj_set_style_text_font(label_message, &lv_font_montserrat_20, LV_PART_MAIN);
+	lv_obj_set_style_text_color(label_message, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+	lv_obj_align(label_message, LV_ALIGN_CENTER, 0, -20);
+
+	// Create countdown label
+	label_countdown = lv_label_create(lv_scr_act());
+	lv_label_set_text_fmt(label_countdown, "%d", countdown_value);
+	lv_obj_set_style_text_font(label_countdown, &lv_font_montserrat_20, LV_PART_MAIN);
+	lv_obj_set_style_text_color(label_countdown, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+	lv_obj_align(label_countdown, LV_ALIGN_CENTER, 0, 20);
+
+	// Create timer for countdown
+	lv_timer_t *timer = lv_timer_create(update_countdown, 1000, NULL); // Update every 1 second
+
+	// Update display to ensure UI is rendered immediately
+	lv_timer_handler();
+}
+
+void reseting_sensors_address(lv_event_t *e)
+{
+	// Your code here
+}
+
+void sensors_disconnect_check(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Inlet(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Outlet(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Antifreeze(lv_event_t *e)
+{
+	// Your code here
+}
+
+void check_set_Filter(lv_event_t *e)
+{
+	// Your code here
+}
+
 void resetDeviceSettings()
 {
 	// Reset Numeric Settings to Default
@@ -409,13 +476,11 @@ void resetDeviceSettings()
 	esp_restart(); // Reboot after the reset
 }
 
-// Callback function for the reset timer
 void resetDeviceCallback(lv_timer_t *t)
 {
 	resetDeviceSettings();
 }
 
-// Function to display UI and then reset
 void displayAndResetTask(lv_event_t *e)
 {
 	// Clear screen
@@ -468,7 +533,6 @@ void displayAndResetTask(lv_event_t *e)
 	lv_timer_create(resetDeviceCallback, 500, NULL); // Set delay to 500 ms
 }
 
-// Function to trigger display and reset
 void goToFactoryReseting(lv_event_t *e)
 {
 	// Start display and reset task
@@ -485,54 +549,32 @@ void show_QR_code(lv_event_t *e)
 	// Your code here
 }
 
-void TabView1AddvancedSetting(lv_event_t *e)
+void switchToMainScreen(lv_timer_t *timer)
 {
-	lv_obj_t *tabview = lv_event_get_target(e);
-	uint16_t active_tab = lv_tabview_get_tab_act(tabview);
+	// Get the currently active screen
+	lv_obj_t *currentScreen = lv_scr_act();
 
-	if (active_tab == 0 || active_tab == 1)
+	// Change to the main screen with a fade-in animation
+	_ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_IN, 100, 0, NULL);
+
+	// Delete the boot screen if it is still active
+	if (currentScreen == ui_Boot_Screen)
 	{
-		lv_obj_clear_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-		lv_obj_clear_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_t *screenToDelete = currentScreen; // Create a temporary pointer
+		_ui_screen_delete(&screenToDelete);		  // Delete the boot screen
 	}
-	else if (active_tab == 2)
-	{
-		lv_obj_add_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-		lv_obj_add_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
-	}
+
+	// Delete the timer to prevent further execution
+	lv_timer_del(timer);
 }
 
-void restart_device(lv_event_t *e)
+void bootScreen(lv_event_t *e)
 {
-	// Your code here
-}
+	printf("📺 [Display] Boot Screen Started...\n");
 
-void reseting_sensors_address(lv_event_t *e)
-{
-	// Your code here
-}
+	// Create a timer to switch to the main screen after 30,000ms (30 seconds)
+	lv_timer_create(switchToMainScreen, 15000, NULL);
 
-void sensors_disconnect_check(lv_event_t *e)
-{
-	// Your code here
-}
-
-void check_set_Inlet(lv_event_t *e)
-{
-	// Your code here
-}
-
-void check_set_Outlet(lv_event_t *e)
-{
-	// Your code here
-}
-
-void check_set_Antifreeze(lv_event_t *e)
-{
-	// Your code here
-}
-
-void check_set_Filter(lv_event_t *e)
-{
-	// Your code here
+	// Handle LVGL tasks
+	lv_timer_handler();
 }

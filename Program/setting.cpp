@@ -40,8 +40,8 @@ const bool defaultBooleanValues[] = {
 };
 
 const char *defaultStringValues[] = {
-    "Redmi Note 9S",           // WIFI_SSID
-    "80018001",                // WIFI_PASSWORD
+    "0",                       // WIFI_SSID
+    "0",                       // WIFI_PASSWORD
     "0",                       // AP_NAME
     "0",                       // AP_PASSWORD
     "http://server.com",       // SERVER_URL

@@ -455,12 +455,13 @@ void updateTemperatureLabels()
             lv_label_set_text(ui_fan_2_filter_alarm_status, buffer);
 
             // Debug Logs
+            Serial.println("");
             Serial.println("📺 [UI-StatusScreen] Temperature Updates:");
             Serial.printf(" - Inlet Temp: %s\n", (!isnan(inletTempstatusScreen)) ? String(inletTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
             Serial.printf(" - Outlet Temp: %s\n", (!isnan(outletTempstatusScreen)) ? String(outletTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
             Serial.printf(" - Antifreeze Temp: %s\n", (!isnan(antifreezeTempstatusScreen)) ? String(antifreezeTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
             Serial.printf(" - Filter Temp: %s\n", (!isnan(filterTempstatusScreen)) ? String(filterTempstatusScreen, 1).c_str() : "❌ Error (Invalid data)");
-            Serial.println("________________________UI-StatusScreen________________________");
+            Serial.println("");
         }
     }
 }
@@ -569,6 +570,7 @@ void updateAlarmLabels()
             lv_label_set_text(ui_high_Pressure_Alarm, buffer_pressure);
 
             // Debug Logs
+            Serial.println("");
             Serial.println("📺 [UI-StatusScreen] Alarm Status Updates:");
 
             Serial.printf(" - Inlet Temp Alarm: %s\n", isHighTempAlarm() ? (!isnan(readTemperatureByName("Inlet")) ? String(readTemperatureByName("Inlet"), 1).c_str() : "❌ Error") : "✅ Within Safe Limits");
@@ -579,7 +581,7 @@ void updateAlarmLabels()
 
             Serial.println(isPressureHigh() ? " - Pressure Alarm: 🚨 High Pressure - System Alert !" : " - Pressure Alarm: ✅ Normal - Stable");
 
-            Serial.println("________________________UI-StatusScreen________________________");
+            Serial.println("");
         }
     }
 }
@@ -656,6 +658,7 @@ void updateRelayLabels()
             lv_label_set_text(ui_condensor_Fan_2_Status, buffer_fan2);
 
             // Debug Logs
+            Serial.println("");
             Serial.println("📺 [UI-StatusScreen] Relay Status Updates:");
 
             Serial.printf(" - Evaporator: %s\n", getEvaporatorRelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
@@ -663,7 +666,7 @@ void updateRelayLabels()
             Serial.printf(" - Condenser: %s\n", getCondenserRelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
             Serial.printf(" - Fan-2: %s\n", getFan2RelayStatus() ? "🟢 ON - Working !" : "🔴 OFF - Not Working !");
 
-            Serial.println("________________________UI-StatusScreen________________________");
+            Serial.println("");
         }
     }
 }
@@ -736,6 +739,7 @@ void updateMaintenanceLabels()
                                         LV_PART_MAIN);
         }
 
+        Serial.println("");
         Serial.println("📺 [UI-StatusScreen] Maintenance Status Updated");
         Serial.printf(" - Service Interval: %d Days\n", serviceInterval);
         Serial.printf(" - Hours Elapsed: %d Hours\n", hoursElapsed);
@@ -751,7 +755,7 @@ void updateMaintenanceLabels()
             Serial.printf(" - Status: 🟢 OK - %d Days Left Until Service.\n", daysRemaining);
         }
 
-        Serial.println("________________________ UI-StatusScreen ________________________");
+        Serial.println("");
     }
 }
 
@@ -770,6 +774,7 @@ void updateInfoLabels()
         firstInfoRun = false;
         lastInfoUpdateTime = currentTime;
 
+        Serial.println("");
         Serial.println("📺 [UI-StatusScreen] Info Labels Updating");
 
         // Update labels
@@ -797,6 +802,7 @@ void updateInfoLabels()
 
         // Debug Log Footer
         Serial.println("________________________ UI-StatusScreen ________________________");
+        Serial.println("");
     }
 }
 
@@ -977,6 +983,8 @@ void displaySetup()
     // Attach event handlers for value updates
     // lv_obj_add_event_cb(ui_inlet_Arc, ui_event_inlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
     // lv_obj_add_event_cb(ui_outlet_Arc, ui_event_outlet_Arc, LV_EVENT_VALUE_CHANGED, NULL);
+
+    // delay(500);
 
     lv_scr_load(ui_Boot_Screen);
 

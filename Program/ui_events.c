@@ -6,6 +6,7 @@
 
 #include "ui.h"
 #include "setting.h"
+#include "esp_system.h"
 #include <Arduino.h>
 
 void mainScreen(lv_event_t *e)
@@ -348,9 +349,56 @@ void TabView1AddvancedSetting(lv_event_t *e)
 	}
 }
 
+static lv_obj_t *label_countdown;
+static int countdown_value = 5;
+
+void update_countdown(lv_timer_t *timer)
+{
+	// Update countdown value
+	countdown_value--;
+	lv_label_set_text_fmt(label_countdown, "%d", countdown_value);
+
+	// Check if countdown reached zero
+	if (countdown_value <= 0)
+	{
+		// Stop the timer
+		lv_timer_del(timer);
+
+		// Restart device
+		esp_restart();
+	}
+}
+
 void restart_device(lv_event_t *e)
 {
-	// Your code here
+	lv_obj_t *new_screen = lv_obj_create(NULL);
+	lv_scr_load(new_screen);
+
+	lv_obj_set_size(new_screen, LV_HOR_RES, LV_VER_RES);
+
+	// Set black background
+	lv_obj_set_style_bg_color(new_screen, lv_color_hex(0x000000), LV_PART_MAIN);
+	lv_obj_set_style_bg_opa(new_screen, LV_OPA_COVER, LV_PART_MAIN);
+
+	// Display restarting message
+	lv_obj_t *label_message = lv_label_create(lv_scr_act());
+	lv_label_set_text(label_message, "Restarting Device...");
+	lv_obj_set_style_text_font(label_message, &lv_font_montserrat_20, LV_PART_MAIN);
+	lv_obj_set_style_text_color(label_message, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+	lv_obj_align(label_message, LV_ALIGN_CENTER, 0, -20);
+
+	// Create countdown label
+	label_countdown = lv_label_create(lv_scr_act());
+	lv_label_set_text_fmt(label_countdown, "%d", countdown_value);
+	lv_obj_set_style_text_font(label_countdown, &lv_font_montserrat_20, LV_PART_MAIN);
+	lv_obj_set_style_text_color(label_countdown, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+	lv_obj_align(label_countdown, LV_ALIGN_CENTER, 0, 20);
+
+	// Create timer for countdown
+	lv_timer_t *timer = lv_timer_create(update_countdown, 1000, NULL); // Update every 1 second
+
+	// Update display to ensure UI is rendered immediately
+	lv_timer_handler();
 }
 
 void reseting_sensors_address(lv_event_t *e)
@@ -438,26 +486,33 @@ void resetDeviceCallback(lv_timer_t *t)
 
 void displayAndResetTask(lv_event_t *e)
 {
+
 	// Clear screen
-	lv_obj_clean(lv_scr_act());
+	// lv_obj_clean(lv_scr_act());
+
+	lv_obj_t *new_screen = lv_obj_create(NULL);
+	lv_scr_load(new_screen);
+
+	lv_obj_set_size(new_screen, LV_HOR_RES, LV_VER_RES);
 
 	// Set black background
-	lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+	lv_obj_set_style_bg_color(new_screen, lv_color_hex(0x000000), LV_PART_MAIN);
+	lv_obj_set_style_bg_opa(new_screen, LV_OPA_COVER, LV_PART_MAIN);
 
 	// Create styles
 	static lv_style_t style_title, style_warning, style_symbol;
 
 	lv_style_init(&style_title);
 	lv_style_set_text_font(&style_title, &lv_font_montserrat_18);
-	lv_style_set_text_color(&style_title, lv_color_white());
+	lv_style_set_text_color(&style_title, lv_color_hex(0xFFFFFF));
 
 	lv_style_init(&style_warning);
 	lv_style_set_text_font(&style_warning, &lv_font_montserrat_14);
-	lv_style_set_text_color(&style_warning, lv_color_white());
+	lv_style_set_text_color(&style_warning, lv_color_hex(0xFFFFFF));
 
 	lv_style_init(&style_symbol);
 	lv_style_set_text_font(&style_symbol, &lv_font_montserrat_20);
-	lv_style_set_text_color(&style_symbol, lv_color_hex(0xFFFF00));
+	lv_style_set_text_color(&style_symbol, lv_color_hex(0xFF0000));
 
 	// Title Label
 	lv_obj_t *titleLabel = lv_label_create(lv_scr_act());

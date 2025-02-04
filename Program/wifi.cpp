@@ -52,7 +52,7 @@ void wifiSetup()
     Serial.println("🛜 [WiFi] Starting Wi-Fi setup 🔁");
 
     // Add a delay to ensure NVS is properly initialized
-    delay(100);
+    // delay(100);
 
     // Step 1: Retrieve SSID and Password from NVS
     char ssid[STRING_MAX_LENGTH];
@@ -144,7 +144,7 @@ void wifiSetup()
 void wifiLoop()
 {
     static unsigned long lastCheckTime = 0;        // Tracks the last time the loop was executed
-    const unsigned long CHECK_INTERVAL = 60000;    // Interval for checking (in seconds)
+    const unsigned long CHECK_INTERVAL = 120000;   // Interval for checking (in seconds)
     static char ssid[STRING_MAX_LENGTH] = {0};     // Cached SSID
     static char password[STRING_MAX_LENGTH] = {0}; // Cached Password
 

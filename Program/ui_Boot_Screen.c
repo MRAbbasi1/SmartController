@@ -11,6 +11,7 @@ ui_Boot_Screen = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Boot_Screen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_Boot_Screen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Boot_Screen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_src( ui_Boot_Screen, &ui_img_1234_png, LV_PART_MAIN | LV_STATE_DEFAULT );
 
 ui_boot_Image = lv_img_create(ui_Boot_Screen);
 lv_img_set_src(ui_boot_Image, &ui_img_884211525);
