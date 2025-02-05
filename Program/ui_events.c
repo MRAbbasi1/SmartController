@@ -4,10 +4,14 @@
 // Project name: SquareLine_Project
 // ui_events.c
 
-#include "ui.h"
-#include "setting.h"
+// Include system and standard libraries
+#include <stdio.h>
 #include "esp_system.h"
 #include <Arduino.h>
+
+// Include project and module-specific libraries
+#include "ui.h"
+#include "setting.h"
 
 void mainScreen(lv_event_t *e)
 {
@@ -350,7 +354,7 @@ void TabView1AddvancedSetting(lv_event_t *e)
 }
 
 static lv_obj_t *label_countdown;
-static int countdown_value = 5;
+static int countdown_value = 10;
 
 void update_countdown(lv_timer_t *timer)
 {
@@ -403,12 +407,35 @@ void restart_device(lv_event_t *e)
 
 void reseting_sensors_address(lv_event_t *e)
 {
-	// Your code here
+	setStringSetting(INLET_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
+	setStringSetting(OUTLET_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
+	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
+	setStringSetting(FILTER_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
 }
+
+extern int detectDS18B20Sensors(void);
 
 void sensors_disconnect_check(lv_event_t *e)
 {
-	// Your code here
+	int numSensors = detectDS18B20Sensors();
+	char statusMessage[32];
+
+	if (numSensors == 0)
+	{
+		lv_obj_add_flag(ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_disconnect_error_icon, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_success_disconnect_icon, LV_OBJ_FLAG_HIDDEN);
+	}
+	else
+	{
+		snprintf(statusMessage, sizeof(statusMessage), "Error %d Sensors Connected!", numSensors);
+		lv_label_set_text(ui_Detail_Success_Status_message_1, statusMessage);
+		lv_obj_clear_flag(ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_disconnect_error_icon, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_success_disconnect_icon, LV_OBJ_FLAG_HIDDEN);
+	}
 }
 
 void check_set_Inlet(lv_event_t *e)

@@ -303,6 +303,7 @@ lv_obj_t *uic_returnButton14;
 lv_obj_t *uic_Advanced_Setting_Label;
 lv_obj_t *uic_Setting_Save_btn_in_advanced_Screen;
 lv_obj_t *uic_Setting_Save_btn_label_advanced_Screen;
+lv_obj_t *uic_TabView1;
 lv_obj_t *uic_AdvancedScreenContainer1;
 lv_obj_t *uic_AntiFreeze_Temp_Range_Spinbox;
 lv_obj_t *uic_AntiFreeze_Temp_Range_Plus_Button;
@@ -639,17 +640,17 @@ lv_obj_t *uic_arc_danger_inlet;
 lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-const lv_img_dsc_t *ui_imgset_882430644[1] = {&ui_img_640283455};
-const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
-const lv_img_dsc_t *ui_imgset_netff_color_background_85551_240x[1] = {&ui_img_netff_color_background_85551_240x320_png};
-const lv_img_dsc_t *ui_imgset_netlkjhg_color_background_85551_240x[1] = {&ui_img_netlkjhg_color_background_85551_240x320_png};
-const lv_img_dsc_t *ui_imgset_return_[1] = {&ui_img_return_66_png};
+const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_1234_png};
 const lv_img_dsc_t *ui_imgset_blur_240x[1] = {&ui_img_blur_240x320_png};
 const lv_img_dsc_t *ui_imgset_blur_color_background_85551_240x[1] = {&ui_img_blur_color_background_85551_240x320_png};
-const lv_img_dsc_t *ui_imgset_[1] = {&ui_img_1234_png};
 const lv_img_dsc_t *ui_imgset_1002920590[1] = {&ui_img_575393433};
+const lv_img_dsc_t *ui_imgset_882430644[1] = {&ui_img_640283455};
+const lv_img_dsc_t *ui_imgset_menu[1] = {&ui_img_menu43_png};
 const lv_img_dsc_t *ui_imgset_1298101175[1] = {&ui_img_1397087731};
+const lv_img_dsc_t *ui_imgset_netff_color_background_85551_240x[1] = {&ui_img_netff_color_background_85551_240x320_png};
 const lv_img_dsc_t *ui_imgset_1084269119[1] = {&ui_img_1417296881};
+const lv_img_dsc_t *ui_imgset_netlkjhg_color_background_85551_240x[1] = {&ui_img_netlkjhg_color_background_85551_240x320_png};
+const lv_img_dsc_t *ui_imgset_return_[1] = {&ui_img_return_66_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16

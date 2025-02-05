@@ -23,4 +23,15 @@ void initializeSensors();                 // Function to initialize all sensors
 void handleTemperatureReadings();         // Function to handle continuous temperature readings
 float readTemperatureByName(String name); // Function to read temperature from a sensor by name
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+    int detectDS18B20Sensors(void); // Function to detect and count DS18B20 sensors
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

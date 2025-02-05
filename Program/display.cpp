@@ -839,6 +839,7 @@ void switchToMainScreen()
     // Change to the main screen (no animation)
     _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, NULL);
 
+    // floating objects reset after switch
     lv_obj_add_flag(ui_tempStatusPanel, LV_OBJ_FLAG_HIDDEN);
     lv_obj_clear_flag(ui_tempStatusButton, LV_OBJ_FLAG_HIDDEN);
 
@@ -863,6 +864,27 @@ void switchToMainScreen()
     lv_obj_add_flag(ui_QRcode_Tab, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(ui_Hide_QR_Code_Button, LV_OBJ_FLAG_HIDDEN);
     lv_obj_clear_flag(ui_show_QR_Code_Button, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_clear_flag(ui_returnButton14, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_Advanced_Setting_Label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_Setting_Save_btn_in_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_Setting_Save_btn_label_advanced_Screen, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_TabView1, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_Sensor_Setup_Button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_Sensor_Setup_Button_Label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_open_factory_reset_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_factory_reset_btn_Label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_DEVICE_RESTART_Button, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_DEVICE_RESTART_Button_Label, LV_OBJ_FLAG_HIDDEN);
+
+    lv_obj_add_flag(ui_sensors_setup_container, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Sensor_Setup_main_Container_1, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Sensor_Setup_main_Container_4, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Sensor_Setup_main_Container_5, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Sensor_Setup_main_Container_6, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_factory_reset_container, LV_OBJ_FLAG_HIDDEN);
 }
 
 // ============================ Display Flushing ==========================

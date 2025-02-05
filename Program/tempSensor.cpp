@@ -1,19 +1,20 @@
 #include "tempSensor.h"
 #include "setting.h"
 
-#define ONE_WIRE_BUS 4
+#define ONE_WIRE_BUS 4 // sensor GPIO pin
 
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature ds18b20(&oneWire);
 
-const uint8_t sensorCount = 4;
+const uint8_t sensorCount = 4; // number of sensor
 DS18B20Sensor sensors[sensorCount];
 
-const unsigned long TEMPERATURE_READ_INTERVAL = 15000;
+const unsigned long TEMPERATURE_READ_INTERVAL = 15000; // reading new data interval
 unsigned long lastTemperatureRequestTime = 0;
 bool conversionRequested = false;
-const uint16_t CONVERSION_TIME = 750;
+const uint16_t CONVERSION_TIME = 750; // connection time
 
+// handle Sensor address in NVS
 bool convertStringToDeviceAddress(const char *addressStr, DeviceAddress &deviceAddress)
 {
     Serial.print("🔍 [Temperature] Converting address string: ");
@@ -40,6 +41,7 @@ bool convertStringToDeviceAddress(const char *addressStr, DeviceAddress &deviceA
     return true;
 }
 
+// initialize Sensors in setup
 void initializeSensors()
 {
     Serial.println("\n🔄 [Temperature] Starting sensor initialization...");
@@ -147,6 +149,7 @@ void initializeSensors()
     Serial.println("________________________________________________");
 }
 
+// handle temp requests with cache
 void handleTemperatureReadings()
 {
     unsigned long currentMillis = millis();
@@ -223,6 +226,7 @@ void handleTemperatureReadings()
     }
 }
 
+// function for access every sensor data with name
 float readTemperatureByName(String name)
 {
     Serial.print("\n🌡️ [Temperature] Reading temperature for: ");
@@ -272,4 +276,58 @@ float readTemperatureByName(String name)
     Serial.print("❌ [Temperature] Sensor not found: ");
     Serial.println(name);
     return NAN;
+}
+
+// Counting Sensors
+int detectDS18B20Sensors(void)
+{
+    OneWire oneWire(ONE_WIRE_BUS);
+    int sensorCount = 0;
+    byte addr[8];
+
+    Serial.println("\n🔍 [Temperature] Scanning for DS18B20 sensors...");
+
+    // Reset the OneWire bus first
+    oneWire.reset_search();
+    delay(250);
+
+    // Search for devices on the bus
+    while (oneWire.search(addr))
+    {
+        // Check if address is valid
+        if (OneWire::crc8(addr, 7) != addr[7])
+        {
+            Serial.println("❌ [Temperature] Invalid CRC!");
+            continue;
+        }
+
+        // Check if device is a DS18B20
+        if (addr[0] != 0x28)
+        {
+            Serial.println("❌ [Temperature] Device is not a DS18B20!");
+            continue;
+        }
+
+        // Print device address
+        Serial.print("✅ [Temperature] Sensor ");
+        Serial.print(sensorCount + 1);
+        Serial.print(" found | Address: ");
+        for (int i = 0; i < 8; i++)
+        {
+            if (addr[i] < 0x10)
+                Serial.print("0");
+            Serial.print(addr[i], HEX);
+            if (i < 7)
+                Serial.print(":");
+        }
+        Serial.println();
+
+        sensorCount++;
+    }
+
+    Serial.print("\n🔍 [Temperature] Total sensors found: ");
+    Serial.println(sensorCount);
+    Serial.println("________________________________________________");
+
+    return sensorCount;
 }

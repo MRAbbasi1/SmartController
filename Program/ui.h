@@ -307,6 +307,7 @@ extern lv_obj_t *uic_returnButton14;
 extern lv_obj_t *uic_Advanced_Setting_Label;
 extern lv_obj_t *uic_Setting_Save_btn_in_advanced_Screen;
 extern lv_obj_t *uic_Setting_Save_btn_label_advanced_Screen;
+extern lv_obj_t *uic_TabView1;
 extern lv_obj_t *uic_AdvancedScreenContainer1;
 extern lv_obj_t *uic_AntiFreeze_Temp_Range_Spinbox;
 extern lv_obj_t *uic_AntiFreeze_Temp_Range_Plus_Button;
@@ -676,13 +677,13 @@ LV_IMG_DECLARE( ui_img_pressure_png);   // assets/pressure.png
 LV_IMG_DECLARE( ui_img_31615732);   // assets/dashboard (6).png
 LV_IMG_DECLARE( ui_img_2101917800);   // assets/door (6).png
 LV_IMG_DECLARE( ui_img_778269571);   // assets/door (5).png
-LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
-LV_IMG_DECLARE( ui_img_netff_color_background_85551_240x320_png);   // assets/netff_color_background_85551_240x320.png
-LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_blur_240x320_png);   // assets/blur_240x320.png
 LV_IMG_DECLARE( ui_img_575393433);   // assets/compaq-abstract-zf-320x240-2.png
+LV_IMG_DECLARE( ui_img_menu43_png);   // assets/menu43.png
 LV_IMG_DECLARE( ui_img_1397087731);   // assets/netff_2-color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_netff_color_background_85551_240x320_png);   // assets/netff_color_background_85551_240x320.png
 LV_IMG_DECLARE( ui_img_1417296881);   // assets/netlkjhg_2-color_background_85551_240x320.png
+LV_IMG_DECLARE( ui_img_netlkjhg_color_background_85551_240x320_png);   // assets/netlkjhg_color_background_85551_240x320.png
 
 // UI INIT
 void ui_init(void);

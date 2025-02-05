@@ -43,12 +43,12 @@ SET(SOURCES ui_Boot_Screen.c
     ui_img_31615732.c
     ui_img_2101917800.c
     ui_img_778269571.c
-    ui_img_menu43_png.c
-    ui_img_netff_color_background_85551_240x320_png.c
-    ui_img_netlkjhg_color_background_85551_240x320_png.c
     ui_img_blur_240x320_png.c
     ui_img_575393433.c
+    ui_img_menu43_png.c
     ui_img_1397087731.c
-    ui_img_1417296881.c)
+    ui_img_netff_color_background_85551_240x320_png.c
+    ui_img_1417296881.c
+    ui_img_netlkjhg_color_background_85551_240x320_png.c)
 
 add_library(ui ${SOURCES})
