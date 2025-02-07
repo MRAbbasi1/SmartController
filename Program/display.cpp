@@ -888,6 +888,18 @@ void switchToMainScreen()
     lv_obj_add_flag(ui_factory_reset_container, LV_OBJ_FLAG_HIDDEN);
 }
 
+// Function to check if any important container is visible
+bool isAnyContainerVisible()
+{
+    return !lv_obj_has_flag(ui_sensors_setup_container, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_Sensor_Setup_main_Container_1, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_Sensor_Setup_main_Container_4, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_Sensor_Setup_main_Container_5, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_Sensor_Setup_main_Container_6, LV_OBJ_FLAG_HIDDEN) ||
+           !lv_obj_has_flag(ui_factory_reset_container, LV_OBJ_FLAG_HIDDEN);
+}
 // ============================ Display Flushing ==========================
 
 // Display flushing function (to send data to the display)
@@ -1025,11 +1037,12 @@ void displayLoop()
     // Handle LVGL tasks
     lv_timer_handler();
 
-    // Check for touch timeout and switch screens
+    // Check for touch timeout and switch screens if no important container is visible
     if (millis() - lastTouchTime > timeoutDuration)
     {
-        if (lv_scr_act() != ui_mainScreen) // Only if not already on the main screen
+        if (lv_scr_act() != ui_mainScreen && !isAnyContainerVisible())
         {
+            switchToMainScreen();
             switchToMainScreen();
         }
     }
