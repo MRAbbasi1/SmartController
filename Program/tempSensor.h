@@ -30,6 +30,8 @@ extern "C"
 
     int detectDS18B20Sensors(void); // Function to detect and count DS18B20 sensors
 
+    int getFirstDS18B20Address(char *addressStr, int maxLen); // sensor setup function with ui
+
 #ifdef __cplusplus
 }
 #endif

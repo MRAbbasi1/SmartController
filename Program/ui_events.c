@@ -407,55 +407,291 @@ void restart_device(lv_event_t *e)
 
 void reseting_sensors_address(lv_event_t *e)
 {
-	setStringSetting(INLET_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
-	setStringSetting(OUTLET_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
-	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
-	setStringSetting(FILTER_SENSOR_ADDRESS, "00:00:00:00:00:00:00:00");
+	setStringSetting(INLET_SENSOR_ADDRESS, "0");
+	setStringSetting(OUTLET_SENSOR_ADDRESS, "0");
+	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "0");
+	setStringSetting(FILTER_SENSOR_ADDRESS, "0");
 }
 
 extern int detectDS18B20Sensors(void);
 
+void hideSensorSetupContainers_1(lv_timer_t *timer)
+{
+	lv_obj_add_flag(ui_Sensor_Setup_main_Container_1, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_clear_flag(ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN);
+
+	lv_timer_del(timer);
+}
+
 void sensors_disconnect_check(lv_event_t *e)
 {
 	int numSensors = detectDS18B20Sensors();
-	char statusMessage[32];
 
 	if (numSensors == 0)
 	{
 		lv_obj_add_flag(ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_add_flag(ui_disconnect_error_icon, LV_OBJ_FLAG_HIDDEN);
+
 		lv_obj_clear_flag(ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(ui_success_disconnect_icon, LV_OBJ_FLAG_HIDDEN);
+
+		lv_timer_create(hideSensorSetupContainers_1, 3000, NULL);
 	}
 	else
 	{
-		snprintf(statusMessage, sizeof(statusMessage), "Error %d Sensors Connected!", numSensors);
+		char statusMessage[100];
+
+		snprintf(statusMessage, sizeof(statusMessage), "Error: %d Sensors Connected!\nDisconnect All sensors, Try Again.", numSensors);
 		lv_label_set_text(ui_Detail_Success_Status_message_1, statusMessage);
+
 		lv_obj_clear_flag(ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_clear_flag(ui_disconnect_error_icon, LV_OBJ_FLAG_HIDDEN);
+
 		lv_obj_add_flag(ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN);
 		lv_obj_add_flag(ui_success_disconnect_icon, LV_OBJ_FLAG_HIDDEN);
 	}
 }
 
+extern int getFirstDS18B20Address(char *addressStr, int maxLen);
+
+void hideSensorSetupContainers_2(lv_timer_t *timer)
+{
+	lv_obj_clear_flag(ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_add_flag(ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN);
+
+	lv_timer_del(timer);
+}
+
 void check_set_Inlet(lv_event_t *e)
 {
-	// Your code here
+	int numSensors = detectDS18B20Sensors();
+
+	if (numSensors != 1) // if not 1 detected
+	{
+		char statusMessage[100];
+
+		if (numSensors == 0)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: No sensor connected!\nPlease connect the INLET sensor.");
+		}
+		else
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: %d sensors connected!\nConnect only the INLET sensor.", numSensors);
+		}
+
+		lv_label_set_text(ui_Detail_Success_Status_message_3, statusMessage);
+
+		lv_obj_clear_flag(ui_Detail_Success_Status_message_3, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_inlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+		lv_obj_add_flag(ui_Detail_Success_Status_message_4, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_inlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+	}
+	else
+	{
+		char newAddress[24];
+
+		if (getFirstDS18B20Address(newAddress, sizeof(newAddress)))
+		{
+			setStringSetting(INLET_SENSOR_ADDRESS, newAddress);
+
+			lv_obj_clear_flag(ui_Detail_Success_Status_message_4, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_clear_flag(ui_inlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_obj_add_flag(ui_Detail_Success_Status_message_3, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_add_flag(ui_inlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_timer_create(hideSensorSetupContainers_2, 3000, NULL);
+		}
+	}
+}
+
+void hideSensorSetupContainers_3(lv_timer_t *timer)
+{
+	lv_obj_clear_flag(ui_Sensor_Setup_main_Container_4, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_add_flag(ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN);
+
+	lv_timer_del(timer);
 }
 
 void check_set_Outlet(lv_event_t *e)
 {
-	// Your code here
+	int numSensors = detectDS18B20Sensors();
+
+	if (numSensors != 2) // if not 2 detected
+	{
+		char statusMessage[100];
+
+		if (numSensors == 0)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: No sensor connected!\nConnect INLET & OUTLET.");
+		}
+		else if (numSensors == 1)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: Only one sensor connected!\nBoth INLET & OUTLET required.");
+		}
+		else
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: %d sensors connected!\nOnly INLET & OUTLET allowed.", numSensors);
+		}
+
+		lv_label_set_text(ui_Detail_Success_Status_message_5, statusMessage);
+
+		lv_obj_clear_flag(ui_Detail_Success_Status_message_5, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Outlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+		lv_obj_add_flag(ui_Detail_Success_Status_message_6, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Outlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+	}
+	else
+	{
+		char newAddress[24];
+
+		if (getFirstDS18B20Address(newAddress, sizeof(newAddress)))
+		{
+			setStringSetting(OUTLET_SENSOR_ADDRESS, newAddress);
+
+			lv_obj_clear_flag(ui_Detail_Success_Status_message_6, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_clear_flag(ui_Outlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_obj_add_flag(ui_Detail_Success_Status_message_5, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_add_flag(ui_Outlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_timer_create(hideSensorSetupContainers_3, 3000, NULL);
+		}
+	}
+}
+
+void hideSensorSetupContainers_4(lv_timer_t *timer)
+{
+	lv_obj_clear_flag(ui_Sensor_Setup_main_Container_5, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_add_flag(ui_Sensor_Setup_main_Container_4, LV_OBJ_FLAG_HIDDEN);
+
+	lv_timer_del(timer);
 }
 
 void check_set_Antifreeze(lv_event_t *e)
 {
-	// Your code here
+	int numSensors = detectDS18B20Sensors();
+
+	if (numSensors != 3) // if not 3 detected
+	{
+		char statusMessage[100];
+
+		if (numSensors == 0)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: No sensor connected!\nConnect INLET, OUTLET & ANTIFREEZE.");
+		}
+		else if (numSensors == 1)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: Only one sensor connected!\nINLET, OUTLET & ANTIFREEZE required.");
+		}
+		else if (numSensors == 2)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: 2 sensors connected!\nINLET, OUTLET & ANTIFREEZE required.");
+		}
+		else
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: %d sensors connected!\nOnly INLET, OUTLET & ANTIFREEZE allowed.", numSensors);
+		}
+
+		lv_label_set_text(ui_Detail_Success_Status_message_7, statusMessage);
+
+		lv_obj_clear_flag(ui_Detail_Success_Status_message_7, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Antifreeze_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+		lv_obj_add_flag(ui_Detail_Success_Status_message_8, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Antifreeze_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+	}
+	else
+	{
+		char newAddress[24];
+
+		if (getFirstDS18B20Address(newAddress, sizeof(newAddress)))
+		{
+			setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, newAddress);
+
+			lv_obj_clear_flag(ui_Detail_Success_Status_message_8, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_clear_flag(ui_Antifreeze_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_obj_add_flag(ui_Detail_Success_Status_message_7, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_add_flag(ui_Antifreeze_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_timer_create(hideSensorSetupContainers_4, 3000, NULL);
+		}
+	}
+}
+
+void hideSensorSetupContainers_5(lv_timer_t *timer)
+{
+	lv_obj_clear_flag(ui_Sensor_Setup_main_Container_6, LV_OBJ_FLAG_HIDDEN);
+	lv_obj_add_flag(ui_Sensor_Setup_main_Container_5, LV_OBJ_FLAG_HIDDEN);
+
+	lv_timer_del(timer);
+
+	label_countdown = lv_label_create(ui_Sensor_Setup_main_Container_6);
+	lv_label_set_text_fmt(label_countdown, "%d", countdown_value);
+	lv_obj_set_style_text_font(label_countdown, &lv_font_montserrat_20, LV_PART_MAIN);
+	lv_obj_set_style_text_color(label_countdown, lv_color_hex(0x0D0246), LV_PART_MAIN);
+	lv_obj_align(label_countdown, LV_ALIGN_BOTTOM_MID, 0, -20);
+
+	lv_timer_create(update_countdown, 1000, NULL);
 }
 
 void check_set_Filter(lv_event_t *e)
 {
-	// Your code here
+	int numSensors = detectDS18B20Sensors();
+
+	if (numSensors != 4) // if not 4 detected
+	{
+		char statusMessage[100];
+
+		if (numSensors == 0)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: No sensor connected!\nConnect INLET, OUTLET, ANTIFREEZE &\nFILTER Sensor.");
+		}
+		else if (numSensors == 1)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: Only one sensor connected!\nINLET, OUTLET, ANTIFREEZE &\nFILTER Sensor required.");
+		}
+		else if (numSensors == 2)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: 2 sensors connected!\nINLET, OUTLET, ANTIFREEZE &\nFILTER Sensor required.");
+		}
+		else if (numSensors == 3)
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: 3 sensors connected!\nINLET, OUTLET, ANTIFREEZE &\nFILTER Sensor required.");
+		}
+		else
+		{
+			snprintf(statusMessage, sizeof(statusMessage), "Error: %d sensors connected!\nOnly INLET, OUTLET, ANTIFREEZE &\nFILTER Sensor allowed.", numSensors);
+		}
+
+		lv_label_set_text(ui_Detail_Success_Status_message_9, statusMessage);
+
+		lv_obj_clear_flag(ui_Detail_Success_Status_message_9, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_clear_flag(ui_Filter_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+		lv_obj_add_flag(ui_Detail_Success_Status_message_10, LV_OBJ_FLAG_HIDDEN);
+		lv_obj_add_flag(ui_Filter_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+	}
+	else
+	{
+		char newAddress[24];
+
+		if (getFirstDS18B20Address(newAddress, sizeof(newAddress)))
+		{
+			setStringSetting(FILTER_SENSOR_ADDRESS, newAddress);
+
+			lv_obj_clear_flag(ui_Detail_Success_Status_message_10, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_clear_flag(ui_Filter_setup_success_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_obj_add_flag(ui_Detail_Success_Status_message_9, LV_OBJ_FLAG_HIDDEN);
+			lv_obj_add_flag(ui_Filter_setup_error_icon, LV_OBJ_FLAG_HIDDEN);
+
+			lv_timer_create(hideSensorSetupContainers_5, 3000, NULL);
+		}
+	}
 }
 
 void resetDeviceSettings()
@@ -578,12 +814,12 @@ void goToFactoryReseting(lv_event_t *e)
 
 void satusScreen(lv_event_t *e)
 {
-	// Your code here
+	// code...
 }
 
 void show_QR_code(lv_event_t *e)
 {
-	// Your code here
+	// code...
 }
 
 void switchToMainScreen(lv_timer_t *timer)

@@ -1209,6 +1209,10 @@ void ui_event_returnButton668( lv_event_t * e) {
 if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_Sensor_Setup_main_Container_1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
       _ui_flag_modify( ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_success_disconnect_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_disconnect_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 
@@ -1225,7 +1229,15 @@ void ui_event_returnButton6987( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_Sensor_Setup_main_Container_1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_inlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_inlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_4, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_success_disconnect_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_disconnect_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 
@@ -1242,7 +1254,15 @@ void ui_event_returnButton64( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Outlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Outlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_6, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_5, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_inlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_inlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_4, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 
@@ -1259,7 +1279,15 @@ void ui_event_returnButton625( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_Sensor_Setup_main_Container_4, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Antifreeze_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Antifreeze_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_8, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_7, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Outlet_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Outlet_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_6, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_5, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 
@@ -1276,7 +1304,15 @@ void ui_event_returnButton614987( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_RELEASED) {
       _ui_flag_modify( ui_Sensor_Setup_main_Container_5, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-      _ui_flag_modify( ui_Sensor_Setup_main_Container_4, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+      _ui_flag_modify( ui_Detail_Success_Status_message_10, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_9, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Filter_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Filter_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Antifreeze_setup_success_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Antifreeze_setup_error_icon, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_8, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+      _ui_flag_modify( ui_Detail_Success_Status_message_7, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
 }
 }
 

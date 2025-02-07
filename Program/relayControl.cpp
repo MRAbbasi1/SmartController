@@ -159,15 +159,6 @@ void controlEvaporatorRelay()
         evaporatorRelayStatus = newStatus;
         digitalWrite(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
 
-        // if (newStatus)
-        // {
-        //     digitalWrite(EVAPORATOR_RELAY_PIN, LOW);
-        // }
-        // if (!newStatus)
-        // {
-        //     digitalWrite(EVAPORATOR_RELAY_PIN, HIGH);
-        // }
-
         Serial.println("");
         Serial.print("[RELAY] 🟢 Evaporator: ");
         Serial.print(newStatus ? "ON" : "OFF");

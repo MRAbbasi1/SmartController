@@ -278,7 +278,7 @@ float readTemperatureByName(String name)
     return NAN;
 }
 
-// Counting Sensors
+// Detect and Counting Sensors
 int detectDS18B20Sensors(void)
 {
     OneWire oneWire(ONE_WIRE_BUS);
@@ -330,4 +330,109 @@ int detectDS18B20Sensors(void)
     Serial.println("________________________________________________");
 
     return sensorCount;
+}
+
+// setup sensors with ui
+int getFirstDS18B20Address(char *addressStr, int maxLen)
+{
+    if (maxLen < 24)
+    { // Need at least 23 chars + null terminator
+        return 0;
+    }
+
+    OneWire oneWire(ONE_WIRE_BUS);
+    byte addr[8];
+    char existingAddr[24];
+    bool found = false;
+
+    Serial.println("\n🔍 [Temperature] Scanning for DS18B20 sensors...");
+
+    // Reset the OneWire bus first
+    oneWire.reset_search();
+    delay(250);
+
+    // Get existing addresses from NVS
+    bool hasInlet = getStringSetting(INLET_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+    bool hasOutlet = getStringSetting(OUTLET_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+    bool hasAntifreeze = getStringSetting(ANTIFREEZE_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+    bool hasFilter = getStringSetting(FILTER_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+
+    // Search for devices
+    while (oneWire.search(addr))
+    {
+        // Check if address is valid
+        if (OneWire::crc8(addr, 7) != addr[7])
+        {
+            continue;
+        }
+
+        // Check if device is a DS18B20
+        if (addr[0] != 0x28)
+        {
+            continue;
+        }
+
+        // Convert current address to string format
+        char currentAddr[24];
+        int pos = 0;
+        for (int i = 0; i < 8; i++)
+        {
+            if (i > 0)
+            {
+                currentAddr[pos++] = ':';
+            }
+            sprintf(&currentAddr[pos], "%02X", addr[i]);
+            pos += 2;
+        }
+        currentAddr[pos] = '\0';
+
+        // Check if this address is already stored in NVS
+        bool isNewAddress = true;
+        if (hasInlet)
+        {
+            getStringSetting(INLET_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+            if (strcmp(currentAddr, existingAddr) == 0)
+            {
+                isNewAddress = false;
+            }
+        }
+        if (hasOutlet)
+        {
+            getStringSetting(OUTLET_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+            if (strcmp(currentAddr, existingAddr) == 0)
+            {
+                isNewAddress = false;
+            }
+        }
+        if (hasAntifreeze)
+        {
+            getStringSetting(ANTIFREEZE_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+            if (strcmp(currentAddr, existingAddr) == 0)
+            {
+                isNewAddress = false;
+            }
+        }
+        if (hasFilter)
+        {
+            getStringSetting(FILTER_SENSOR_ADDRESS, existingAddr, sizeof(existingAddr));
+            if (strcmp(currentAddr, existingAddr) == 0)
+            {
+                isNewAddress = false;
+            }
+        }
+
+        // If this is a new address, return it
+        if (isNewAddress)
+        {
+            strcpy(addressStr, currentAddr);
+            Serial.print("✅ [Temperature] New sensor found | Address: ");
+            Serial.println(addressStr);
+            Serial.println("________________________________________________");
+            return 1;
+        }
+    }
+
+    Serial.println("❌ [Temperature] No new sensors found!");
+    Serial.println("________________________________________________");
+    return 0;
 }

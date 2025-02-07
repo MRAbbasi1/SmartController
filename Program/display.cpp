@@ -111,21 +111,21 @@ bool isDoorClosedStatus = false;        // Door status (true = closed, false = o
 bool isCompressorRelayActive = false;   // Door status (true = closed, false = open)
 
 // Timing variables for checking door status
-unsigned long lastDoorCheckTime = 0;            // Last time door status was checked
-const unsigned long DOOR_CHECK_INTERVAL = 5000; // Interval for checking door status
+uint32_t lastDoorCheckTime = 0;            // Last time door status was checked
+const uint32_t DOOR_CHECK_INTERVAL = 5000; // Interval for checking door status
 
 // Timing variables for periodic checks in the main screen
-unsigned long lastDeviceCheckTime = 0;            // Last check time for device working status
-const unsigned long DEVICE_CHECK_INTERVAL = 5000; // Interval for checking device status
+uint32_t lastDeviceCheckTime = 0;            // Last check time for device working status
+const uint32_t DEVICE_CHECK_INTERVAL = 5000; // Interval for checking device status
 
-unsigned long lastHighTempCheckTime = 0;             // Last check time for high temperature alarm status
-const unsigned long HIGH_TEMP_CHECK_INTERVAL = 5000; // Interval for checking high temperature alarm status
+uint32_t lastHighTempCheckTime = 0;             // Last check time for high temperature alarm status
+const uint32_t HIGH_TEMP_CHECK_INTERVAL = 5000; // Interval for checking high temperature alarm status
 
-unsigned long lastPressureCheckTime = 0;            // Last check time for high pressure alarm status
-const unsigned long PRESSURE_CHECK_INTERVAL = 5000; // Interval for checking high pressure alarm status
+uint32_t lastPressureCheckTime = 0;            // Last check time for high pressure alarm status
+const uint32_t PRESSURE_CHECK_INTERVAL = 5000; // Interval for checking high pressure alarm status
 
-unsigned long lastRelayCheckTime = 0;            // Last time the relay status was checked
-const unsigned long RELAY_CHECK_INTERVAL = 5000; // Interval to check relay status
+uint32_t lastRelayCheckTime = 0;            // Last time the relay status was checked
+const uint32_t RELAY_CHECK_INTERVAL = 5000; // Interval to check relay status
 
 // Function to update compressor relay icons
 void updateCompressorIcons()
@@ -215,7 +215,7 @@ void updateDoorIcons()
 // Function to periodically check the device status
 void checkDeviceStatus()
 {
-    unsigned long currentMillis = millis(); // Get the current system time
+    uint32_t currentMillis = millis(); // Get the current system time
 
     // Check if the interval for the device power status has passed
     if (currentMillis - lastDeviceCheckTime >= DEVICE_CHECK_INTERVAL)
@@ -243,7 +243,7 @@ void checkDeviceStatus()
 // Function to periodically check the high temperature alarm status
 void checkHighTempAlarmStatus()
 {
-    unsigned long currentMillis = millis(); // Get the current system time
+    uint32_t currentMillis = millis(); // Get the current system time
 
     // Check if the interval for the high temperature alarm status has passed
     if (currentMillis - lastHighTempCheckTime >= HIGH_TEMP_CHECK_INTERVAL)
@@ -274,7 +274,7 @@ void checkHighTempAlarmStatus()
 // Function to periodically check the high pressure alarm status
 void checkPressureAlarmStatus()
 {
-    unsigned long currentMillis = millis(); // Get the current system time
+    uint32_t currentMillis = millis(); // Get the current system time
 
     // Check if the interval for the high pressure alarm status has passed
     if (currentMillis - lastPressureCheckTime >= PRESSURE_CHECK_INTERVAL)
@@ -305,7 +305,7 @@ void checkPressureAlarmStatus()
 // Function to check door status periodically
 void checkDoorStatus()
 {
-    unsigned long currentMillis = millis(); // Get the current time
+    uint32_t currentMillis = millis(); // Get the current time
 
     // Check if the interval for checking door status has passed
     if (currentMillis - lastDoorCheckTime >= DOOR_CHECK_INTERVAL)
@@ -336,7 +336,7 @@ void checkDoorStatus()
 // Function to check Relay status periodically
 void checkRelayStatus()
 {
-    unsigned long currentMillis = millis(); // Get the current system time
+    uint32_t currentMillis = millis(); // Get the current system time
 
     // Check if the interval for relay status update has passed
     if (currentMillis - lastRelayCheckTime >= RELAY_CHECK_INTERVAL)
@@ -830,7 +830,7 @@ void switchToMainScreen()
     lv_obj_t *currentScreen = lv_scr_act();
 
     // Only delete the previous screen if it's not the main screen
-    if (currentScreen != ui_mainScreen && currentScreen != NULL)
+    if (currentScreen != ui_mainScreen && currentScreen != NULL && lv_obj_has_flag(ui_sensors_setup_container, LV_OBJ_FLAG_HIDDEN))
     {
         lv_obj_t *screenToDelete = currentScreen; // Create a temporary pointer for compatibility
         _ui_screen_delete(&screenToDelete);       // Pass as a pointer-to-pointer to delete the screen
@@ -878,6 +878,7 @@ void switchToMainScreen()
     lv_obj_clear_flag(ui_DEVICE_RESTART_Button_Label, LV_OBJ_FLAG_HIDDEN);
 
     lv_obj_add_flag(ui_sensors_setup_container, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(ui_Sensor_Setup_Notice_Container, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(ui_Sensor_Setup_main_Container_1, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(ui_Sensor_Setup_main_Container_2, LV_OBJ_FLAG_HIDDEN);
     lv_obj_add_flag(ui_Sensor_Setup_main_Container_3, LV_OBJ_FLAG_HIDDEN);

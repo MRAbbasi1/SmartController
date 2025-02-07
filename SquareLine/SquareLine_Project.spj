@@ -4666,7 +4666,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -80,
-                  -33
+                  -31
                 ],
                 "InheritedType": 7
               },
@@ -5686,7 +5686,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   80,
-                  -33
+                  -31
                 ],
                 "InheritedType": 7
               },
@@ -6708,7 +6708,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   80,
-                  64
+                  67
                 ],
                 "InheritedType": 7
               },
@@ -6718,7 +6718,7 @@
                 "strtype": "OBJECT/Size",
                 "intarray": [
                   150,
-                  95
+                  90
                 ],
                 "InheritedType": 7
               },
@@ -7620,7 +7620,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -80,
-                  38
+                  40
                 ],
                 "InheritedType": 7
               },
@@ -8797,7 +8797,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -80,
-                  90
+                  94
                 ],
                 "InheritedType": 7
               },
@@ -8971,7 +8971,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   80,
-                  18
+                  20
                 ],
                 "InheritedType": 7
               },
@@ -9148,7 +9148,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -80,
-                  18
+                  20
                 ],
                 "InheritedType": 7
               },
@@ -9324,7 +9324,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   80,
-                  -72
+                  -70
                 ],
                 "InheritedType": 7
               },
@@ -9500,7 +9500,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -80,
-                  -72
+                  -70
                 ],
                 "InheritedType": 7
               },
@@ -9677,7 +9677,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -80,
-                  72
+                  75
                 ],
                 "InheritedType": 7
               },
@@ -11943,7 +11943,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           -80,
-                          -40
+                          -35
                         ],
                         "InheritedType": 7
                       },
@@ -12974,7 +12974,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           80,
-                          -40
+                          -35
                         ],
                         "InheritedType": 7
                       },
@@ -15383,7 +15383,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           80,
-                          -75
+                          -70
                         ],
                         "InheritedType": 7
                       },
@@ -15560,7 +15560,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           -80,
-                          -75
+                          -70
                         ],
                         "InheritedType": 7
                       },
@@ -25517,6 +25517,182 @@
                               }
                             ],
                             "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004673,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004674,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004675,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004676,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004677,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID8487988-917372S5012433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004678,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004679,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004680,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004681,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004682,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004683,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004684,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID36638013-917370S492433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004685,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004686,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004687,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004688,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004689,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004690,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004691,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID34802057-917374S702433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004692,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004693,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004694,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004695,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004696,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004697,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004698,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID54221843-917367S507433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004699,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004700,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
                           }
                         ],
                         "InheritedType": 4
@@ -25738,7 +25914,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -25854,7 +26030,7 @@
                               {
                                 "nid": 10450,
                                 "strtype": "_style/Text_Font",
-                                "strval": "montserrat_16",
+                                "strval": "montserrat_14",
                                 "InheritedType": 3
                               }
                             ],
@@ -25918,7 +26094,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -25988,7 +26164,7 @@
                       {
                         "nid": 1030,
                         "strtype": "LABEL/Text",
-                        "strval": "OK All Sensor Disconnected",
+                        "strval": "OK, All Sensor Disconnected...",
                         "InheritedType": 10
                       },
                       {
@@ -26097,8 +26273,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -26257,8 +26433,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          -130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -26492,9 +26668,9 @@
                                 "nid": 10520,
                                 "strtype": "_style/Bg_Color",
                                 "intarray": [
+                                  8,
                                   0,
-                                  113,
-                                  255,
+                                  82,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -27186,7 +27362,7 @@
                               {
                                 "nid": 1001072,
                                 "strtype": "MODIFY FLAG/Object",
-                                "strval": "GUID92335063-917364S994433",
+                                "strval": "GUID39023589-917358S214433",
                                 "InheritedType": 9
                               },
                               {
@@ -27199,6 +27375,358 @@
                                 "nid": 1001074,
                                 "strtype": "MODIFY FLAG/Action",
                                 "strval": "REMOVE",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004701,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004702,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004703,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004704,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004705,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID81969770-917379S693433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004706,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004707,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004708,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004709,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004710,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004711,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004712,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID54346942-917378S692433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004713,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004714,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004715,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004716,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004717,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004718,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004719,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID53604210-917377S692433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004720,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004721,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004722,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004723,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004724,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004725,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004726,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID60420773-917376S691433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004727,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004728,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004729,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004730,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004731,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004732,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004733,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID8487988-917372S5012433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004734,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004735,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004736,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004737,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004738,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004739,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004740,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID36638013-917370S492433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004741,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004742,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004743,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004744,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004745,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004746,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004747,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID34802057-917374S702433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004748,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004749,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004750,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004751,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004752,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004753,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004754,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID54221843-917367S507433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004755,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004756,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
                                 "InheritedType": 3
                               }
                             ],
@@ -27424,7 +27952,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -27540,7 +28068,7 @@
                               {
                                 "nid": 10450,
                                 "strtype": "_style/Text_Font",
-                                "strval": "montserrat_16",
+                                "strval": "montserrat_14",
                                 "InheritedType": 3
                               }
                             ],
@@ -27604,7 +28132,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -27674,7 +28202,7 @@
                       {
                         "nid": 1030,
                         "strtype": "LABEL/Text",
-                        "strval": "OK Inlet Sensor Connected",
+                        "strval": "OK, Inlet Sensor Connected...",
                         "InheritedType": 10
                       },
                       {
@@ -27783,8 +28311,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -27943,8 +28471,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          -130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -28178,9 +28706,9 @@
                                 "nid": 10520,
                                 "strtype": "_style/Bg_Color",
                                 "intarray": [
+                                  8,
                                   0,
-                                  113,
-                                  255,
+                                  82,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -28872,7 +29400,7 @@
                               {
                                 "nid": 1001072,
                                 "strtype": "MODIFY FLAG/Object",
-                                "strval": "GUID37013578-917382S694433",
+                                "strval": "GUID39023589-917358S214433",
                                 "InheritedType": 9
                               },
                               {
@@ -28885,6 +29413,358 @@
                                 "nid": 1001074,
                                 "strtype": "MODIFY FLAG/Action",
                                 "strval": "REMOVE",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004757,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004758,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004759,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004760,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004761,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID23724849-917387S530433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004762,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004763,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004764,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004765,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004766,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004767,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004768,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID74365304-917386S530433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004769,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004770,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004771,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004772,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004773,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004774,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004775,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID52077172-917385S529433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004776,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004777,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004778,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004779,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004780,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004781,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004782,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID45829523-917384S529433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004783,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004784,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004785,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004786,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004787,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004788,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004789,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID81969770-917379S693433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004790,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004791,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004792,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004793,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004794,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004795,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004796,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID54346942-917378S692433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004797,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004798,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004799,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004800,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004801,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004802,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004803,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID53604210-917377S692433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004804,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004805,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004806,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004807,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004808,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004809,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004810,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID60420773-917376S691433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004811,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004812,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
                                 "InheritedType": 3
                               }
                             ],
@@ -29111,7 +29991,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -29227,7 +30107,7 @@
                               {
                                 "nid": 10450,
                                 "strtype": "_style/Text_Font",
-                                "strval": "montserrat_16",
+                                "strval": "montserrat_14",
                                 "InheritedType": 3
                               }
                             ],
@@ -29291,7 +30171,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -29361,7 +30241,7 @@
                       {
                         "nid": 1030,
                         "strtype": "LABEL/Text",
-                        "strval": "OK Outlet Sensor Connected",
+                        "strval": "OK, Outlet Sensor Connected...",
                         "InheritedType": 10
                       },
                       {
@@ -29470,8 +30350,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -29630,8 +30510,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          -130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -29865,9 +30745,9 @@
                                 "nid": 10520,
                                 "strtype": "_style/Bg_Color",
                                 "intarray": [
+                                  8,
                                   0,
-                                  113,
-                                  255,
+                                  82,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -30559,7 +31439,7 @@
                               {
                                 "nid": 1001072,
                                 "strtype": "MODIFY FLAG/Object",
-                                "strval": "GUID51966462-917390S531433",
+                                "strval": "GUID39023589-917358S214433",
                                 "InheritedType": 9
                               },
                               {
@@ -30572,6 +31452,358 @@
                                 "nid": 1001074,
                                 "strtype": "MODIFY FLAG/Action",
                                 "strval": "REMOVE",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004813,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004814,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004815,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004816,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004817,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID62733506-917395S91433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004818,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004819,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004820,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004821,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004822,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004823,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004824,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID77348432-917394S90433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004825,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004826,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004827,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004828,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004829,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004830,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004831,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID14016598-917393S90433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004832,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004833,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004834,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004835,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004836,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004837,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004838,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID59826585-917392S89433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004839,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004840,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004841,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004842,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004843,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004844,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004845,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID23724849-917387S530433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004846,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004847,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004848,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004849,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004850,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004851,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004852,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID74365304-917386S530433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004853,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004854,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004855,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004856,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004857,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004858,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004859,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID52077172-917385S529433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004860,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004861,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004862,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004863,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004864,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004865,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004866,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID45829523-917384S529433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004867,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004868,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
                                 "InheritedType": 3
                               }
                             ],
@@ -30797,7 +32029,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -30913,7 +32145,7 @@
                               {
                                 "nid": 10450,
                                 "strtype": "_style/Text_Font",
-                                "strval": "montserrat_16",
+                                "strval": "montserrat_14",
                                 "InheritedType": 3
                               }
                             ],
@@ -30977,7 +32209,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -31047,7 +32279,7 @@
                       {
                         "nid": 1030,
                         "strtype": "LABEL/Text",
-                        "strval": "OK Antifreeze Sensor Connected",
+                        "strval": "OK, Antifreeze Sensor Connected...",
                         "InheritedType": 10
                       },
                       {
@@ -31156,8 +32388,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -31316,8 +32548,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          -130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -31551,9 +32783,9 @@
                                 "nid": 10520,
                                 "strtype": "_style/Bg_Color",
                                 "intarray": [
+                                  8,
                                   0,
-                                  113,
-                                  255,
+                                  82,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -32245,7 +33477,7 @@
                               {
                                 "nid": 1001072,
                                 "strtype": "MODIFY FLAG/Object",
-                                "strval": "GUID75082453-917398S92433",
+                                "strval": "GUID39023589-917358S214433",
                                 "InheritedType": 9
                               },
                               {
@@ -32258,6 +33490,358 @@
                                 "nid": 1001074,
                                 "strtype": "MODIFY FLAG/Action",
                                 "strval": "REMOVE",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004869,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004870,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004871,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004872,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004873,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID81297239-917409S559433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004874,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004875,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004876,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004877,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004878,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004879,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004880,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID74094476-917408S559433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004881,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004882,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004883,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004884,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004885,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004886,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004887,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID57875679-917411S561433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004888,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004889,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004890,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004891,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004892,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004893,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004894,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID52685234-917410S560433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004895,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004896,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004897,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004898,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004899,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004900,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004901,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID62733506-917395S91433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004902,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004903,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004904,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004905,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004906,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004907,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004908,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID77348432-917394S90433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004909,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004910,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004911,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004912,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004913,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004914,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004915,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID14016598-917393S90433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004916,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004917,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
+                                "InheritedType": 3
+                              }
+                            ],
+                            "InheritedType": 10
+                          },
+                          {
+                            "nid": 1004918,
+                            "strtype": "_event/action",
+                            "strval": "MODIFY FLAG",
+                            "childs": [
+                              {
+                                "nid": 1004919,
+                                "strtype": "MODIFY FLAG/Name",
+                                "strval": "MODIFY FLAG",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004920,
+                                "strtype": "MODIFY FLAG/Call",
+                                "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004921,
+                                "strtype": "MODIFY FLAG/CallC",
+                                "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);",
+                                "InheritedType": 10
+                              },
+                              {
+                                "nid": 1004922,
+                                "strtype": "MODIFY FLAG/Object",
+                                "strval": "GUID59826585-917392S89433",
+                                "InheritedType": 9
+                              },
+                              {
+                                "nid": 1004923,
+                                "strtype": "MODIFY FLAG/Flag",
+                                "strval": "HIDDEN",
+                                "InheritedType": 3
+                              },
+                              {
+                                "nid": 1004924,
+                                "strtype": "MODIFY FLAG/Action",
+                                "strval": "ADD",
                                 "InheritedType": 3
                               }
                             ],
@@ -32483,7 +34067,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -32599,7 +34183,7 @@
                               {
                                 "nid": 10450,
                                 "strtype": "_style/Text_Font",
-                                "strval": "montserrat_16",
+                                "strval": "montserrat_14",
                                 "InheritedType": 3
                               }
                             ],
@@ -32663,7 +34247,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          0
+                          12
                         ],
                         "InheritedType": 7
                       },
@@ -32733,7 +34317,7 @@
                       {
                         "nid": 1030,
                         "strtype": "LABEL/Text",
-                        "strval": "OK Filter Sensor Connected",
+                        "strval": "OK, Filter Sensor Connected...",
                         "InheritedType": 10
                       },
                       {
@@ -32842,8 +34426,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -33002,8 +34586,8 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          -130,
-                          0
+                          0,
+                          -25
                         ],
                         "InheritedType": 7
                       },
@@ -33238,9 +34822,9 @@
                                 "nid": 10520,
                                 "strtype": "_style/Bg_Color",
                                 "intarray": [
+                                  8,
                                   0,
-                                  113,
-                                  255,
+                                  82,
                                   255
                                 ],
                                 "InheritedType": 7
@@ -33725,7 +35309,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          20
+                          0
                         ],
                         "InheritedType": 7
                       },
@@ -33789,7 +35373,7 @@
                       {
                         "nid": 1030,
                         "strtype": "LABEL/Text",
-                        "strval": "Sensors Setup Completed,\\nDevice Will Restart In 60s\\n...",
+                        "strval": "Sensors Setup Completed,\\nDevice Will Restart.",
                         "InheritedType": 10
                       },
                       {
@@ -59052,7 +60636,7 @@
     "uiExportFolderPath": "/Users/mra1380mohammadrezagmail.com/Downloads/SquareLine/export/ui",
     "projectExportFolderPath": "/Users/mra1380mohammadrezagmail.com/Downloads/SquareLine/export",
     "custom_variable_prefix": "uic",
-    "backup_cnt": 867,
+    "backup_cnt": 878,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.11",
     "callfuncsexport": "C_FILE",
@@ -59068,7 +60652,7 @@
     "drive_fatfs_path": "",
     "naming": "Name",
     "naming_force_lowercase": false,
-    "nidcnt": 1004673,
+    "nidcnt": 1004925,
     "BitDepth": 16,
     "Name": "SquareLine_Project"
   }

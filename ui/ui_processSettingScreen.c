@@ -75,7 +75,7 @@ lv_obj_remove_style_all(ui_ProcessScreenContainer1);
 lv_obj_set_width( ui_ProcessScreenContainer1, 150);
 lv_obj_set_height( ui_ProcessScreenContainer1, 80);
 lv_obj_set_x( ui_ProcessScreenContainer1, -80 );
-lv_obj_set_y( ui_ProcessScreenContainer1, -33 );
+lv_obj_set_y( ui_ProcessScreenContainer1, -31 );
 lv_obj_set_align( ui_ProcessScreenContainer1, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer1, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -161,7 +161,7 @@ lv_obj_remove_style_all(ui_ProcessScreenContainer2);
 lv_obj_set_width( ui_ProcessScreenContainer2, 150);
 lv_obj_set_height( ui_ProcessScreenContainer2, 80);
 lv_obj_set_x( ui_ProcessScreenContainer2, 80 );
-lv_obj_set_y( ui_ProcessScreenContainer2, -33 );
+lv_obj_set_y( ui_ProcessScreenContainer2, -31 );
 lv_obj_set_align( ui_ProcessScreenContainer2, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer2, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -245,9 +245,9 @@ lv_obj_set_style_bg_opa(ui_lable39854, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 ui_ProcessScreenContainer3 = lv_obj_create(ui_processSettingScreen);
 lv_obj_remove_style_all(ui_ProcessScreenContainer3);
 lv_obj_set_width( ui_ProcessScreenContainer3, 150);
-lv_obj_set_height( ui_ProcessScreenContainer3, 95);
+lv_obj_set_height( ui_ProcessScreenContainer3, 90);
 lv_obj_set_x( ui_ProcessScreenContainer3, 80 );
-lv_obj_set_y( ui_ProcessScreenContainer3, 64 );
+lv_obj_set_y( ui_ProcessScreenContainer3, 67 );
 lv_obj_set_align( ui_ProcessScreenContainer3, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer3, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer3, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -333,7 +333,7 @@ lv_obj_remove_style_all(ui_ProcessScreenContainer4);
 lv_obj_set_width( ui_ProcessScreenContainer4, 150);
 lv_obj_set_height( ui_ProcessScreenContainer4, 45);
 lv_obj_set_x( ui_ProcessScreenContainer4, -80 );
-lv_obj_set_y( ui_ProcessScreenContainer4, 38 );
+lv_obj_set_y( ui_ProcessScreenContainer4, 40 );
 lv_obj_set_align( ui_ProcessScreenContainer4, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer4, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer4, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -388,7 +388,7 @@ lv_obj_remove_style_all(ui_ProcessScreenContainer5);
 lv_obj_set_width( ui_ProcessScreenContainer5, 150);
 lv_obj_set_height( ui_ProcessScreenContainer5, 45);
 lv_obj_set_x( ui_ProcessScreenContainer5, -80 );
-lv_obj_set_y( ui_ProcessScreenContainer5, 90 );
+lv_obj_set_y( ui_ProcessScreenContainer5, 94 );
 lv_obj_set_align( ui_ProcessScreenContainer5, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_ProcessScreenContainer5, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_ProcessScreenContainer5, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -442,7 +442,7 @@ ui_High_Temp_Alarm_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Temp_Alarm_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Temp_Alarm_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_High_Temp_Alarm_Label, 80 );
-lv_obj_set_y( ui_High_Temp_Alarm_Label, 18 );
+lv_obj_set_y( ui_High_Temp_Alarm_Label, 20 );
 lv_obj_set_align( ui_High_Temp_Alarm_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_High_Temp_Alarm_Label," Temp Alarm ");
 lv_obj_set_style_text_color(ui_High_Temp_Alarm_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -456,7 +456,7 @@ ui_High_Pressure_Alarm_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Pressure_Alarm_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Pressure_Alarm_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_High_Pressure_Alarm_Label, -80 );
-lv_obj_set_y( ui_High_Pressure_Alarm_Label, 18 );
+lv_obj_set_y( ui_High_Pressure_Alarm_Label, 20 );
 lv_obj_set_align( ui_High_Pressure_Alarm_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_High_Pressure_Alarm_Label," Pressure Alarm ");
 lv_obj_set_style_text_color(ui_High_Pressure_Alarm_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -470,7 +470,7 @@ ui_Compressor_Offset_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_Compressor_Offset_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Compressor_Offset_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Compressor_Offset_Label, 80 );
-lv_obj_set_y( ui_Compressor_Offset_Label, -72 );
+lv_obj_set_y( ui_Compressor_Offset_Label, -70 );
 lv_obj_set_align( ui_Compressor_Offset_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Compressor_Offset_Label," Comp Range ");
 lv_obj_set_style_text_color(ui_Compressor_Offset_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -484,7 +484,7 @@ ui_Compressor_Range_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_Compressor_Range_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Compressor_Range_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Compressor_Range_Label, -80 );
-lv_obj_set_y( ui_Compressor_Range_Label, -72 );
+lv_obj_set_y( ui_Compressor_Range_Label, -70 );
 lv_obj_set_align( ui_Compressor_Range_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Compressor_Range_Label," Compressor ");
 lv_obj_set_style_text_color(ui_Compressor_Range_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );
@@ -498,7 +498,7 @@ ui_High_Temp_Alarm_Switch_Label = lv_label_create(ui_processSettingScreen);
 lv_obj_set_width( ui_High_Temp_Alarm_Switch_Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_High_Temp_Alarm_Switch_Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_High_Temp_Alarm_Switch_Label, -80 );
-lv_obj_set_y( ui_High_Temp_Alarm_Switch_Label, 72 );
+lv_obj_set_y( ui_High_Temp_Alarm_Switch_Label, 75 );
 lv_obj_set_align( ui_High_Temp_Alarm_Switch_Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_High_Temp_Alarm_Switch_Label," Temp Alarm ");
 lv_obj_set_style_text_color(ui_High_Temp_Alarm_Switch_Label, lv_color_hex(0x080041), LV_PART_MAIN | LV_STATE_DEFAULT );

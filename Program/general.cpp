@@ -143,7 +143,7 @@ String getTime()
 
 // Constants
 const uint32_t HOUR_INTERVAL = 60 * 60 * 1000; // 1 hour in milliseconds
-const uint8_t SAVE_INTERVAL = 1;               // Save every 5 hours
+const uint8_t SAVE_INTERVAL = 1;               // Save every 1 hours
 const uint32_t MAX_HOURS = 87600;              // Maximum trackable hours
 
 static uint32_t hoursElapsedCounter = 0;
@@ -164,6 +164,9 @@ void updateHoursElapsedCounter()
     // Check if 1 hour has passed and Evaporator Fan is running
     if ((currentTime - lastHourUpdateTime >= HOUR_INTERVAL))
     {
+        // Reset the hour timer
+        lastHourUpdateTime = currentTime;
+
         if (getEvaporatorRelayStatus())
         {
             // Increment the counter
@@ -177,9 +180,6 @@ void updateHoursElapsedCounter()
             {
                 setNumericSetting(HOURS_ELAPSED, hoursElapsedCounter);
             }
-
-            // Reset the hour timer
-            lastHourUpdateTime = currentTime;
 
             Serial.printf("🔧 Hours Elapsed Updated: %d\n", hoursElapsedCounter);
         }
