@@ -25914,7 +25914,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          17
+                          20
                         ],
                         "InheritedType": 7
                       },
@@ -26094,7 +26094,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          12
+                          15
                         ],
                         "InheritedType": 7
                       },
@@ -27952,7 +27952,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          17
+                          20
                         ],
                         "InheritedType": 7
                       },
@@ -28132,7 +28132,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          12
+                          15
                         ],
                         "InheritedType": 7
                       },
@@ -29991,7 +29991,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          17
+                          20
                         ],
                         "InheritedType": 7
                       },
@@ -30171,7 +30171,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          12
+                          15
                         ],
                         "InheritedType": 7
                       },
@@ -32029,7 +32029,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          17
+                          20
                         ],
                         "InheritedType": 7
                       },
@@ -32209,7 +32209,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          12
+                          15
                         ],
                         "InheritedType": 7
                       },
@@ -34067,7 +34067,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          17
+                          20
                         ],
                         "InheritedType": 7
                       },
@@ -34247,7 +34247,7 @@
                         "strtype": "OBJECT/Position",
                         "intarray": [
                           0,
-                          12
+                          15
                         ],
                         "InheritedType": 7
                       },
@@ -60636,7 +60636,7 @@
     "uiExportFolderPath": "/Users/mra1380mohammadrezagmail.com/Downloads/SquareLine/export/ui",
     "projectExportFolderPath": "/Users/mra1380mohammadrezagmail.com/Downloads/SquareLine/export",
     "custom_variable_prefix": "uic",
-    "backup_cnt": 878,
+    "backup_cnt": 879,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.11",
     "callfuncsexport": "C_FILE",

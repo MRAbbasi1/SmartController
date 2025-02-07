@@ -1121,7 +1121,7 @@ ui_Detail_Success_Status_message_1 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_1, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_1, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_1, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_1, 17 );
+lv_obj_set_y( ui_Detail_Success_Status_message_1, 20 );
 lv_obj_set_align( ui_Detail_Success_Status_message_1, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_1,"Error 4 Sensor Conected");
 lv_obj_add_flag( ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1136,7 +1136,7 @@ ui_Detail_Success_Status_message_2 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_2, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_2, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_2, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_2, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_2, 15 );
 lv_obj_set_align( ui_Detail_Success_Status_message_2, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_2,"OK, All Sensor Disconnected...");
 lv_obj_add_flag( ui_Detail_Success_Status_message_2, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1241,7 +1241,7 @@ ui_Detail_Success_Status_message_3 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_3, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_3, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_3, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_3, 17 );
+lv_obj_set_y( ui_Detail_Success_Status_message_3, 20 );
 lv_obj_set_align( ui_Detail_Success_Status_message_3, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_3,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_3, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1256,7 +1256,7 @@ ui_Detail_Success_Status_message_4 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_4, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_4, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_4, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_4, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_4, 15 );
 lv_obj_set_align( ui_Detail_Success_Status_message_4, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_4,"OK, Inlet Sensor Connected...");
 lv_obj_add_flag( ui_Detail_Success_Status_message_4, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1361,7 +1361,7 @@ ui_Detail_Success_Status_message_5 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_5, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_5, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_5, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_5, 17 );
+lv_obj_set_y( ui_Detail_Success_Status_message_5, 20 );
 lv_obj_set_align( ui_Detail_Success_Status_message_5, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_5,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_5, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1376,7 +1376,7 @@ ui_Detail_Success_Status_message_6 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_6, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_6, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_6, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_6, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_6, 15 );
 lv_obj_set_align( ui_Detail_Success_Status_message_6, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_6,"OK, Outlet Sensor Connected...");
 lv_obj_add_flag( ui_Detail_Success_Status_message_6, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1481,7 +1481,7 @@ ui_Detail_Success_Status_message_7 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_7, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_7, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_7, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_7, 17 );
+lv_obj_set_y( ui_Detail_Success_Status_message_7, 20 );
 lv_obj_set_align( ui_Detail_Success_Status_message_7, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_7,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_7, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1496,7 +1496,7 @@ ui_Detail_Success_Status_message_8 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_8, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_8, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_8, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_8, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_8, 15 );
 lv_obj_set_align( ui_Detail_Success_Status_message_8, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_8,"OK, Antifreeze Sensor Connected...");
 lv_obj_add_flag( ui_Detail_Success_Status_message_8, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1601,7 +1601,7 @@ ui_Detail_Success_Status_message_9 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_9, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_9, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_9, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_9, 17 );
+lv_obj_set_y( ui_Detail_Success_Status_message_9, 20 );
 lv_obj_set_align( ui_Detail_Success_Status_message_9, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_9,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_9, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1616,7 +1616,7 @@ ui_Detail_Success_Status_message_10 = lv_label_create(ui_Sensor_Setup_main_Conta
 lv_obj_set_width( ui_Detail_Success_Status_message_10, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_10, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_10, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_10, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_10, 15 );
 lv_obj_set_align( ui_Detail_Success_Status_message_10, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_10,"OK, Filter Sensor Connected...");
 lv_obj_add_flag( ui_Detail_Success_Status_message_10, LV_OBJ_FLAG_HIDDEN );   /// Flags
