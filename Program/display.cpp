@@ -830,7 +830,7 @@ void switchToMainScreen()
     lv_obj_t *currentScreen = lv_scr_act();
 
     // Only delete the previous screen if it's not the main screen
-    if (currentScreen != ui_mainScreen && currentScreen != NULL && lv_obj_has_flag(ui_sensors_setup_container, LV_OBJ_FLAG_HIDDEN))
+    if (currentScreen != ui_mainScreen && currentScreen != NULL)
     {
         lv_obj_t *screenToDelete = currentScreen; // Create a temporary pointer for compatibility
         _ui_screen_delete(&screenToDelete);       // Pass as a pointer-to-pointer to delete the screen

@@ -648,23 +648,23 @@ void check_set_Filter(lv_event_t *e)
 
 		if (numSensors == 0)
 		{
-			snprintf(statusMessage, sizeof(statusMessage), "Error: No sensor connected!\nConnect INLET, OUTLET, ANTIFREEZE & FILTER.");
+			snprintf(statusMessage, sizeof(statusMessage), "Error: No sensor connected!\nConnect INLET, OUTLET, ANTIFREEZE &\nFILTER Sensor.");
 		}
 		else if (numSensors == 1)
 		{
-			snprintf(statusMessage, sizeof(statusMessage), "Error: Only one sensor connected!\nINLET, OUTLET, ANTIFREEZE & FILTER required.");
+			snprintf(statusMessage, sizeof(statusMessage), "Error: Only one sensor connected!\nINLET, OUTLET, ANTIFREEZE &\nFILTER Sensor required.");
 		}
 		else if (numSensors == 2)
 		{
-			snprintf(statusMessage, sizeof(statusMessage), "Error: 2 sensors connected!\nINLET, OUTLET, ANTIFREEZE & FILTER required.");
+			snprintf(statusMessage, sizeof(statusMessage), "Error: 2 sensors connected!\nINLET, OUTLET, ANTIFREEZE &\nFILTER Sensor required.");
 		}
 		else if (numSensors == 3)
 		{
-			snprintf(statusMessage, sizeof(statusMessage), "Error: 3 sensors connected!\nINLET, OUTLET, ANTIFREEZE & FILTER required.");
+			snprintf(statusMessage, sizeof(statusMessage), "Error: 3 sensors connected!\nINLET, OUTLET, ANTIFREEZE &\nFILTER Sensor required.");
 		}
 		else
 		{
-			snprintf(statusMessage, sizeof(statusMessage), "Error: %d sensors connected!\nOnly INLET, OUTLET, ANTIFREEZE & FILTER allowed.", numSensors);
+			snprintf(statusMessage, sizeof(statusMessage), "Error: %d sensors connected!\nOnly INLET, OUTLET, ANTIFREEZE &\nFILTER Sensor allowed.", numSensors);
 		}
 
 		lv_label_set_text(ui_Detail_Success_Status_message_9, statusMessage);

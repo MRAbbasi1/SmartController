@@ -1121,7 +1121,7 @@ ui_Detail_Success_Status_message_1 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_1, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_1, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_1, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_1, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_1, 17 );
 lv_obj_set_align( ui_Detail_Success_Status_message_1, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_1,"Error 4 Sensor Conected");
 lv_obj_add_flag( ui_Detail_Success_Status_message_1, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1241,7 +1241,7 @@ ui_Detail_Success_Status_message_3 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_3, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_3, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_3, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_3, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_3, 17 );
 lv_obj_set_align( ui_Detail_Success_Status_message_3, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_3,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_3, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1361,7 +1361,7 @@ ui_Detail_Success_Status_message_5 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_5, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_5, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_5, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_5, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_5, 17 );
 lv_obj_set_align( ui_Detail_Success_Status_message_5, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_5,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_5, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1481,7 +1481,7 @@ ui_Detail_Success_Status_message_7 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_7, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_7, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_7, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_7, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_7, 17 );
 lv_obj_set_align( ui_Detail_Success_Status_message_7, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_7,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_7, LV_OBJ_FLAG_HIDDEN );   /// Flags
@@ -1601,7 +1601,7 @@ ui_Detail_Success_Status_message_9 = lv_label_create(ui_Sensor_Setup_main_Contai
 lv_obj_set_width( ui_Detail_Success_Status_message_9, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_Detail_Success_Status_message_9, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_Detail_Success_Status_message_9, 0 );
-lv_obj_set_y( ui_Detail_Success_Status_message_9, 12 );
+lv_obj_set_y( ui_Detail_Success_Status_message_9, 17 );
 lv_obj_set_align( ui_Detail_Success_Status_message_9, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Detail_Success_Status_message_9,"Error in Setup, Try Again");
 lv_obj_add_flag( ui_Detail_Success_Status_message_9, LV_OBJ_FLAG_HIDDEN );   /// Flags
