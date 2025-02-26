@@ -1,3 +1,4 @@
+// general.cpp
 #include "general.h"
 #include "wifi.h"
 #include <ArduinoJson.h> // Include the ArduinoJson library for JSON parsing
