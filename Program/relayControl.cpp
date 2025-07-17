@@ -12,61 +12,103 @@ bool fan2RelayStatus = false;       // Fan2 relay state
 
 // ================================
 // Cached Settings and Sensor Data
-// Static variables to store configuration and sensor readings from NVS and sensors
+// Stores settings and sensor data retrieved from NVS and sensors
 // ================================
 static bool deviceOn = false;            // Device power state
-static bool fan2On = false;              // Fan2 enabled state
-static int32_t compressorTemp = 0;       // Compressor base temperature threshold
-static int32_t compressorRange = 0;      // Compressor temperature range for hysteresis
-static int32_t compressorRestTime = 0;   // Compressor rest time (ms) after deactivation (default 0ms, disabled)
-static int32_t antiFreezeBase = 0;       // Antifreeze base temperature threshold
-static int32_t antiFreezeRange = 0;      // Antifreeze temperature range for hysteresis
-static int32_t fan2Temp = 0;             // Fan2 temperature threshold
+static bool fan2On = false;              // Fan2 enable state
+static int32_t compressorTemp = 0;       // Compressor temperature threshold (°C)
+static int32_t compressorRange = 0;      // Compressor hysteresis range (°C)
+static int32_t compressorRestTime = 0;   // Compressor rest time (ms)
+static int32_t antiFreezeBase = 0;       // Anti-freeze temperature base (°C)
+static int32_t antiFreezeRange = 0;      // Anti-freeze hysteresis range (°C)
+static int32_t fan2Temp = 0;             // Fan2 temperature threshold (°C)
 static bool cachedDoorClosed = true;     // Cached door state (true = closed)
-static bool cachedFilterWarning = false; // Cached filter warning state (true = active)
-static float inletTemp = 0.0;            // Inlet sensor temperature
-static float antiFreezeTemp = 0.0;       // Antifreeze sensor temperature
-static float fan2SensorTemp = 0.0;       // Fan2 sensor temperature
+static bool cachedFilterWarning = false; // Cached filter warning state
+static float inletTemp = 0.0;            // Inlet sensor temperature (°C)
+static float antiFreezeTemp = 0.0;       // Anti-freeze sensor temperature (°C)
+static float fan2SensorTemp = 0.0;       // Fan2 sensor temperature (°C)
 
 // ================================
 // Timing Variables
-// Control periodic updates for settings and relay control
+// Controls timing for relay updates and sensor checks
 // ================================
-static unsigned long lastCheckTime = 0;           // Last time settings were refreshed
+static unsigned long lastCheckTime = 0;           // Last time settings/sensors were checked
 static unsigned long lastRelayUpdateTime = 0;     // Last time relays were updated
 static unsigned long lastCompressorOffTime = 0;   // Last time compressor was turned off
-const unsigned long CHECK_INTERVAL = 5000;        // Interval for refreshing settings (ms)
-const unsigned long RELAY_UPDATE_INTERVAL = 5000; // Interval for relay updates (ms, matched with PCF8574 version)
-const unsigned long COMPRESSOR_ON_DELAY = 5000;   // Fixed delay (ms) for compressor activation after condenser
+const unsigned long CHECK_INTERVAL = 5000;        // Interval for checking settings/sensors (ms)
+const unsigned long RELAY_UPDATE_INTERVAL = 5000; // Interval for updating relays (ms)
+const unsigned long COMPRESSOR_ON_DELAY = 5000;   // Delay before compressor turns on (ms)
+
+// PCF8574 output state (all pins HIGH by default, relays OFF)
+static uint8_t pcf8574_output_state = 0xFF;
+
+// ================================
+// Helper Function to Write to PCF8574
+// Writes the current output state to PCF8574 via I2C
+// ================================
+void writeToPCF8574()
+{
+    uint32_t currentTime = millis();
+    Wire.beginTransmission(PCF8574_ADDRESS);
+    Wire.write(pcf8574_output_state);
+    if (Wire.endTransmission() != 0)
+    {
+        Serial.printf("[Relay][ERROR][%lu] Failed to write to PCF8574 at address 0x%02X\n", currentTime, PCF8574_ADDRESS);
+    }
+}
+
+// ================================
+// Helper Function to Set Pin State
+// Updates the specific bit in pcf8574_output_state and writes to PCF8574
+// pin: 0 to 7 (P0 to P7), value: HIGH (relay OFF) or LOW (relay ON)
+// ================================
+void setPCF8574Pin(uint8_t pin, uint8_t value)
+{
+    uint32_t currentTime = millis();
+    if (value == HIGH)
+        pcf8574_output_state |= (1 << pin); // Set bit to 1 (HIGH, relay OFF)
+    else
+        pcf8574_output_state &= ~(1 << pin); // Clear bit to 0 (LOW, relay ON)
+    writeToPCF8574();
+    Serial.printf("[Relay][INFO][%lu] PCF8574 pin P%d set to %s\n", currentTime, pin, value == HIGH ? "HIGH" : "LOW");
+}
 
 // ================================
 // Setup Function
-// Initializes relay pins and loads initial configuration data from NVS
+// Initializes PCF8574 via I2C and loads initial configuration data from NVS
 // ================================
 void setupRelays()
 {
     uint32_t currentTime = millis();
-    Serial.printf("[Relay][INFO][%lu] Initializing relay pins\n", currentTime);
+    Serial.printf("[Relay][INFO][%lu] Initializing PCF8574 for relay control\n", currentTime);
 
-    // Configure relay pins as outputs
-    pinMode(COMPRESSOR_RELAY_PIN, OUTPUT);
-    pinMode(EVAPORATOR_RELAY_PIN, OUTPUT);
-    pinMode(CONDENSER_RELAY_PIN, OUTPUT);
-    pinMode(FAN2_RELAY_PIN, OUTPUT);
+    // Initialize I2C bus with SDA: GPIO15, SCL: GPIO7
+    Wire.begin(15, 7);
 
-    // Set initial relay states to OFF (HIGH = OFF, LOW = ON for active-low relays)
-    digitalWrite(COMPRESSOR_RELAY_PIN, HIGH);
-    digitalWrite(EVAPORATOR_RELAY_PIN, HIGH);
-    digitalWrite(CONDENSER_RELAY_PIN, HIGH);
-    digitalWrite(FAN2_RELAY_PIN, HIGH);
+    Wire.setClock(400000); // Set I2C frequency to 400kHz
+
+    // Set all PCF8574 pins to HIGH (relays OFF)
+    pcf8574_output_state = 0xFF;
+    writeToPCF8574();
+
+    // Verify PCF8574 connection
+    Wire.beginTransmission(PCF8574_ADDRESS);
+    if (Wire.endTransmission() == 0)
+    {
+        Serial.printf("[Relay][INFO][%lu] PCF8574 initialized at address 0x%02X\n", currentTime, PCF8574_ADDRESS);
+    }
+    else
+    {
+        Serial.printf("[Relay][ERROR][%lu] Failed to initialize PCF8574 at address 0x%02X. Continuing without relays...\n", currentTime, PCF8574_ADDRESS);
+    }
 
     // Load initial settings and sensor data
     reloadCachedData();
 }
 
 // ================================
-// Control Loop
-// Periodically refreshes settings and controls all relays
+// Main Control Loop
+// Periodically refreshes settings and updates relay states
 // ================================
 void controlRelays()
 {
@@ -91,8 +133,7 @@ void controlRelays()
 
 // ================================
 // Reload Cached Data
-// Updates cached settings, alarms, and sensor data from NVS and sensors
-// Only refreshes changed settings to optimize performance
+// Refreshes cached settings and sensor data from NVS and sensors
 // ================================
 void reloadCachedData()
 {
@@ -129,13 +170,12 @@ void reloadCachedData()
     if (getChangedFlagTemp("numeric", COMPRESSOR_REST_TIME))
     {
         int32_t restTimeMinutes = getNumericSetting(COMPRESSOR_REST_TIME);
-        // Validate compressorRestTime (0 to 5 minutes)
         if (restTimeMinutes < 0 || restTimeMinutes > 5)
         {
-            restTimeMinutes = 0; // Default to 0 (disabled) if invalid
+            restTimeMinutes = 0;
             Serial.printf("[Relay][WARN][%lu] Invalid compressorRestTime, using default 0 minutes\n", currentTime);
         }
-        compressorRestTime = restTimeMinutes * 60000; // Convert minutes to milliseconds
+        compressorRestTime = restTimeMinutes * 60000;
         resetChangedFlagTemp("numeric", COMPRESSOR_REST_TIME);
         Serial.printf("[Relay][INFO][%lu] Compressor Rest Time: %d minutes (%dms)\n", currentTime, restTimeMinutes, compressorRestTime);
     }
@@ -175,19 +215,17 @@ void reloadCachedData()
 
 // ================================
 // Evaporator Relay Control
-// Activates evaporator relay based on general conditions
+// Controls evaporator relay based on device state, door, filter, and inlet temperature
 // ================================
 void controlEvaporatorRelay()
 {
     uint32_t currentTime = millis();
-    // Enable relay if device is on, door is closed, no filter warning, and inlet temp is valid
     bool newStatus = (deviceOn && cachedDoorClosed && !cachedFilterWarning && !isnan(inletTemp));
 
     if (newStatus != evaporatorRelayStatus)
     {
         evaporatorRelayStatus = newStatus;
-        digitalWrite(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
-
+        setPCF8574Pin(EVAPORATOR_RELAY_PIN, newStatus ? LOW : HIGH);
         Serial.printf("[Relay][INFO][%lu] Evaporator: %s | Reason: ", currentTime, newStatus ? "ON" : "OFF");
         if (!deviceOn)
             Serial.printf("Device is OFF\n");
@@ -204,38 +242,35 @@ void controlEvaporatorRelay()
 
 // ================================
 // Compressor and Condenser Relay Control
-// Implements hysteresis for inletTemp and antiFreezeTemp to prevent rapid relay switching
-// - inletTemp: ON at >= compressorTemp + compressorRange, OFF at < compressorTemp
-// - antiFreezeTemp: ON at > antiFreezeBase + antiFreezeRange, OFF at <= antiFreezeBase
-// Maintains state in hysteresis ranges, enforces 5s delay for compressor activation, and ensures rest time after deactivation
+// Controls compressor and condenser relays with hysteresis and delay
 // ================================
 void controlCompressorAndCondenserRelays()
 {
     uint32_t currentTime = millis();
-    static unsigned long condenserOnTime = 0;         // Tracks condenser activation time for delay
-    static bool lastCondenserStatus = false;          // Stores previous condenser state for hysteresis
-    bool newCondenserStatus = lastCondenserStatus;    // Default: maintain current state
-    bool newCompressorStatus = compressorRelayStatus; // Default: maintain previous compressor state
+    static unsigned long condenserOnTime = 0;         // Time when condenser was last turned on
+    bool newCompressorStatus = compressorRelayStatus; // Maintain previous compressor state by default
+    bool newCondenserStatus = compressorRelayStatus;  // Condenser follows compressor state by default
 
-    // Validate general conditions for operation
+    // Check if device is on and no errors exist
     if (deviceOn && cachedDoorClosed && !cachedFilterWarning && !isnan(antiFreezeTemp) && !isnan(inletTemp))
     {
-        // Hysteresis for antiFreezeTemp: ON when temp > antiFreezeBase + antiFreezeRange, OFF when <= antiFreezeBase
+        // Check anti-freeze temperature condition
         if (antiFreezeTemp > antiFreezeBase + antiFreezeRange)
         {
-            // Hysteresis for inletTemp: ON when temp >= compressorTemp + compressorRange, OFF when < compressorTemp
+            // Hysteresis logic for compressor
             if (inletTemp >= compressorTemp + compressorRange)
             {
-                newCondenserStatus = true;
-                if (newCondenserStatus != lastCondenserStatus)
-                {
-                    condenserOnTime = millis(); // Record condenser activation time
-                }
-                // Check if compressor rest time has elapsed since last deactivation (if rest time is enabled)
+                newCondenserStatus = true; // Condenser should be ON
+                // Check if compressor rest time has elapsed
                 if (compressorRestTime == 0 || lastCompressorOffTime == 0 ||
                     (millis() - lastCompressorOffTime >= (unsigned long)compressorRestTime))
                 {
-                    newCompressorStatus = (millis() - condenserOnTime >= COMPRESSOR_ON_DELAY); // Compressor ON after 5s delay
+                    // Apply delay for compressor activation
+                    if (!condenserOnTime) // Start timer when condenser turns ON
+                    {
+                        condenserOnTime = millis();
+                    }
+                    newCompressorStatus = (millis() - condenserOnTime >= COMPRESSOR_ON_DELAY);
                 }
                 else
                 {
@@ -245,28 +280,31 @@ void controlCompressorAndCondenserRelays()
             }
             else if (inletTemp < compressorTemp)
             {
-                newCondenserStatus = false;
-                newCompressorStatus = false;
-                condenserOnTime = 0; // Reset condenser timer
+                newCondenserStatus = false;  // Condenser should be OFF
+                newCompressorStatus = false; // Compressor should be OFF
+                condenserOnTime = 0;         // Reset condenser timer
             }
             else
             {
-                newCondenserStatus = compressorRelayStatus; // Maintain previous state in hysteresis range
+                // Hysteresis range for inlet temp: maintain previous compressor state
+                newCondenserStatus = compressorRelayStatus; // Condenser follows compressor
                 Serial.printf("[Relay][INFO][%lu] Inlet Temp in hysteresis range: %.1f°C (%.1f to %.1f)\n",
                               currentTime, inletTemp, (float)compressorTemp, (float)(compressorTemp + compressorRange));
             }
         }
-        else if (antiFreezeTemp <= antiFreezeBase)
+        else if (antiFreezeTemp < antiFreezeBase)
         {
-            newCondenserStatus = false;
-            newCompressorStatus = false;
-            condenserOnTime = 0; // Reset condenser timer
+            // Anti-freeze temperature too low
+            newCondenserStatus = false;  // Condenser should be OFF
+            newCompressorStatus = false; // Compressor should be OFF
+            condenserOnTime = 0;         // Reset condenser timer
             Serial.printf("[Relay][INFO][%lu] AntiFreeze Temp at or below base: %.1f°C <= %d°C\n",
                           currentTime, antiFreezeTemp, antiFreezeBase);
         }
         else
         {
-            newCondenserStatus = compressorRelayStatus;  // Maintain previous state in hysteresis range
+            // Hysteresis range for anti-freeze temp: maintain previous compressor state
+            newCondenserStatus = compressorRelayStatus;  // Condenser follows compressor
             newCompressorStatus = compressorRelayStatus; // Maintain previous compressor state
             Serial.printf("[Relay][INFO][%lu] AntiFreeze Temp in hysteresis range: %.1f°C (%.1f to %.1f)\n",
                           currentTime, antiFreezeTemp, (float)antiFreezeBase, (float)(antiFreezeBase + antiFreezeRange));
@@ -274,9 +312,10 @@ void controlCompressorAndCondenserRelays()
     }
     else
     {
-        newCondenserStatus = false;
-        newCompressorStatus = false;
-        condenserOnTime = 0; // Reset condenser timer
+        // Device is OFF or error condition exists
+        newCondenserStatus = false;  // Condenser should be OFF
+        newCompressorStatus = false; // Compressor should be OFF
+        condenserOnTime = 0;         // Reset condenser timer
         Serial.printf("[Relay][INFO][%lu] Relays OFF | Reason: ", currentTime);
         if (!deviceOn)
             Serial.printf("Device is OFF\n");
@@ -290,13 +329,11 @@ void controlCompressorAndCondenserRelays()
             Serial.printf("Invalid inlet temperature (NaN)\n");
     }
 
-    // Apply condenser relay state if changed
+    // Update condenser relay if state changed
     if (newCondenserStatus != condenserRelayStatus)
     {
         condenserRelayStatus = newCondenserStatus;
-        lastCondenserStatus = newCondenserStatus; // Update hysteresis state
-        digitalWrite(CONDENSER_RELAY_PIN, newCondenserStatus ? LOW : HIGH);
-
+        setPCF8574Pin(CONDENSER_RELAY_PIN, newCondenserStatus ? LOW : HIGH);
         Serial.printf("[Relay][INFO][%lu] Condenser: %s | Reason: ", currentTime, newCondenserStatus ? "ON" : "OFF");
         if (!deviceOn)
             Serial.printf("Device is OFF\n");
@@ -316,23 +353,21 @@ void controlCompressorAndCondenserRelays()
         else if (inletTemp < compressorTemp)
             Serial.printf("Inlet temperature below base: %.1f°C < %d°C\n", inletTemp, compressorTemp);
         else if (inletTemp >= compressorTemp + compressorRange)
-            Serial.printf("Inlet temperature at or above range: %.1f°C >= %.1f°C\n",
-                          inletTemp, (float)(compressorTemp + compressorRange));
+            Serial.printf("Inlet temperature at or above range: %.1f°C >= %.1f°C\n", inletTemp, (float)(compressorTemp + compressorRange));
         else
             Serial.printf("Following compressor in hysteresis range\n");
     }
 
-    // Apply compressor relay state if changed
+    // Update compressor relay if state changed
     if (newCompressorStatus != compressorRelayStatus)
     {
         compressorRelayStatus = newCompressorStatus;
-        digitalWrite(COMPRESSOR_RELAY_PIN, newCompressorStatus ? LOW : HIGH);
+        setPCF8574Pin(COMPRESSOR_RELAY_PIN, newCompressorStatus ? LOW : HIGH);
         if (!newCompressorStatus)
         {
-            lastCompressorOffTime = millis(); // Record time when compressor turns off
-            condenserOnTime = 0;              // Reset condenser timer when compressor turns OFF
+            lastCompressorOffTime = millis();
+            condenserOnTime = 0; // Reset condenser timer when compressor turns OFF
         }
-
         Serial.printf("[Relay][INFO][%lu] Compressor: %s | Reason: ", currentTime, newCompressorStatus ? "ON" : "OFF");
         if (!deviceOn)
             Serial.printf("Device is OFF\n");
@@ -351,10 +386,8 @@ void controlCompressorAndCondenserRelays()
                           antiFreezeTemp, (float)antiFreezeBase, (float)(antiFreezeBase + antiFreezeRange));
         else if (inletTemp < compressorTemp)
             Serial.printf("Inlet temperature below base: %.1f°C < %d°C\n", inletTemp, compressorTemp);
-        else if (compressorRestTime != 0 && lastCompressorOffTime != 0 &&
-                 (millis() - lastCompressorOffTime < (unsigned long)compressorRestTime))
-            Serial.printf("Waiting for rest time: %lu/%dms\n",
-                          millis() - lastCompressorOffTime, compressorRestTime);
+        else if (compressorRestTime != 0 && lastCompressorOffTime != 0 && (millis() - lastCompressorOffTime < (unsigned long)compressorRestTime))
+            Serial.printf("Waiting for rest time: %lu/%dms\n", millis() - lastCompressorOffTime, compressorRestTime);
         else if (millis() - condenserOnTime < COMPRESSOR_ON_DELAY)
             Serial.printf("Waiting for condenser delay (5s)\n");
         else
@@ -364,20 +397,18 @@ void controlCompressorAndCondenserRelays()
 
 // ================================
 // Fan2 Relay Control
-// Activates Fan2 relay based on general conditions and fan2SensorTemp threshold
+// Controls fan2 relay based on device state, settings, and sensor temperature
 // ================================
 void controlFan2Relay()
 {
     uint32_t currentTime = millis();
-    // Enable relay if device is on, door is closed, no filter warning, valid temp, and fan2SensorTemp exceeds threshold
     bool newStatus = (deviceOn && fan2On && cachedDoorClosed && !cachedFilterWarning &&
                       !isnan(fan2SensorTemp) && fan2SensorTemp > fan2Temp);
 
     if (newStatus != fan2RelayStatus)
     {
         fan2RelayStatus = newStatus;
-        digitalWrite(FAN2_RELAY_PIN, newStatus ? LOW : HIGH);
-
+        setPCF8574Pin(FAN2_RELAY_PIN, newStatus ? LOW : HIGH);
         Serial.printf("[Relay][INFO][%lu] Fan2: %s | Reason: ", currentTime, newStatus ? "ON" : "OFF");
         if (!deviceOn)
             Serial.printf("Device is OFF\n");
@@ -390,17 +421,15 @@ void controlFan2Relay()
         else if (isnan(fan2SensorTemp))
             Serial.printf("Invalid sensor temperature (NaN)\n");
         else if (fan2SensorTemp <= fan2Temp)
-            Serial.printf("Sensor temperature at or below threshold: %.1f°C <= %d°C\n",
-                          fan2SensorTemp, fan2Temp);
+            Serial.printf("Sensor temperature at or below threshold: %.1f°C <= %d°C\n", fan2SensorTemp, fan2Temp);
         else
-            Serial.printf("Sensor temperature above threshold: %.1f°C > %d°C\n",
-                          fan2SensorTemp, fan2Temp);
+            Serial.printf("Sensor temperature above threshold: %.1f°C > %d°C\n", fan2SensorTemp, fan2Temp);
     }
 }
 
 // ================================
 // Relay Status Accessors
-// Return current state of each relay with debug logging
+// Returns current state of each relay with logging
 // ================================
 bool getCompressorRelayStatus()
 {

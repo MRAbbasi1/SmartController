@@ -24,7 +24,7 @@
 
 // Only ONE line below should be uncommented to define your setup.  Add extra lines and files as needed.
 
-#include <User_Setup.h>           // Default setup is root library folder
+// #include <User_Setup.h>           // Default setup is root library folder
 
 //#include <User_Setups/Setup1_ILI9341.h>  // Setup file for ESP8266 configured for my ILI9341
 //#include <User_Setups/Setup2_ST7735.h>   // Setup file for ESP8266 configured for my ST7735
@@ -143,6 +143,7 @@
 
 //#include <User_Setups/Setup301_BW16_ST7735.h>            // Setup file for Bw16-based boards with ST7735 160 x 80 TFT
 //#include <User_Setups/Setup302_Waveshare_ESP32S3_GC9A01.h>            // Setup file for Waveshare ESP32-S3-Touch-LCD-1.28 board with GC9A01 240*240 TFT
+#include <User_Setups/Setup303_Waveshare_ESP32S3_ST7789.h>            // Setup file for Waveshare ESP32-S3-Touch-LCD-2.8 board with GC9A01 240*320 TFT
 
 //#include <User_Setups/SetupX_Template.h>     // Template file for a setup
 
@@ -231,6 +232,9 @@
      #define  TFT_DRIVER 0xE9D
 #elif defined (ST7789_DRIVER)
      #include "TFT_Drivers/ST7789_Defines.h"
+     #define  TFT_DRIVER 0x7789
+#elif defined (ST7789_3_DRIVER)
+     #include "TFT_Drivers/ST7789_3_Defines.h"
      #define  TFT_DRIVER 0x7789
 #elif defined (R61581_DRIVER)
      #include "TFT_Drivers/R61581_Defines.h"

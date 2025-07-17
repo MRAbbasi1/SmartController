@@ -738,9 +738,9 @@ void resetDeviceSettings()
     setStringSetting(SERVER_URL, "https://bently.cool/");
     setStringSetting(SERVER_IP, "192.168.4.1");
 	setStringSetting(INLET_SENSOR_ADDRESS, "28:2D:11:58:D4:E1:3C:BC");
-	setStringSetting(OUTLET_SENSOR_ADDRESS, "28:BD:AD:43:D4:E1:3C:CF");
-	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "28:AB:CC:43:D4:E1:3C:FA");
-	setStringSetting(FILTER_SENSOR_ADDRESS, "28:FF:64:1F:70:68:7C:7C");
+	setStringSetting(OUTLET_SENSOR_ADDRESS, "28:AB:CC:43:D4:E1:3C:FA");
+	setStringSetting(ANTIFREEZE_SENSOR_ADDRESS, "28:FF:64:1F:7F:86:98:02");
+	setStringSetting(FILTER_SENSOR_ADDRESS, "28:FF:64:1F:7F:CA:EF:AF");
     printf("[UI][INFO][%lu] String settings reset to default\n", millis());
 
     resetAllChangedFlagsToFalse(); // Reset all flags to false

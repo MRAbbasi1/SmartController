@@ -7,17 +7,7 @@
 #include "tempSensor.h"
 #include "alarm.h"
 #include "general.h"
-#include <Adafruit_NeoPixel.h>
 #include <esp_heap_caps.h>
-
-// ================================
-// RGB LED Configuration
-// Configures built-in RGB LED (NeoPixel) for status indication
-// - Pin: GPIO 48, Single pixel, GRB color order
-// ================================
-#define PIN_NEOPIXEL 48
-#define NUM_PIXELS 1
-Adafruit_NeoPixel pixels(NUM_PIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 
 // ================================
 // System Monitoring Variables
@@ -69,7 +59,7 @@ void showMemoryUsage()
 // ================================
 // Setup Function
 // Initializes all system components and modules
-// - Configures RGB LED, serial, relays, display, settings, sensors, WiFi, alarms, time, and maintenance counter
+// - Configures serial, relays, display, settings, sensors, WiFi, alarms, time, and maintenance counter
 // - Logs progress and errors for each initialization step
 // ================================
 void setup()
@@ -78,39 +68,32 @@ void setup()
   Serial.begin(115200);
   Serial.printf("[System][INFO][%lu] Starting system setup\n", currentTime);
 
-  // Initialize RGB LED (Green to indicate setup start)
-  pixels.begin();
-  pixels.clear();
-  pixels.setPixelColor(0, pixels.Color(0, 255, 0));
-  pixels.show();
-  Serial.printf("[System][INFO][%lu] RGB LED initialized (Green)\n", currentTime);
-
   // Show initial memory usage
   showMemoryUsage();
-
-  // Initialize relays
-  setupRelays();
-  Serial.printf("[System][INFO][%lu] Relays initialized\n", currentTime);
-
-  // Initialize display
-  displaySetup();
-  Serial.printf("[System][INFO][%lu] Display initialized\n", currentTime);
 
   // Initialize settings (NVS)
   initializeSettings();
   Serial.printf("[System][INFO][%lu] NVS settings initialized\n", currentTime);
 
+  // Initialize display
+  displaySetup();
+  Serial.printf("[System][INFO][%lu] Display initialized\n", currentTime);
+
   // Initialize sensors
   initializeSensors();
   Serial.printf("[System][INFO][%lu] Sensors initialized\n", currentTime);
 
-  // Initialize WiFi
-  wifiSetup();
-  Serial.printf("[System][INFO][%lu] WiFi initialized\n", currentTime);
-
   // Initialize alarm system
   alarmSetup();
   Serial.printf("[System][INFO][%lu] Alarm system initialized\n", currentTime);
+
+  // Initialize relays
+  setupRelays();
+  Serial.printf("[System][INFO][%lu] Relays initialized\n", currentTime);
+
+  // Initialize WiFi
+  wifiSetup();
+  Serial.printf("[System][INFO][%lu] WiFi initialized\n", currentTime);
 
   // Update system time
   setupAndUpdateTime();
@@ -120,11 +103,7 @@ void setup()
   initializeHoursElapsedTracking();
   Serial.printf("[System][INFO][%lu] Maintenance counter initialized\n", currentTime);
 
-  // Indicate end of setup with RGB LED (Red)
-  pixels.setBrightness(64);
-  pixels.setPixelColor(0, pixels.Color(64, 0, 0));
-  pixels.show();
-  Serial.printf("[System][INFO][%lu] Setup completed (RGB LED set to Red)\n", currentTime);
+  Serial.printf("[System][INFO][%lu] Setup completed :) \n", currentTime);
 }
 
 // ================================

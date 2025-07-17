@@ -9,10 +9,10 @@
 // Pin Definitions
 // Defines GPIO pins for monitoring door and pressure states
 // ================================
-#define DOOR_PIN 1     // GPIO pin for door status sensor
-#define PRESSURE_PIN 2 // GPIO pin for pressure sensor
+#define DOOR_PIN     // GPIO pin for door status sensor
+#define PRESSURE_PIN // GPIO pin for pressure sensor
 
-// ================================
+// ================================x
 // Global Alarm State Variables
 // Tracks current alarm conditions
 // ================================

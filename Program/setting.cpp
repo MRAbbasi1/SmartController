@@ -18,7 +18,7 @@ const int32_t defaultNumericValues[] = {
     40,        // HIGH_TEMP_WARNING
     -5,        // ANTI_FREEZE_TEMP
     10,        // ANTI_FREEZE_RANGE
-    3,         // COMPRESSOR_REST_TIME
+    1,         // COMPRESSOR_REST_TIME
     80,        // FILTER_WARNING
     55,        // FAN2_TEMP
     100001,    // DEVICE_SERIAL_ID
@@ -46,12 +46,12 @@ const char *defaultStringValues[] = {
     "0",                       // WIFI_PASSWORD
     "0",                       // AP_NAME
     "0",                       // AP_PASSWORD
-    "http://bently.cool",       // SERVER_URL
+    "http://bently.cool",      // SERVER_URL
     "192.168.4.1",             // SERVER_IP
     "28:2D:11:58:D4:E1:3C:BC", // INLET_SENSOR_ADDRESS
-    "28:BD:AD:43:D4:E1:3C:CF", // OUTLET_SENSOR_ADDRESS
-    "28:AB:CC:43:D4:E1:3C:FA", // ANTIFREEZE_SENSOR_ADDRESS
-    "28:FF:64:1F:70:68:7C:7C"  // FILTER_SENSOR_ADDRESS
+    "28:AB:CC:43:D4:E1:3C:FA", // OUTLET_SENSOR_ADDRESS
+    "28:FF:64:1F:7F:86:98:02", // ANTIFREEZE_SENSOR_ADDRESS
+    "28:FF:64:1F:7F:CA:EF:AF"  // FILTER_SENSOR_ADDRESS
 };
 
 // ================================

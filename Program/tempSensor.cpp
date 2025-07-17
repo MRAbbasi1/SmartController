@@ -3,7 +3,7 @@
 #include "tempSensor.h"
 #include "setting.h"
 
-#define ONE_WIRE_BUS 4 // sensor GPIO pin
+#define ONE_WIRE_BUS // sensor GPIO pin - ** REAL GPIO need for DS18B20 frequency speed controling **
 
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature ds18b20(&oneWire);
