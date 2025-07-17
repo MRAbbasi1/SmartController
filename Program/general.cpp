@@ -1,5 +1,6 @@
+// general.cpp
 #include "general.h"
-#include "wifi.h"
+#include "WiFiManager.h"
 #include <ArduinoJson.h> // Include the ArduinoJson library for JSON parsing
 #include "setting.h"
 #include "relayControl.h"
@@ -25,10 +26,11 @@ String formatTime(time_t epoch)
 // Helper: Update the cached time (epoch) with the current time
 void updateCachedTime(time_t epoch)
 {
+    uint32_t currentTime = millis();
     cachedEpoch = epoch;
-    lastUpdateMillis = millis();
+    lastUpdateMillis = currentTime;
     timeIsValid = true;
-    Serial.println("⏱️ [Time] Time successfully updated and cached: " + formatTime(epoch));
+    Serial.printf("[Time][INFO][%lu] Time successfully updated and cached: %s\n", currentTime, formatTime(epoch).c_str());
 }
 
 // ======== Time Retrieval Functions ========
@@ -36,26 +38,29 @@ void updateCachedTime(time_t epoch)
 // Function: Get time from NTP servers
 time_t getLocalNTPTime()
 {
+    uint32_t currentTime = millis();
     configTime(3 * 3600 + 1800, 0, "pool.ntp.org", "time.nist.gov"); // Set up the NTP servers with Iran timezone (UTC+3:30)
     struct tm timeinfo;
     if (!getLocalTime(&timeinfo)) // Get local time using NTP
     {
-        Serial.println("❌ [Time] Failed to obtain NTP time.");
+        Serial.printf("[Time][ERROR][%lu] Failed to obtain NTP time\n", currentTime);
         return 0; // Return 0 if NTP fails
     }
+    Serial.printf("[Time][INFO][%lu] NTP time retrieved successfully\n", currentTime);
     return mktime(&timeinfo); // Convert struct tm to epoch time
 }
 
 // Function: Get time from API (World Time API)
 time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asia/Tehran")
 {
+    uint32_t currentTime = millis();
     HTTPClient http;
     http.begin(apiURL);        // Initiate HTTP request to the API
     int httpCode = http.GET(); // Send GET request
 
     if (httpCode != 200) // Check if the request was successful
     {
-        Serial.printf("❌ [Time] HTTP request failed with code: %d\n", httpCode);
+        Serial.printf("[Time][ERROR][%lu] HTTP request failed with code: %d\n", currentTime, httpCode);
         return 0; // Return 0 if request fails
     }
 
@@ -69,14 +74,14 @@ time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asi
     DeserializationError error = deserializeJson(doc, payload);
     if (error) // Check for deserialization errors
     {
-        Serial.println("❌ [Time] Failed to parse JSON.");
+        Serial.printf("[Time][ERROR][%lu] Failed to parse JSON: %s\n", currentTime, error.c_str());
         return 0; // Return 0 if JSON parsing fails
     }
 
     const char *datetime = doc["datetime"].as<const char *>(); // Extract the datetime string from the response
     if (datetime == nullptr)                                   // Check if the datetime is empty
     {
-        Serial.println("❌ [Time] Failed to parse API time.");
+        Serial.printf("[Time][ERROR][%lu] Failed to parse API time\n", currentTime);
         return 0; // Return 0 if the datetime is invalid
     }
 
@@ -88,6 +93,7 @@ time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asi
     timeinfo.tm_year -= 1900; // Adjust year to tm_year format
     timeinfo.tm_mon -= 1;     // Adjust month to tm_mon format
 
+    Serial.printf("[Time][INFO][%lu] API time retrieved successfully\n", currentTime);
     return mktime(&timeinfo); // Convert struct tm to epoch time
 }
 
@@ -96,10 +102,11 @@ time_t getAPITime(const char *apiURL = "http://worldtimeapi.org/api/timezone/Asi
 // Function: Setup and update time based on NTP or API
 void setupAndUpdateTime()
 {
+    uint32_t currentTime = millis();
     char ssid[32];
     if (!wifiIsConnected(ssid, sizeof(ssid))) // Check if Wi-Fi is connected
     {
-        Serial.println("❌ [Time] Wi-Fi not connected, cannot update time.");
+        Serial.printf("[Time][ERROR][%lu] Wi-Fi not connected, cannot update time\n", currentTime);
         return; // Exit function if not connected to Wi-Fi
     }
 
@@ -119,7 +126,7 @@ void setupAndUpdateTime()
         return;
     }
 
-    Serial.println("❌ [Time] All time sources failed. Cached time remains unchanged.");
+    Serial.printf("[Time][ERROR][%lu] All time sources failed, cached time unchanged\n", currentTime);
 }
 
 // ======== Get Current Time ========
@@ -127,8 +134,10 @@ void setupAndUpdateTime()
 // Function: Get the current time based on cached epoch time
 String getTime()
 {
+    uint32_t currentTime = millis();
     if (!timeIsValid) // Check if time is valid
     {
+        Serial.printf("[Time][WARN][%lu] Time is unavailable\n", currentTime);
         return "Time Unavailable"; // Return a default message if time is invalid
     }
 
@@ -136,6 +145,7 @@ String getTime()
     unsigned long elapsedMillis = millis() - lastUpdateMillis;
     time_t currentEpoch = cachedEpoch + (elapsedMillis / 1000);
 
+    Serial.printf("[Time][INFO][%lu] Current time: %s\n", currentTime, formatTime(currentEpoch).c_str());
     return formatTime(currentEpoch); // Format and return the current time as a string
 }
 
@@ -151,10 +161,11 @@ static uint32_t lastHourUpdateTime = 0;
 
 void initializeHoursElapsedTracking()
 {
-    Serial.println("------------Setup Hours Elapsed Counter------------");
+    uint32_t currentTime = millis();
+    Serial.printf("[Time][INFO][%lu] Initializing hours elapsed counter\n", currentTime);
     hoursElapsedCounter = getNumericSetting(HOURS_ELAPSED);
-    lastHourUpdateTime = millis();
-    Serial.println("🔧 Hours Elapsed Counter Initialized");
+    lastHourUpdateTime = currentTime;
+    Serial.printf("[Time][INFO][%lu] Hours elapsed counter initialized: %d hours\n", currentTime, hoursElapsedCounter);
 }
 
 void updateHoursElapsedCounter()
@@ -179,9 +190,10 @@ void updateHoursElapsedCounter()
             if (hoursElapsedCounter % SAVE_INTERVAL == 0)
             {
                 setNumericSetting(HOURS_ELAPSED, hoursElapsedCounter);
+                Serial.printf("[Time][INFO][%lu] Hours elapsed counter saved: %d hours\n", currentTime, hoursElapsedCounter);
             }
 
-            Serial.printf("🔧 Hours Elapsed Updated: %d\n", hoursElapsedCounter);
+            Serial.printf("[Time][INFO][%lu] Hours elapsed updated: %d hours\n", currentTime, hoursElapsedCounter);
         }
     }
 }

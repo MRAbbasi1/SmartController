@@ -1,3 +1,5 @@
+// general.h
+
 #ifndef GENERAL_H
 #define GENERAL_H
 
@@ -15,4 +17,4 @@ String getTime();
 void initializeHoursElapsedTracking();
 void updateHoursElapsedCounter();
 
-#endif                               // GENERAL_H
+#endif // GENERAL_H

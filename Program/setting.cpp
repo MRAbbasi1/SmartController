@@ -1,16 +1,18 @@
-// -----------------------------------
-// NVS Methods for Setting Management Module
-// -----------------------------------
+// setting.cpp
 
 #include "setting.h"
 #include <nvs_flash.h>
 #include <nvs.h>
 #include <string.h>
 
-// -----------------------------------
-// Section: Default Values
-// -----------------------------------
-const int defaultNumericValues[] = {
+// ================================
+// Default Values
+// Defines default values for numeric, boolean, and string settings
+// - Numeric: Temperature thresholds, device IDs, counters (e.g., COMPRESSOR_TEMP = 20)
+// - Boolean: Feature toggles (e.g., DEVICE_ON = false)
+// - String: Wi-Fi credentials, server URLs, sensor addresses (e.g., SERVER_URL = "http://server.com")
+// ================================
+const int32_t defaultNumericValues[] = {
     20,        // COMPRESSOR_TEMP
     5,         // COMPRESSOR_RANGE
     40,        // HIGH_TEMP_WARNING
@@ -44,20 +46,21 @@ const char *defaultStringValues[] = {
     "0",                       // WIFI_PASSWORD
     "0",                       // AP_NAME
     "0",                       // AP_PASSWORD
-    "http://server.com",       // SERVER_URL
-    "192.168.1.1",             // SERVER_IP
+    "http://bently.cool",       // SERVER_URL
+    "192.168.4.1",             // SERVER_IP
     "28:2D:11:58:D4:E1:3C:BC", // INLET_SENSOR_ADDRESS
     "28:BD:AD:43:D4:E1:3C:CF", // OUTLET_SENSOR_ADDRESS
     "28:AB:CC:43:D4:E1:3C:FA", // ANTIFREEZE_SENSOR_ADDRESS
     "28:FF:64:1F:70:68:7C:7C"  // FILTER_SENSOR_ADDRESS
 };
 
-// -----------------------------------
-// Section: Validation Ranges
-// -----------------------------------
-
-// Limits for numbers
-const int numericMinValues[] = {
+// ================================
+// Validation Ranges
+// Defines minimum and maximum values for numeric settings and maximum lengths for strings
+// - Numeric: Ensures values stay within valid ranges (e.g., COMPRESSOR_TEMP: 20 to 50)
+// - String: Limits lengths (e.g., WIFI_SSID: 32, SERVER_IP: 15)
+// ================================
+const int32_t numericMinValues[] = {
     20,       // COMPRESSOR_TEMP_MIN
     0,        // COMPRESSOR_RANGE
     20,       // HIGH_TEMP_WARNING
@@ -73,7 +76,7 @@ const int numericMinValues[] = {
     0         // HOURS_ELAPSED
 };
 
-const int numericMaxValues[] = {
+const int32_t numericMaxValues[] = {
     50,        // COMPRESSOR_TEMP_MAX
     15,        // COMPRESSOR_RANGE
     50,        // HIGH_TEMP_WARNING
@@ -89,8 +92,7 @@ const int numericMaxValues[] = {
     87600      // HOURS_ELAPSED
 };
 
-// Length limit for strings
-const int stringMaxLengths[] = {
+const size_t stringMaxLengths[] = {
     32, // WIFI_SSID
     32, // WIFI_PASSWORD
     16, // AP_NAME
@@ -103,24 +105,32 @@ const int stringMaxLengths[] = {
     32  // FILTER_SENSOR_ADDRESS
 };
 
-// Temporary Arrays to track change flags
+// ================================
+// Temporary Change Flags
+// Tracks changes to settings with temporary flags
+// - Arrays for numeric, boolean, and string settings
+// ================================
 bool numericTempSettingsChanged[NUMERIC_SETTING_COUNT] = {false};
 bool booleanTempSettingsChanged[BOOLEAN_SETTING_COUNT] = {false};
 bool stringTempSettingsChanged[STRING_SETTING_COUNT] = {false};
 
-// -----------------------------------
-// Track last set time for each flag
-// -----------------------------------
+// ================================
+// Track Last Set Time
+// Records the time (in milliseconds) when each setting was last updated
+// - Used to reset temporary change flags after 60 seconds
+// ================================
 unsigned long numericLastSetTime[NUMERIC_SETTING_COUNT] = {0};
 unsigned long booleanLastSetTime[BOOLEAN_SETTING_COUNT] = {0};
 unsigned long stringLastSetTime[STRING_SETTING_COUNT] = {0};
 
-// ----------------------------------------------------------------
-// Section: Reset All Changed Flags: Base and Temporary to "false"
-// ----------------------------------------------------------------
-
+// ================================
+// Reset All Changed Flags to False
+// Resets all temporary change flags for numeric, boolean, and string settings to false
+// - Used to clear change tracking after processing
+// ================================
 void resetAllChangedFlagsToFalse()
 {
+    uint32_t currentTime = millis();
     for (int i = 0; i < NUMERIC_SETTING_COUNT; i++)
     {
         numericTempSettingsChanged[i] = false;
@@ -133,16 +143,17 @@ void resetAllChangedFlagsToFalse()
     {
         stringTempSettingsChanged[i] = false;
     }
-
-    Serial.println("🏁 [Flag] All changed flags reset to --> False ✅");
+    Serial.printf("[Setting][INFO][%lu] All changed flags reset to false\n", currentTime);
 }
 
-// ---------------------------------------------------------------
-// Section: Reset All Changed Flags: Base and Temporary to "true"
-// ---------------------------------------------------------------
-
+// ================================
+// Reset All Changed Flags to True
+// Sets all temporary change flags for numeric, boolean, and string settings to true
+// - Used during initialization or reset to mark all settings as changed
+// ================================
 void resetAllChangedFlagsToTrue()
 {
+    uint32_t currentTime = millis();
     for (int i = 0; i < NUMERIC_SETTING_COUNT; i++)
     {
         numericTempSettingsChanged[i] = true;
@@ -155,48 +166,46 @@ void resetAllChangedFlagsToTrue()
     {
         stringTempSettingsChanged[i] = true;
     }
-
-    Serial.println("🏁 [Flag] All changed flags reset to --> True ✅");
+    Serial.printf("[Setting][INFO][%lu] All changed flags reset to true\n", currentTime);
 }
 
-// -----------------------------------
-// Section: Initialization
-// -----------------------------------
+// ================================
+// Initialize Settings
+// Initializes NVS and loads default values for missing settings
+// - Opens NVS storage in read/write mode
+// - Sets default numeric, boolean, and string values if not found
+// - Commits changes and sets all change flags to true
+// ================================
 void initializeSettings()
 {
-    Serial.println("🎛️ [NVS] Initializing settings...🔁");
+    uint32_t currentTime = millis();
+    Serial.printf("[Setting][INFO][%lu] Initializing settings\n", currentTime);
 
     if (nvs_flash_init() != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] initialization failed!");
-
+        Serial.printf("[Setting][ERROR][%lu] NVS initialization failed\n", currentTime);
         return;
     }
 
     nvs_handle_t handle;
-
     if (nvs_open("storage", NVS_READWRITE, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return;
     }
 
-    Serial.println("🎛️ [NVS] opened successfully ✅");
+    Serial.printf("[Setting][INFO][%lu] NVS opened successfully\n", currentTime);
 
     // Load numeric defaults if missing
     for (int i = 0; i < NUMERIC_SETTING_COUNT; i++)
     {
         char key[16];
         sprintf(key, "num_%d", i);
-        int value;
+        int32_t value;
         if (nvs_get_i32(handle, key, &value) != ESP_OK)
         {
             nvs_set_i32(handle, key, defaultNumericValues[i]);
-
-            Serial.printf("🎛️ [NVS] Numeric key '%s' initialized with default value: %d\n", key, defaultNumericValues[i]);
+            Serial.printf("[Setting][INFO][%lu] Numeric key '%s' initialized with default value: %d\n", currentTime, key, defaultNumericValues[i]);
         }
     }
 
@@ -209,8 +218,7 @@ void initializeSettings()
         if (nvs_get_u8(handle, key, &value) != ESP_OK)
         {
             nvs_set_u8(handle, key, defaultBooleanValues[i]);
-
-            Serial.printf("🎛️ [NVS] Boolean key '%s' initialized with default value: %d\n", key, defaultBooleanValues[i]);
+            Serial.printf("[Setting][INFO][%lu] Boolean key '%s' initialized with default value: %d\n", currentTime, key, defaultBooleanValues[i]);
         }
     }
 
@@ -224,63 +232,59 @@ void initializeSettings()
         if (nvs_get_str(handle, key, buffer, &length) != ESP_OK)
         {
             nvs_set_str(handle, key, defaultStringValues[i]);
-
-            Serial.printf("🎛️ [NVS] String key '%s' initialized with default value: %s\n", key, defaultStringValues[i]);
+            Serial.printf("[Setting][INFO][%lu] String key '%s' initialized with default value: %s\n", currentTime, key, defaultStringValues[i]);
         }
     }
 
     nvs_commit(handle);
     nvs_close(handle);
-    // resetAllChangedFlags(); // set flags true in start
-    resetAllChangedFlagsToTrue(); // set flags true in start
-
-    Serial.println("🎛️ [NVS] Settings initialization completed ✅");
+    resetAllChangedFlagsToTrue();
+    Serial.printf("[Setting][INFO][%lu] Settings initialization completed\n", currentTime);
 }
 
-// -----------------------------------
-// Section: Reset | Erase all NVS and Flag data and reinitialize with default values
-// -----------------------------------
+// ================================
+// Reset Settings
+// Erases all NVS data and reinitializes with default values
+// - Clears NVS, reinitializes, and sets all change flags to true
+// ================================
 void resetSettings()
 {
-
-    Serial.println("🎛️ [NVS] Rest Setting to Default Values... 🔁");
+    uint32_t currentTime = millis();
+    Serial.printf("[Setting][INFO][%lu] Resetting settings to default values\n", currentTime);
 
     nvs_flash_erase();
     nvs_flash_init();
     initializeSettings();
-    // resetAllChangedFlags(); // set flags false in reset
-    resetAllChangedFlagsToTrue(); // set flags true in reset
-
-    Serial.println("🎛️ [NVS] Rest Setting Done ✅");
+    resetAllChangedFlagsToTrue();
+    Serial.printf("[Setting][INFO][%lu] Settings reset completed\n", currentTime);
 }
 
-// -----------------------------------
-// Section: Set in NVS Functions
-// -----------------------------------
-bool setNumericSetting(NumericIndex index, int value)
+// ================================
+// Set Numeric Setting
+// Stores a numeric setting in NVS with validation
+// - Validates index and value range
+// - Updates change flag and records set time
+// - Returns true on success, false on failure
+// ================================
+bool setNumericSetting(NumericIndex index, int32_t value)
 {
+    uint32_t currentTime = millis();
     if (index < 0 || index >= NUMERIC_SETTING_COUNT)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Invalid numeric index!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid numeric index: %d\n", currentTime, index);
         return false;
     }
 
     if (value < numericMinValues[index] || value > numericMaxValues[index])
     {
-
-        Serial.printf("🎛️ ❌ [NVS] Value for 'num_%d' is out of bounds. Valid range is: %d to %d\n", index, numericMinValues[index], numericMaxValues[index]);
-
+        Serial.printf("[Setting][ERROR][%lu] Value %d for 'num_%d' out of range: %d to %d\n", currentTime, value, index, numericMinValues[index], numericMaxValues[index]);
         return false;
     }
 
     nvs_handle_t handle;
     if (nvs_open("storage", NVS_READWRITE, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return false;
     }
 
@@ -290,30 +294,32 @@ bool setNumericSetting(NumericIndex index, int value)
     nvs_commit(handle);
     nvs_close(handle);
 
-    numericTempSettingsChanged[index] = true; // Update the change flag - Temporary
-    numericLastSetTime[index] = millis();     // Record the time of the change
-
-    Serial.printf("🔢 [NVS] Numeric key '%s' updated to value: %d\n", key, value);
-
+    numericTempSettingsChanged[index] = true;
+    numericLastSetTime[index] = currentTime;
+    Serial.printf("[Setting][INFO][%lu] Numeric key '%s' updated to value: %d\n", currentTime, key, value);
     return true;
 }
 
+// ================================
+// Set Boolean Setting
+// Stores a boolean setting in NVS
+// - Validates index
+// - Updates change flag and records set time
+// - Returns true on success, false on failure
+// ================================
 bool setBooleanSetting(BooleanIndex index, bool value)
 {
+    uint32_t currentTime = millis();
     if (index < 0 || index >= BOOLEAN_SETTING_COUNT)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Invalid boolean index!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid boolean index: %d\n", currentTime, index);
         return false;
     }
 
     nvs_handle_t handle;
     if (nvs_open("storage", NVS_READWRITE, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open NVS!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return false;
     }
 
@@ -323,154 +329,147 @@ bool setBooleanSetting(BooleanIndex index, bool value)
     nvs_commit(handle);
     nvs_close(handle);
 
-    booleanTempSettingsChanged[index] = true; // Update the change flag - Temporary
-    booleanLastSetTime[index] = millis();     // Record the time of the change
-
-    Serial.printf("🎛️ [NVS] Boolean key '%s' updated to value: %d\n", key, value);
-
+    booleanTempSettingsChanged[index] = true;
+    booleanLastSetTime[index] = currentTime;
+    Serial.printf("[Setting][INFO][%lu] Boolean key '%s' updated to value: %d\n", currentTime, key, value);
     return true;
 }
 
+// ================================
+// Set String Setting
+// Stores a string setting in NVS with validation
+// - Validates index, string length, and SERVER_IP format (if applicable)
+// - Updates change flag and records set time
+// - Returns true on success, false on failure
+// ================================
 bool setStringSetting(StringIndex index, const char *value)
 {
-    // Check if the index is valid
+    uint32_t currentTime = millis();
     if (index < 0 || index >= STRING_SETTING_COUNT)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Invalid string index!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid string index: %d\n", currentTime, index);
         return false;
     }
 
-    // Check if the value corresponds to the SERVER_IP setting
     if (index == SERVER_IP)
     {
-        // Validate the IP address
-        Serial.print("Validating IP: ");
-        Serial.println(value);
-
-        // IP validation directly inside this function
-        int parts[4]; // Array to store the 4 parts of the IP
+        Serial.printf("[Setting][INFO][%lu] Validating IP address: %s\n", currentTime, value);
+        int parts[4];
         int count = 0;
-
-        // Make a copy of the IP string because strtok modifies the original
         char ipCopy[16];
         strncpy(ipCopy, value, sizeof(ipCopy));
-        ipCopy[sizeof(ipCopy) - 1] = '\0'; // Ensure null termination
-
-        // Split the string by dots
+        ipCopy[sizeof(ipCopy) - 1] = '\0';
         char *token = strtok(ipCopy, ".");
 
         while (token != NULL)
         {
             if (count >= 4)
-                return false;             // No more than 4 parts
-            parts[count++] = atoi(token); // Convert each part to an integer
+            {
+                Serial.printf("[Setting][ERROR][%lu] Invalid IP address: too many parts\n", currentTime);
+                return false;
+            }
+            parts[count++] = atoi(token);
             token = strtok(NULL, ".");
         }
 
         if (count != 4)
-            return false; // IP must have exactly 4 parts
+        {
+            Serial.printf("[Setting][ERROR][%lu] Invalid IP address: must have 4 parts\n", currentTime);
+            return false;
+        }
 
-        // Check if each part is between 0 and 255
         for (int i = 0; i < 4; i++)
         {
             if (parts[i] < 0 || parts[i] > 255)
+            {
+                Serial.printf("[Setting][ERROR][%lu] Invalid IP address: part %d out of range\n", currentTime, i);
                 return false;
+            }
         }
     }
 
-    // Check if the string exceeds the maximum length allowed
     if (strlen(value) > stringMaxLengths[index])
     {
-
-        Serial.printf("🎛️ ❌ [NVS] String value for 'str_%d' is too long. Max length is: %d\n", index, stringMaxLengths[index]);
-
+        Serial.printf("[Setting][ERROR][%lu] String value for 'str_%d' too long: %d, max: %d\n", currentTime, index, strlen(value), stringMaxLengths[index]);
         return false;
     }
 
-    // Open NVS for reading and writing
     nvs_handle_t handle;
     if (nvs_open("storage", NVS_READWRITE, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open NVS!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return false;
     }
 
-    // Create a key for the setting in NVS
     char key[16];
     sprintf(key, "str_%d", index);
-
-    // Set the string value in NVS
     nvs_set_str(handle, key, value);
     nvs_commit(handle);
     nvs_close(handle);
 
-    stringTempSettingsChanged[index] = true; // Update the change flag - Temporary
-    stringLastSetTime[index] = millis();     // Record the time of the change
-
-    Serial.printf("🔠 [NVS] String key '%s' updated to value: %s\n", key, value);
-
+    stringTempSettingsChanged[index] = true;
+    stringLastSetTime[index] = currentTime;
+    Serial.printf("[Setting][INFO][%lu] String key '%s' updated to value: %s\n", currentTime, key, value);
     return true;
 }
 
-// -----------------------------------
-// Section: Get from NVS Functions
-// -----------------------------------
-int getNumericSetting(NumericIndex index)
+// ================================
+// Get Numeric Setting
+// Retrieves a numeric setting from NVS
+// - Validates index
+// - Returns default value if key not found
+// - Returns -1 on invalid index or NVS failure
+// ================================
+int32_t getNumericSetting(NumericIndex index)
 {
+    uint32_t currentTime = millis();
     if (index < 0 || index >= NUMERIC_SETTING_COUNT)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Invalid numeric index!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid numeric index: %d\n", currentTime, index);
         return -1;
     }
 
     nvs_handle_t handle;
     if (nvs_open("storage", NVS_READONLY, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open NVS!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return -1;
     }
 
     char key[16];
     sprintf(key, "num_%d", index);
-    int value;
+    int32_t value;
     if (nvs_get_i32(handle, key, &value) != ESP_OK)
     {
-
-        Serial.printf("🔁 [NVS] Key '%s' not found, using default value: %d\n", key, defaultNumericValues[index]);
-
+        Serial.printf("[Setting][WARN][%lu] Numeric key '%s' not found, using default value: %d\n", currentTime, key, defaultNumericValues[index]);
         value = defaultNumericValues[index];
     }
     nvs_close(handle);
 
-    Serial.printf("🔢 [NVS] Numeric key '%s' retrieved with value: %d\n", key, value);
-
+    Serial.printf("[Setting][INFO][%lu] Numeric key '%s' retrieved with value: %d\n", currentTime, key, value);
     return value;
 }
 
+// ================================
+// Get Boolean Setting
+// Retrieves a boolean setting from NVS
+// - Validates index
+// - Returns default value if key not found
+// - Returns false on invalid index or NVS failure
+// ================================
 bool getBooleanSetting(BooleanIndex index)
 {
+    uint32_t currentTime = millis();
     if (index < 0 || index >= BOOLEAN_SETTING_COUNT)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Invalid boolean index!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid boolean index: %d\n", currentTime, index);
         return false;
     }
 
     nvs_handle_t handle;
     if (nvs_open("storage", NVS_READONLY, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open NVS!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return false;
     }
 
@@ -479,34 +478,35 @@ bool getBooleanSetting(BooleanIndex index)
     uint8_t value;
     if (nvs_get_u8(handle, key, &value) != ESP_OK)
     {
-
-        Serial.printf("🔁 [NVS] Key '%s' not found, using default value: %d\n", key, defaultBooleanValues[index]);
-
+        Serial.printf("[Setting][WARN][%lu] Boolean key '%s' not found, using default value: %d\n", currentTime, key, defaultBooleanValues[index]);
         value = defaultBooleanValues[index];
     }
     nvs_close(handle);
 
-    Serial.printf("🎛️ [NVS] Boolean key '%s' retrieved with value: %d\n", key, value);
-
+    Serial.printf("[Setting][INFO][%lu] Boolean key '%s' retrieved with value: %d\n", currentTime, key, value);
     return value;
 }
 
+// ================================
+// Get String Setting
+// Retrieves a string setting from NVS
+// - Validates index and buffer size
+// - Copies default value to buffer if key not found
+// - Returns true on success, false on failure
+// ================================
 bool getStringSetting(StringIndex index, char *buffer, size_t bufferSize)
 {
+    uint32_t currentTime = millis();
     if (index < 0 || index >= STRING_SETTING_COUNT)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Invalid string index!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid string index: %d\n", currentTime, index);
         return false;
     }
 
     nvs_handle_t handle;
     if (nvs_open("storage", NVS_READONLY, &handle) != ESP_OK)
     {
-
-        Serial.println("🎛️ ❌ [NVS] Failed to open NVS!");
-
+        Serial.printf("[Setting][ERROR][%lu] Failed to open NVS\n", currentTime);
         return false;
     }
 
@@ -515,32 +515,30 @@ bool getStringSetting(StringIndex index, char *buffer, size_t bufferSize)
     size_t length = bufferSize;
     if (nvs_get_str(handle, key, buffer, &length) != ESP_OK)
     {
-
-        Serial.printf("🔁 [NVS] Key '%s' not found, using default value: %s\n", key, defaultStringValues[index]);
-
+        Serial.printf("[Setting][WARN][%lu] String key '%s' not found, using default value: %s\n", currentTime, key, defaultStringValues[index]);
         strncpy(buffer, defaultStringValues[index], bufferSize);
     }
     nvs_close(handle);
 
-    Serial.printf("🔠 [NVS] String key '%s' retrieved with value: %s\n", key, buffer);
-
+    Serial.printf("[Setting][INFO][%lu] String key '%s' retrieved with value: %s\n", currentTime, key, buffer);
     return true;
 }
 
-// --------------------------------------------------
-// Section: Reset Changed Flag to "false" - Temporary
-// --------------------------------------------------
-
+// ================================
+// Reset Changed Flag (Temporary)
+// Resets a specific temporary change flag to false after 60 seconds
+// - Supports numeric, boolean, and string settings
+// - Returns true if flag was reset, false otherwise
+// ================================
 bool resetChangedFlagTemp(const char *type, int index)
 {
-    unsigned long currentTime = millis();
-
+    uint32_t currentTime = millis();
     if (strcmp(type, "numeric") == 0 && index >= 0 && index < NUMERIC_SETTING_COUNT)
     {
         if (numericTempSettingsChanged[index] && (currentTime - numericLastSetTime[index] >= 60000))
         {
             numericTempSettingsChanged[index] = false;
-            Serial.printf("🎛️ ✅ [Flag] Numeric setting flag for index %d reset after 60 seconds.\n", index);
+            Serial.printf("[Setting][INFO][%lu] Numeric setting flag for index %d reset after 60 seconds\n", currentTime, index);
             return true;
         }
     }
@@ -549,7 +547,7 @@ bool resetChangedFlagTemp(const char *type, int index)
         if (booleanTempSettingsChanged[index] && (currentTime - booleanLastSetTime[index] >= 60000))
         {
             booleanTempSettingsChanged[index] = false;
-            Serial.printf("🎛️ ✅ [Flag] Boolean setting flag for index %d reset after 60 seconds.\n", index);
+            Serial.printf("[Setting][INFO][%lu] Boolean setting flag for index %d reset after 60 seconds\n", currentTime, index);
             return true;
         }
     }
@@ -558,25 +556,25 @@ bool resetChangedFlagTemp(const char *type, int index)
         if (stringTempSettingsChanged[index] && (currentTime - stringLastSetTime[index] >= 60000))
         {
             stringTempSettingsChanged[index] = false;
-            Serial.printf("🎛️ ✅ [Flag] String setting flag for index %d reset after 60 seconds.\n", index);
+            Serial.printf("[Setting][INFO][%lu] String setting flag for index %d reset after 60 seconds\n", currentTime, index);
             return true;
         }
     }
-
-    // If no condition met, do nothing
     return false;
 }
 
-// ---------------------------------------
-// Section: get Changed Flag Temp
-// ---------------------------------------
+// ================================
+// Get Changed Flag (Temporary)
+// Checks the temporary change flag for a specific setting
+// - Supports numeric, boolean, and string settings
+// - Returns true if changed, false if unchanged or invalid
+// ================================
 bool getChangedFlagTemp(const char *settingType, int index)
 {
+    uint32_t currentTime = millis();
     if (index < 0)
     {
-
-        Serial.println("🎛️ ❌ [Flag] Invalid index for reading flag!");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid index for reading flag: %d\n", currentTime, index);
         return false;
     }
 
@@ -584,49 +582,35 @@ bool getChangedFlagTemp(const char *settingType, int index)
     {
         if (index >= NUMERIC_SETTING_COUNT)
         {
-
-            Serial.println("🎛️ ❌ [Flag] Invalid numeric index for reading!");
-
+            Serial.printf("[Setting][ERROR][%lu] Invalid numeric index for reading: %d\n", currentTime, index);
             return false;
         }
-
-        Serial.printf("🏁 [Flag] Numeric setting flag for index %d is: %s\n", index, numericTempSettingsChanged[index] ? "true" : "false");
-
+        Serial.printf("[Setting][INFO][%lu] Numeric setting flag for index %d is: %s\n", currentTime, index, numericTempSettingsChanged[index] ? "true" : "false");
         return numericTempSettingsChanged[index];
     }
     else if (strcmp(settingType, "boolean") == 0)
     {
         if (index >= BOOLEAN_SETTING_COUNT)
         {
-
-            Serial.println("🎛️ ❌ [Flag] Invalid boolean index for reading!");
-
+            Serial.printf("[Setting][ERROR][%lu] Invalid boolean index for reading: %d\n", currentTime, index);
             return false;
         }
-
-        Serial.printf("🏁 [Flag] Boolean setting flag for index %d is: %s\n", index, booleanTempSettingsChanged[index] ? "true" : "false");
-
+        Serial.printf("[Setting][INFO][%lu] Boolean setting flag for index %d is: %s\n", currentTime, index, booleanTempSettingsChanged[index] ? "true" : "false");
         return booleanTempSettingsChanged[index];
     }
     else if (strcmp(settingType, "string") == 0)
     {
         if (index >= STRING_SETTING_COUNT)
         {
-
-            Serial.println("🎛️ ❌ [Flag] Invalid string index for reading!");
-
+            Serial.printf("[Setting][ERROR][%lu] Invalid string index for reading: %d\n", currentTime, index);
             return false;
         }
-
-        Serial.printf("🏁 [Flag] String setting flag for index %d is: %s\n", index, stringTempSettingsChanged[index] ? "true" : "false");
-
+        Serial.printf("[Setting][INFO][%lu] String setting flag for index %d is: %s\n", currentTime, index, stringTempSettingsChanged[index] ? "true" : "false");
         return stringTempSettingsChanged[index];
     }
     else
     {
-
-        Serial.println("🎛️ ❌ [Flag] Invalid type for reading flag! Valid types: 'numeric', 'boolean', 'string'");
-
+        Serial.printf("[Setting][ERROR][%lu] Invalid type for reading flag: %s\n", currentTime, settingType);
         return false;
     }
 }

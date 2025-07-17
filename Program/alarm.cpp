@@ -1,95 +1,77 @@
+// alarm.cpp
 // ===============================================
 // Includes and Global Variables
 // ===============================================
-
 #include "alarm.h"
-#include "setting.h"    // For NVS functions
-#include "tempSensor.h" // For temperature readings
+#include "setting.h"    // Provides NVS settings management functions
+#include "tempSensor.h" // Provides temperature sensor reading utilities
 
-bool doorClosed = false;
-bool tempAlarm = false;
-bool filterAlarm = false;
-bool pressureHigh = false;
+// Global variables to track alarm states
+bool doorClosed = false;   // Tracks door status (true = closed, false = open)
+bool tempAlarm = false;    // Tracks high temperature alarm status
+bool filterAlarm = false;  // Tracks filter warning status
+bool pressureHigh = false; // Tracks high pressure alarm status
 
 // ===============================================
-// Initialization Functions
+// Initialization Function
+// Configures alarm-related pins and initializes settings
 // ===============================================
-
 void alarmSetup()
 {
+    uint32_t currentTime = millis();
+    // Configure door and pressure pins with pulldown resistors
     pinMode(DOOR_PIN, INPUT_PULLDOWN);
     pinMode(PRESSURE_PIN, INPUT_PULLDOWN);
+    // Initialize NVS settings
     initializeSettings();
-    Serial.println("🚨 [Alarm] Alarm system initialized ✅");
+    Serial.printf("[Alarm][INFO][%lu] Alarm system initialized\n", currentTime);
 }
 
 // ===============================================
 // Door Monitoring
+// Checks door status based on settings and pin state
 // ===============================================
-
 bool isDoorClosed()
 {
+    uint32_t currentTime = millis();
+    // Check if door warning setting has changed
     bool doorSettingTemp = getChangedFlagTemp("boolean", DOOR_WARNING_ON);
-    static bool doorWarning = false;
+    static bool doorWarning = false; // Cached door warning enable state
 
     if (doorSettingTemp)
     {
         doorWarning = getBooleanSetting(DOOR_WARNING_ON);
         resetChangedFlagTemp("boolean", DOOR_WARNING_ON);
+        Serial.printf("[Alarm][INFO][%lu] Door warning setting updated: %s\n", currentTime, doorWarning ? "Enabled" : "Disabled");
     }
 
+    // If door warning is disabled, assume door is closed
     if (!doorWarning)
     {
         doorClosed = true;
-        Serial.println("🚨 [Alarm] Door is Closed ✅ - Default Disabled in Setting");
+        Serial.printf("[Alarm][INFO][%lu] Door is closed (warning disabled)\n", currentTime);
     }
     else
     {
+        // Read door pin state (HIGH = closed, LOW = open)
         doorClosed = (digitalRead(DOOR_PIN) == HIGH);
-        Serial.println(doorClosed ? "🚨 [Alarm] Door is Closed ✅" : "🚨 [Alarm] Door is Open ⛔️");
+        Serial.printf("[Alarm][INFO][%lu] Door status: %s\n", currentTime, doorClosed ? "Closed" : "Open");
     }
 
     return doorClosed;
 }
 
 // ===============================================
-// Pressure Monitoring
-// ===============================================
-
-bool isPressureHigh()
-{
-    bool pressureSettingTemp = getChangedFlagTemp("boolean", PRESSURE_WARNING_ON);
-    static bool pressureWarning = false;
-
-    if (pressureSettingTemp)
-    {
-        pressureWarning = getBooleanSetting(PRESSURE_WARNING_ON);
-        resetChangedFlagTemp("boolean", PRESSURE_WARNING_ON);
-    }
-
-    if (!pressureWarning)
-    {
-        pressureHigh = false;
-        Serial.println("🚨 [Alarm] Pressure is Normal ✅ - Default Disabled in Setting");
-    }
-    else
-    {
-        pressureHigh = (digitalRead(PRESSURE_PIN) == HIGH);
-        Serial.println(pressureHigh ? "🚨 [Alarm] Pressure is High ⛔️" : "🚨 [Alarm] Pressure is Normal ✅");
-    }
-
-    return pressureHigh;
-}
-
-// ===============================================
 // Filter Monitoring
+// Checks filter temperature against threshold to detect warnings
 // ===============================================
-
 bool isFilterWarning()
 {
-    static bool filterWarning = false;
-    static bool filterAlarm = false;
-    static int filterWarningThreshold = 0;
+    uint32_t currentTime = millis();
+    static bool filterWarning = false;         // Cached filter warning enable state
+    static bool filterAlarm = false;           // Cached filter alarm state
+    static int32_t filterWarningThreshold = 0; // Cached filter temperature threshold
+    // Check if filter warning setting has changed
     bool filterSettingTemp = getChangedFlagTemp("boolean", FILTER_WARNING_ON);
 
     if (filterSettingTemp)
@@ -97,32 +79,35 @@ bool isFilterWarning()
         filterWarning = getBooleanSetting(FILTER_WARNING_ON);
         filterWarningThreshold = getNumericSetting(FILTER_WARNING);
         resetChangedFlagTemp("boolean", FILTER_WARNING_ON);
+        Serial.printf("[Alarm][INFO][%lu] Filter warning setting updated: %s, threshold: %d°C\n", currentTime, filterWarning ? "Enabled" : "Disabled", filterWarningThreshold);
     }
 
+    // If filter warning is disabled, clear alarm
     if (!filterWarning)
     {
         if (filterAlarm)
         {
             filterAlarm = false;
-            Serial.println("🚨 [Alarm] Filter is Normal ✅ - Default Disabled in Setting");
+            Serial.printf("[Alarm][INFO][%lu] Filter is normal (warning disabled)\n", currentTime);
         }
     }
     else
     {
+        // Read filter sensor temperature
         float temperature = readTemperatureByName("Filter");
 
-        // Trigger an alert if the temperature value is NaN or above the threshold.
+        // Trigger alarm if temperature is invalid (NaN) or exceeds threshold
         filterAlarm = (isnan(temperature) || temperature > filterWarningThreshold);
 
-        // Warning messages for invalid values ​​and comparison with thresholds
+        // Log warning for invalid readings or threshold comparison
         if (isnan(temperature))
         {
-            Serial.println("🚨 [Alarm] Invalid Filter Temperature Reading (NAN) detected!");
+            Serial.printf("[Alarm][ERROR][%lu] Invalid filter temperature reading (NaN)\n", currentTime);
         }
         else
         {
-            Serial.printf("🚨 [Alarm] Filter temperature: %0.2f %s threshold of %d\n",
-                          temperature, filterAlarm ? "exceeds" : "is below", filterWarningThreshold);
+            Serial.printf("[Alarm][INFO][%lu] Filter temperature: %.2f°C %s threshold of %d°C\n",
+                          currentTime, temperature, filterAlarm ? "exceeds" : "is below", filterWarningThreshold);
         }
     }
 
@@ -130,14 +115,50 @@ bool isFilterWarning()
 }
 
 // ===============================================
-// Temperature Monitoring
+// Pressure Monitoring
+// Checks pressure status based on settings and pin state
 // ===============================================
+bool isPressureHigh()
+{
+    uint32_t currentTime = millis();
+    // Check if pressure warning setting has changed
+    bool pressureSettingTemp = getChangedFlagTemp("boolean", PRESSURE_WARNING_ON);
+    static bool pressureWarning = false; // Cached pressure warning enable state
 
+    if (pressureSettingTemp)
+    {
+        pressureWarning = getBooleanSetting(PRESSURE_WARNING_ON);
+        resetChangedFlagTemp("boolean", PRESSURE_WARNING_ON);
+        Serial.printf("[Alarm][INFO][%lu] Pressure warning setting updated: %s\n", currentTime, pressureWarning ? "Enabled" : "Disabled");
+    }
+
+    // If pressure warning is disabled, assume pressure is normal
+    if (!pressureWarning)
+    {
+        pressureHigh = false;
+        Serial.printf("[Alarm][INFO][%lu] Pressure is normal (warning disabled)\n", currentTime);
+    }
+    else
+    {
+        // Read pressure pin state (HIGH = high pressure, LOW = normal)
+        pressureHigh = (digitalRead(PRESSURE_PIN) == HIGH);
+        Serial.printf("[Alarm][INFO][%lu] Pressure status: %s\n", currentTime, pressureHigh ? "High" : "Normal");
+    }
+
+    return pressureHigh;
+}
+
+// ===============================================
+// Temperature Monitoring
+// Checks inlet temperature against threshold to detect high temperature alarms
+// ===============================================
 bool isHighTempAlarm()
 {
-    static bool tempWarning = false;
-    static bool tempAlarm = false;
-    static int highTempWarningThreshold = 0;
+    uint32_t currentTime = millis();
+    static bool tempWarning = false;             // Cached temperature warning enable state
+    static bool tempAlarm = false;               // Cached temperature alarm state
+    static int32_t highTempWarningThreshold = 0; // Cached high temperature threshold
+    // Check if temperature warning setting has changed
     bool tempSettingTemp = getChangedFlagTemp("boolean", TEMP_WARNING_ON);
 
     if (tempSettingTemp)
@@ -145,32 +166,35 @@ bool isHighTempAlarm()
         tempWarning = getBooleanSetting(TEMP_WARNING_ON);
         highTempWarningThreshold = getNumericSetting(HIGH_TEMP_WARNING);
         resetChangedFlagTemp("boolean", TEMP_WARNING_ON);
+        Serial.printf("[Alarm][INFO][%lu] Temperature warning setting updated: %s, threshold: %d°C\n", currentTime, tempWarning ? "Enabled" : "Disabled", highTempWarningThreshold);
     }
 
+    // If temperature warning is disabled, clear alarm
     if (!tempWarning)
     {
         if (tempAlarm)
         {
             tempAlarm = false;
-            Serial.println("🚨 [Alarm] Temperature is Normal ✅ - Default Disabled in Setting");
+            Serial.printf("[Alarm][INFO][%lu] Temperature is normal (warning disabled)\n", currentTime);
         }
     }
     else
     {
+        // Read inlet sensor temperature
         float temperature = readTemperatureByName("Inlet");
 
-        // Trigger an alert if the temperature value is NaN or above the threshold.
+        // Trigger alarm if temperature is invalid (NaN) or exceeds threshold
         tempAlarm = (isnan(temperature) || temperature > highTempWarningThreshold);
 
-        // Warning messages for invalid values ​​and comparison with thresholds
+        // Log warning for invalid readings or threshold comparison
         if (isnan(temperature))
         {
-            Serial.println("🚨 [Alarm] Invalid Temperature Reading (NAN) detected!");
+            Serial.printf("[Alarm][ERROR][%lu] Invalid inlet temperature reading (NaN)\n", currentTime);
         }
         else
         {
-            Serial.printf("🚨 [Alarm] Temperature: %0.2f %s high threshold of %d\n",
-                          temperature, tempAlarm ? "exceeds" : "is below", highTempWarningThreshold);
+            Serial.printf("[Alarm][INFO][%lu] Inlet temperature: %.2f°C %s threshold of %d°C\n",
+                          currentTime, temperature, tempAlarm ? "exceeds" : "is below", highTempWarningThreshold);
         }
     }
 
